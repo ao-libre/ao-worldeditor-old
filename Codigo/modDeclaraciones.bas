@@ -32,6 +32,8 @@ Option Explicit
 Public Const MSGMod As String = "Este mapa há sido modificado." & vbCrLf & "Si no lo guardas perderas todos los cambios ¿Deseas guardarlo?"
 Public Const MSGDang As String = "CUIDADO! Este comando puede arruinar el mapa." & vbCrLf & "¿Estas seguro que desea continuar?"
 
+Public Const ENDL As String * 2 = vbCrLf
+
 ' Objeto de Translado
 Public Cfg_TrOBJ As Integer
 
@@ -112,7 +114,6 @@ Public ObjData() As ObjData
 Public Conexion As New Connection
 Public prgRun As Boolean
 Public CurrentGrh As Grh
-Public ENDL As String
 Public Play As Boolean
 Public MapaCargado As Boolean
 Public cFPS As Long

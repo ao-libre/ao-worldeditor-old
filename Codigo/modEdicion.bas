@@ -881,7 +881,3 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
     End If
 
 End Sub
-
-
-
-

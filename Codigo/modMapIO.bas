@@ -367,7 +367,7 @@ Seek FreeFileInf, 1
 Call Pestañas(SaveAs)
 
 'write .dat file
-SaveAs = Left(SaveAs, Len(SaveAs) - 4) & ".dat"
+SaveAs = Left$(SaveAs, Len(SaveAs) - 4) & ".dat"
 MapInfo_Guardar SaveAs
 
 'Change mouse icon
@@ -646,7 +646,7 @@ On Error Resume Next
     
     bRefreshRadar = True ' Radar
     
-    Map = Left(Map, Len(Map) - 4) & ".dat"
+    Map = Left$(Map, Len(Map) - 4) & ".dat"
     
     MapInfo_Cargar Map
     frmMain.lblMapVersion.Caption = MapInfo.MapVersion

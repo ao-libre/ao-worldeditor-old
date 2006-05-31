@@ -290,8 +290,6 @@ Dim OffsetCounterY As Integer
 Call CargarMapIni
 Call IniciarCabecera(MiCabecera)
 
-ENDL = Chr(13) & Chr(10)
-
 If FileExist(IniPath & "WorldEditor.jpg", vbArchive) Then frmCargando.Picture1.Picture = LoadPicture(IniPath & "WorldEditor.jpg")
 frmCargando.verX = "v" & App.Major & "." & App.Minor & "." & App.Revision
 frmCargando.Show
