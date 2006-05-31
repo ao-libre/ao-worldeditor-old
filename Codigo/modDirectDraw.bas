@@ -24,8 +24,8 @@ Attribute VB_Name = "modDirectDraw"
 '
 ' @remarks Funciones de DirectDraw y Visualizacion
 ' @author unkwown
-' @version 0.0.09
-' @date 20060520
+' @version 0.0.10
+' @date 20060530
 
 Option Explicit
 
@@ -484,39 +484,39 @@ End Sub
 Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Integer, PixelOffsetY As Integer)
 '*************************************************
 'Author: Unkwown
-'Last modified: 28/05/06 by GS
+'Last modified: 30/05/06 by GS
 '*************************************************
 On Error Resume Next
-Dim Y As Integer    'Keeps track of where on map we are
-Dim X As Integer
-Dim minY As Integer 'Start Y pos on current map
-Dim maxY As Integer 'End Y pos on current map
-Dim minX As Integer 'Start X pos on current map
-Dim maxX As Integer 'End X pos on current map
-Dim ScreenX As Integer 'Keeps track of where to place tile on screen
+Dim Y       As Integer              'Keeps track of where on map we are
+Dim X       As Integer
+Dim minY    As Integer              'Start Y pos on current map
+Dim maxY    As Integer              'End Y pos on current map
+Dim minX    As Integer              'Start X pos on current map
+Dim maxX    As Integer              'End X pos on current map
+Dim ScreenX As Integer              'Keeps track of where to place tile on screen
 Dim ScreenY As Integer
-Dim PixelOffsetXTemp As Integer 'For centering grhs
-Dim PixelOffsetYTemp As Integer
-Dim Moved As Byte
-Dim iPPx     As Integer 'Usado en el Layer de Chars
-Dim iPPy     As Integer 'Usado en el Layer de Chars
-Dim Grh As Grh 'Temp Grh for show tile and blocked
-Dim rSourceRect      As RECT    'Usado en el Layer 1
-Dim iGrhIndex        As Integer 'Usado en el Layer 1
-Dim TempChar As Char
-Dim R As RECT
-Dim Sobre As Integer
+Dim R       As RECT
+Dim Sobre   As Integer
+Dim Moved   As Byte
+Dim iPPx    As Integer              'Usado en el Layer de Chars
+Dim iPPy    As Integer              'Usado en el Layer de Chars
+Dim Grh     As Grh                  'Temp Grh for show tile and blocked
+Dim rSourceRect         As RECT     'Usado en el Layer 1
+Dim iGrhIndex           As Integer  'Usado en el Layer 1
+Dim PixelOffsetXTemp    As Integer  'For centering grhs
+Dim PixelOffsetYTemp    As Integer
+Dim TempChar            As Char
 BackBufferSurface.BltColorFill R, 0 'Solucion a algunos temas molestos :P
 minY = (TileY - (WindowTileHeight \ 2)) - TileBufferSize
 maxY = (TileY + (WindowTileHeight \ 2)) + TileBufferSize
 minX = (TileX - (WindowTileWidth \ 2)) - TileBufferSize
 maxX = (TileX + (WindowTileWidth \ 2)) + TileBufferSize
-
 ScreenY = 8
 For Y = (minY + 8) To (maxY - 8)
     ScreenX = 8
     For X = (minX + 8) To (maxX - 8)
         If InMapBounds(X, Y) Then
+            If X > 100 Or Y < 1 Then Exit For ' 30/05/2006
             'Layer 1 **********************************
             If SobreX = X And SobreY = Y Then
                 ' Pone Grh !
@@ -524,31 +524,31 @@ For Y = (minY + 8) To (maxY - 8)
                 If frmMain.cSeleccionarSuperficie.value = True Then
                     Sobre = MapData(X, Y).Graphic(frmMain.cCapas.Text).GrhIndex
                     If frmConfigSup.MOSAICO.value = vbChecked Then
-                      Dim aux As Integer
-                      Dim dy As Integer
-                      Dim dx As Integer
-                      If frmConfigSup.DespMosaic.value = vbChecked Then
-                                    dy = Val(frmConfigSup.DMLargo)
-                                    dx = Val(frmConfigSup.DMAncho.Text)
-                      Else
-                                dy = 0
-                                dx = 0
-                      End If
-                    If frmMain.mnuAutoCompletarSuperficies.Checked = False Then
+                        Dim aux As Integer
+                        Dim dy As Integer
+                        Dim dx As Integer
+                        If frmConfigSup.DespMosaic.value = vbChecked Then
+                            dy = Val(frmConfigSup.DMLargo)
+                            dx = Val(frmConfigSup.DMAncho.Text)
+                        Else
+                            dy = 0
+                            dx = 0
+                        End If
+                        If frmMain.mnuAutoCompletarSuperficies.Checked = False Then
                             aux = Val(frmMain.cGrh.Text) + _
                             (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dx) Mod frmConfigSup.mAncho.Text)
-                             If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
+                            If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
                                 MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                                 InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
                             End If
-                      Else
-                        aux = Val(frmMain.cGrh.Text) + _
-                        (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dx) Mod frmConfigSup.mAncho.Text)
-                             If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
+                        Else
+                            aux = Val(frmMain.cGrh.Text) + _
+                            (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dx) Mod frmConfigSup.mAncho.Text)
+                            If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
                                 MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                                 InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
+                            End If
                         End If
-                      End If
                     Else
                         If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> Val(frmMain.cGrh.Text) Then
                             MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Val(frmMain.cGrh.Text)
@@ -559,7 +559,6 @@ For Y = (minY + 8) To (maxY - 8)
             Else
                 Sobre = -1
             End If
-            
             With MapData(X, Y).Graphic(1)
                 If (.GrhIndex <> 0) Then
                     If (.Started = 1) Then
@@ -573,11 +572,10 @@ For Y = (minY + 8) To (maxY - 8)
                             End If
                         End If
                     End If
-                'Figure out what frame to draw (always 1 if not animated)
-                iGrhIndex = GrhData(.GrhIndex).Frames(.FrameCounter)
+                    'Figure out what frame to draw (always 1 if not animated)
+                    iGrhIndex = GrhData(.GrhIndex).Frames(.FrameCounter)
                 End If
             End With
-                    
             If iGrhIndex <> 0 Then
                 rSourceRect.Left = GrhData(iGrhIndex).sX
                 rSourceRect.Top = GrhData(iGrhIndex).sY
@@ -591,35 +589,34 @@ For Y = (minY + 8) To (maxY - 8)
                         rSourceRect, _
                         DDBLTFAST_WAIT)
             End If
-                
-                'Layer 2 **********************************
-                If MapData(X, Y).Graphic(2).GrhIndex <> 0 And (frmMain.mnuVerCapa2.Checked = True) Then
-                    Call DDrawTransGrhtoSurface( _
-                            BackBufferSurface, _
-                            MapData(X, Y).Graphic(2), _
-                            ((32 * ScreenX) - 32) + PixelOffsetX, _
-                            ((32 * ScreenY) - 32) + PixelOffsetY, _
-                            1, _
-                            1)
-                End If
+            'Layer 2 **********************************
+            If MapData(X, Y).Graphic(2).GrhIndex <> 0 And (frmMain.mnuVerCapa2.Checked = True) Then
+                Call DDrawTransGrhtoSurface( _
+                        BackBufferSurface, _
+                        MapData(X, Y).Graphic(2), _
+                        ((32 * ScreenX) - 32) + PixelOffsetX, _
+                        ((32 * ScreenY) - 32) + PixelOffsetY, _
+                        1, _
+                        1)
             End If
             If Sobre >= 0 Then
-                If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> Sobre Then
+                If MapData(X, Y).Graphic(frmMain.cCapas.Text).GrhIndex <> Sobre Then
                     MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Sobre
                     InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), Sobre
                 End If
             End If
+        End If
         ScreenX = ScreenX + 1
     Next X
     ScreenY = ScreenY + 1
     If Y > 100 Then Exit For
 Next Y
-
 ScreenY = 8
 For Y = (minY + 8) To (maxY - 1) '- 8+ 8
     ScreenX = 5
     For X = (minX + 5) To (maxX - 5) '- 8 + 8
         If InMapBounds(X, Y) Then
+            If X > 100 Or X < -3 Then Exit For ' 30/05/2006
             iPPx = ((32 * ScreenX) - 32) + PixelOffsetX
             iPPy = ((32 * ScreenY) - 32) + PixelOffsetY
              'Object Layer **********************************
@@ -662,13 +659,12 @@ For Y = (minY + 8) To (maxY - 1) '- 8+ 8
     Next X
     ScreenY = ScreenY + 1
 Next Y
-
 'Tiles blokeadas, techos, triggers
 ScreenY = 5
 For Y = (minY + 5) To (maxY - 1)
     ScreenX = 5
     For X = (minX + 5) To (maxX)
-    'Check to see if in bounds
+        If X < 101 And X > 0 And Y < 101 And Y > 0 Then ' 30/05/2006
             If MapData(X, Y).Graphic(4).GrhIndex <> 0 _
             And (frmMain.mnuVerCapa4.Checked = True) Then
                 'Draw
@@ -702,15 +698,14 @@ For Y = (minY + 5) To (maxY - 1)
                     ((32 * ScreenY) - 32) + PixelOffsetY, _
                     1, 1)
             End If
-            
             If frmMain.cVerTriggers.value = True Then
-                  Call DrawText(PixelPos(ScreenX), PixelPos(ScreenY), Str(MapData(X, Y).Trigger), vbRed)
+                Call DrawText(PixelPos(ScreenX), PixelPos(ScreenY), Str(MapData(X, Y).Trigger), vbRed)
             End If
+        End If
         ScreenX = ScreenX + 1
     Next X
     ScreenY = ScreenY + 1
 Next Y
-
 End Sub
 
 
