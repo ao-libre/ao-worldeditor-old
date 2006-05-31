@@ -24,8 +24,8 @@ Attribute VB_Name = "modDirectDraw"
 '
 ' @remarks Funciones de DirectDraw y Visualizacion
 ' @author unkwown
-' @version 0.0.10
-' @date 20060530
+' @version 0.0.19
+' @date 20060531
 
 Option Explicit
 
@@ -205,24 +205,27 @@ End Sub
 Sub InitGrh(ByRef Grh As Grh, ByVal GrhIndex As Integer, Optional Started As Byte = 2)
 '*************************************************
 'Author: Unkwown
-'Last modified: 20/05/06
+'Last modified: 31/05/06 - GS
 '*************************************************
 On Error Resume Next
 Grh.GrhIndex = GrhIndex
-
-If Started = 2 Then
-    If GrhData(Grh.GrhIndex).NumFrames > 1 Then
-        Grh.Started = 1
+If Grh.GrhIndex <> 0 Then ' 31/05/2006
+    If Started = 2 Then
+        If GrhData(Grh.GrhIndex).NumFrames > 1 Then
+            Grh.Started = 1
+        Else
+            Grh.Started = 0
+        End If
     Else
-        Grh.Started = 0
+        Grh.Started = Started
     End If
+    Grh.FrameCounter = 1
+    Grh.SpeedCounter = GrhData(Grh.GrhIndex).Speed
 Else
-    Grh.Started = Started
+    Grh.FrameCounter = 1
+    Grh.Started = 0
+    Grh.SpeedCounter = 0
 End If
-
-Grh.FrameCounter = 1
-If Grh.GrhIndex <> 0 Then Grh.SpeedCounter = GrhData(Grh.GrhIndex).Speed
-'Grh.SpeedCounter = GrhData(Grh.GrhIndex).Speed
 
 End Sub
 
@@ -484,7 +487,7 @@ End Sub
 Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Integer, PixelOffsetY As Integer)
 '*************************************************
 'Author: Unkwown
-'Last modified: 30/05/06 by GS
+'Last modified: 31/05/06 by GS
 '*************************************************
 On Error Resume Next
 Dim Y       As Integer              'Keeps track of where on map we are
@@ -501,6 +504,7 @@ Dim Moved   As Byte
 Dim iPPx    As Integer              'Usado en el Layer de Chars
 Dim iPPy    As Integer              'Usado en el Layer de Chars
 Dim Grh     As Grh                  'Temp Grh for show tile and blocked
+Dim bCapa    As Byte                 'cCapas ' 31/05/2006 - GS, control de Capas
 Dim rSourceRect         As RECT     'Usado en el Layer 1
 Dim iGrhIndex           As Integer  'Usado en el Layer 1
 Dim PixelOffsetXTemp    As Integer  'For centering grhs
@@ -511,6 +515,12 @@ minY = (TileY - (WindowTileHeight \ 2)) - TileBufferSize
 maxY = (TileY + (WindowTileHeight \ 2)) + TileBufferSize
 minX = (TileX - (WindowTileWidth \ 2)) - TileBufferSize
 maxX = (TileX + (WindowTileWidth \ 2)) + TileBufferSize
+' 31/05/2006 - GS, control de Capas
+If Val(frmMain.cCapas.Text) >= 1 And (frmMain.cCapas.Text) <= 4 Then
+    bCapa = Val(frmMain.cCapas.Text)
+Else
+    bCapa = 1
+End If
 ScreenY = 8
 For Y = (minY + 8) To (maxY - 8)
     ScreenX = 8
@@ -522,13 +532,13 @@ For Y = (minY + 8) To (maxY - 8)
                 ' Pone Grh !
                 Sobre = -1
                 If frmMain.cSeleccionarSuperficie.value = True Then
-                    Sobre = MapData(X, Y).Graphic(frmMain.cCapas.Text).GrhIndex
+                    Sobre = MapData(X, Y).Graphic(bCapa).GrhIndex
                     If frmConfigSup.MOSAICO.value = vbChecked Then
                         Dim aux As Integer
                         Dim dy As Integer
                         Dim dx As Integer
                         If frmConfigSup.DespMosaic.value = vbChecked Then
-                            dy = Val(frmConfigSup.DMLargo)
+                            dy = Val(frmConfigSup.DMLargo.Text)
                             dx = Val(frmConfigSup.DMAncho.Text)
                         Else
                             dy = 0
@@ -537,22 +547,22 @@ For Y = (minY + 8) To (maxY - 8)
                         If frmMain.mnuAutoCompletarSuperficies.Checked = False Then
                             aux = Val(frmMain.cGrh.Text) + _
                             (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dx) Mod frmConfigSup.mAncho.Text)
-                            If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
-                                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
-                                InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
+                            If MapData(X, Y).Graphic(bCapa).GrhIndex <> aux Then
+                                MapData(X, Y).Graphic(bCapa).GrhIndex = aux
+                                InitGrh MapData(X, Y).Graphic(bCapa), aux
                             End If
                         Else
                             aux = Val(frmMain.cGrh.Text) + _
                             (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dx) Mod frmConfigSup.mAncho.Text)
-                            If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Then
-                                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
-                                InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
+                            If MapData(X, Y).Graphic(bCapa).GrhIndex <> aux Then
+                                MapData(X, Y).Graphic(bCapa).GrhIndex = aux
+                                InitGrh MapData(X, Y).Graphic(bCapa), aux
                             End If
                         End If
                     Else
-                        If MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> Val(frmMain.cGrh.Text) Then
-                            MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Val(frmMain.cGrh.Text)
-                            InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), Val(frmMain.cGrh.Text)
+                        If MapData(X, Y).Graphic(bCapa).GrhIndex <> Val(frmMain.cGrh.Text) Then
+                            MapData(X, Y).Graphic(bCapa).GrhIndex = Val(frmMain.cGrh.Text)
+                            InitGrh MapData(X, Y).Graphic(bCapa), Val(frmMain.cGrh.Text)
                         End If
                     End If
                 End If
@@ -600,9 +610,9 @@ For Y = (minY + 8) To (maxY - 8)
                         1)
             End If
             If Sobre >= 0 Then
-                If MapData(X, Y).Graphic(frmMain.cCapas.Text).GrhIndex <> Sobre Then
-                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Sobre
-                    InitGrh MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), Sobre
+                If MapData(X, Y).Graphic(bCapa).GrhIndex <> Sobre Then
+                MapData(X, Y).Graphic(bCapa).GrhIndex = Sobre
+                InitGrh MapData(X, Y).Graphic(bCapa), Sobre
                 End If
             End If
         End If

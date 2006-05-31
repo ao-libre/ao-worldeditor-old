@@ -395,7 +395,7 @@ Do While prgRun
         End If
     End If
     Call RenderScreen(UserPos.X - AddtoUserPos.X, UserPos.Y - AddtoUserPos.Y, OffsetCounterX, OffsetCounterY)
-    modDirectDraw.DrawText 230, 230, "X: " & UserPos.X & " - Y: " & UserPos.Y, vbWhite
+    modDirectDraw.DrawText 260, 260, "X: " & UserPos.X & " - Y: " & UserPos.Y, vbWhite
     Call DrawBackBufferSurface 'Draw to the screen!
     Call CheckKeys
     If CurrentGrh.GrhIndex = 0 Then

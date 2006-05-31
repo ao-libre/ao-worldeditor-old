@@ -2764,16 +2764,14 @@ End Sub
 Private Sub cCapas_Change()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 29/05/06
+'Last modified: 31/05/06
 '*************************************************
     If Val(cCapas.Text) < 1 Then
       cCapas.Text = 1
     End If
-    
     If Val(cCapas.Text) > 4 Then
       cCapas.Text = 4
     End If
-    
     cCapas.Tag = vbNullString
 End Sub
 
