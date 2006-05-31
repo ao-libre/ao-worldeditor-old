@@ -24,8 +24,8 @@ Attribute VB_Name = "modPaneles"
 '
 ' @remarks Funciones referentes a los Paneles de Funcion
 ' @author gshaxor@gmail.com
-' @version 0.3.25
-' @date 20060520
+' @version 0.3.28
+' @date 20060530
 
 Option Explicit
 

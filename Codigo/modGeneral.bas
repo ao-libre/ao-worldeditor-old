@@ -24,8 +24,8 @@ Attribute VB_Name = "modGeneral"
 '
 ' @remarks Funciones Generales
 ' @author unkwown
-' @version 0.4.08
-' @date 20060526
+' @version 0.4.09
+' @date 20060530
 
 Option Explicit
 
@@ -319,7 +319,7 @@ Else
     ClientSetup.bUseVideo = False
     Set SurfaceDB = New clsSurfaceManDyn
 End If
-If InitTileEngine(frmMain.hwnd, frmMain.MainViewShp.Top + 50, frmMain.MainViewShp.Left + 4, 32, 32, PantallaX, PantallaY, 8) Then
+If InitTileEngine(frmMain.hwnd, frmMain.MainViewShp.Top + 50, frmMain.MainViewShp.Left + 4, 32, 32, PantallaX, PantallaY, 9) Then ' 30/05/2006
     'Display form handle, View window offset from 0,0 of display form, Tile Size, Display size in tiles, Screen buffer
     frmCargando.P1.Visible = True
     frmCargando.L(0).Visible = True

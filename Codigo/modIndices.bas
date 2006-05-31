@@ -24,8 +24,8 @@ Attribute VB_Name = "modIndices"
 '
 ' @remarks Funciones Especificas al Trabajo con Indices
 ' @author gshaxor@gmail.com
-' @version 0.1.04
-' @date 20060520
+' @version 0.1.05
+' @date 20060530
 
 Option Explicit
 
