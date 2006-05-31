@@ -38,7 +38,7 @@ Option Explicit
 Public Sub EstSelectPanel(ByVal Numero As Byte, ByVal Activado As Boolean)
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 26/05/06
+'Last modified: 30/05/06
 '*************************************************
     If Activado = True Then
         frmMain.SelectPanel(Numero).GradientMode = lv_Bottom2Top
@@ -73,11 +73,11 @@ Public Sub EstSelectPanel(ByVal Numero As Byte, ByVal Activado As Boolean)
             Select Case Numero
                 Case 0
                     If frmMain.cCapas.Text = 4 Then
-                        frmMain.mnuVerCapa4.Checked = CBool(frmMain.mnuVerCapa4.Tag)
+                        If LenB(frmMain.mnuVerCapa3.Tag) <> 0 Then frmMain.mnuVerCapa4.Checked = CBool(frmMain.mnuVerCapa4.Tag)
                     ElseIf frmMain.cCapas.Text = 3 Then
-                        frmMain.mnuVerCapa3.Checked = CBool(frmMain.mnuVerCapa3.Tag)
+                        If LenB(frmMain.mnuVerCapa3.Tag) <> 0 Then frmMain.mnuVerCapa3.Checked = CBool(frmMain.mnuVerCapa3.Tag)
                     ElseIf frmMain.cCapas.Text = 2 Then
-                        frmMain.mnuVerCapa2.Checked = CBool(frmMain.mnuVerCapa2.Tag)
+                        If LenB(frmMain.mnuVerCapa2.Tag) <> 0 Then frmMain.mnuVerCapa2.Checked = CBool(frmMain.mnuVerCapa2.Tag)
                     End If
                 Case 2
                     If LenB(frmMain.cVerBloqueos.Tag) = 0 Then frmMain.cVerBloqueos.Tag = 0
