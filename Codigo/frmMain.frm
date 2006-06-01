@@ -356,7 +356,7 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H8000000E&
+      ForeColor       =   &H00FFFFFF&
       Height          =   4275
       Left            =   120
       Locked          =   -1  'True
