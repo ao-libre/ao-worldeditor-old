@@ -24,8 +24,8 @@ Attribute VB_Name = "modMapIO"
 '
 ' @remarks Funciones Especificas al trabajo con Archivos de Mapas
 ' @author gshaxor@gmail.com
-' @version 0.1.02
-' @date 20060520
+' @version 0.1.15
+' @date 20060602
 
 Option Explicit
 Private MapTitulo As String     ' GS > Almacena el titulo del mapa para el .dat
@@ -152,7 +152,7 @@ End Sub
 Public Sub NuevoMapa()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 20/05/06
+'Last modified: 21/05/06
 '*************************************************
 
 On Error Resume Next
@@ -222,6 +222,8 @@ MapInfo.Terreno = "BOSQUE"
 MapInfo.Zona = "CAMPO"
 MapInfo.Restringir = "No"
 MapInfo.NoEncriptarMP = 0
+
+Call MapInfo_Actualizar
 
 bRefreshRadar = True ' Radar
 
@@ -831,7 +833,7 @@ End Sub
 Public Sub MapInfo_Cargar(ByVal Archivo As String)
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 20/05/06
+'Last modified: 02/06/06
 '*************************************************
 
 On Error Resume Next
@@ -866,6 +868,21 @@ On Error Resume Next
     MapInfo.Restringir = Leer.GetValue(MapTitulo, "Restringir")
     MapInfo.BackUp = Val(Leer.GetValue(MapTitulo, "BACKUP"))
     
+    Call MapInfo_Actualizar
+    
+End Sub
+
+''
+' Actualiza el formulario de MapInfo
+'
+
+Public Sub MapInfo_Actualizar()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 02/06/06
+'*************************************************
+
+On Error Resume Next
     ' Mostrar en Formularios
     frmMapInfo.txtMapNombre.Text = MapInfo.name
     frmMapInfo.txtMapMusica.Text = MapInfo.Music
@@ -879,6 +896,7 @@ On Error Resume Next
     frmMapInfo.txtMapVersion = MapInfo.MapVersion
     frmMain.lblMapNombre = MapInfo.name
     frmMain.lblMapMusica = MapInfo.Music
+
 End Sub
 
 ''
