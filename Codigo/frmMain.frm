@@ -1243,7 +1243,7 @@ Begin VB.Form frmMain
          Width           =   2175
          _ExtentX        =   3836
          _ExtentY        =   661
-         Caption         =   "Insetar NPC's al &Azar"
+         Caption         =   "Insetar OBJ's al &Azar"
          CapAlign        =   2
          BackStyle       =   2
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -1270,7 +1270,7 @@ Begin VB.Form frmMain
          Width           =   2175
          _ExtentX        =   3836
          _ExtentY        =   661
-         Caption         =   "&Quitar NPC's"
+         Caption         =   "&Quitar OBJ's"
          CapAlign        =   2
          BackStyle       =   2
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -3634,7 +3634,7 @@ End Sub
 Private Sub mnuOptimizar_Click()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 20/05/06
+'Last modified: 09/06/06
 '*************************************************
 Dim Y As Integer
 Dim X As Integer
@@ -3647,6 +3647,7 @@ End If
 ' Quita Trigger's Bloqueados
 ' Quita Trigger's en Translados
 ' Quita NPCs, Objetos y Translados en los Bordes Exteriores
+' Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
 
 For Y = YMinMapSize To YMaxMapSize
     For X = XMinMapSize To XMaxMapSize
@@ -3684,6 +3685,14 @@ For Y = YMinMapSize To YMaxMapSize
                 MapData(X, Y).Trigger = 0
             End If
         End If
+        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
+        If MapData(X, Y).OBJInfo.objindex > 0 Then
+            Select Case ObjData(MapData(X, Y).OBJInfo.objindex).ObjType
+                Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
+                    If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+            End Select
+        End If
+        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
     Next X
 Next Y
 
@@ -3751,13 +3760,14 @@ End Sub
 Private Sub mnuQueHace_Click()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 20/05/06
+'Last modified: 09/06/06
 '*************************************************
 MsgBox "Realiza las siguientes tareas automaticamente:" & vbCrLf & _
         "+ Quita Translados Bloqueados" & vbCrLf & _
         "+ Quita Trigger's Bloqueados" & vbCrLf & _
         "+ Quita Triggers en Translados" & vbCrLf & _
-        "+ Quita NPC's, Objetos y Translados en los Bordes Exteriores", vbInformation + vbOKOnly
+        "+ Quita NPC's, Objetos y Translados en los Bordes Exteriores" & vbCrLf & _
+        "+ Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa", vbInformation + vbOKOnly
 
 End Sub
 
