@@ -2607,9 +2607,6 @@ Begin VB.Form frmMain
          Caption         =   "Optimi&zar Mapa"
          Shortcut        =   ^O
       End
-      Begin VB.Menu mnuQueHace 
-         Caption         =   "¿que &hace Optimizar?"
-      End
       Begin VB.Menu mnuLine2 
          Caption         =   "-"
       End
@@ -3631,74 +3628,13 @@ Next
 modPaneles.VerFuncion 5, True
 End Sub
 
+
 Private Sub mnuOptimizar_Click()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 09/06/06
+'Last modified: 22/09/06
 '*************************************************
-Dim Y As Integer
-Dim X As Integer
-
-If Not MapaCargado Then
-    Exit Sub
-End If
-
-' Quita Translados Bloqueados
-' Quita Trigger's Bloqueados
-' Quita Trigger's en Translados
-' Quita NPCs, Objetos y Translados en los Bordes Exteriores
-' Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
-
-For Y = YMinMapSize To YMaxMapSize
-    For X = XMinMapSize To XMaxMapSize
-        ' ** Quitar NPCs, Objetos y Translados en los Bordes Exteriores
-        If X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder Then
-             'Quitar NPCs
-            If MapData(X, Y).NPCIndex > 0 Then
-                EraseChar MapData(X, Y).CharIndex
-                MapData(X, Y).NPCIndex = 0
-            End If
-            ' Quitar Objetos
-            MapData(X, Y).OBJInfo.objindex = 0
-            MapData(X, Y).OBJInfo.Amount = 0
-            MapData(X, Y).ObjGrh.GrhIndex = 0
-            ' Quitar Translados
-            MapData(X, Y).TileExit.Map = 0
-            MapData(X, Y).TileExit.X = 0
-            MapData(X, Y).TileExit.Y = 0
-            ' Quitar Triggers
-            MapData(X, Y).Trigger = 0
-        End If
-        ' ** Quitar Translados y Triggers en Bloqueo
-        If MapData(X, Y).Blocked = 1 Then
-            If MapData(X, Y).TileExit.Map > 0 Then ' Quita Translado Bloqueado
-                MapData(X, Y).TileExit.Map = 0
-                MapData(X, Y).TileExit.Y = 0
-                MapData(X, Y).TileExit.X = 0
-            ElseIf MapData(X, Y).Trigger > 0 Then ' Quita Trigger Bloqueado
-                MapData(X, Y).Trigger = 0
-            End If
-        End If
-        ' ** Quitar Triggers en Translado
-        If MapData(X, Y).TileExit.Map > 0 Then
-            If MapData(X, Y).Trigger > 0 Then ' Quita Trigger en Translado
-                MapData(X, Y).Trigger = 0
-            End If
-        End If
-        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
-        If MapData(X, Y).OBJInfo.objindex > 0 Then
-            Select Case ObjData(MapData(X, Y).OBJInfo.objindex).ObjType
-                Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
-                    If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
-            End Select
-        End If
-        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
-    Next X
-Next Y
-
-'Set changed flag
-MapInfo.Changed = 1
-
+frmOptimizar.Show
 End Sub
 
 Private Sub mnuQBloquear_Click()
@@ -3757,19 +3693,6 @@ Private Sub mnuQTriggers_Click()
 modPaneles.VerFuncion 6, False
 End Sub
 
-Private Sub mnuQueHace_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 09/06/06
-'*************************************************
-MsgBox "Realiza las siguientes tareas automaticamente:" & vbCrLf & _
-        "+ Quita Translados Bloqueados" & vbCrLf & _
-        "+ Quita Trigger's Bloqueados" & vbCrLf & _
-        "+ Quita Triggers en Translados" & vbCrLf & _
-        "+ Quita NPC's, Objetos y Translados en los Bordes Exteriores" & vbCrLf & _
-        "+ Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa", vbInformation + vbOKOnly
-
-End Sub
 
 Private Sub mnuQuitarBloqueos_Click()
 '*************************************************
