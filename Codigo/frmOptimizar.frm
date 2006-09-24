@@ -62,7 +62,6 @@ Begin VB.Form frmOptimizar
       Left            =   120
       TabIndex        =   5
       Top             =   2280
-      Visible         =   0   'False
       Width           =   1815
       _ExtentX        =   3201
       _ExtentY        =   1296
@@ -88,7 +87,6 @@ Begin VB.Form frmOptimizar
       Left            =   1920
       TabIndex        =   6
       Top             =   2280
-      Visible         =   0   'False
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   1296
@@ -203,3 +201,5 @@ Private Sub cOptimizar_Click()
 '*************************************************
 Call Optimizar
 End Sub
+
+
