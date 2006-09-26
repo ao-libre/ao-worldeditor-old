@@ -119,7 +119,7 @@ Option Explicit
 Private Sub Optimizar()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 22/09/06
+'Last modified: 25/09/06
 '*************************************************
 Dim Y As Integer
 Dim X As Integer
@@ -137,7 +137,7 @@ End If
 For Y = YMinMapSize To YMaxMapSize
     For X = XMinMapSize To XMaxMapSize
         ' ** Quitar NPCs, Objetos y Translados en los Bordes Exteriores
-        If X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder And chkQuitarTodoBordes.value = 1 Then
+        If (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) And chkQuitarTodoBordes.value = 1 Then
              'Quitar NPCs
             If MapData(X, Y).NPCIndex > 0 Then
                 EraseChar MapData(X, Y).CharIndex
