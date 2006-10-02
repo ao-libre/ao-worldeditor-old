@@ -2,14 +2,14 @@ VERSION 5.00
 Begin VB.Form frmUnionAdyacente 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Union con Mapas Adyasentes"
-   ClientHeight    =   4575
+   ClientHeight    =   5265
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   6165
    Icon            =   "frmUnionAdyasente.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   4575
+   ScaleHeight     =   5265
    ScaleWidth      =   6165
    StartUpPosition =   2  'CenterScreen
    Begin WorldEditor.lvButtons_H cmdAplicar 
@@ -18,18 +18,27 @@ Begin VB.Form frmUnionAdyacente
       TabIndex        =   29
       Top             =   4080
       Width           =   1335
-      _extentx        =   2355
-      _extenty        =   661
-      caption         =   "&Aplicar"
-      capalign        =   2
-      backstyle       =   2
-      cgradient       =   0
-      font            =   "frmUnionAdyasente.frx":628A
-      mode            =   0
-      value           =   0
-      cback           =   -2147483633
+      _ExtentX        =   2355
+      _ExtentY        =   661
+      Caption         =   "&Aplicar"
+      CapAlign        =   2
+      BackStyle       =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cGradient       =   0
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   -2147483633
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H008080FF&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -39,6 +48,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   7
       Left            =   360
@@ -48,6 +58,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H008080FF&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -57,6 +68,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   6
       Left            =   5640
@@ -66,6 +78,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00FF8080&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -75,6 +88,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   5
       Left            =   5520
@@ -84,6 +98,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00FF8080&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -93,6 +108,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   4
       Left            =   480
@@ -214,6 +230,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   735
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00000080&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -223,6 +240,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   3
       Left            =   840
@@ -232,6 +250,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00000080&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -241,6 +260,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   2
       Left            =   4800
@@ -250,6 +270,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00800000&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -259,6 +280,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   1
       Left            =   5640
@@ -268,6 +290,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   375
    End
    Begin VB.TextBox PosLim 
+      BackColor       =   &H00800000&
       BeginProperty Font 
          Name            =   "Arial"
          Size            =   8.25
@@ -277,6 +300,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
+      ForeColor       =   &H00FFFFFF&
       Height          =   285
       Index           =   0
       Left            =   360
@@ -301,7 +325,7 @@ Begin VB.Form frmUnionAdyacente
       Index           =   0
       Left            =   3360
       TabIndex        =   1
-      Top             =   960
+      Top             =   840
       Width           =   975
    End
    Begin VB.TextBox Mapa 
@@ -319,7 +343,7 @@ Begin VB.Form frmUnionAdyacente
       Left            =   2520
       TabIndex        =   0
       Text            =   "0"
-      Top             =   960
+      Top             =   840
       Width           =   735
    End
    Begin WorldEditor.lvButtons_H cmdCancelar 
@@ -328,16 +352,24 @@ Begin VB.Form frmUnionAdyacente
       TabIndex        =   30
       Top             =   4080
       Width           =   1335
-      _extentx        =   2355
-      _extenty        =   661
-      caption         =   "&Cancelar"
-      capalign        =   2
-      backstyle       =   2
-      cgradient       =   0
-      font            =   "frmUnionAdyasente.frx":62B6
-      mode            =   0
-      value           =   0
-      cback           =   -2147483633
+      _ExtentX        =   2355
+      _ExtentY        =   661
+      Caption         =   "&Cancelar"
+      CapAlign        =   2
+      BackStyle       =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cGradient       =   0
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   -2147483633
    End
    Begin WorldEditor.lvButtons_H cmdDefault 
       Height          =   375
@@ -345,16 +377,166 @@ Begin VB.Form frmUnionAdyacente
       TabIndex        =   31
       Top             =   4080
       Width           =   1095
-      _extentx        =   1931
-      _extenty        =   661
-      caption         =   "&Default"
-      capalign        =   2
-      backstyle       =   2
-      cgradient       =   0
-      font            =   "frmUnionAdyasente.frx":62E2
-      mode            =   0
-      value           =   0
-      cback           =   -2147483633
+      _ExtentX        =   1931
+      _ExtentY        =   661
+      Caption         =   "&Default"
+      CapAlign        =   2
+      BackStyle       =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cGradient       =   0
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   -2147483633
+   End
+   Begin VB.Label Label18 
+      Alignment       =   1  'Right Justify
+      BackStyle       =   0  'Transparent
+      Caption         =   "Leyenda sobre posiciones:"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   -1  'True
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   495
+      Left            =   120
+      TabIndex        =   36
+      Top             =   4680
+      Width           =   1335
+   End
+   Begin VB.Line Line18 
+      BorderColor     =   &H00800000&
+      BorderWidth     =   2
+      X1              =   3840
+      X2              =   3840
+      Y1              =   4950
+      Y2              =   5080
+   End
+   Begin VB.Label Label17 
+      AutoSize        =   -1  'True
+      BackColor       =   &H00000000&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Posicion Y del mapa actual"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800000&
+      Height          =   210
+      Left            =   3960
+      TabIndex        =   35
+      Top             =   4920
+      Width           =   1935
+   End
+   Begin VB.Line Line17 
+      BorderColor     =   &H00FF8080&
+      BorderWidth     =   2
+      X1              =   3840
+      X2              =   3840
+      Y1              =   4700
+      Y2              =   4850
+   End
+   Begin VB.Label Label16 
+      AutoSize        =   -1  'True
+      BackColor       =   &H00000000&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Posicion Y del mapa destino"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00FF8080&
+      Height          =   210
+      Left            =   3960
+      TabIndex        =   34
+      Top             =   4680
+      Width           =   2025
+   End
+   Begin VB.Line Line16 
+      BorderColor     =   &H00000080&
+      BorderWidth     =   2
+      X1              =   1560
+      X2              =   1560
+      Y1              =   4950
+      Y2              =   5080
+   End
+   Begin VB.Label Label15 
+      AutoSize        =   -1  'True
+      BackColor       =   &H00000000&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Posicion X del mapa actual"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00000080&
+      Height          =   210
+      Left            =   1680
+      TabIndex        =   33
+      Top             =   4920
+      Width           =   1920
+   End
+   Begin VB.Line Line15 
+      BorderColor     =   &H008080FF&
+      BorderWidth     =   2
+      X1              =   1560
+      X2              =   1560
+      Y1              =   4700
+      Y2              =   4850
+   End
+   Begin VB.Label Label14 
+      AutoSize        =   -1  'True
+      BackColor       =   &H00000000&
+      BackStyle       =   0  'Transparent
+      Caption         =   "Posicion X del mapa destino"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H008080FF&
+      Height          =   210
+      Left            =   1680
+      TabIndex        =   32
+      Top             =   4680
+      Width           =   2010
+   End
+   Begin VB.Line Line14 
+      BorderColor     =   &H00008000&
+      X1              =   120
+      X2              =   6000
+      Y1              =   4560
+      Y2              =   4560
    End
    Begin VB.Label Label13 
       Caption         =   "NOTA: Mapa 0, borra el translado de mapa."
@@ -375,7 +557,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   1815
    End
    Begin VB.Line Line13 
-      BorderColor     =   &H00000080&
+      BorderColor     =   &H008080FF&
       BorderWidth     =   2
       X1              =   840
       X2              =   840
@@ -393,7 +575,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H008080FF&
       Height          =   255
       Left            =   120
       TabIndex        =   27
@@ -401,7 +583,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   255
    End
    Begin VB.Line Line12 
-      BorderColor     =   &H00000080&
+      BorderColor     =   &H008080FF&
       BorderWidth     =   2
       X1              =   5280
       X2              =   5280
@@ -419,7 +601,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H008080FF&
       Height          =   255
       Left            =   5400
       TabIndex        =   25
@@ -427,7 +609,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   255
    End
    Begin VB.Line Line11 
-      BorderColor     =   &H00800000&
+      BorderColor     =   &H00FF8080&
       BorderWidth     =   2
       X1              =   1080
       X2              =   5280
@@ -445,7 +627,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00FF8080&
       Height          =   255
       Left            =   5280
       TabIndex        =   23
@@ -453,7 +635,7 @@ Begin VB.Form frmUnionAdyacente
       Width           =   255
    End
    Begin VB.Line Line10 
-      BorderColor     =   &H00800000&
+      BorderColor     =   &H00FF8080&
       BorderWidth     =   2
       X1              =   840
       X2              =   5040
@@ -471,7 +653,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00FF8080&
       Height          =   255
       Left            =   240
       TabIndex        =   21
@@ -524,7 +706,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00800000&
       Height          =   255
       Left            =   5400
       TabIndex        =   9
@@ -542,7 +724,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00800000&
       Height          =   255
       Left            =   120
       TabIndex        =   8
@@ -560,7 +742,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00000080&
       Height          =   255
       Left            =   600
       TabIndex        =   7
@@ -578,7 +760,7 @@ Begin VB.Form frmUnionAdyacente
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H00000000&
+      ForeColor       =   &H00000080&
       Height          =   255
       Left            =   4560
       TabIndex        =   6
@@ -670,7 +852,7 @@ Begin VB.Form frmUnionAdyacente
       Height          =   255
       Left            =   1920
       TabIndex        =   2
-      Top             =   960
+      Top             =   840
       Width           =   495
    End
    Begin VB.Line Line2 
@@ -700,6 +882,9 @@ Begin VB.Form frmUnionAdyacente
    Begin VB.Menu mnuDefault 
       Caption         =   "mnuDefault"
       Visible         =   0   'False
+      Begin VB.Menu mnuLegal 
+         Caption         =   "Borde Legal Automatico"
+      End
       Begin VB.Menu mnuBasica 
          Caption         =   "11,10 y 90,91 - Basica"
       End
@@ -961,6 +1146,22 @@ PosLim(4).Text = 90
 PosLim(5).Text = 11
 PosLim(6).Text = 12
 PosLim(7).Text = 89
+Call LeerMapaExit
+End Sub
+
+Private Sub mnuLegal_Click()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 02/10/06
+'*************************************************
+PosLim(0).Text = MaxYBorder
+PosLim(1).Text = MinYBorder
+PosLim(2).Text = MaxXBorder
+PosLim(3).Text = MinXBorder
+PosLim(4).Text = MaxYBorder - 1
+PosLim(5).Text = MinYBorder + 1
+PosLim(6).Text = MinXBorder + 1
+PosLim(7).Text = MaxXBorder - 1
 Call LeerMapaExit
 End Sub
 

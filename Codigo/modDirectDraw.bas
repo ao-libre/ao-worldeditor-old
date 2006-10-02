@@ -765,7 +765,7 @@ End Function
 Function InitTileEngine(ByRef setDisplayFormhWnd As Long, setMainViewTop As Integer, setMainViewLeft As Integer, setTilePixelHeight As Integer, setTilePixelWidth As Integer, setWindowTileHeight As Integer, setWindowTileWidth As Integer, setTileBufferSize As Integer) As Boolean
 '*************************************************
 'Author: Unkwown
-'Last modified: 28/05/06 by GS
+'Last modified: 02/10/06 by GS
 '*************************************************
 
 Dim SurfaceDesc As DDSURFACEDESC2
@@ -781,10 +781,11 @@ WindowTileHeight = setWindowTileHeight
 WindowTileWidth = setWindowTileWidth
 TileBufferSize = setTileBufferSize
 
-MinXBorder = XMinMapSize + (WindowTileWidth \ 2)
-MaxXBorder = XMaxMapSize - (WindowTileWidth \ 2)
-MinYBorder = YMinMapSize + (WindowTileHeight \ 2)
-MaxYBorder = YMaxMapSize - (WindowTileHeight \ 2)
+'[GS] 02/10/2006
+MinXBorder = XMinMapSize + (ClienteWidth \ 2)
+MaxXBorder = XMaxMapSize - (ClienteWidth \ 2)
+MinYBorder = YMinMapSize + (ClienteHeight \ 2)
+MaxYBorder = YMaxMapSize - (ClienteHeight \ 2)
 
 MainViewWidth = (TilePixelWidth * WindowTileWidth)
 MainViewHeight = (TilePixelHeight * WindowTileHeight)

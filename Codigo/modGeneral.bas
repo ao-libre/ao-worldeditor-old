@@ -24,8 +24,8 @@ Attribute VB_Name = "modGeneral"
 '
 ' @remarks Funciones Generales
 ' @author unkwown
-' @version 0.4.09
-' @date 20060530
+' @version 0.4.10
+' @date 20061002
 
 Option Explicit
 
@@ -168,7 +168,7 @@ End Function
 Private Sub CargarMapIni()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 29/05/06
+'Last modified: 02/10/06
 '*************************************************
 On Error GoTo Fallo
 Dim tStr As String
@@ -270,6 +270,13 @@ PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
 PantallaY = Val(Leer.GetValue("MOSTRAR", "PantallaY"))
 If PantallaX > 19 Or PantallaX <= 2 Then PantallaX = 19
 If PantallaY > 22 Or PantallaY <= 2 Then PantallaY = 22
+
+' [GS] 02/10/06
+' Tamaño de visualizacion en el cliente
+ClienteHeight = Val(Leer.GetValue("MOSTRAR", "ClienteHeight"))
+ClienteWidth = Val(Leer.GetValue("MOSTRAR", "ClienteWidth"))
+If ClienteHeight <= 0 Then ClienteHeight = 13
+If ClienteWidth <= 0 Then ClienteWidth = 17
 
 Exit Sub
 Fallo:

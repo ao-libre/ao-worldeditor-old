@@ -24,8 +24,8 @@ Attribute VB_Name = "modDeclaraciones"
 '
 ' @remarks Declaraciones
 ' @author ^[GS]^
-' @version 0.1.09
-' @date 20060527
+' @version 0.1.10
+' @date 20061002
 
 Option Explicit
 
@@ -56,6 +56,11 @@ Public NameMap_Save As String
 ' DX Config
 Public PantallaX As Integer
 Public PantallaY As Integer
+
+' [GS] 02/10/06
+' Client Config
+Public ClienteHeight As Integer
+Public ClienteWidth As Integer
 
 Public Type tSetupMods
     bDinamic    As Boolean
