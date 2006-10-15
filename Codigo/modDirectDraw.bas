@@ -24,8 +24,8 @@ Attribute VB_Name = "modDirectDraw"
 '
 ' @remarks Funciones de DirectDraw y Visualizacion
 ' @author unkwown
-' @version 0.0.19
-' @date 20060531
+' @version 0.0.20
+' @date 20061015
 
 Option Explicit
 
@@ -403,7 +403,7 @@ InMapBounds = True
 
 End Function
 
-Sub DDrawTransGrhtoSurface(Surface As DirectDrawSurface7, Grh As Grh, ByVal X As Integer, ByVal Y As Integer, Center As Byte, Animate As Byte, Optional ByVal KillAnim As Integer = 0)
+Sub DDrawTransGrhtoSurface(ByRef Surface As DirectDrawSurface7, Grh As Grh, ByVal X As Integer, ByVal Y As Integer, Center As Byte, Animate As Byte, Optional ByVal KillAnim As Integer = 0)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
@@ -698,15 +698,21 @@ For Y = (minY + 5) To (maxY - 1)
             End If
             'Show blocked tiles
             If frmMain.cVerBloqueos.value = True And MapData(X, Y).Blocked = 1 Then
-                Grh.GrhIndex = 4
-                Grh.FrameCounter = 1
-                Grh.Started = 0
-                Call DDrawTransGrhtoSurface( _
-                    BackBufferSurface, _
-                    Grh, _
-                    ((32 * ScreenX) - 32) + PixelOffsetX, _
-                    ((32 * ScreenY) - 32) + PixelOffsetY, _
-                    1, 1)
+                'Grh.GrhIndex = 4
+                'Grh.FrameCounter = 1
+                'Grh.Started = 0
+                'Call DDrawTransGrhtoSurface( _
+                '    BackBufferSurface, _
+                '    Grh, _
+                '    ((32 * ScreenX) - 32) + PixelOffsetX, _
+                '    ((32 * ScreenY) - 32) + PixelOffsetY, _
+                '    1, 1)
+                BackBufferSurface.SetFillColor vbRed
+                Call BackBufferSurface.DrawBox( _
+                    (((32 * ScreenX) - 32) + PixelOffsetX) + 16, _
+                    (((32 * ScreenY) - 32) + PixelOffsetY) + 16, _
+                    (((32 * ScreenX) - 32) + PixelOffsetX + 5) + 16, _
+                    (((32 * ScreenY) - 32) + PixelOffsetY + 5) + 16)
             End If
             If frmMain.cVerTriggers.value = True Then
                 Call DrawText(PixelPos(ScreenX), PixelPos(ScreenY), Str(MapData(X, Y).Trigger), vbRed)
@@ -725,10 +731,10 @@ Public Sub DrawText(lngXPos As Integer, lngYPos As Integer, strText As String, l
 'Last modified: 26/05/06
 '*************************************************
    If LenB(strText) <> 0 Then
-    BackBufferSurface.SetFontTransparency True                           'Set the transparency flag to true
-    BackBufferSurface.SetForeColor vbBlack                               'Set the color of the text to the color passed to the sub
-    BackBufferSurface.SetFont frmMain.Font                               'Set the font used to the font on the form
-    BackBufferSurface.DrawText lngXPos - 2, lngYPos - 1, strText, False  'Draw the text on to the screen, in the coordinates specified
+    'BackBufferSurface.SetFontTransparency True                           'Set the transparency flag to true
+    'BackBufferSurface.SetForeColor vbBlack                               'Set the color of the text to the color passed to the sub
+    'BackBufferSurface.SetFont frmMain.Font                               'Set the font used to the font on the form
+    'BackBufferSurface.DrawText lngXPos - 2, lngYPos - 1, strText, False  'Draw the text on to the screen, in the coordinates specified
     
     
     BackBufferSurface.SetFontTransparency True                           'Set the transparency flag to true
@@ -765,7 +771,7 @@ End Function
 Function InitTileEngine(ByRef setDisplayFormhWnd As Long, setMainViewTop As Integer, setMainViewLeft As Integer, setTilePixelHeight As Integer, setTilePixelWidth As Integer, setWindowTileHeight As Integer, setWindowTileWidth As Integer, setTileBufferSize As Integer) As Boolean
 '*************************************************
 'Author: Unkwown
-'Last modified: 02/10/06 by GS
+'Last modified: 15/10/06 by GS
 '*************************************************
 
 Dim SurfaceDesc As DDSURFACEDESC2
@@ -850,7 +856,7 @@ If LenB(Dir(DirGraficos & "1.bmp", vbArchive)) = 0 Then
     End
 Else
     frmCargando.X.Caption = "Iniciando Control de Superficies..."
-    DoEvents
+'    DoEvents
     Call SurfaceDB.Initialize(DirectDraw, ClientSetup.bUseVideo, DirGraficos, ClientSetup.byMemory)
 End If
 
@@ -861,5 +867,5 @@ LastSoundBufferUsed = 1
 
 InitTileEngine = True
 EngineRun = True
-
+DoEvents
 End Function

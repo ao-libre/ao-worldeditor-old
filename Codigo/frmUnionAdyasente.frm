@@ -1127,10 +1127,10 @@ End Sub
 Private Sub Mapa_KeyUp(index As Integer, KeyCode As Integer, Shift As Integer)
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 26/05/06
+'Last modified: 15/10/06
 '*************************************************
 If LenB(Mapa(index).Text) = 0 Then Mapa(index).Text = 0
-If Mapa(index).Text > 255 Then Mapa(index).Text = 255
+If Mapa(index).Text > 1024 Then Mapa(index).Text = 1024
 End Sub
 
 Private Sub mnuBasica_Click()

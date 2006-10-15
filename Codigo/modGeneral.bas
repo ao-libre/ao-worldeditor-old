@@ -24,8 +24,8 @@ Attribute VB_Name = "modGeneral"
 '
 ' @remarks Funciones Generales
 ' @author unkwown
-' @version 0.4.10
-' @date 20061002
+' @version 0.4.11
+' @date 20061015
 
 Option Explicit
 
@@ -287,13 +287,13 @@ End Sub
 Public Sub Main()
 '*************************************************
 'Author: Unkwown
-'Last modified: 28/05/06 - GS
+'Last modified: 15/10/06 - GS
 '*************************************************
 On Error Resume Next
 If App.PrevInstance = True Then End
 Dim OffsetCounterX As Integer
 Dim OffsetCounterY As Integer
-
+Dim Chkflag As Integer
 Call CargarMapIni
 Call IniciarCabecera(MiCabecera)
 
@@ -376,6 +376,7 @@ With MainViewRect
 End With
 prgRun = True
 cFPS = 0
+Chkflag = 0
 dTiempoGT = GetTickCount
 Do While prgRun
     If (GetTickCount - dTiempoGT) >= 1000 Then
@@ -399,10 +400,15 @@ Do While prgRun
             AddtoUserPos.Y = 0
         End If
     End If
-    Call RenderScreen(UserPos.X - AddtoUserPos.X, UserPos.Y - AddtoUserPos.Y, OffsetCounterX, OffsetCounterY)
-    modDirectDraw.DrawText 260, 260, "X: " & UserPos.X & " - Y: " & UserPos.Y, vbWhite
-    Call DrawBackBufferSurface 'Draw to the screen!
-    Call CheckKeys
+    
+    If Chkflag = 3 Then
+        Call RenderScreen(UserPos.X - AddtoUserPos.X, UserPos.Y - AddtoUserPos.Y, OffsetCounterX, OffsetCounterY)
+        modDirectDraw.DrawText 260, 260, "X: " & UserPos.X & " - Y: " & UserPos.Y, vbWhite
+        Call DrawBackBufferSurface 'Draw to the screen!
+        Call CheckKeys
+        Chkflag = 0
+    End If
+    Chkflag = Chkflag + 1
     If CurrentGrh.GrhIndex = 0 Then
         InitGrh CurrentGrh, 1
     End If
