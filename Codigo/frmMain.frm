@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form frmMain 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "WorldEditor"
@@ -2369,8 +2369,7 @@ Begin VB.Form frmMain
    Begin VB.Menu mnuEdicion 
       Caption         =   "&Edición"
       Begin VB.Menu mnuDeshacer 
-         Caption         =   "&Deshacer (no implementado)"
-         Enabled         =   0   'False
+         Caption         =   "&Deshacer"
          Shortcut        =   ^Z
       End
       Begin VB.Menu mnuInfoMap 
@@ -2675,6 +2674,8 @@ Dim Body As Integer
 Dim Heading As Byte
 Dim Leer As New clsIniReader
 i = N
+
+modEdicion.Deshacer_Add "Aplicar " & IIf(T = 0, "Objetos", "NPCs") & " al Azar" ' Hago deshacer
 
 Do While i > 0
     X = CInt(RandomNumber(XMinMapSize, XMaxMapSize - 1))
@@ -3474,6 +3475,14 @@ Private Sub mnuConfigObjTrans_Click()
 'Last modified: 29/05/06
 '*************************************************
 Cfg_TrOBJ = cNumFunc(2).Text
+End Sub
+
+Private Sub mnuDeshacer_Click()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 15/10/06
+'*************************************************
+Call modEdicion.Deshacer_Recover
 End Sub
 
 Private Sub mnuGuardarMapa_Click()

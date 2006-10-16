@@ -134,6 +134,8 @@ End If
 ' Quita NPCs, Objetos y Translados en los Bordes Exteriores
 ' Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
 
+modEdicion.Deshacer_Add "Aplicar Optimizacion del Mapa" ' Hago deshacer
+
 For Y = YMinMapSize To YMaxMapSize
     For X = XMinMapSize To XMaxMapSize
         ' ** Quitar NPCs, Objetos y Translados en los Bordes Exteriores

@@ -230,6 +230,10 @@ bRefreshRadar = True ' Radar
 'Set changed flag
 MapInfo.Changed = 0
 frmMain.MousePointer = 0
+
+' Vacio deshacer
+modEdicion.Deshacer_Clear
+
 MapaCargado = True
 EngineRun = True
 
@@ -656,6 +660,9 @@ On Error Resume Next
     'Set changed flag
     MapInfo.Changed = 0
     
+    ' Vacia el Deshacer
+    modEdicion.Deshacer_Clear
+    
     'Change mouse icon
     frmMain.MousePointer = 0
     MapaCargado = True
@@ -780,6 +787,9 @@ Public Sub MapaV1_Cargar(ByVal Map As String)
     
     'Set changed flag
     MapInfo.Changed = 0
+    
+    ' Vacia el Deshacer
+    modEdicion.Deshacer_Clear
     
     'Change mouse icon
     frmMain.MousePointer = 0

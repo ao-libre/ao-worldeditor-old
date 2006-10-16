@@ -261,6 +261,15 @@ Public MaxYBorder As Byte
 'Object Constants
 Public Const MAX_INVENORY_OBJS  As Integer = 10000
 
+' Deshacer
+Public Const maxDeshacer As Byte = 10
+Public MapData_Deshacer(1 To maxDeshacer, XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
+Type tDeshacerInfo
+    Libre As Boolean
+    Desc As String
+End Type
+Public MapData_Deshacer_Info(1 To maxDeshacer) As tDeshacerInfo
+
 '********** Public ARRAYS ***********
 Public GrhData() As GrhData 'Holds all the grh data
 Public MapData() As MapBlock 'Holds map data for current map
