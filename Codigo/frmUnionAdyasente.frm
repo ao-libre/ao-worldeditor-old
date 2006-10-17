@@ -29,6 +29,7 @@ Begin VB.Form frmUnionAdyacente
       Left            =   1200
       TabIndex        =   40
       Top             =   2400
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.CheckBox AutoMapeo 
@@ -49,6 +50,7 @@ Begin VB.Form frmUnionAdyacente
       Left            =   3840
       TabIndex        =   38
       Top             =   2400
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.CheckBox AutoMapeo 
@@ -68,6 +70,7 @@ Begin VB.Form frmUnionAdyacente
       Left            =   3360
       TabIndex        =   37
       Top             =   1080
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin WorldEditor.lvButtons_H cmdAplicar 
@@ -471,6 +474,7 @@ Begin VB.Form frmUnionAdyacente
       Left            =   3360
       TabIndex        =   39
       Top             =   3000
+      Visible         =   0   'False
       Width           =   1095
    End
    Begin VB.Label Label18 
