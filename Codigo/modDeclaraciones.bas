@@ -262,7 +262,7 @@ Public MaxYBorder As Byte
 Public Const MAX_INVENORY_OBJS  As Integer = 10000
 
 ' Deshacer
-Public Const maxDeshacer As Byte = 10
+Public Const maxDeshacer As Integer = 10
 Public MapData_Deshacer(1 To maxDeshacer, XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
 Type tDeshacerInfo
     Libre As Boolean

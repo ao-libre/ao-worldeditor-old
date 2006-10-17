@@ -2,16 +2,74 @@ VERSION 5.00
 Begin VB.Form frmUnionAdyacente 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Union con Mapas Adyasentes"
-   ClientHeight    =   5265
+   ClientHeight    =   5235
    ClientLeft      =   45
    ClientTop       =   330
    ClientWidth     =   6165
    Icon            =   "frmUnionAdyasente.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   5265
+   ScaleHeight     =   5235
    ScaleWidth      =   6165
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox AutoMapeo 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Auto-Mapeo"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   6.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   3
+      Left            =   1200
+      TabIndex        =   40
+      Top             =   2400
+      Width           =   1095
+   End
+   Begin VB.CheckBox AutoMapeo 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Auto-Mapeo"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   6.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   1
+      Left            =   3840
+      TabIndex        =   38
+      Top             =   2400
+      Width           =   1095
+   End
+   Begin VB.CheckBox AutoMapeo 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Auto-Mapeo"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   6.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   0
+      Left            =   3360
+      TabIndex        =   37
+      Top             =   1080
+      Width           =   1095
+   End
    Begin WorldEditor.lvButtons_H cmdAplicar 
       Height          =   375
       Left            =   3240
@@ -152,7 +210,7 @@ Begin VB.Form frmUnionAdyacente
       Index           =   2
       Left            =   3360
       TabIndex        =   18
-      Top             =   2880
+      Top             =   2760
       Width           =   975
    End
    Begin VB.CheckBox Aplicar 
@@ -396,6 +454,25 @@ Begin VB.Form frmUnionAdyacente
       Value           =   0   'False
       cBack           =   -2147483633
    End
+   Begin VB.CheckBox AutoMapeo 
+      BackColor       =   &H00E0E0E0&
+      Caption         =   "Auto-Mapeo"
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   6.75
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Index           =   2
+      Left            =   3360
+      TabIndex        =   39
+      Top             =   3000
+      Width           =   1095
+   End
    Begin VB.Label Label18 
       Alignment       =   1  'Right Justify
       BackStyle       =   0  'Transparent
@@ -449,8 +526,8 @@ Begin VB.Form frmUnionAdyacente
       BorderWidth     =   2
       X1              =   3840
       X2              =   3840
-      Y1              =   4700
-      Y2              =   4850
+      Y1              =   4695
+      Y2              =   4845
    End
    Begin VB.Label Label16 
       AutoSize        =   -1  'True
@@ -507,8 +584,8 @@ Begin VB.Form frmUnionAdyacente
       BorderWidth     =   2
       X1              =   1560
       X2              =   1560
-      Y1              =   4700
-      Y2              =   4850
+      Y1              =   4695
+      Y2              =   4845
    End
    Begin VB.Label Label14 
       AutoSize        =   -1  'True

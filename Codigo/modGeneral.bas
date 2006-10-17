@@ -198,6 +198,7 @@ Call Leer.Initialize(IniPath & "WorldEditor.ini")
 Cfg_TrOBJ = Val(Leer.GetValue("CONFIGURACION", "ObjTranslado"))
 frmMain.mnuAutoCapturarTranslados.Checked = Val(Leer.GetValue("CONFIGURACION", "AutoCapturarTrans"))
 frmMain.mnuAutoCapturarSuperficie.Checked = Val(Leer.GetValue("CONFIGURACION", "AutoCapturarSup"))
+frmMain.mnuUtilizarDeshacer.Checked = Val(Leer.GetValue("CONFIGURACION", "UtilizarDeshacer"))
 
 ' Guardar Ultima Configuracion
 frmMain.mnuGuardarUltimaConfig.Checked = Val(Leer.GetValue("CONFIGURACION", "GuardarConfig"))
@@ -430,9 +431,9 @@ End If
 
 DeInitTileEngine
 LiberarDirectSound
-Dim F
-For Each F In Forms
-    Unload F
+Dim f
+For Each f In Forms
+    Unload f
 Next
 End
 

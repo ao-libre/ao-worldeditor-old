@@ -24,8 +24,8 @@ Attribute VB_Name = "modEdicion"
 '
 ' @remarks Funciones de Edicion
 ' @author gshaxor@gmail.com
-' @version 0.1.35
-' @date 20061015
+' @version 0.1.38
+' @date 20061016
 
 Option Explicit
 
@@ -52,8 +52,9 @@ End Sub
 Public Sub Deshacer_Add(ByVal Desc As String)
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 15/10/06
+'Last modified: 16/10/06
 '*************************************************
+If frmMain.mnuUtilizarDeshacer.Checked = False Then Exit Sub
 
 Dim i As Integer
 Dim f As Integer
@@ -579,6 +580,38 @@ Next Y
 
 'Set changed flag
 MapInfo.Changed = 1
+End Sub
+
+''
+' Elimita todos los translados del mapa
+'
+
+Public Sub Quitar_Translados()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 16/10/06
+'*************************************************
+
+If EditWarning Then Exit Sub
+
+modEdicion.Deshacer_Add "Quitar todos los Translados" ' Hago deshacer
+
+Dim Y As Integer
+Dim X As Integer
+
+For Y = YMinMapSize To YMaxMapSize
+    For X = XMinMapSize To XMaxMapSize
+        If MapData(X, Y).TileExit.Map > 0 Then
+            MapData(X, Y).TileExit.Map = 0
+            MapData(X, Y).TileExit.X = 0
+            MapData(X, Y).TileExit.Y = 0
+        End If
+    Next X
+Next Y
+
+'Set changed flag
+MapInfo.Changed = 1
+
 End Sub
 
 ''

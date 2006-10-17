@@ -2372,6 +2372,10 @@ Begin VB.Form frmMain
          Caption         =   "&Deshacer"
          Shortcut        =   ^Z
       End
+      Begin VB.Menu mnuUtilizarDeshacer 
+         Caption         =   "&Utilizar Deshacer"
+         Checked         =   -1  'True
+      End
       Begin VB.Menu mnuInfoMap 
          Caption         =   "&Información del Mapa"
       End
@@ -2401,6 +2405,12 @@ Begin VB.Form frmMain
       End
       Begin VB.Menu mnuQuitar 
          Caption         =   "&Quitar"
+         Begin VB.Menu mnuQuitarTranslados 
+            Caption         =   "Todos los &Translados"
+         End
+         Begin VB.Menu mnuQuitarBloqueos 
+            Caption         =   "Todos los &Bloqueos"
+         End
          Begin VB.Menu mnuQuitarNPCs 
             Caption         =   "Todos los &NPC's"
          End
@@ -2411,10 +2421,7 @@ Begin VB.Form frmMain
             Caption         =   "Todos los &Objetos"
          End
          Begin VB.Menu mnuQuitarTriggers 
-            Caption         =   "Todos los &Trigger's"
-         End
-         Begin VB.Menu mnuQuitarBloqueos 
-            Caption         =   "Todos los &Bloqueos"
+            Caption         =   "Todos los Tri&gger's"
          End
          Begin VB.Menu mnuQuitarSuperficieBordes 
             Caption         =   "Superficie de los B&ordes"
@@ -3801,6 +3808,14 @@ Private Sub mnuQuitarTODO_Click()
 Call modEdicion.Borrar_Mapa
 End Sub
 
+Private Sub mnuQuitarTranslados_Click()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 16/10/06
+'*************************************************
+Call modEdicion.Quitar_Translados
+End Sub
+
 Private Sub mnuQuitarTriggers_Click()
 '*************************************************
 'Author: ^[GS]^
@@ -3881,6 +3896,14 @@ For i = 0 To 6
     End If
 Next
 modPaneles.VerFuncion 6, True
+End Sub
+
+Private Sub mnuUtilizarDeshacer_Click()
+'*************************************************
+'Author: ^[GS]^
+'Last modified: 16/10/06
+'*************************************************
+mnuUtilizarDeshacer.Checked = (mnuUtilizarDeshacer.Checked = False)
 End Sub
 
 Private Sub mnuUtirialNuevoFormato_Click()
@@ -4052,7 +4075,7 @@ End Sub
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 28/05/06
+'Last modified: 16/10/06
 '*************************************************
 
 ' Guardar configuración
@@ -4069,6 +4092,7 @@ If frmMain.mnuGuardarUltimaConfig.Checked = True Then
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Triggers", IIf(frmMain.mnuVerTriggers.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Bloqueos", IIf(frmMain.mnuVerBloqueos.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "LastPos", UserPos.X & "-" & UserPos.Y
+    WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "UtilizarDeshacer", IIf(frmMain.mnuUtilizarDeshacer.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "AutoCapturarTrans", IIf(frmMain.mnuAutoCapturarTranslados.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "AutoCapturarSup", IIf(frmMain.mnuAutoCapturarSuperficie.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "ObjTranslado", Val(Cfg_TrOBJ)

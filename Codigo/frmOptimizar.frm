@@ -2,16 +2,25 @@ VERSION 5.00
 Begin VB.Form frmOptimizar 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Optimizar Mapa"
-   ClientHeight    =   3240
+   ClientHeight    =   3525
    ClientLeft      =   45
    ClientTop       =   435
    ClientWidth     =   3600
    Icon            =   "frmOptimizar.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   3240
+   ScaleHeight     =   3525
    ScaleWidth      =   3600
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkBloquearArbolesEtc 
+      Caption         =   "Bloquear Arboles, Carteles, Foros y Yacimientos"
+      Height          =   375
+      Left            =   120
+      TabIndex        =   7
+      Top             =   2160
+      Value           =   1  'Checked
+      Width           =   3375
+   End
    Begin VB.CheckBox chkMapearArbolesEtc 
       Caption         =   "Mapear Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa"
       Height          =   375
@@ -61,7 +70,7 @@ Begin VB.Form frmOptimizar
       Height          =   735
       Left            =   120
       TabIndex        =   5
-      Top             =   2280
+      Top             =   2640
       Width           =   1815
       _ExtentX        =   3201
       _ExtentY        =   1296
@@ -78,7 +87,7 @@ Begin VB.Form frmOptimizar
          Strikethrough   =   0   'False
       EndProperty
       cGradient       =   0
-      Mode            =   1
+      Mode            =   0
       Value           =   0   'False
       cBack           =   12648384
    End
@@ -86,7 +95,7 @@ Begin VB.Form frmOptimizar
       Height          =   735
       Left            =   1920
       TabIndex        =   6
-      Top             =   2280
+      Top             =   2640
       Width           =   1575
       _ExtentX        =   2778
       _ExtentY        =   1296
@@ -119,7 +128,7 @@ Option Explicit
 Private Sub Optimizar()
 '*************************************************
 'Author: ^[GS]^
-'Last modified: 25/09/06
+'Last modified: 16/10/06
 '*************************************************
 Dim Y As Integer
 Dim X As Integer
@@ -173,10 +182,11 @@ For Y = YMinMapSize To YMaxMapSize
             End If
         End If
         ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
-        If MapData(X, Y).OBJInfo.objindex > 0 And chkMapearArbolesEtc.value = 1 Then
+        If MapData(X, Y).OBJInfo.objindex > 0 And (chkMapearArbolesEtc.value = 1 Or chkBloquearArbolesEtc.value = 1) Then
             Select Case ObjData(MapData(X, Y).OBJInfo.objindex).ObjType
                 Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
-                    If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+                    If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex And chkMapearArbolesEtc.value = 1 Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+                    If chkBloquearArbolesEtc.value = 1 And MapData(X, Y).Blocked = 0 Then MapData(X, Y).Blocked = 1
             End Select
         End If
         ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
