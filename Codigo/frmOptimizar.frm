@@ -147,49 +147,55 @@ modEdicion.Deshacer_Add "Aplicar Optimizacion del Mapa" ' Hago deshacer
 
 For Y = YMinMapSize To YMaxMapSize
     For X = XMinMapSize To XMaxMapSize
-        ' ** Quitar NPCs, Objetos y Translados en los Bordes Exteriores
-        If (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) And chkQuitarTodoBordes.value = 1 Then
-             'Quitar NPCs
-            If MapData(X, Y).NPCIndex > 0 Then
-                EraseChar MapData(X, Y).CharIndex
-                MapData(X, Y).NPCIndex = 0
+        With MapData(X, Y)
+            ' ** Quitar NPCs, Objetos y Translados en los Bordes Exteriores
+            If (X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder) And (chkQuitarTodoBordes.value = 1) Then
+                'Quitar NPCs
+                If .NPCIndex > 0 Then
+                    EraseChar .CharIndex
+                    .NPCIndex = 0
+                End If
+                
+                ' Quitar Objetos
+                .OBJInfo.objindex = 0
+                .OBJInfo.Amount = 0
+                .ObjGrh.GrhIndex = 0
+                ' Quitar Translados
+                .TileExit.Map = 0
+                .TileExit.X = 0
+                .TileExit.Y = 0
+                ' Quitar Triggers
+                .Trigger = 0
             End If
-            ' Quitar Objetos
-            MapData(X, Y).OBJInfo.objindex = 0
-            MapData(X, Y).OBJInfo.Amount = 0
-            MapData(X, Y).ObjGrh.GrhIndex = 0
-            ' Quitar Translados
-            MapData(X, Y).TileExit.Map = 0
-            MapData(X, Y).TileExit.X = 0
-            MapData(X, Y).TileExit.Y = 0
-            ' Quitar Triggers
-            MapData(X, Y).Trigger = 0
-        End If
-        ' ** Quitar Translados y Triggers en Bloqueo
-        If MapData(X, Y).Blocked = 1 Then
-            If MapData(X, Y).TileExit.Map > 0 And chkQuitarTrans.value = 1 Then ' Quita Translado Bloqueado
-                MapData(X, Y).TileExit.Map = 0
-                MapData(X, Y).TileExit.Y = 0
-                MapData(X, Y).TileExit.X = 0
-            ElseIf MapData(X, Y).Trigger > 0 And chkQuitarTrigBloq.value = 1 Then ' Quita Trigger Bloqueado
-                MapData(X, Y).Trigger = 0
+            
+            ' ** Quitar Translados y Triggers en Bloqueo
+            If (.Blocked = 1) Then
+                If (.TileExit.Map > 0) And (chkQuitarTrans.value = 1) Then ' Quita Translado Bloqueado
+                    .TileExit.Map = 0
+                    .TileExit.Y = 0
+                    .TileExit.X = 0
+                ElseIf (.Trigger > 0) And (chkQuitarTrigBloq.value = 1) Then ' Quita Trigger Bloqueado
+                    .Trigger = 0
+                End If
             End If
-        End If
-        ' ** Quitar Triggers en Translado
-        If MapData(X, Y).TileExit.Map > 0 And chkQuitarTrigTrans.value = 1 Then
-            If MapData(X, Y).Trigger > 0 Then ' Quita Trigger en Translado
-                MapData(X, Y).Trigger = 0
+            
+            ' ** Quitar Triggers en Translado
+            If (.TileExit.Map > 0) And (chkQuitarTrigTrans.value = 1) Then
+                If (.Trigger > 0) Then ' Quita Trigger en Translado
+                    .Trigger = 0
+                End If
             End If
-        End If
-        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
-        If MapData(X, Y).OBJInfo.objindex > 0 And (chkMapearArbolesEtc.value = 1 Or chkBloquearArbolesEtc.value = 1) Then
-            Select Case ObjData(MapData(X, Y).OBJInfo.objindex).ObjType
-                Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
-                    If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex And chkMapearArbolesEtc.value = 1 Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
-                    If chkBloquearArbolesEtc.value = 1 And MapData(X, Y).Blocked = 0 Then MapData(X, Y).Blocked = 1
-            End Select
-        End If
-        ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
+            
+            ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
+            If (.OBJInfo.objindex > 0) And ((chkMapearArbolesEtc.value = 1) Or (chkBloquearArbolesEtc.value = 1)) Then
+                Select Case ObjData(.OBJInfo.objindex).ObjType
+                    Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
+                        If (.Graphic(3).GrhIndex <> .ObjGrh.GrhIndex) And (chkMapearArbolesEtc.value = 1) Then .Graphic(3) = .ObjGrh
+                        If (chkBloquearArbolesEtc.value = 1) And (.Blocked = 0) Then .Blocked = 1
+                End Select
+            End If
+            ' ** Mapea Arboles, Carteles, Foros y Yacimientos que no esten en la 3ra Capa
+        End With
     Next X
 Next Y
 
@@ -213,5 +219,3 @@ Private Sub cOptimizar_Click()
 '*************************************************
 Call Optimizar
 End Sub
-
-

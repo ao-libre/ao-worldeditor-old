@@ -441,7 +441,7 @@ Private Sub cmdMusica_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-frmMusica.Show
+frmMusica.Show vbModeless
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)

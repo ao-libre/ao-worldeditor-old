@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form frmMain 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "WorldEditor"
@@ -375,7 +375,7 @@ Begin VB.Form frmMain
       ForeColor       =   &H80000008&
       Height          =   4395
       Left            =   120
-      Picture         =   "frmMain.frx":E446
+      Picture         =   "frmMain.frx":E448
       ScaleHeight     =   4365
       ScaleWidth      =   4365
       TabIndex        =   6
@@ -515,7 +515,7 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          cGradient       =   0
-         Mode            =   0
+         Mode            =   1
          Value           =   0   'False
          cBack           =   -2147483633
       End
@@ -585,9 +585,9 @@ Begin VB.Form frmMain
          EndProperty
          ForeColor       =   &H80000014&
          Height          =   330
-         ItemData        =   "frmMain.frx":20AAA
+         ItemData        =   "frmMain.frx":20AAC
          Left            =   1080
-         List            =   "frmMain.frx":20ABA
+         List            =   "frmMain.frx":20ABC
          TabIndex        =   74
          Text            =   "1"
          Top             =   3120
@@ -649,9 +649,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   2580
          Index           =   0
-         ItemData        =   "frmMain.frx":20ACA
+         ItemData        =   "frmMain.frx":20ACC
          Left            =   120
-         List            =   "frmMain.frx":20ACC
+         List            =   "frmMain.frx":20ACE
          Sorted          =   -1  'True
          TabIndex        =   71
          Tag             =   "-1"
@@ -752,9 +752,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   2
-         ItemData        =   "frmMain.frx":20ACE
+         ItemData        =   "frmMain.frx":20AD0
          Left            =   3360
-         List            =   "frmMain.frx":20AD0
+         List            =   "frmMain.frx":20AD2
          TabIndex        =   67
          Text            =   "1"
          Top             =   3120
@@ -776,9 +776,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   2
-         ItemData        =   "frmMain.frx":20AD2
+         ItemData        =   "frmMain.frx":20AD4
          Left            =   840
-         List            =   "frmMain.frx":20AD4
+         List            =   "frmMain.frx":20AD6
          TabIndex        =   66
          Text            =   "1"
          Top             =   3120
@@ -799,9 +799,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   2580
          Index           =   3
-         ItemData        =   "frmMain.frx":20AD6
+         ItemData        =   "frmMain.frx":20AD8
          Left            =   120
-         List            =   "frmMain.frx":20AD8
+         List            =   "frmMain.frx":20ADA
          TabIndex        =   65
          Tag             =   "-1"
          Top             =   120
@@ -843,9 +843,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   0
-         ItemData        =   "frmMain.frx":20ADA
+         ItemData        =   "frmMain.frx":20ADC
          Left            =   840
-         List            =   "frmMain.frx":20ADC
+         List            =   "frmMain.frx":20ADE
          TabIndex        =   57
          Text            =   "1"
          Top             =   3120
@@ -867,9 +867,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   0
-         ItemData        =   "frmMain.frx":20ADE
+         ItemData        =   "frmMain.frx":20AE0
          Left            =   3360
-         List            =   "frmMain.frx":20AE0
+         List            =   "frmMain.frx":20AE2
          TabIndex        =   56
          Text            =   "1"
          Top             =   3120
@@ -910,9 +910,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   2580
          Index           =   1
-         ItemData        =   "frmMain.frx":20AE2
+         ItemData        =   "frmMain.frx":20AE4
          Left            =   120
-         List            =   "frmMain.frx":20AE4
+         List            =   "frmMain.frx":20AE6
          TabIndex        =   54
          Tag             =   "-1"
          Top             =   120
@@ -933,9 +933,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   3210
          Index           =   4
-         ItemData        =   "frmMain.frx":20AE6
+         ItemData        =   "frmMain.frx":20AE8
          Left            =   120
-         List            =   "frmMain.frx":20AE8
+         List            =   "frmMain.frx":20AEA
          TabIndex        =   53
          Tag             =   "-1"
          Top             =   120
@@ -1410,9 +1410,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   1
-         ItemData        =   "frmMain.frx":20AEA
+         ItemData        =   "frmMain.frx":20AEC
          Left            =   840
-         List            =   "frmMain.frx":20AEC
+         List            =   "frmMain.frx":20AEE
          TabIndex        =   78
          Text            =   "1"
          Top             =   3120
@@ -1453,9 +1453,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   2580
          Index           =   2
-         ItemData        =   "frmMain.frx":20AEE
+         ItemData        =   "frmMain.frx":20AF0
          Left            =   120
-         List            =   "frmMain.frx":20AF0
+         List            =   "frmMain.frx":20AF2
          TabIndex        =   80
          Tag             =   "-1"
          Top             =   120
@@ -1477,9 +1477,9 @@ Begin VB.Form frmMain
          ForeColor       =   &H80000014&
          Height          =   330
          Index           =   1
-         ItemData        =   "frmMain.frx":20AF2
+         ItemData        =   "frmMain.frx":20AF4
          Left            =   3360
-         List            =   "frmMain.frx":20AF4
+         List            =   "frmMain.frx":20AF6
          TabIndex        =   81
          Text            =   "500"
          Top             =   3120
@@ -2315,10 +2315,10 @@ Begin VB.Form frmMain
       BackColor       =   &H000000FF&
       BorderColor     =   &H00C0C0C0&
       FillColor       =   &H00C0E0FF&
-      Height          =   9165
+      Height          =   9120
       Left            =   4560
       Top             =   1440
-      Width           =   10605
+      Width           =   10080
    End
    Begin VB.Menu FileMnu 
       Caption         =   "&Archivo"
@@ -2355,6 +2355,18 @@ Begin VB.Form frmMain
       End
       Begin VB.Menu mnuGuardarMapaComo 
          Caption         =   "Guardar Mapa &como..."
+      End
+      Begin VB.Menu mnuExportar 
+         Caption         =   "&Exportar"
+         Begin VB.Menu mnuBmp 
+            Caption         =   "Bmp"
+         End
+         Begin VB.Menu mnuPng 
+            Caption         =   "Png"
+         End
+         Begin VB.Menu mnuJpg 
+            Caption         =   "Jpg"
+         End
       End
       Begin VB.Menu mnuArchivoLine5 
          Caption         =   "-"
@@ -2436,6 +2448,17 @@ Begin VB.Form frmMain
             Caption         =   "TODO"
          End
       End
+      Begin VB.Menu mnuAplicar 
+         Caption         =   "Aplicar"
+         Begin VB.Menu mnuApliBloq 
+            Caption         =   "Aplicar bloqueos"
+            Shortcut        =   ^B
+         End
+         Begin VB.Menu mnuApliSelec 
+            Caption         =   "Aplicar seleccionado"
+            Shortcut        =   ^D
+         End
+      End
       Begin VB.Menu mnuLineEdicion3 
          Caption         =   "-"
       End
@@ -2474,16 +2497,19 @@ Begin VB.Form frmMain
       Caption         =   "&Ver"
       Begin VB.Menu mnuCapas 
          Caption         =   "...&Capas"
-         Begin VB.Menu mnuVerCapa2 
+         Begin VB.Menu mnuVerCapa 
             Caption         =   "Capa &2 (costas, etc)"
             Checked         =   -1  'True
+            Index           =   2
          End
-         Begin VB.Menu mnuVerCapa3 
+         Begin VB.Menu mnuVerCapa 
             Caption         =   "Capa &3 (arboles, etc)"
             Checked         =   -1  'True
+            Index           =   3
          End
-         Begin VB.Menu mnuVerCapa4 
+         Begin VB.Menu mnuVerCapa 
             Caption         =   "Capa &4 (techos, etc)"
+            Index           =   4
          End
       End
       Begin VB.Menu mnuVerTranslados 
@@ -2668,7 +2694,10 @@ Attribute VB_Exposed = False
 '**************************************************************
 Option Explicit
 
-Private Sub PonerAlAzar(ByVal N As Integer, T As Byte)
+Public MouseX As Long
+Public MouseY As Long
+
+Private Sub PonerAlAzar(ByVal n As Integer, ByVal T As Byte)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06 by GS
@@ -2680,7 +2709,8 @@ Dim Head As Integer
 Dim Body As Integer
 Dim Heading As Byte
 Dim Leer As New clsIniReader
-i = N
+
+i = n
 
 modEdicion.Deshacer_Add "Aplicar " & IIf(T = 0, "Objetos", "NPCs") & " al Azar" ' Hago deshacer
 
@@ -2691,49 +2721,42 @@ Do While i > 0
     Select Case T
         Case 0
             If MapData(X, Y).OBJInfo.objindex = 0 Then
-                  i = i - 1
-                  If cInsertarBloqueo.value = True Then
+                i = i - 1
+                  
+                If cInsertarBloqueo.value = True Then
                     MapData(X, Y).Blocked = 1
-                  Else
+                Else
                     MapData(X, Y).Blocked = 0
-                  End If
-                  If cNumFunc(2).Text > 0 Then
-                      objindex = cNumFunc(2).Text
-                      InitGrh MapData(X, Y).ObjGrh, ObjData(objindex).GrhIndex
-                      MapData(X, Y).OBJInfo.objindex = objindex
-                      MapData(X, Y).OBJInfo.Amount = Val(cCantFunc(2).Text)
-                      Select Case ObjData(objindex).ObjType ' GS
-                            Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
-                                MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
-                      End Select
-                  End If
+                End If
+                  
+                If cNumFunc(2).Text > 0 Then
+                    objindex = cNumFunc(2).Text
+                    InitGrh MapData(X, Y).ObjGrh, ObjData(objindex).GrhIndex
+                    MapData(X, Y).OBJInfo.objindex = objindex
+                    MapData(X, Y).OBJInfo.Amount = Val(cCantFunc(2).Text)
+                    
+                    Select Case ObjData(objindex).ObjType ' GS
+                        Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
+                            MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+                    End Select
+                End If
             End If
-        Case 1
+            
+        Case 1, 2
            If MapData(X, Y).Blocked = 0 Then
-                  i = i - 1
-                  If cNumFunc(T - 1).Text > 0 Then
-                        NPCIndex = cNumFunc(T - 1).Text
-                        Body = NpcData(NPCIndex).Body
-                        Head = NpcData(NPCIndex).Head
-                        Heading = NpcData(NPCIndex).Heading
-                        Call MakeChar(NextOpenChar(), Body, Head, Heading, CInt(X), CInt(Y))
-                        MapData(X, Y).NPCIndex = NPCIndex
-                  End If
+                i = i - 1
+                
+                If cNumFunc(T - 1).Text > 0 Then
+                    NPCIndex = cNumFunc(T - 1).Text
+                    Body = NpcData(NPCIndex).Body
+                    Head = NpcData(NPCIndex).Head
+                    Heading = NpcData(NPCIndex).Heading
+                        
+                    Call MakeChar(NextOpenChar(), Body, Head, Heading, CInt(X), CInt(Y))
+                    MapData(X, Y).NPCIndex = NPCIndex
+                End If
             End If
-        Case 2
-           If MapData(X, Y).Blocked = 0 Then
-                  i = i - 1
-                  If cNumFunc(T - 1).Text >= 0 Then
-                        NPCIndex = cNumFunc(T - 1).Text
-                        Body = NpcData(NPCIndex).Body
-                        Head = NpcData(NPCIndex).Head
-                        Heading = NpcData(NPCIndex).Heading
-                        Call MakeChar(NextOpenChar(), Body, Head, Heading, CInt(X), CInt(Y))
-                        MapData(X, Y).NPCIndex = NPCIndex
-                  End If
-           End If
-        End Select
-        DoEvents
+    End Select
 Loop
 End Sub
 
@@ -2747,6 +2770,7 @@ If IsNumeric(cCantFunc(index).Text) = False Or cCantFunc(index).Text > 200 Then
     MsgBox "El Valor de Cantidad introducido no es soportado!" & vbCrLf & "El valor maximo es 200.", vbCritical
     Exit Sub
 End If
+
 cAgregarFuncalAzar(index).Enabled = False
 Call PonerAlAzar(CInt(cCantFunc(index).Text), 1 + (IIf(index = 2, -1, index)))
 cAgregarFuncalAzar(index).Enabled = True
@@ -2757,12 +2781,16 @@ Private Sub cCantFunc_Change(index As Integer)
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-On Error Resume Next
-    If Val(cCantFunc(index)) < 1 Then
+    Dim Cant As Long
+    
+    Cant = Val(cCantFunc(index))
+    
+    If Cant < 1 Then
       cCantFunc(index).Text = 1
-    End If
-    If Val(cCantFunc(index)) > 10000 Then
+    ElseIf Cant > 10000 Then
       cCantFunc(index).Text = 10000
+    Else
+        cCantFunc(index).Text = Cant
     End If
 End Sub
 
@@ -2771,21 +2799,38 @@ Private Sub cCapas_Change()
 'Author: ^[GS]^
 'Last modified: 31/05/06
 '*************************************************
-    If Val(cCapas.Text) < 1 Then
-      cCapas.Text = 1
+    cCapas.Text = Val(cCapas.Text)
+    
+    If (Val(cCapas.Text) >= 1) And (Val(cCapas.Text) <= 4) Then
+        CurLayer = Val(frmMain.cCapas.Text)
+    Else
+        CurLayer = 1
+        cCapas.Text = CurLayer
     End If
-    If Val(cCapas.Text) > 4 Then
-      cCapas.Text = 4
-    End If
+    
     cCapas.Tag = vbNullString
 End Sub
 
+Private Sub cCapas_Click()
+    cCapas.Text = Val(cCapas.Text)
+    
+    If (Val(cCapas.Text) >= 1) And (Val(cCapas.Text) <= 4) Then
+        CurLayer = Val(frmMain.cCapas.Text)
+    Else
+        CurLayer = 1
+        cCapas.Text = CurLayer
+    End If
+    
+    cCapas.Tag = vbNullString
+End Sub
+
+Private Sub cCapas_KeyDown(KeyCode As Integer, Shift As Integer)
+KeyCode = 0
+End Sub
+
 Private Sub cCapas_KeyPress(KeyAscii As Integer)
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-If IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
+If IsNumeric(Chr$(KeyAscii)) Then cCapas.Text = Chr$(KeyAscii)
+KeyAscii = 0
 End Sub
 
 Private Sub cFiltro_GotFocus(index As Integer)
@@ -2823,11 +2868,14 @@ Private Sub cGrh_KeyPress(KeyAscii As Integer)
 On Error GoTo Fallo
 If KeyAscii = 13 Then
     Call fPreviewGrh(cGrh.Text)
+    
     If frmMain.cGrh.ListCount > 5 Then
         frmMain.cGrh.RemoveItem 0
     End If
+    
     frmMain.cGrh.AddItem frmMain.cGrh.Text
 End If
+
 Exit Sub
 Fallo:
     cGrh.Text = 1
@@ -2839,7 +2887,7 @@ Private Sub cInsertarFunc_Click(index As Integer)
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cInsertarFunc(index).value = True Then
+If cInsertarFunc(index).value Then
     cQuitarFunc(index).Enabled = False
     cAgregarFuncalAzar(index).Enabled = False
     If index <> 2 Then cCantFunc(index).Enabled = False
@@ -2857,7 +2905,7 @@ Private Sub cInsertarTrans_Click()
 'Author: ^[GS]^
 'Last modified: 22/05/06
 '*************************************************
-If cInsertarTrans.value = True Then
+If cInsertarTrans.value Then
     cQuitarTrans.Enabled = False
     Call modPaneles.EstSelectPanel(1, True)
 Else
@@ -2871,7 +2919,7 @@ Private Sub cInsertarTrigger_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cInsertarTrigger.value = True Then
+If cInsertarTrigger.value Then
     cQuitarTrigger.Enabled = False
     Call modPaneles.EstSelectPanel(6, True)
 Else
@@ -2879,7 +2927,6 @@ Else
     Call modPaneles.EstSelectPanel(6, False)
 End If
 End Sub
-
 
 Private Sub cmdInformacionDelMapa_Click()
 '*************************************************
@@ -2903,7 +2950,10 @@ Private Sub cUnionManual_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-cInsertarTrans.value = (cUnionManual.value = True)
+cUnionManual.value = (cUnionManual.value = True)
+
+If cUnionManual.value Then cInsertarTrans.value = True
+
 Call cInsertarTrans_Click
 End Sub
 
@@ -2913,6 +2963,8 @@ Private Sub cverBloqueos_Click()
 'Last modified: 20/05/06
 '*************************************************
 mnuVerBloqueos.Checked = cVerBloqueos.value
+
+bBloqs = mnuVerBloqueos.Checked
 End Sub
 
 Private Sub cverTriggers_Click()
@@ -2921,6 +2973,8 @@ Private Sub cverTriggers_Click()
 'Last modified: 20/05/06
 '*************************************************
 mnuVerTriggers.Checked = cVerTriggers.value
+
+bTriggers = mnuVerTriggers.Checked
 End Sub
 
 Private Sub cNumFunc_KeyPress(index As Integer, KeyAscii As Integer)
@@ -2932,19 +2986,19 @@ On Error Resume Next
 
 If KeyAscii = 13 Then
     Dim Cont As String
+    
     Cont = frmMain.cNumFunc(index).Text
     Call cNumFunc_LostFocus(index)
+    
     If Cont <> frmMain.cNumFunc(index).Text Then Exit Sub
+    
     If frmMain.cNumFunc(index).ListCount > 5 Then
         frmMain.cNumFunc(index).RemoveItem 0
     End If
-    frmMain.cNumFunc(index).AddItem frmMain.cNumFunc(index).Text
-    Exit Sub
-ElseIf KeyAscii = 8 Then
     
-ElseIf IsNumeric(Chr(KeyAscii)) = False Then
+    frmMain.cNumFunc(index).AddItem frmMain.cNumFunc(index).Text
+ElseIf (Not IsNumeric(Chr$(KeyAscii))) And (KeyAscii <> 8) Then
     KeyAscii = 0
-    Exit Sub
 End If
 
 End Sub
@@ -2955,7 +3009,7 @@ Private Sub cNumFunc_KeyUp(index As Integer, KeyCode As Integer, Shift As Intege
 'Last modified: 20/05/06
 '*************************************************
 On Error Resume Next
-If cNumFunc(index).Text = vbNullString Then
+If LenB(cNumFunc(index).Text) > 0 Then
     frmMain.cNumFunc(index).Text = IIf(index = 1, 500, 1)
 End If
 End Sub
@@ -2987,7 +3041,8 @@ Private Sub cInsertarBloqueo_Click()
 'Last modified: 29/05/06
 '*************************************************
 cInsertarBloqueo.Tag = vbNullString
-If cInsertarBloqueo.value = True Then
+
+If cInsertarBloqueo.value Then
     cQuitarBloqueo.Enabled = False
     Call modPaneles.EstSelectPanel(2, True)
 Else
@@ -3002,7 +3057,8 @@ Private Sub cQuitarBloqueo_Click()
 'Last modified: 20/05/06
 '*************************************************
 cInsertarBloqueo.Tag = vbNullString
-If cQuitarBloqueo.value = True Then
+
+If cQuitarBloqueo.value Then
     cInsertarBloqueo.Enabled = False
     Call modPaneles.EstSelectPanel(2, True)
 Else
@@ -3016,7 +3072,7 @@ Private Sub cQuitarEnEstaCapa_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cQuitarEnEstaCapa.value = True Then
+If cQuitarEnEstaCapa.value Then
     lListado(0).Enabled = False
     cFiltro(0).Enabled = False
     cGrh.Enabled = False
@@ -3038,7 +3094,7 @@ Private Sub cQuitarEnTodasLasCapas_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cQuitarEnTodasLasCapas.value = True Then
+If cQuitarEnTodasLasCapas.value Then
     cCapas.Enabled = False
     lListado(0).Enabled = False
     cFiltro(0).Enabled = False
@@ -3057,13 +3113,12 @@ Else
 End If
 End Sub
 
-
 Private Sub cQuitarFunc_Click(index As Integer)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cQuitarFunc(index).value = True Then
+If cQuitarFunc(index).value Then
     cInsertarFunc(index).Enabled = False
     cAgregarFuncalAzar(index).Enabled = False
     cCantFunc(index).Enabled = False
@@ -3115,7 +3170,7 @@ Private Sub cQuitarTrigger_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cQuitarTrigger.value = True Then
+If cQuitarTrigger.value Then
     lListado(4).Enabled = False
     cInsertarTrigger.Enabled = False
     Call modPaneles.EstSelectPanel(6, True)
@@ -3131,7 +3186,7 @@ Private Sub cSeleccionarSuperficie_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-If cSeleccionarSuperficie.value = True Then
+If cSeleccionarSuperficie.value Then
     cQuitarEnTodasLasCapas.Enabled = False
     cQuitarEnEstaCapa.Enabled = False
     Call modPaneles.EstSelectPanel(0, True)
@@ -3140,6 +3195,8 @@ Else
     cQuitarEnEstaCapa.Enabled = True
     Call modPaneles.EstSelectPanel(0, False)
 End If
+
+bSelectSup = cSeleccionarSuperficie.value
 End Sub
 
 Private Sub cUnionAuto_Click()
@@ -3163,7 +3220,7 @@ Private Sub Form_DblClick()
 'Author: ^[GS]^
 'Last modified: 28/05/06
 '*************************************************
-Dim tX As Integer
+Dim tx As Integer
 Dim tY As Integer
 
 If Not MapaCargado Then Exit Sub
@@ -3179,9 +3236,9 @@ Private Sub Form_KeyPress(KeyAscii As Integer)
 'Last modified: 20/05/06
 '*************************************************
 ' HotKeys
-If HotKeysAllow = False Then Exit Sub
+If Not HotKeysAllow Then Exit Sub
 
-Select Case UCase(Chr(KeyAscii))
+Select Case UCase$(Chr$(KeyAscii))
     Case "S" ' Activa/Desactiva Insertar Superficie
         cSeleccionarSuperficie.value = (cSeleccionarSuperficie.value = False)
         Call cSeleccionarSuperficie_Click
@@ -3208,6 +3265,36 @@ Select Case UCase(Chr(KeyAscii))
 End Select
 End Sub
 
+Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Dim tx As Integer
+Dim tY As Integer
+
+MouseX = X - MainViewShp.Left
+MouseY = Y - MainViewShp.Top
+
+'Trim to fit screen
+If MouseX < 0 Then
+    MouseX = 0
+ElseIf MouseX > MainViewShp.Width Then
+    MouseX = MainViewShp.Width
+End If
+
+'Trim to fit screen
+If MouseY < 0 Then
+    MouseY = 0
+ElseIf MouseY > MainViewShp.Height Then
+    MouseY = MainViewShp.Height
+End If
+    
+'Make sure click is in view window
+If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainViewShp.Top Or Y >= MainViewShp.Top + MainViewHeight Then
+    Exit Sub
+End If
+
+ConvertCPtoTP MouseX, MouseY, tx, tY
+
+If Button = vbLeftButton Then Call SelectTiles(True, tx, tY)
+End Sub
 
 Private Sub lListado_Click(index As Integer)
 '*************************************************
@@ -3216,7 +3303,7 @@ Private Sub lListado_Click(index As Integer)
 '*************************************************
 On Error Resume Next
 If HotKeysAllow = False Then
-    lListado(index).Tag = lListado(index).listIndex
+    lListado(index).Tag = lListado(index).ListIndex
     Select Case index
         Case 0
             cGrh.Text = DameGrhIndex(ReadField(2, lListado(index).Text, Asc("#")))
@@ -3249,7 +3336,7 @@ If HotKeysAllow = False Then
             cNumFunc(2).Text = ReadField(2, lListado(index).Text, Asc("#"))
     End Select
 Else
-    lListado(index).listIndex = lListado(index).Tag
+    lListado(index).ListIndex = lListado(index).Tag
 End If
 
 End Sub
@@ -3260,7 +3347,7 @@ Private Sub lListado_MouseDown(index As Integer, Button As Integer, Shift As Int
 'Last modified: 29/05/06
 '*************************************************
 If index = 3 And Button = 2 Then
-    If lListado(3).listIndex > -1 Then Me.PopupMenu mnuObjSc
+    If lListado(3).ListIndex > -1 Then Me.PopupMenu mnuObjSc
 End If
 End Sub
 
@@ -3282,15 +3369,14 @@ If (index + NumMap_Save - 4) <> NumMap_Save Then
     Dialog.CancelError = True
     On Error GoTo ErrHandler
     Dialog.FileName = PATH_Save & NameMap_Save & (index + NumMap_Save - 4) & ".map"
+    
     If MapInfo.Changed = 1 Then
         If MsgBox(MSGMod, vbExclamation + vbYesNo) = vbYes Then
             modMapIO.GuardarMapa Dialog.FileName
         End If
     End If
         Call modMapIO.NuevoMapa
-        DoEvents
-        modMapIO.AbrirMapa Dialog.FileName
-        EngineRun = True
+        modMapIO.AbrirMapa Dialog.FileName, MapData
     Exit Sub
     
 ErrHandler:
@@ -3336,25 +3422,19 @@ Private Sub mnuAbrirMapa_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-Dialog.CancelError = True
 On Error GoTo ErrHandler
 
-DeseaGuardarMapa Dialog.FileName
+    DeseaGuardarMapa Dialog.FileName
+    
+    ObtenerNombreArchivo False
+    
+    If Len(Dialog.FileName) < 3 Then Exit Sub
 
-ObtenerNombreArchivo False
-
-If Len(Dialog.FileName) < 3 Then Exit Sub
-
-    If WalkMode = True Then
-        Call modGeneral.ToggleWalkMode
-    End If
+    If WalkMode Then Call modGeneral.ToggleWalkMode
     
     Call modMapIO.NuevoMapa
-    modMapIO.AbrirMapa Dialog.FileName
-    DoEvents
+    modMapIO.AbrirMapa Dialog.FileName, MapData
     mnuReAbrirMapa.Enabled = True
-    EngineRun = True
-    
 Exit Sub
 ErrHandler:
 End Sub
@@ -3366,8 +3446,6 @@ Private Sub mnuacercade_Click()
 '*************************************************
 frmAbout.Show
 End Sub
-
-
 
 Private Sub mnuActualizarNPCs_Click()
 '*************************************************
@@ -3391,6 +3469,14 @@ Private Sub mnuActualizarTriggers_Click()
 'Last modified: 20/05/06
 '*************************************************
 Call modIndices.CargarIndicesTriggers
+End Sub
+
+Private Sub mnuApliBloq_Click()
+Call AplicarBloqueos
+End Sub
+
+Private Sub mnuApliSelec_Click()
+Call AplicarSeleccionado
 End Sub
 
 Private Sub mnuAutoCapturarTranslados_Click()
@@ -3417,6 +3503,7 @@ Private Sub mnuAutoCompletarSuperficies_Click()
 '*************************************************
 mnuAutoCompletarSuperficies.Checked = (mnuAutoCompletarSuperficies.Checked = False)
 
+bAutoCompletarSuperficies = mnuAutoCompletarSuperficies.Checked
 End Sub
 
 Private Sub mnuAutoGuardarMapas_Click()
@@ -3442,12 +3529,13 @@ Private Sub mnuBloquear_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> 2 Then
         frmMain.SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
 
 modPaneles.VerFuncion 2, True
 End Sub
@@ -3466,6 +3554,11 @@ Private Sub mnuBloquearMapa_Click()
 'Last modified: 20/05/06
 '*************************************************
 Call modEdicion.Bloqueo_Todo(1)
+End Sub
+
+Private Sub mnuBmp_Click()
+frmRender.formatPic = eFormatPic.bmp
+Call frmRender.Show(vbModal)
 End Sub
 
 Private Sub mnuConfigAvanzada_Click()
@@ -3565,6 +3658,11 @@ Private Sub mnuInsertarTransladosAdyasentes_Click()
 frmUnionAdyacente.Show
 End Sub
 
+Private Sub mnuJpg_Click()
+frmRender.formatPic = eFormatPic.jpg
+Call frmRender.Show(vbModal)
+End Sub
+
 Private Sub mnuModoCaminata_Click()
 '*************************************************
 'Author: ^[GS]^
@@ -3579,12 +3677,14 @@ Private Sub mnuNPCs_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> 3 Then
         frmMain.SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
+
 modPaneles.VerFuncion 3, True
 End Sub
 
@@ -3594,12 +3694,14 @@ Private Sub mnuNPCsHostiles_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> 4 Then
         frmMain.SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
+
 modPaneles.VerFuncion 4, True
 End Sub
 
@@ -3613,15 +3715,13 @@ Dim loopc As Integer
 
 DeseaGuardarMapa Dialog.FileName
 
-For loopc = 0 To frmMain.MapPest.Count
+For loopc = 0 To frmMain.MapPest.Count - 1
     frmMain.MapPest(loopc).Visible = False
 Next
 
 frmMain.Dialog.FileName = Empty
 
-If WalkMode = True Then
-    Call modGeneral.ToggleWalkMode
-End If
+If WalkMode Then Call modGeneral.ToggleWalkMode
 
 Call modMapIO.NuevoMapa
 
@@ -3635,12 +3735,14 @@ Private Sub mnuObjetos_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> 5 Then
         frmMain.SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
+
 modPaneles.VerFuncion 5, True
 End Sub
 
@@ -3651,6 +3753,11 @@ Private Sub mnuOptimizar_Click()
 'Last modified: 22/09/06
 '*************************************************
 frmOptimizar.Show
+End Sub
+
+Private Sub mnuPng_Click()
+frmRender.formatPic = eFormatPic.png
+Call frmRender.Show(vbModal)
 End Sub
 
 Private Sub mnuQBloquear_Click()
@@ -3708,7 +3815,6 @@ Private Sub mnuQTriggers_Click()
 '*************************************************
 modPaneles.VerFuncion 6, False
 End Sub
-
 
 Private Sub mnuQuitarBloqueos_Click()
 '*************************************************
@@ -3830,17 +3936,18 @@ Private Sub mnuReAbrirMapa_Click()
 'Last modified: 20/05/06
 '*************************************************
 On Error GoTo ErrHandler
-    If FileExist(Dialog.FileName, vbArchive) = False Then Exit Sub
+    If Not FileExist(Dialog.FileName, vbArchive) Then Exit Sub
+    
     If MapInfo.Changed = 1 Then
         If MsgBox(MSGMod, vbExclamation + vbYesNo) = vbYes Then
             modMapIO.GuardarMapa Dialog.FileName
         End If
     End If
+    
     Call modMapIO.NuevoMapa
-    modMapIO.AbrirMapa Dialog.FileName
-    DoEvents
+    modMapIO.AbrirMapa Dialog.FileName, MapData
     mnuReAbrirMapa.Enabled = True
-    EngineRun = True
+    
 Exit Sub
 ErrHandler:
 End Sub
@@ -3859,12 +3966,12 @@ Private Sub mnuSuperficie_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
-For i = 0 To 6
-    If i <> 0 Then
-        frmMain.SelectPanel(i).value = False
-        Call VerFuncion(i, False)
-    End If
-Next
+
+For i = 1 To 6
+    frmMain.SelectPanel(i).value = False
+    Call VerFuncion(i, False)
+Next i
+
 modPaneles.VerFuncion 0, True
 End Sub
 
@@ -3874,12 +3981,14 @@ Private Sub mnuTranslados_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> 1 Then
         frmMain.SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
+
 modPaneles.VerFuncion 1, True
 End Sub
 
@@ -3889,12 +3998,12 @@ Private Sub mnuTriggers_Click()
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
-For i = 0 To 6
-    If i <> 6 Then
-        frmMain.SelectPanel(i).value = False
-        Call VerFuncion(i, False)
-    End If
-Next
+
+For i = 0 To 5
+    frmMain.SelectPanel(i).value = False
+    Call VerFuncion(i, False)
+Next i
+
 modPaneles.VerFuncion 6, True
 End Sub
 
@@ -3930,32 +4039,14 @@ Private Sub mnuVerBloqueos_Click()
 cVerBloqueos.value = (cVerBloqueos.value = False)
 mnuVerBloqueos.Checked = cVerBloqueos.value
 
+bBloqs = mnuVerBloqueos.Checked
 End Sub
 
-Private Sub mnuVerCapa2_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-mnuVerCapa2.Checked = (mnuVerCapa2.Checked = False)
-End Sub
+Private Sub mnuVerCapa_Click(index As Integer)
+mnuVerCapa(index).Checked = (mnuVerCapa(index).Checked = False)
 
-Private Sub mnuVerCapa3_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-mnuVerCapa3.Checked = (mnuVerCapa3.Checked = False)
+bVerCapa(index) = mnuVerCapa(index).Checked
 End Sub
-
-Private Sub mnuVerCapa4_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-mnuVerCapa4.Checked = (mnuVerCapa4.Checked = False)
-End Sub
-
 
 Private Sub mnuVerNPCs_Click()
 '*************************************************
@@ -3964,6 +4055,7 @@ Private Sub mnuVerNPCs_Click()
 '*************************************************
 mnuVerNPCs.Checked = (mnuVerNPCs.Checked = False)
 
+bVerNpcs = mnuVerNPCs.Checked
 End Sub
 
 Private Sub mnuVerObjetos_Click()
@@ -3973,6 +4065,7 @@ Private Sub mnuVerObjetos_Click()
 '*************************************************
 mnuVerObjetos.Checked = (mnuVerObjetos.Checked = False)
 
+bVerObjetos = mnuVerObjetos.Checked
 End Sub
 
 Private Sub mnuVerTranslados_Click()
@@ -3981,7 +4074,7 @@ Private Sub mnuVerTranslados_Click()
 'Last modified: 26/05/06
 '*************************************************
 mnuVerTranslados.Checked = (mnuVerTranslados.Checked = False)
-
+bTranslados = mnuVerTranslados.Checked
 End Sub
 
 Private Sub mnuVerTriggers_Click()
@@ -3991,6 +4084,8 @@ Private Sub mnuVerTriggers_Click()
 '*************************************************
 cVerTriggers.value = (cVerTriggers.value = False)
 mnuVerTriggers.Checked = cVerTriggers.value
+
+bTriggers = mnuVerTriggers.Checked
 End Sub
 
 Private Sub picRadar_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
@@ -3998,10 +4093,11 @@ Private Sub picRadar_MouseDown(Button As Integer, Shift As Integer, X As Single,
 'Author: ^[GS]^
 'Last modified: 29/05/06
 '*************************************************
-If X < 11 Then X = 11
-If X > 89 Then X = 89
-If Y < 10 Then Y = 10
-If Y > 92 Then Y = 92
+If X < MinXBorder Then X = 11
+If X > MaxXBorder Then X = 89
+If Y < MinYBorder Then Y = 10
+If Y > MaxYBorder Then Y = 92
+
 UserPos.X = X
 UserPos.Y = Y
 bRefreshRadar = True
@@ -4016,15 +4112,13 @@ MiRadarX = X
 MiRadarY = Y
 End Sub
 
-
-
 Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
-'*************************************************
+    '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06 - GS
 '*************************************************
 
-Dim tX As Integer
+Dim tx As Integer
 Dim tY As Integer
 
 If Not MapaCargado Then Exit Sub
@@ -4033,12 +4127,13 @@ If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainVi
     Exit Sub
 End If
 
-ConvertCPtoTP MainViewShp.Left, MainViewShp.Top, X, Y, tX, tY
+ConvertCPtoTP MouseX, MouseY, tx, tY
 
-ClickEdit Button, tX, tY
+ClickEdit Button, tx, tY
 
+MouseDownX = tx
+MouseDownY = tY
 End Sub
-
 
 Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
 '*************************************************
@@ -4046,52 +4141,72 @@ Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y A
 'Last modified: 20/05/06 - GS
 '*************************************************
 
-Dim tX As Integer
+Dim tx As Integer
 Dim tY As Integer
 
 'Make sure map is loaded
 If Not MapaCargado Then Exit Sub
 HotKeysAllow = True
 
+MouseX = X - MainViewShp.Left
+MouseY = Y - MainViewShp.Top
+
+'Trim to fit screen
+If MouseX < 0 Then
+    MouseX = 0
+ElseIf MouseX > MainViewShp.Width Then
+    MouseX = MainViewShp.Width
+End If
+
+'Trim to fit screen
+If MouseY < 0 Then
+    MouseY = 0
+ElseIf MouseY > MainViewShp.Height Then
+    MouseY = MainViewShp.Height
+End If
+    
 'Make sure click is in view window
 If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainViewShp.Top Or Y >= MainViewShp.Top + MainViewHeight Then
     Exit Sub
 End If
 
-ConvertCPtoTP MainViewShp.Left, MainViewShp.Top, X, Y, tX, tY
+ConvertCPtoTP MouseX, MouseY, tx, tY
 
-POSX.Caption = "X: " & tX & " - Y: " & tY
-If tX < 10 Or tY < 10 Or tX > 90 Or tY > 90 Then
+POSX.Caption = "X: " & tx & " - Y: " & tY
+If (tx < MinXBorder) Or (tY < MinYBorder) Or (tx > MaxXBorder) Or (tY > MaxYBorder) Then
     POSX.ForeColor = vbRed
 Else
     POSX.ForeColor = vbWhite
 End If
 
-ClickEdit Button, tX, tY
-
+ClickEdit Button, tx, tY
+If Button = vbLeftButton Then Call SelectTiles(False, tx, tY)
 End Sub
-
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 16/10/06
 '*************************************************
+Dim i As Long
 
 ' Guardar configuración
 WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "GuardarConfig", IIf(frmMain.mnuGuardarUltimaConfig.Checked = True, "1", "0")
-If frmMain.mnuGuardarUltimaConfig.Checked = True Then
+If frmMain.mnuGuardarUltimaConfig.Checked Then
     WriteVar IniPath & "WorldEditor.ini", "PATH", "UltimoMapa", Dialog.FileName
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "ControlAutomatico", IIf(frmMain.mnuVerAutomatico.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Capa2", IIf(frmMain.mnuVerCapa2.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Capa3", IIf(frmMain.mnuVerCapa3.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Capa4", IIf(frmMain.mnuVerCapa4.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Translados", IIf(frmMain.mnuVerTranslados.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Objetos", IIf(frmMain.mnuVerObjetos.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "NPCs", IIf(frmMain.mnuVerNPCs.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Triggers", IIf(frmMain.mnuVerTriggers.Checked = True, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Bloqueos", IIf(frmMain.mnuVerBloqueos.Checked = True, "1", "0")
+    
+    For i = 2 To 4
+        WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Capa" & i, IIf(bVerCapa(i), "1", "0")
+    Next i
+    
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Translados", IIf(bTranslados, "1", "0")
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Objetos", IIf(bVerObjetos, "1", "0")
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "NPCs", IIf(bVerNpcs, "1", "0")
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Triggers", IIf(bTriggers, "1", "0")
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Bloqueos", IIf(bBloqs, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "LastPos", UserPos.X & "-" & UserPos.Y
+    
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "UtilizarDeshacer", IIf(frmMain.mnuUtilizarDeshacer.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "AutoCapturarTrans", IIf(frmMain.mnuAutoCapturarTranslados.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "AutoCapturarSup", IIf(frmMain.mnuAutoCapturarSuperficie.Checked = True, "1", "0")
@@ -4099,14 +4214,9 @@ If frmMain.mnuGuardarUltimaConfig.Checked = True Then
 End If
 
 'Allow MainLoop to close program
-If prgRun = True Then
-    prgRun = False
-    Cancel = 1
-End If
+prgRun = False
 
 End Sub
-
-
 
 Private Sub SelectPanel_Click(index As Integer)
 '*************************************************
@@ -4114,12 +4224,14 @@ Private Sub SelectPanel_Click(index As Integer)
 'Last modified: 20/05/06
 '*************************************************
 Dim i As Byte
+
 For i = 0 To 6
     If i <> index Then
         SelectPanel(i).value = False
         Call VerFuncion(i, False)
     End If
-Next
+Next i
+
 If mnuAutoQuitarFunciones.Checked = True Then Call mnuQuitarFunciones_Click
 Call VerFuncion(index, SelectPanel(index).value)
 End Sub
@@ -4140,7 +4252,6 @@ If mnuAutoGuardarMapas.Checked = True Then
 End If
 End Sub
 
-
 Public Sub ObtenerNombreArchivo(ByVal Guardar As Boolean)
 '*************************************************
 'Author: Unkwown
@@ -4149,16 +4260,18 @@ Public Sub ObtenerNombreArchivo(ByVal Guardar As Boolean)
 
 With Dialog
     .Filter = "Mapas de Argentum Online (*.map)|*.map"
+    
     If Guardar Then
-            .DialogTitle = "Guardar"
-            .DefaultExt = ".txt"
-            .FileName = vbNullString
-            .flags = cdlOFNPathMustExist
-            .ShowSave
+        .DialogTitle = "Guardar"
+        .DefaultExt = ".txt"
+        .FileName = vbNullString
+        .Flags = cdlOFNPathMustExist
+        .ShowSave
     Else
+        .CancelError = False
         .DialogTitle = "Cargar"
         .FileName = vbNullString
-        .flags = cdlOFNFileMustExist
+        .Flags = cdlOFNFileMustExist
         .ShowOpen
     End If
 End With

@@ -226,6 +226,7 @@ Private Sub ActalizarNPCs()
 On Error Resume Next
 Dim Y As Integer
 Dim X As Integer
+Dim NPCIndex As Integer
 
 If Not MapaCargado Then
     Exit Sub
@@ -235,11 +236,13 @@ txtInfo.Text = "Informe de NPCs/Hostiles (X,Y)"
 
 For Y = YMinMapSize To YMaxMapSize
     For X = XMinMapSize To XMaxMapSize
-        If MapData(X, Y).NPCIndex > 0 Then
-            If MapData(X, Y).NPCIndex >= 500 Then
-                txtInfo.Text = txtInfo.Text & vbCrLf & X & "," & Y & " tiene " & NpcData(MapData(X, Y).NPCIndex).name & " (Hostil)"
+        NPCIndex = MapData(X, Y).NPCIndex
+        
+        If NPCIndex > 0 Then
+            If NpcData(NPCIndex).Hostile Then
+                txtInfo.Text = txtInfo.Text & vbCrLf & X & "," & Y & " tiene " & NpcData(NPCIndex).name & " (Hostil)"
             Else
-                txtInfo.Text = txtInfo.Text & vbCrLf & X & "," & Y & " tiene " & NpcData(MapData(X, Y).NPCIndex).name
+                txtInfo.Text = txtInfo.Text & vbCrLf & X & "," & Y & " tiene " & NpcData(NPCIndex).name
             End If
         End If
     Next X
