@@ -94,7 +94,7 @@ Public Type SupData
     Grh As Integer
     Width As Byte
     Height As Byte
-    Block As Boolean
+    block As Boolean
     Capa As Byte
 End Type
 
@@ -115,7 +115,7 @@ Public NpcData() As NpcData
 Public Type ObjData
     name As String 'Nombre del obj
     ObjType As Integer 'Tipo enum que determina cuales son las caract del obj
-    GrhIndex As Integer ' Indice del grafico que representa el obj
+    grhIndex As Integer ' Indice del grafico que representa el obj
     GrhSecundario As Integer
     Info As String
     Ropaje As Integer 'Indice del grafico del ropaje
@@ -178,19 +178,19 @@ Public Const INFINITE_LOOPS As Integer = -1
 'Holds a local position
 Public Type Position
     X As Integer
-    y As Integer
+    Y As Integer
 End Type
 
 'Holds a world position
 Public Type WorldPos
     Map As Integer
     X As Integer
-    y As Integer
+    Y As Integer
 End Type
 
 'Points to a grhData and keeps animation info
 Public Type Grh
-    GrhIndex As Integer
+    grhIndex As Integer
     FrameCounter As Single
     Speed As Single
     Started As Byte
@@ -451,3 +451,5 @@ Public Declare Function GetPrivateProfileString Lib "kernel32" Alias "GetPrivate
 Public Declare Function GetAsyncKeyState Lib "user32" (ByVal nVirtKey As Long) As Integer
 Public Declare Function GetTickCount Lib "kernel32" () As Long
 Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
+
+Public Declare Function GetPixel Lib "gdi32" (ByVal hdc As Long, ByVal X As Long, ByVal Y As Long) As Long

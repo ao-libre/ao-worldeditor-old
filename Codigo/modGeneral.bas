@@ -208,7 +208,7 @@ frmMain.mnuUtilizarDeshacer.Checked = Val(Leer.GetValue("CONFIGURACION", "Utiliz
 frmMain.mnuGuardarUltimaConfig.Checked = Val(Leer.GetValue("CONFIGURACION", "GuardarConfig"))
 
 'Reciente
-frmMain.Dialog.InitDir = Leer.GetValue("PATH", "UltimoMapa")
+frmMain.Dialog.InitDir = autoCompletaPath(Leer.GetValue("PATH", "UltimoMapa"))
 DirGraficos = autoCompletaPath(Leer.GetValue("PATH", "DirGraficos"))
 
 If DirGraficos = "\" Then
@@ -291,8 +291,8 @@ frmMain.mnuVerNPCs.Checked = bVerNpcs
 frmMain.mnuVerTriggers.Checked = bTriggers
 frmMain.mnuVerBloqueos.Checked = bBloqs
 
-frmMain.cVerTriggers.Value = bTriggers
-frmMain.cVerBloqueos.Value = bBloqs
+frmMain.cVerTriggers.value = bTriggers
+frmMain.cVerBloqueos.value = bBloqs
 
 ' Tamaño de visualizacion
 PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
@@ -485,7 +485,7 @@ Dim Chkflag As Integer
         
         If bRefreshRadar Then Call RefreshAllChars
 
-        If frmMain.PreviewGrh.Visible Then Call modPaneles.VistaPreviaDeSup
+        'If frmMain.PreviewGrh.Visible Then Call modPaneles.VistaPreviaDeSup
         DoEvents
     Loop
         
@@ -525,12 +525,12 @@ GetVar = RTrim$(sSpaces)
 GetVar = Left$(GetVar, Len(GetVar) - 1)
 End Function
 
-Public Sub WriteVar(ByRef file As String, ByRef Main As String, ByRef Var As String, ByRef Value As String)
+Public Sub WriteVar(ByRef file As String, ByRef Main As String, ByRef Var As String, ByRef value As String)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
 '*************************************************
-writeprivateprofilestring Main, Var, Value, file
+writeprivateprofilestring Main, Var, value, file
 End Sub
 
 Public Sub ToggleWalkMode()
@@ -562,25 +562,25 @@ End If
 fin:
 End Sub
 
-Public Sub FixCoasts(ByVal GrhIndex As Integer, ByVal X As Integer, ByVal y As Integer)
+Public Sub FixCoasts(ByVal grhIndex As Integer, ByVal X As Integer, ByVal y As Integer)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
 '*************************************************
 
-If GrhIndex = 7284 Or GrhIndex = 7290 Or GrhIndex = 7291 Or GrhIndex = 7297 Or _
-   GrhIndex = 7300 Or GrhIndex = 7301 Or GrhIndex = 7302 Or GrhIndex = 7303 Or _
-   GrhIndex = 7304 Or GrhIndex = 7306 Or GrhIndex = 7308 Or GrhIndex = 7310 Or _
-   GrhIndex = 7311 Or GrhIndex = 7313 Or GrhIndex = 7314 Or GrhIndex = 7315 Or _
-   GrhIndex = 7316 Or GrhIndex = 7317 Or GrhIndex = 7319 Or GrhIndex = 7321 Or _
-   GrhIndex = 7325 Or GrhIndex = 7326 Or GrhIndex = 7327 Or GrhIndex = 7328 Or GrhIndex = 7332 Or _
-   GrhIndex = 7338 Or GrhIndex = 7339 Or GrhIndex = 7345 Or GrhIndex = 7348 Or _
-   GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or GrhIndex = 7352 Or _
-   GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or _
-   GrhIndex = 7354 Or GrhIndex = 7357 Or GrhIndex = 7358 Or GrhIndex = 7360 Or _
-   GrhIndex = 7362 Or GrhIndex = 7363 Or GrhIndex = 7365 Or GrhIndex = 7366 Or _
-   GrhIndex = 7367 Or GrhIndex = 7368 Or GrhIndex = 7369 Or GrhIndex = 7371 Or _
-   GrhIndex = 7373 Or GrhIndex = 7375 Or GrhIndex = 7376 Then MapData(X, y).Graphic(2).GrhIndex = 0
+If grhIndex = 7284 Or grhIndex = 7290 Or grhIndex = 7291 Or grhIndex = 7297 Or _
+   grhIndex = 7300 Or grhIndex = 7301 Or grhIndex = 7302 Or grhIndex = 7303 Or _
+   grhIndex = 7304 Or grhIndex = 7306 Or grhIndex = 7308 Or grhIndex = 7310 Or _
+   grhIndex = 7311 Or grhIndex = 7313 Or grhIndex = 7314 Or grhIndex = 7315 Or _
+   grhIndex = 7316 Or grhIndex = 7317 Or grhIndex = 7319 Or grhIndex = 7321 Or _
+   grhIndex = 7325 Or grhIndex = 7326 Or grhIndex = 7327 Or grhIndex = 7328 Or grhIndex = 7332 Or _
+   grhIndex = 7338 Or grhIndex = 7339 Or grhIndex = 7345 Or grhIndex = 7348 Or _
+   grhIndex = 7349 Or grhIndex = 7350 Or grhIndex = 7351 Or grhIndex = 7352 Or _
+   grhIndex = 7349 Or grhIndex = 7350 Or grhIndex = 7351 Or _
+   grhIndex = 7354 Or grhIndex = 7357 Or grhIndex = 7358 Or grhIndex = 7360 Or _
+   grhIndex = 7362 Or grhIndex = 7363 Or grhIndex = 7365 Or grhIndex = 7366 Or _
+   grhIndex = 7367 Or grhIndex = 7368 Or grhIndex = 7369 Or grhIndex = 7371 Or _
+   grhIndex = 7373 Or grhIndex = 7375 Or grhIndex = 7376 Then MapData(X, y).Graphic(2).grhIndex = 0
 
 End Sub
 
@@ -669,3 +669,38 @@ Private Sub LoadClientSetup()
         GraphicsFile = "Graficos3.ind"
     End If
 End Sub
+
+Public Function fullyBlack(ByVal grhIndex As Long) As Boolean
+'**************************************************************
+'Author: Torres Patricio (Pato)
+'Last Modify Date: 10/27/2011
+'Return true if the grh is fully black
+'*************************************************************
+    Dim color As Long
+    Dim X As Long
+    Dim y As Long
+    Dim srchdc As Long
+    Dim Surface As DirectDrawSurface7
+    
+    With GrhData(GrhData(grhIndex).Frames(1))
+        Set Surface = SurfaceDB.Surface(.FileNum)
+        
+        srchdc = Surface.GetDC
+        
+        For y = .sY To .sY + .pixelHeight - 1
+            For X = .sX To .sX + .pixelWidth - 1
+                color = GetPixel(srchdc, X, y)
+                
+                If color <> 0 Then
+                    Call Surface.ReleaseDC(srchdc)
+                    
+                    fullyBlack = False
+                    Exit Function
+                End If
+            Next X
+        Next y
+    End With
+    
+    Call Surface.ReleaseDC(srchdc)
+    fullyBlack = True
+End Function

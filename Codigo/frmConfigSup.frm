@@ -392,13 +392,13 @@ Private Sub cmdDM_Click(index As Integer)
 On Error Resume Next
 Select Case index
     Case 0
-        DMAncho.Text = Str(Val(DMAncho.Text) + 1)
+        DMAncho.Text = str(Val(DMAncho.Text) + 1)
     Case 1
-        DMAncho.Text = Str(Val(DMAncho.Text) - 1)
+        DMAncho.Text = str(Val(DMAncho.Text) - 1)
     Case 2
-        DMLargo.Text = Str(Val(DMLargo.Text) - 1)
+        DMLargo.Text = str(Val(DMLargo.Text) - 1)
     Case 3
-        DMLargo.Text = Str(Val(DMLargo.Text) + 1)
+        DMLargo.Text = str(Val(DMLargo.Text) + 1)
 End Select
 End Sub
 
@@ -441,8 +441,8 @@ If LenB(DMLargo.Text) = 0 Then DMLargo.Text = "0"
 End Sub
 
 Private Sub mAncho_Change()
-If Val(MAncho) <= 0 Then
-    MAncho.Text = 1
+If Val(mAncho) <= 0 Then
+    mAncho.Text = 1
 Else
     Call ActualizarMosaico
 End If
@@ -487,8 +487,8 @@ Private Sub MOSAICO_Click()
 'Author: ^[GS]^
 'Last modified: 26/05/06
 '*************************************************
-If LenB(MAncho.Text) = 0 Then MAncho.Text = "1"
-If LenB(mLargo.Text) = 0 Then mLargo.Text = "1"
+If Val(mAncho.Text) <= 0 Then mAncho.Text = "1"
+If Val(mLargo.Text) <= 0 Then mLargo.Text = "1"
 
 Call ActualizarMosaico
 End Sub

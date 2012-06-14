@@ -92,9 +92,9 @@ Begin VB.Form frmMapInfo
       Height          =   330
       ItemData        =   "frmMapInfo.frx":628A
       Left            =   1680
-      List            =   "frmMapInfo.frx":6294
+      List            =   "frmMapInfo.frx":629D
       TabIndex        =   12
-      Text            =   "No"
+      Text            =   "NO"
       Top             =   1920
       Width           =   2655
    End
@@ -135,9 +135,9 @@ Begin VB.Form frmMapInfo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   330
-      ItemData        =   "frmMapInfo.frx":62A0
+      ItemData        =   "frmMapInfo.frx":62C4
       Left            =   1680
-      List            =   "frmMapInfo.frx":62AD
+      List            =   "frmMapInfo.frx":62D1
       TabIndex        =   10
       Top             =   1560
       Width           =   2655
@@ -153,9 +153,9 @@ Begin VB.Form frmMapInfo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   330
-      ItemData        =   "frmMapInfo.frx":62CA
+      ItemData        =   "frmMapInfo.frx":62EE
       Left            =   1680
-      List            =   "frmMapInfo.frx":62D7
+      List            =   "frmMapInfo.frx":62FB
       TabIndex        =   9
       Top             =   1200
       Width           =   2655
@@ -397,7 +397,7 @@ Private Sub chkMapBackup_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.BackUp = chkMapBackup.value
+MapInfo.BackUp = chkMapBackup.Value
 MapInfo.Changed = 1
 End Sub
 
@@ -406,7 +406,7 @@ Private Sub chkMapMagiaSinEfecto_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.MagiaSinEfecto = chkMapMagiaSinEfecto.value
+MapInfo.MagiaSinEfecto = chkMapMagiaSinEfecto.Value
 MapInfo.Changed = 1
 End Sub
 
@@ -415,7 +415,7 @@ Private Sub chkMapNoEncriptarMP_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.NoEncriptarMP = chkMapNoEncriptarMP.value
+MapInfo.NoEncriptarMP = chkMapNoEncriptarMP.Value
 MapInfo.Changed = 1
 End Sub
 
@@ -424,7 +424,7 @@ Private Sub chkMapPK_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.PK = chkMapPK.value
+MapInfo.PK = chkMapPK.Value
 MapInfo.Changed = 1
 End Sub
 

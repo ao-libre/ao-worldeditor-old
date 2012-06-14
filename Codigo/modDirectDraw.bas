@@ -108,28 +108,28 @@ Sub ShowNextFrame(ByVal DisplayFormTop As Integer, ByVal DisplayFormLeft As Inte
     
     If UserMoving Then
         '****** Move screen Left and Right if needed ******
-        If AddtoUserPos.X <> 0 Then
-            OffsetCounterX = OffsetCounterX - ScrollPixelsPerFrameX * AddtoUserPos.X * timerTicksPerFrame
-            If Abs(OffsetCounterX) >= Abs(TilePixelWidth * AddtoUserPos.X) Then
+        If AddtoUserPos.x <> 0 Then
+            OffsetCounterX = OffsetCounterX - ScrollPixelsPerFrameX * AddtoUserPos.x * timerTicksPerFrame
+            If Abs(OffsetCounterX) >= Abs(TilePixelWidth * AddtoUserPos.x) Then
                 OffsetCounterX = 0
-                AddtoUserPos.X = 0
+                AddtoUserPos.x = 0
                 UserMoving = False
             End If
         End If
         
         '****** Move screen Up and Down if needed ******
-        If AddtoUserPos.Y <> 0 Then
-            OffsetCounterY = OffsetCounterY - ScrollPixelsPerFrameY * AddtoUserPos.Y * timerTicksPerFrame
-            If Abs(OffsetCounterY) >= Abs(TilePixelHeight * AddtoUserPos.Y) Then
+        If AddtoUserPos.y <> 0 Then
+            OffsetCounterY = OffsetCounterY - ScrollPixelsPerFrameY * AddtoUserPos.y * timerTicksPerFrame
+            If Abs(OffsetCounterY) >= Abs(TilePixelHeight * AddtoUserPos.y) Then
                 OffsetCounterY = 0
-                AddtoUserPos.Y = 0
+                AddtoUserPos.y = 0
                 UserMoving = False
             End If
         End If
     End If
     
     '****** Update screen ******
-    Call RenderScreen(UserPos.X - AddtoUserPos.X, UserPos.Y - AddtoUserPos.Y, OffsetCounterX, OffsetCounterY)
+    Call RenderScreen(UserPos.x - AddtoUserPos.x, UserPos.y - AddtoUserPos.y, OffsetCounterX, OffsetCounterY)
     
     'Display front-buffer!
     Call PrimarySurface.Blt(MainViewRect, BackBufferSurface, MainDestRect, DDBLT_WAIT)
@@ -157,44 +157,44 @@ Sub MoveScreen(ByVal nHeading As E_Heading)
 '******************************************
 'Starts the screen moving in a direction
 '******************************************
-    Dim X As Integer
-    Dim Y As Integer
+    Dim x As Integer
+    Dim y As Integer
     Dim tx As Integer
     Dim tY As Integer
     
     'Figure out which way to move
     Select Case nHeading
         Case E_Heading.NORTH
-            Y = -1
+            y = -1
         
         Case E_Heading.EAST
-            X = 1
+            x = 1
         
         Case E_Heading.SOUTH
-            Y = 1
+            y = 1
         
         Case E_Heading.WEST
-            X = -1
+            x = -1
     End Select
     
     'Fill temp pos
-    tx = UserPos.X + X
-    tY = UserPos.Y + Y
+    tx = UserPos.x + x
+    tY = UserPos.y + y
     
     'Check to see if its out of bounds
     If tx < MinXBorder Or tx > MaxXBorder Or tY < MinYBorder Or tY > MaxYBorder Then
         Exit Sub
     Else
         'Start moving... MainLoop does the rest
-        AddtoUserPos.X = X
-        UserPos.X = tx
-        AddtoUserPos.Y = Y
-        UserPos.Y = tY
+        AddtoUserPos.x = x
+        UserPos.x = tx
+        AddtoUserPos.y = y
+        UserPos.y = tY
         UserMoving = 1
         
-        bTecho = IIf(MapData(UserPos.X, UserPos.Y).Trigger = 1 Or _
-                MapData(UserPos.X, UserPos.Y).Trigger = 2 Or _
-                MapData(UserPos.X, UserPos.Y).Trigger = 4, True, False)
+        bTecho = IIf(MapData(UserPos.x, UserPos.y).Trigger = 1 Or _
+                MapData(UserPos.x, UserPos.y).Trigger = 2 Or _
+                MapData(UserPos.x, UserPos.y).Trigger = 4, True, False)
     End If
 End Sub
 
@@ -202,11 +202,11 @@ Sub ConvertCPtoTP(ByVal viewPortX As Integer, ByVal viewPortY As Integer, ByRef 
 '******************************************
 'Converts where the mouse is in the main window to a tile position. MUST be called eveytime the mouse moves.
 '******************************************
-    tx = UserPos.X + viewPortX \ TilePixelWidth - WindowTileWidth \ 2
-    tY = UserPos.Y + viewPortY \ TilePixelHeight - WindowTileHeight \ 2
+    tx = UserPos.x + viewPortX \ TilePixelWidth - WindowTileWidth \ 2
+    tY = UserPos.y + viewPortY \ TilePixelHeight - WindowTileHeight \ 2
 End Sub
 
-Sub MakeChar(ByVal CharIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal Heading As Byte, ByVal X As Integer, ByVal Y As Integer)
+Sub MakeChar(ByVal CharIndex As Integer, ByVal Body As Integer, ByVal Head As Integer, ByVal Heading As Byte, ByVal x As Integer, ByVal y As Integer)
 On Error Resume Next
     'Apuntamos al ultimo Char
     If CharIndex > LastChar Then LastChar = CharIndex
@@ -229,15 +229,15 @@ On Error Resume Next
         .MoveOffsetY = 0
         
         'Update position
-        .Pos.X = X
-        .Pos.Y = Y
+        .Pos.x = x
+        .Pos.y = y
         
         'Make active
         .Active = 1
     End With
     
     'Plot on map
-    MapData(X, Y).CharIndex = CharIndex
+    MapData(x, y).CharIndex = CharIndex
     
     bRefreshRadar = True ' GS
 End Sub
@@ -247,8 +247,8 @@ Sub ResetCharInfo(ByVal CharIndex As Integer)
         .Active = 0
         
         .Moving = 0
-        .Pos.X = 0
-        .Pos.Y = 0
+        .Pos.x = 0
+        .Pos.y = 0
     End With
 End Sub
 
@@ -269,7 +269,7 @@ On Error Resume Next
         Loop
     End If
     
-    MapData(CharList(CharIndex).Pos.X, CharList(CharIndex).Pos.Y).CharIndex = 0
+    MapData(CharList(CharIndex).Pos.x, CharList(CharIndex).Pos.y).CharIndex = 0
 
     Call ResetCharInfo(CharIndex)
     
@@ -279,21 +279,23 @@ On Error Resume Next
     bRefreshRadar = True ' GS
 End Sub
 
-Public Sub InitGrh(ByRef Grh As Grh, ByVal GrhIndex As Integer, Optional ByVal Started As Byte = 2)
+Public Sub InitGrh(ByRef Grh As Grh, ByVal grhIndex As Integer, Optional ByVal Started As Byte = 2)
 '*****************************************************************
 'Sets up a grh. MUST be done before rendering
 '*****************************************************************
-    Grh.GrhIndex = GrhIndex
+    Grh.grhIndex = grhIndex
+    
+    If grhIndex = 0 Then Exit Sub
     
     If Started = 2 Then
-        If GrhData(Grh.GrhIndex).NumFrames > 1 Then
+        If GrhData(Grh.grhIndex).NumFrames > 1 Then
             Grh.Started = 1
         Else
             Grh.Started = 0
         End If
     Else
         'Make sure the graphic can be started
-        If GrhData(Grh.GrhIndex).NumFrames = 1 Then Started = 0
+        If GrhData(Grh.grhIndex).NumFrames = 1 Then Started = 0
         Grh.Started = Started
     End If
     
@@ -305,7 +307,7 @@ Public Sub InitGrh(ByRef Grh As Grh, ByVal GrhIndex As Integer, Optional ByVal S
     End If
     
     Grh.FrameCounter = 1
-    Grh.Speed = GrhData(Grh.GrhIndex).Speed
+    Grh.Speed = GrhData(Grh.grhIndex).Speed
 End Sub
 
 Sub MoveCharbyHead(ByVal CharIndex As Integer, ByVal nHeading As E_Heading)
@@ -314,14 +316,14 @@ Sub MoveCharbyHead(ByVal CharIndex As Integer, ByVal nHeading As E_Heading)
 '*****************************************************************
     Dim addX As Integer
     Dim addY As Integer
-    Dim X As Integer
-    Dim Y As Integer
+    Dim x As Integer
+    Dim y As Integer
     Dim nX As Integer
     Dim nY As Integer
     
     With CharList(CharIndex)
-        X = .Pos.X
-        Y = .Pos.Y
+        x = .Pos.x
+        y = .Pos.y
         
         'Figure out which way to move
         Select Case nHeading
@@ -338,13 +340,13 @@ Sub MoveCharbyHead(ByVal CharIndex As Integer, ByVal nHeading As E_Heading)
                 addX = -1
         End Select
         
-        nX = X + addX
-        nY = Y + addY
+        nX = x + addX
+        nY = y + addY
         
         MapData(nX, nY).CharIndex = CharIndex
-        .Pos.X = nX
-        .Pos.Y = nY
-        MapData(X, Y).CharIndex = 0
+        .Pos.x = nX
+        .Pos.y = nY
+        MapData(x, y).CharIndex = 0
         
         .MoveOffsetX = -1 * (TilePixelWidth * addX)
         .MoveOffsetY = -1 * (TilePixelHeight * addY)
@@ -366,20 +368,20 @@ End Sub
 
 Sub MoveCharbyPos(ByVal CharIndex As Integer, ByVal nX As Integer, ByVal nY As Integer)
 On Error Resume Next
-    Dim X As Integer
-    Dim Y As Integer
+    Dim x As Integer
+    Dim y As Integer
     Dim addX As Integer
     Dim addY As Integer
     Dim nHeading As E_Heading
     
     With CharList(CharIndex)
-        X = .Pos.X
-        Y = .Pos.Y
+        x = .Pos.x
+        y = .Pos.y
         
-        MapData(X, Y).CharIndex = 0
+        MapData(x, y).CharIndex = 0
         
-        addX = nX - X
-        addY = nY - Y
+        addX = nX - x
+        addY = nY - y
         
         If Sgn(addX) = 1 Then
             nHeading = E_Heading.EAST
@@ -393,8 +395,8 @@ On Error Resume Next
         
         MapData(nX, nY).CharIndex = CharIndex
         
-        .Pos.X = nX
-        .Pos.Y = nY
+        .Pos.x = nX
+        .Pos.y = nY
         
         .MoveOffsetX = -1 * (TilePixelWidth * addX)
         .MoveOffsetY = -1 * (TilePixelHeight * addY)
@@ -423,7 +425,7 @@ Function NextOpenChar() As Integer
     NextOpenChar = loopc
 End Function
 
-Function LegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
+Function LegalPos(ByVal x As Integer, ByVal y As Integer) As Boolean
 '*************************************************
 'Author: Unkwown
 'Last modified: 28/05/06 - GS
@@ -432,32 +434,32 @@ Function LegalPos(ByVal X As Integer, ByVal Y As Integer) As Boolean
 LegalPos = True
 
 'Check to see if its out of bounds
-If Not InMapLegalBounds(X, Y) Then
+If Not InMapLegalBounds(x, y) Then
     LegalPos = False
     Exit Function
 End If
 
 'Check to see if its blocked
-If MapData(X, Y).Blocked = 1 Then
+If MapData(x, y).Blocked = 1 Then
     LegalPos = False
     Exit Function
 End If
 
 'Check for character
-If MapData(X, Y).CharIndex > 0 Then
+If MapData(x, y).CharIndex > 0 Then
     LegalPos = False
     Exit Function
 End If
 
 End Function
 
-Function InMapLegalBounds(ByVal X As Integer, ByVal Y As Integer) As Boolean
+Function InMapLegalBounds(ByVal x As Integer, ByVal y As Integer) As Boolean
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
 '*************************************************
 
-If (X < MinXBorder) Or (X > MaxXBorder) Or (Y < MinYBorder) Or (Y > MaxYBorder) Then
+If (x < MinXBorder) Or (x > MaxXBorder) Or (y < MinYBorder) Or (y > MaxYBorder) Then
     InMapLegalBounds = False
     Exit Function
 End If
@@ -466,18 +468,18 @@ InMapLegalBounds = True
 
 End Function
 
-Public Sub DDrawGrhtoSurface(ByRef Surface As DirectDrawSurface7, ByRef Grh As Grh, ByVal X As Integer, ByVal Y As Integer, ByVal Center As Byte, ByVal Animate As Byte)
+Public Sub DDrawGrhtoSurface(ByRef Surface As DirectDrawSurface7, ByRef Grh As Grh, ByVal x As Integer, ByVal y As Integer, ByVal Center As Byte, ByVal Animate As Byte)
     Dim CurrentGrhIndex As Integer
     Dim SourceRect As RECT
 On Error GoTo error
         
-    If Grh.GrhIndex = 0 Then Exit Sub
+    If Grh.grhIndex = 0 Then Exit Sub
     
     If Animate Then
         If Grh.Started = 1 Then
-            Grh.FrameCounter = Grh.FrameCounter + (timerElapsedTime * GrhData(Grh.GrhIndex).NumFrames / Grh.Speed)
-            If Grh.FrameCounter > GrhData(Grh.GrhIndex).NumFrames Then
-                Grh.FrameCounter = (Grh.FrameCounter Mod GrhData(Grh.GrhIndex).NumFrames) + 1
+            Grh.FrameCounter = Grh.FrameCounter + (timerElapsedTime * GrhData(Grh.grhIndex).NumFrames / Grh.Speed)
+            If Grh.FrameCounter > GrhData(Grh.grhIndex).NumFrames Then
+                Grh.FrameCounter = (Grh.FrameCounter Mod GrhData(Grh.grhIndex).NumFrames) + 1
                 
                 If Grh.Loops <> INFINITE_LOOPS Then
                     If Grh.Loops > 0 Then
@@ -491,17 +493,17 @@ On Error GoTo error
     End If
     
     'Figure out what frame to draw (always 1 if not animated)
-    CurrentGrhIndex = GrhData(Grh.GrhIndex).Frames(Grh.FrameCounter)
+    CurrentGrhIndex = GrhData(Grh.grhIndex).Frames(Grh.FrameCounter)
     
     With GrhData(CurrentGrhIndex)
         'Center Grh over X,Y pos
         If Center Then
             If .TileWidth <> 1 Then
-                X = X - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
+                x = x - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
             End If
             
             If .TileHeight <> 1 Then
-                Y = Y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
+                y = y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
             End If
         End If
         
@@ -511,7 +513,7 @@ On Error GoTo error
         SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
-        Call Surface.BltFast(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_WAIT)
+        Call Surface.BltFast(x, y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_WAIT)
     End With
 Exit Sub
 
@@ -526,18 +528,20 @@ error:
     End If
 End Sub
 
-Public Sub DDrawTransGrhIndextoSurface(ByRef Surface As DirectDrawSurface7, ByVal GrhIndex As Integer, ByVal X As Integer, ByVal Y As Integer, ByVal Center As Byte)
+Public Sub DDrawTransGrhIndextoSurface(ByRef Surface As DirectDrawSurface7, ByVal grhIndex As Integer, ByVal x As Integer, ByVal y As Integer, ByVal Center As Byte)
     Dim SourceRect As RECT
     
-    With GrhData(GrhIndex)
+    If grhIndex = 0 Then Exit Sub
+    
+    With GrhData(grhIndex)
         'Center Grh over X,Y pos
         If Center Then
             If .TileWidth <> 1 Then
-                X = X - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
+                x = x - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
             End If
             
             If .TileHeight <> 1 Then
-                Y = Y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
+                y = y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
             End If
         End If
         
@@ -547,11 +551,11 @@ Public Sub DDrawTransGrhIndextoSurface(ByRef Surface As DirectDrawSurface7, ByVa
         SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
-        Call Surface.BltFast(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
+        Call Surface.BltFast(x, y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
     End With
 End Sub
 
-Public Sub DDrawTransGrhtoSurface(ByRef Surface As DirectDrawSurface7, ByRef Grh As Grh, ByVal X As Integer, ByVal Y As Integer, ByVal Center As Byte, ByVal Animate As Byte)
+Public Sub DDrawTransGrhtoSurface(ByRef Surface As DirectDrawSurface7, ByRef Grh As Grh, ByVal x As Integer, ByVal y As Integer, ByVal Center As Byte, ByVal Animate As Byte)
 '*****************************************************************
 'Draws a GRH transparently to a X and Y position
 '*****************************************************************
@@ -561,14 +565,14 @@ Public Sub DDrawTransGrhtoSurface(ByRef Surface As DirectDrawSurface7, ByRef Grh
     
 On Error GoTo error
 
-    If Grh.GrhIndex = 0 Then Exit Sub
+    If Grh.grhIndex = 0 Then Exit Sub
     
     If Animate Then
         If Grh.Started = 1 Then
-            Grh.FrameCounter = Grh.FrameCounter + (timerElapsedTime * GrhData(Grh.GrhIndex).NumFrames / Grh.Speed)
+            Grh.FrameCounter = Grh.FrameCounter + (timerElapsedTime * GrhData(Grh.grhIndex).NumFrames / Grh.Speed)
             
-            If Grh.FrameCounter > GrhData(Grh.GrhIndex).NumFrames Then
-                Grh.FrameCounter = (Grh.FrameCounter Mod GrhData(Grh.GrhIndex).NumFrames) + 1
+            If Grh.FrameCounter > GrhData(Grh.grhIndex).NumFrames Then
+                Grh.FrameCounter = (Grh.FrameCounter Mod GrhData(Grh.grhIndex).NumFrames) + 1
                 
                 If Grh.Loops <> INFINITE_LOOPS Then
                     If Grh.Loops > 0 Then
@@ -582,17 +586,17 @@ On Error GoTo error
     End If
     
     'Figure out what frame to draw (always 1 if not animated)
-    CurrentGrhIndex = GrhData(Grh.GrhIndex).Frames(Grh.FrameCounter)
+    CurrentGrhIndex = GrhData(Grh.grhIndex).Frames(Grh.FrameCounter)
     
     With GrhData(CurrentGrhIndex)
         'Center Grh over X,Y pos
         If Center Then
             If .TileWidth <> 1 Then
-                X = X - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
+                x = x - Int(.TileWidth * TilePixelWidth / 2) + TilePixelWidth \ 2
             End If
             
             If .TileHeight <> 1 Then
-                Y = Y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
+                y = y - Int(.TileHeight * TilePixelHeight) + TilePixelHeight
             End If
         End If
                 
@@ -602,7 +606,7 @@ On Error GoTo error
         SourceRect.Bottom = SourceRect.Top + .pixelHeight
         
         'Draw
-        Call Surface.BltFast(X, Y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
+        Call Surface.BltFast(x, y, SurfaceDB.Surface(.FileNum), SourceRect, DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
     End With
 Exit Sub
 
@@ -625,11 +629,11 @@ Sub DrawBackBufferSurface()
 PrimarySurface.Blt MainViewRect, BackBufferSurface, MainDestRect, DDBLT_WAIT
 End Sub
 
-Sub DrawGrhtoHdc(ByVal hdc As Long, ByVal GrhIndex As Integer, ByRef SourceRect As RECT, ByRef destRect As RECT)
+Sub DrawGrhtoHdc(ByVal hdc As Long, ByVal grhIndex As Integer, ByRef SourceRect As RECT, ByRef destRect As RECT)
 '*****************************************************************
 'Draws a Grh's portion to the given area of any Device Context
 '*****************************************************************
-    Call SurfaceDB.Surface(GrhData(GrhIndex).FileNum).BltToDC(hdc, SourceRect, destRect)
+    Call SurfaceDB.Surface(GrhData(grhIndex).FileNum).BltToDC(hdc, SourceRect, destRect)
 End Sub
 
 Sub PlayWaveDS(ByRef file As String)
@@ -655,8 +659,8 @@ Sub RenderScreen(ByVal tilex As Integer, ByVal tiley As Integer, ByVal PixelOffs
 'Author: Unkwown
 'Last modified: 31/05/06 by GS
 '*************************************************
-Dim Y           As Long     'Keeps track of where on map we are
-Dim X           As Long     'Keeps track of where on map we are
+Dim y           As Long     'Keeps track of where on map we are
+Dim x           As Long     'Keeps track of where on map we are
 Dim screenminY  As Integer  'Start Y pos on current screen
 Dim screenmaxY  As Integer  'End Y pos on current screen
 Dim screenminX  As Integer  'Start X pos on current screen
@@ -732,13 +736,13 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
     
     'Draw floor layer
     ScreenY = ScreenYOffset
-    For Y = screenminY To screenmaxY
+    For y = screenminY To screenmaxY
         ScreenX = ScreenXOffset
-        For X = screenminX To screenmaxX
+        For x = screenminX To screenmaxX
             
             'Layer 1 **********************************
-            If MapData(X, Y).Graphic(1).GrhIndex <> 0 Then
-                Call DDrawGrhtoSurface(BackBufferSurface, MapData(X, Y).Graphic(1), _
+            If MapData(x, y).Graphic(1).grhIndex <> 0 Then
+                Call DDrawGrhtoSurface(BackBufferSurface, MapData(x, y).Graphic(1), _
                     (ScreenX - 1) * TilePixelWidth + PixelOffsetX + TileBufferPixelOffsetX, _
                     (ScreenY - 1) * TilePixelHeight + PixelOffsetY + TileBufferPixelOffsetY, _
                     0, 1)
@@ -746,9 +750,9 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 
             If bSelectSup Then
                 If CurLayer = 1 Then
-                    If X = SobreX And Y = SobreY Then
-                        If frmConfigSup.MOSAICO.value = vbChecked Then
-                            Call DDrawGrhtoSurface(BackBufferSurface, CurrentGrh(((X + DespX) Mod mAncho) + 1, ((Y + DespY) Mod MAlto) + 1), _
+                    If x = SobreX And y = SobreY Then
+                        If frmConfigSup.MOSAICO.Value = vbChecked Then
+                            Call DDrawGrhtoSurface(BackBufferSurface, CurrentGrh(((x + DespX) Mod mAncho) + 1, ((y + DespY) Mod MAlto) + 1), _
                                 (ScreenX - 1) * TilePixelWidth + PixelOffsetX + TileBufferPixelOffsetX, _
                                 (ScreenY - 1) * TilePixelHeight + PixelOffsetY + TileBufferPixelOffsetY, _
                                 0, 1)
@@ -764,22 +768,22 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
             '******************************************
             
             ScreenX = ScreenX + 1
-        Next X
+        Next x
         
         'Increment ScreenY
         ScreenY = ScreenY + 1
-    Next Y
+    Next y
         
     If bVerCapa(2) Then
         'Draw floor layer 2
         ScreenY = minYOffset
-        For Y = MinY To MaxY
+        For y = MinY To MaxY
             ScreenX = minXOffset
-            For X = MinX To MaxX
+            For x = MinX To MaxX
                 
                 'Layer 2 **********************************
-                If MapData(X, Y).Graphic(2).GrhIndex <> 0 Then
-                    Call DDrawTransGrhtoSurface(BackBufferSurface, MapData(X, Y).Graphic(2), _
+                If MapData(x, y).Graphic(2).grhIndex <> 0 Then
+                    Call DDrawTransGrhtoSurface(BackBufferSurface, MapData(x, y).Graphic(2), _
                             (ScreenX - 1) * TilePixelWidth + PixelOffsetX, _
                             (ScreenY - 1) * TilePixelHeight + PixelOffsetY, _
                             1, 1)
@@ -787,9 +791,9 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 
                 If bSelectSup Then
                     If CurLayer = 2 Then
-                        If (X = SobreX) And (Y = SobreY) Then
-                            If frmConfigSup.MOSAICO.value = vbChecked Then
-                                Call DDrawTransGrhtoSurface(BackBufferSurface, CurrentGrh(((X + DespX) Mod mAncho) + 1, ((Y + DespY) Mod MAlto) + 1), _
+                        If (x = SobreX) And (y = SobreY) Then
+                            If frmConfigSup.MOSAICO.Value = vbChecked Then
+                                Call DDrawTransGrhtoSurface(BackBufferSurface, CurrentGrh(((x + DespX) Mod mAncho) + 1, ((y + DespY) Mod MAlto) + 1), _
                                     (ScreenX - 1) * TilePixelWidth + PixelOffsetX, _
                                     (ScreenY - 1) * TilePixelHeight + PixelOffsetY, _
                                     1, 1)
@@ -805,19 +809,19 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 '******************************************
                 
                 ScreenX = ScreenX + 1
-            Next X
+            Next x
             ScreenY = ScreenY + 1
-        Next Y
+        Next y
     Else
         If bSelectSup Then
             If CurLayer = 2 Then
-                X = SobreX
-                Y = SobreY
-                ScreenX = (X - MinX) + minXOffset
-                ScreenY = (Y - MinY) + minYOffset
+                x = SobreX
+                y = SobreY
+                ScreenX = (x - MinX) + minXOffset
+                ScreenY = (y - MinY) + minYOffset
                 
-                If frmConfigSup.MOSAICO.value = vbChecked Then
-                    Call DDrawTransGrhtoSurface(BackBufferSurface, CurrentGrh(((X + DespX) Mod mAncho) + 1, ((Y + DespY) Mod MAlto) + 1), _
+                If frmConfigSup.MOSAICO.Value = vbChecked Then
+                    Call DDrawTransGrhtoSurface(BackBufferSurface, CurrentGrh(((x + DespX) Mod mAncho) + 1, ((y + DespY) Mod MAlto) + 1), _
                         (ScreenX - 1) * TilePixelWidth + PixelOffsetX, _
                         (ScreenY - 1) * TilePixelHeight + PixelOffsetY, _
                         1, 1)
@@ -833,15 +837,15 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
     
     'Draw Transparent Layers
     ScreenY = minYOffset
-    For Y = MinY To MaxY
+    For y = MinY To MaxY
         ScreenX = minXOffset
-        For X = MinX To MaxX
+        For x = MinX To MaxX
             PixelOffsetXTemp = (ScreenX - 1) * TilePixelWidth + PixelOffsetX
             PixelOffsetYTemp = (ScreenY - 1) * TilePixelHeight + PixelOffsetY
             
-            With MapData(X, Y)
+            With MapData(x, y)
                 'Object Layer **********************************
-                If (.ObjGrh.GrhIndex <> 0) And bVerObjetos Then
+                If (.ObjGrh.grhIndex <> 0) And bVerObjetos Then
                     Call DDrawTransGrhtoSurface(BackBufferSurface, .ObjGrh, _
                             PixelOffsetXTemp, PixelOffsetYTemp, 1, 1)
                 End If
@@ -856,7 +860,7 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 
                 
                 'Layer 3 *****************************************
-                If (.Graphic(3).GrhIndex <> 0) And bVerCapa(3) Then
+                If (.Graphic(3).grhIndex <> 0) And bVerCapa(3) Then
                     'Draw
                     Call DDrawTransGrhtoSurface(BackBufferSurface, .Graphic(3), _
                             PixelOffsetXTemp, PixelOffsetYTemp, 1, 1)
@@ -865,9 +869,9 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
             End With
             
             ScreenX = ScreenX + 1
-        Next X
+        Next x
         ScreenY = ScreenY + 1
-    Next Y
+    Next y
     
     Grh.FrameCounter = 1
     Grh.Started = 0
@@ -875,12 +879,12 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
     If bVerCapa(4) Then
         'Draw layer 4
         ScreenY = minYOffset
-        For Y = MinY To MaxY
+        For y = MinY To MaxY
             ScreenX = minXOffset
-            For X = MinX To MaxX
-                With MapData(X, Y)
+            For x = MinX To MaxX
+                With MapData(x, y)
                     'Layer 4 **********************************
-                    If .Graphic(4).GrhIndex <> 0 Then
+                    If .Graphic(4).grhIndex <> 0 Then
                         'Draw
                         Call DDrawTransGrhtoSurface(BackBufferSurface, .Graphic(4), _
                             (ScreenX - 1) * TilePixelWidth + PixelOffsetX, _
@@ -891,23 +895,23 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 End With
                 
                 ScreenX = ScreenX + 1
-            Next X
+            Next x
             ScreenY = ScreenY + 1
-        Next Y
+        Next y
     End If
     
     'Draw trans, bloqs, triggers and select tiles
     ScreenY = ScreenYOffset
-    For Y = screenminY To screenmaxY
+    For y = screenminY To screenmaxY
         ScreenX = ScreenXOffset
-        For X = screenminX To screenmaxX
-            With MapData(X, Y)
+        For x = screenminX To screenmaxX
+            With MapData(x, y)
                 PixelOffsetXTemp = (ScreenX - 1) * TilePixelWidth + PixelOffsetX + TileBufferPixelOffsetX
                 PixelOffsetYTemp = (ScreenY - 1) * TilePixelHeight + PixelOffsetY + TileBufferPixelOffsetY
                 
                 '**********************************
                 If (.TileExit.Map <> 0) And bTranslados Then
-                    Grh.GrhIndex = 3
+                    Grh.grhIndex = 3
                     
                     Call DDrawTransGrhtoSurface(BackBufferSurface, Grh, _
                         PixelOffsetXTemp, _
@@ -917,7 +921,7 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
                 
                 'Show blocked tiles
                 If (.Blocked = 1) And bBloqs Then
-                    Grh.GrhIndex = 4
+                    Grh.grhIndex = 4
                     
                     Call DDrawTransGrhtoSurface(BackBufferSurface, Grh, _
                         PixelOffsetXTemp, _
@@ -946,11 +950,11 @@ Dim Grh         As Grh      'Temp Grh for show tile and blocked
             
                 ScreenX = ScreenX + 1
             End With
-        Next X
+        Next x
         
         'Increment ScreenY
         ScreenY = ScreenY + 1
-    Next Y
+    Next y
     
     Dim DC As Long
     
@@ -1028,12 +1032,12 @@ Private Sub CharRender(ByVal CharIndex As Long, ByVal PixelOffsetX As Integer, B
         PixelOffsetY = PixelOffsetY + .MoveOffsetY
         
         'Draw Body
-        If .Body.Walk(.Heading).GrhIndex Then _
+        If .Body.Walk(.Heading).grhIndex Then _
             Call DDrawTransGrhtoSurface(BackBufferSurface, .Body.Walk(.Heading), PixelOffsetX, PixelOffsetY, 1, 1)
     
         'Draw Head
-        If .Head.Head(.Heading).GrhIndex Then _
-            Call DDrawTransGrhtoSurface(BackBufferSurface, .Head.Head(.Heading), PixelOffsetX + .Body.HeadOffset.X, PixelOffsetY + .Body.HeadOffset.Y, 1, 0)
+        If .Head.Head(.Heading).grhIndex Then _
+            Call DDrawTransGrhtoSurface(BackBufferSurface, .Head.Head(.Heading), PixelOffsetX + .Body.HeadOffset.x, PixelOffsetY + .Body.HeadOffset.y, 1, 0)
     End With
 End Sub
 
@@ -1089,8 +1093,8 @@ Public Function InitTileEngine(ByVal setDisplayFormhWnd As Long, ByVal setMainVi
     ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
     
     'Set intial user position
-    UserPos.X = MinXBorder
-    UserPos.Y = MinYBorder
+    UserPos.x = MinXBorder
+    UserPos.y = MinYBorder
     
     'Set scroll pixels per frame
     ScrollPixelsPerFrameX = pixelsToScrollPerFrameX
@@ -1179,7 +1183,7 @@ On Error GoTo 0
     'Load graphic data into memory
     modIndices.CargarIndicesDeGraficos
 
-    frmCargando.X.Caption = "Iniciando Control de Superficies..."
+    frmCargando.x.Caption = "Iniciando Control de Superficies..."
     Call SurfaceDB.Initialize(DirectDraw, ClientSetup.bUseVideo, DirGraficos, ClientSetup.byMemory)
     
     'Wave Sound

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form frmMain 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "WorldEditor"
@@ -2704,7 +2704,7 @@ Private Sub PonerAlAzar(ByVal n As Integer, ByVal T As Byte)
 '*************************************************
 Dim objindex As Long
 Dim NPCIndex As Long
-Dim X, Y, i
+Dim X, y, i
 Dim Head As Integer
 Dim Body As Integer
 Dim Heading As Byte
@@ -2716,34 +2716,34 @@ modEdicion.Deshacer_Add "Aplicar " & IIf(T = 0, "Objetos", "NPCs") & " al Azar" 
 
 Do While i > 0
     X = CInt(RandomNumber(XMinMapSize, XMaxMapSize - 1))
-    Y = CInt(RandomNumber(YMinMapSize, YMaxMapSize - 1))
+    y = CInt(RandomNumber(YMinMapSize, YMaxMapSize - 1))
     
     Select Case T
         Case 0
-            If MapData(X, Y).OBJInfo.objindex = 0 Then
+            If MapData(X, y).OBJInfo.objindex = 0 Then
                 i = i - 1
                   
                 If cInsertarBloqueo.value = True Then
-                    MapData(X, Y).Blocked = 1
+                    MapData(X, y).Blocked = 1
                 Else
-                    MapData(X, Y).Blocked = 0
+                    MapData(X, y).Blocked = 0
                 End If
                   
                 If cNumFunc(2).Text > 0 Then
                     objindex = cNumFunc(2).Text
-                    InitGrh MapData(X, Y).ObjGrh, ObjData(objindex).GrhIndex
-                    MapData(X, Y).OBJInfo.objindex = objindex
-                    MapData(X, Y).OBJInfo.Amount = Val(cCantFunc(2).Text)
+                    InitGrh MapData(X, y).ObjGrh, ObjData(objindex).grhIndex
+                    MapData(X, y).OBJInfo.objindex = objindex
+                    MapData(X, y).OBJInfo.Amount = Val(cCantFunc(2).Text)
                     
                     Select Case ObjData(objindex).ObjType ' GS
                         Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
-                            MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+                            MapData(X, y).Graphic(3) = MapData(X, y).ObjGrh
                     End Select
                 End If
             End If
             
         Case 1, 2
-           If MapData(X, Y).Blocked = 0 Then
+           If MapData(X, y).Blocked = 0 Then
                 i = i - 1
                 
                 If cNumFunc(T - 1).Text > 0 Then
@@ -2752,8 +2752,8 @@ Do While i > 0
                     Head = NpcData(NPCIndex).Head
                     Heading = NpcData(NPCIndex).Heading
                         
-                    Call MakeChar(NextOpenChar(), Body, Head, Heading, CInt(X), CInt(Y))
-                    MapData(X, Y).NPCIndex = NPCIndex
+                    Call MakeChar(NextOpenChar(), Body, Head, Heading, CInt(X), CInt(y))
+                    MapData(X, y).NPCIndex = NPCIndex
                 End If
             End If
     End Select
@@ -3265,12 +3265,12 @@ Select Case UCase$(Chr$(KeyAscii))
 End Select
 End Sub
 
-Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseUp(Button As Integer, Shift As Integer, X As Single, y As Single)
 Dim tx As Integer
 Dim tY As Integer
 
 MouseX = X - MainViewShp.Left
-MouseY = Y - MainViewShp.Top
+MouseY = y - MainViewShp.Top
 
 'Trim to fit screen
 If MouseX < 0 Then
@@ -3287,7 +3287,7 @@ ElseIf MouseY > MainViewShp.Height Then
 End If
     
 'Make sure click is in view window
-If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainViewShp.Top Or Y >= MainViewShp.Top + MainViewHeight Then
+If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or y <= MainViewShp.Top Or y >= MainViewShp.Top + MainViewHeight Then
     Exit Sub
 End If
 
@@ -3301,22 +3301,37 @@ Private Sub lListado_Click(index As Integer)
 'Author: ^[GS]^
 'Last modified: 29/05/06
 '*************************************************
+Dim supNum As Long
+
 On Error Resume Next
 If HotKeysAllow = False Then
     lListado(index).Tag = lListado(index).ListIndex
     Select Case index
         Case 0
-            cGrh.Text = DameGrhIndex(ReadField(2, lListado(index).Text, Asc("#")))
-            If SupData(ReadField(2, lListado(index).Text, Asc("#"))).Capa <> 0 Then
-                If LenB(ReadField(2, lListado(index).Text, Asc("#"))) = 0 Then cCapas.Tag = cCapas.Text
-                cCapas.Text = SupData(ReadField(2, lListado(index).Text, Asc("#"))).Capa
+            supNum = ReadField(2, lListado(index).Text, Asc("#"))
+            cGrh.Text = DameGrhIndex(supNum)
+            
+            If SupData(supNum).Width > 0 Then
+                frmConfigSup.MOSAICO.value = vbChecked
+                frmConfigSup.mAncho.Text = SupData(supNum).Width
+                frmConfigSup.mLargo.Text = SupData(supNum).Height
+            Else
+                frmConfigSup.MOSAICO.value = vbUnchecked
+                frmConfigSup.mAncho.Text = "0"
+                frmConfigSup.mLargo.Text = "0"
+            End If
+
+            If SupData(supNum).Capa <> 0 Then
+                If LenB(supNum) = 0 Then cCapas.Tag = cCapas.Text
+                cCapas.Text = SupData(supNum).Capa
             Else
                 If LenB(cCapas.Tag) <> 0 Then
                     cCapas.Text = cCapas.Tag
                     cCapas.Tag = vbNullString
                 End If
             End If
-            If SupData(ReadField(2, lListado(index).Text, Asc("#"))).Block = True Then
+            
+            If SupData(supNum).block = True Then
                 If LenB(cInsertarBloqueo.Tag) = 0 Then cInsertarBloqueo.Tag = IIf(cInsertarBloqueo.value = True, 1, 0)
                 cInsertarBloqueo.value = True
                 Call cInsertarBloqueo_Click
@@ -3327,7 +3342,9 @@ If HotKeysAllow = False Then
                     Call cInsertarBloqueo_Click
                 End If
             End If
+            
             Call fPreviewGrh(cGrh.Text)
+            Call VistaPreviaDeSup
         Case 1
             cNumFunc(0).Text = ReadField(2, lListado(index).Text, Asc("#"))
         Case 2
@@ -3341,7 +3358,7 @@ End If
 
 End Sub
 
-Private Sub lListado_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lListado_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 29/05/06
@@ -3351,7 +3368,7 @@ If index = 3 And Button = 2 Then
 End If
 End Sub
 
-Private Sub lListado_MouseMove(index As Integer, Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub lListado_MouseMove(index As Integer, Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 22/05/06
@@ -4088,31 +4105,31 @@ mnuVerTriggers.Checked = cVerTriggers.value
 bTriggers = mnuVerTriggers.Checked
 End Sub
 
-Private Sub picRadar_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picRadar_MouseDown(Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 29/05/06
 '*************************************************
 If X < MinXBorder Then X = 11
 If X > MaxXBorder Then X = 89
-If Y < MinYBorder Then Y = 10
-If Y > MaxYBorder Then Y = 92
+If y < MinYBorder Then y = 10
+If y > MaxYBorder Then y = 92
 
 UserPos.X = X
-UserPos.Y = Y
+UserPos.y = y
 bRefreshRadar = True
 End Sub
 
-Private Sub picRadar_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub picRadar_MouseMove(Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 28/05/06
 '*************************************************
 MiRadarX = X
-MiRadarY = Y
+MiRadarY = y
 End Sub
 
-Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseDown(Button As Integer, Shift As Integer, X As Single, y As Single)
     '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06 - GS
@@ -4123,7 +4140,7 @@ Dim tY As Integer
 
 If Not MapaCargado Then Exit Sub
 
-If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainViewShp.Top Or Y >= MainViewShp.Top + MainViewHeight Then
+If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or y <= MainViewShp.Top Or y >= MainViewShp.Top + MainViewHeight Then
     Exit Sub
 End If
 
@@ -4135,7 +4152,7 @@ MouseDownX = tx
 MouseDownY = tY
 End Sub
 
-Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, Y As Single)
+Private Sub Form_MouseMove(Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06 - GS
@@ -4149,7 +4166,7 @@ If Not MapaCargado Then Exit Sub
 HotKeysAllow = True
 
 MouseX = X - MainViewShp.Left
-MouseY = Y - MainViewShp.Top
+MouseY = y - MainViewShp.Top
 
 'Trim to fit screen
 If MouseX < 0 Then
@@ -4166,7 +4183,7 @@ ElseIf MouseY > MainViewShp.Height Then
 End If
     
 'Make sure click is in view window
-If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or Y <= MainViewShp.Top Or Y >= MainViewShp.Top + MainViewHeight Then
+If X <= MainViewShp.Left Or X >= MainViewShp.Left + MainViewWidth Or y <= MainViewShp.Top Or y >= MainViewShp.Top + MainViewHeight Then
     Exit Sub
 End If
 
@@ -4192,8 +4209,14 @@ Dim i As Long
 
 ' Guardar configuración
 WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "GuardarConfig", IIf(frmMain.mnuGuardarUltimaConfig.Checked = True, "1", "0")
+
 If frmMain.mnuGuardarUltimaConfig.Checked Then
-    WriteVar IniPath & "WorldEditor.ini", "PATH", "UltimoMapa", Dialog.FileName
+    If InStr(1, Dialog.FileName, App.path) = 1 Then
+        WriteVar IniPath & "WorldEditor.ini", "PATH", "UltimoMapa", mid$(Dialog.FileName, Len(App.path) + 1)
+    Else
+        WriteVar IniPath & "WorldEditor.ini", "PATH", "UltimoMapa", Dialog.FileName
+    End If
+    
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "ControlAutomatico", IIf(frmMain.mnuVerAutomatico.Checked = True, "1", "0")
     
     For i = 2 To 4
@@ -4205,7 +4228,7 @@ If frmMain.mnuGuardarUltimaConfig.Checked Then
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "NPCs", IIf(bVerNpcs, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Triggers", IIf(bTriggers, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "Bloqueos", IIf(bBloqs, "1", "0")
-    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "LastPos", UserPos.X & "-" & UserPos.Y
+    WriteVar IniPath & "WorldEditor.ini", "MOSTRAR", "LastPos", UserPos.X & "-" & UserPos.y
     
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "UtilizarDeshacer", IIf(frmMain.mnuUtilizarDeshacer.Checked = True, "1", "0")
     WriteVar IniPath & "WorldEditor.ini", "CONFIGURACION", "AutoCapturarTrans", IIf(frmMain.mnuAutoCapturarTranslados.Checked = True, "1", "0")
