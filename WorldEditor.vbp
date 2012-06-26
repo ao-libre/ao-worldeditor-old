@@ -38,8 +38,6 @@ Module=modMusic; Codigo\modMusic.bas
 Form=Codigo\frmRender.frm
 Module=modPicAdvanced; Codigo\modPicAdvanced.bas
 Module=modRender; Codigo\modRender.bas
-Module=modCompressionEx; Codigo\Critico\modCompressionEx.bas
-Class=clsMD5; Codigo\Critico\clsMD5.cls
 IconForm="frmMain"
 Startup="Sub Main"
 HelpFile=""
@@ -57,7 +55,6 @@ AutoIncrementVer=1
 ServerSupportFiles=0
 VersionCompanyName="Argentum Online"
 VersionLegalCopyright="Programado por ^[GS]^"
-CondComp="SeguridadAlkon = 0"
 CompilationType=0
 OptimizationType=0
 FavorPentiumPro(tm)=-1
