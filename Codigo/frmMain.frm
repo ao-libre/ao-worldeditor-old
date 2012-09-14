@@ -3312,10 +3312,12 @@ If HotKeysAllow = False Then
             cGrh.Text = DameGrhIndex(supNum)
             
             If SupData(supNum).Width > 0 Then
+                MosaicoChecked = True
                 frmConfigSup.MOSAICO.value = vbChecked
                 frmConfigSup.mAncho.Text = SupData(supNum).Width
                 frmConfigSup.mLargo.Text = SupData(supNum).Height
             Else
+                MosaicoChecked = False
                 frmConfigSup.MOSAICO.value = vbUnchecked
                 frmConfigSup.mAncho.Text = "0"
                 frmConfigSup.mLargo.Text = "0"
@@ -3343,8 +3345,7 @@ If HotKeysAllow = False Then
                 End If
             End If
             
-            Call fPreviewGrh(cGrh.Text)
-            Call VistaPreviaDeSup
+            Call ActualizarMosaico
         Case 1
             cNumFunc(0).Text = ReadField(2, lListado(index).Text, Asc("#"))
         Case 2
@@ -3357,7 +3358,6 @@ Else
 End If
 
 End Sub
-
 Private Sub lListado_MouseDown(index As Integer, Button As Integer, Shift As Integer, X As Single, y As Single)
 '*************************************************
 'Author: ^[GS]^
@@ -3583,7 +3583,8 @@ Private Sub mnuConfigAvanzada_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-frmConfigSup.Show
+
+frmConfigSup.Show vbModeless, Me
 End Sub
 
 Private Sub mnuConfigObjTrans_Click()

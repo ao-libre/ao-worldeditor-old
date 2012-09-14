@@ -20,7 +20,7 @@ Private Type RECTO ' xD
     Bottom As Long
 End Type
 
-Private Declare Function TextOut Lib "gdi32" Alias "TextOutA" (ByVal hdc As Long, ByVal X As Long, ByVal Y As Long, ByVal lpString As String, ByVal nCount As Long) As Long
+Private Declare Function TextOut Lib "gdi32" Alias "TextOutA" (ByVal hdc As Long, ByVal X As Long, ByVal y As Long, ByVal lpString As String, ByVal nCount As Long) As Long
 Private Declare Function SetTextColor Lib "gdi32" (ByVal hdc As Long, ByVal crColor As Long) As Long
 Private Declare Function SetBkMode Lib "gdi32" (ByVal hdc As Long, ByVal nBkMode As Long) As Long
 Private Declare Function SetBkColor Lib "gdi32" (ByVal hdc As Long, ByVal crColor As Long) As Long
@@ -30,7 +30,7 @@ Private Declare Function CreateFont Lib "gdi32" Alias "CreateFontA" (ByVal H As 
     ByVal W As Long, ByVal E As Long, ByVal O As Long, ByVal W As Long, ByVal i As Long, _
     ByVal u As Long, ByVal s As Long, ByVal c As Long, ByVal OP As Long, ByVal CP As Long, _
     ByVal Q As Long, ByVal PAF As Long, ByVal f As String) As Long
-Private Declare Function GetTextExtentPoint32 Lib "gdi32" Alias "GetTextExtentPoint32A" (ByVal hdc As Long, ByVal lpsz As String, ByVal cbString As Long, lpSize As size) As Long
+Private Declare Function GetTextExtentPoint32 Lib "gdi32" Alias "GetTextExtentPoint32A" (ByVal hdc As Long, ByVal lpsz As String, ByVal cbString As Long, lpSize As Size) As Long
 Private Declare Function Rectangle Lib "gdi32" (ByVal hdc As Long, ByVal X1 As Long, ByVal Y1 As Long, ByVal X2 As Long, ByVal Y2 As Long) As Long
 Private Declare Function InvalidateRect Lib "user32" ( _
     ByVal hwnd As Long, lpRect As RECTO, ByVal bErase As Long) As Long
@@ -75,13 +75,13 @@ Private Const TEXTBUFFER_SIZE As Long = 1024 * 2
 
 Private Type TextInfo
     X As Long
-    Y As Long
+    y As Long
     color As Long
     centered As Boolean
     Text As String
 End Type
 
-Private Type size
+Private Type Size
     cx As Long
     cy As Long
 End Type
@@ -99,7 +99,7 @@ Private useVideoMemory As Boolean
 Private TextSurfaces(MAX_COLORS - 1) As Long
 Private Surface(MAX_COLORS - 1) As DirectDrawSurface7
 Private CantColors As Long
-Private surfacesize As size
+Private surfacesize As Size
 Private letters As String
 Private lettersrect(255) As RECT
 
@@ -110,7 +110,7 @@ Public Function InitText(ByRef DD As DirectDraw7, ByVal videoMemory As Boolean)
 '
 '**************************************************************
 
-Dim ret As size
+Dim ret As Size
 Dim tsize As Integer
 Dim i As Long
 Dim hdc As Long
@@ -225,18 +225,23 @@ On Error GoTo ErrHandler
 Exit Function
 
 ErrHandler:
-    If Err.Number = DDERR_OUTOFMEMORY Or Err.Number = DDERR_OUTOFVIDEOMEMORY Then
-            MsgBox "No hay memoria disponible! El programa abortará. Cierra algunos programas e intenta de nuevo"
-            End
-    Else
+    If Err.Number = DDERR_OUTOFVIDEOMEMORY Then
+        ' No video memory? Try system memory! We want all surfaces loaded!
+        ddsd.ddsCaps.lCaps = DDSCAPS_OFFSCREENPLAIN Or DDSCAPS_SYSTEMMEMORY
+        Resume
+    End If
+    'If Err.Number = DDERR_OUTOFMEMORY Or Err.Number = DDERR_OUTOFVIDEOMEMORY Then
+    '        MsgBox "No hay memoria disponible! El programa abortará. Cierra algunos programas e intenta de nuevo"
+    '        End
+    'Else
         MsgBox "Un error inesperado ocurrió al intentar crear el texto" & ". " & vbCrLf & _
                 "El código de error es " & CStr(Err.Number) & " - " & Err.Description & vbCrLf & vbCrLf & "Copia este mensaje y notifica a los administradores.", _
                 vbOKOnly Or vbCritical Or vbExclamation, "Error"
         End
-    End If
+    'End If
 End Function
 
-Public Function DrawText(ByVal X As Long, ByVal Y As Long, ByRef Text As String, ByVal color As Long, ByRef Surface As DirectDrawSurface7)
+Public Function DrawText(ByVal X As Long, ByVal y As Long, ByRef Text As String, ByVal color As Long, ByRef Surface As DirectDrawSurface7)
 '**************************************************************
 'Author: Alejandro Salvo (Salvito)
 'Last Modify Date: 07/31/2010
@@ -253,7 +258,7 @@ Public Function DrawText(ByVal X As Long, ByVal Y As Long, ByRef Text As String,
     Set textSurface = GetTextSurface(color)
     
     For i = 0 To UBound(bytestring)
-        Call Surface.BltFast(tx, Y, textSurface, lettersrect(bytestring(i)), DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
+        Call Surface.BltFast(tx, y, textSurface, lettersrect(bytestring(i)), DDBLTFAST_SRCCOLORKEY Or DDBLTFAST_WAIT)
         tx = tx + lettersrect(bytestring(i)).Right - lettersrect(bytestring(i)).Left
     Next i
 End Function
@@ -269,7 +274,7 @@ Public Function DrawTextToDC(ByVal hdc As Long, Optional ByVal Shadow As Boolean
 'La forma de usarla es llamando a la funcion AddText de ahi abajo
 Dim i As Long
 Dim lastcolor As Long
-Dim ret As size
+Dim ret As Size
 Dim tRect As RECTO
 
 'Aplico mi font
@@ -288,10 +293,10 @@ If Shadow Then
             If .centered Then ' ya lo dejo acomodado
                 Call GetTextExtentPoint32(hdc, .Text, Len(.Text), ret)
                 .X = .X - ret.cx \ 2
-                .Y = .Y - ret.cy \ 2
+                .y = .y - ret.cy \ 2
             End If
             
-            TextOut hdc, .X - 2, .Y - 1, .Text, Len(.Text)
+            TextOut hdc, .X - 2, .y - 1, .Text, Len(.Text)
         End With
     Next i
 End If
@@ -307,10 +312,10 @@ For i = 0 To textCount - 1
         If (Not Shadow) And .centered Then
             Call GetTextExtentPoint32(hdc, .Text, Len(.Text), ret)
             .X = .X - ret.cx \ 2
-            .Y = .Y - ret.cy \ 2
+            .y = .y - ret.cy \ 2
         End If
         
-        TextOut hdc, .X, .Y, .Text, Len(.Text)
+        TextOut hdc, .X, .y, .Text, Len(.Text)
     End With
 Next i
 
@@ -333,7 +338,7 @@ If LenB(strText) > 0 Then
     If textCount < TEXTBUFFER_SIZE Then
         With TextBuffer(textCount)
             .X = xPos
-            .Y = yPos
+            .y = yPos
             .color = fontcolor
             .Text = strText
             .centered = centered

@@ -54,13 +54,13 @@ Public Sub EstSelectPanel(ByVal Numero As Byte, ByVal Activado As Boolean)
                         bVerCapa(CurLayer) = True
                     End If
                 Case 2
-                    frmMain.cVerBloqueos.Tag = CInt(frmMain.cVerBloqueos.Value)
-                    frmMain.cVerBloqueos.Value = True
-                    frmMain.mnuVerBloqueos.Checked = frmMain.cVerBloqueos.Value
+                    frmMain.cVerBloqueos.Tag = CInt(frmMain.cVerBloqueos.value)
+                    frmMain.cVerBloqueos.value = True
+                    frmMain.mnuVerBloqueos.Checked = frmMain.cVerBloqueos.value
                 Case 6
-                    frmMain.cVerTriggers.Tag = CInt(frmMain.cVerTriggers.Value)
-                    frmMain.cVerTriggers.Value = True
-                    frmMain.mnuVerTriggers.Checked = frmMain.cVerTriggers.Value
+                    frmMain.cVerTriggers.Tag = CInt(frmMain.cVerTriggers.value)
+                    frmMain.cVerTriggers.value = True
+                    frmMain.mnuVerTriggers.Checked = frmMain.cVerTriggers.value
             End Select
         End If
     Else
@@ -78,12 +78,12 @@ Public Sub EstSelectPanel(ByVal Numero As Byte, ByVal Activado As Boolean)
                     End If
                 Case 2
                     If LenB(frmMain.cVerBloqueos.Tag) = 0 Then frmMain.cVerBloqueos.Tag = 0
-                    frmMain.cVerBloqueos.Value = CBool(frmMain.cVerBloqueos.Tag)
-                    frmMain.mnuVerBloqueos.Checked = frmMain.cVerBloqueos.Value
+                    frmMain.cVerBloqueos.value = CBool(frmMain.cVerBloqueos.Tag)
+                    frmMain.mnuVerBloqueos.Checked = frmMain.cVerBloqueos.value
                 Case 6
                     If LenB(frmMain.cVerTriggers.Tag) = 0 Then frmMain.cVerTriggers.Tag = 0
-                    frmMain.cVerTriggers.Value = CBool(frmMain.cVerTriggers.Tag)
-                    frmMain.mnuVerTriggers.Checked = frmMain.cVerTriggers.Value
+                    frmMain.cVerTriggers.value = CBool(frmMain.cVerTriggers.Tag)
+                    frmMain.mnuVerTriggers.Checked = frmMain.cVerTriggers.value
             End Select
         End If
     End If
@@ -182,13 +182,13 @@ Public Sub VerFuncion(ByVal Numero As Byte, ByVal Ver As Boolean, Optional Norma
     If Ver Then
         vMostrando = Numero
         If Numero < 0 Or Numero > 6 Then Exit Sub
-        If frmMain.SelectPanel(Numero).Value = False Then
-            frmMain.SelectPanel(Numero).Value = True
+        If frmMain.SelectPanel(Numero).value = False Then
+            frmMain.SelectPanel(Numero).value = True
         End If
     Else
         If Numero < 0 Or Numero > 6 Then Exit Sub
-        If frmMain.SelectPanel(Numero).Value = True Then
-            frmMain.SelectPanel(Numero).Value = False
+        If frmMain.SelectPanel(Numero).value = True Then
+            frmMain.SelectPanel(Numero).value = False
         End If
     End If
 End Sub
@@ -269,7 +269,7 @@ DameGrhIndex = SupData(GrhIn).Grh
 End Function
 
 Public Sub ActualizarMosaico()
-If frmConfigSup.MOSAICO.Value = vbChecked Then
+If MosaicoChecked Then
     mAncho = Val(frmConfigSup.mAncho)
     MAlto = Val(frmConfigSup.mLargo)
     
@@ -300,7 +300,7 @@ If Val(GrhIn) > UBound(GrhData) Then
     Exit Sub
 End If
 
-If frmConfigSup.MOSAICO.Value = vbChecked Then
+If MosaicoChecked Then
     For y = 1 To MAlto
         For X = 1 To mAncho
             'Change CurrentGrh
@@ -335,23 +335,7 @@ Dim SR As RECT, DR As RECT
     
     frmGrafico.ShowPic = frmGrafico.Picture1
     
-    If frmConfigSup.MOSAICO = vbUnchecked Then
-        If CurrentGrh(0).grhIndex Then
-            With GrhData(CurrentGrh(0).grhIndex)
-                DR.Left = 0
-                DR.Top = 0
-                DR.Bottom = .pixelHeight
-                DR.Right = .pixelWidth
-                
-                SR.Left = .sX
-                SR.Top = .sY
-                SR.Right = SR.Left + .pixelWidth
-                SR.Bottom = SR.Top + .pixelHeight
-                
-                Call DrawGrhtoHdc(frmGrafico.ShowPic.hdc, .Frames(1), SR, DR)
-            End With
-        End If
-    Else
+    If MosaicoChecked Then
         Dim X As Integer, y As Integer
         
         For X = 1 To mAncho
@@ -373,8 +357,24 @@ Dim SR As RECT, DR As RECT
                 End If
             Next y
         Next X
+    Else
+        If CurrentGrh(0).grhIndex Then
+            With GrhData(CurrentGrh(0).grhIndex)
+                DR.Left = 0
+                DR.Top = 0
+                DR.Bottom = .pixelHeight
+                DR.Right = .pixelWidth
+                
+                SR.Left = .sX
+                SR.Top = .sY
+                SR.Right = SR.Left + .pixelWidth
+                SR.Bottom = SR.Top + .pixelHeight
+                
+                Call DrawGrhtoHdc(frmGrafico.ShowPic.hdc, .Frames(1), SR, DR)
+            End With
+        End If
     End If
-    
-    frmGrafico.ShowPic.Picture = frmGrafico.ShowPic.image
+        
+    frmGrafico.ShowPic.Picture = frmGrafico.ShowPic.Image
     frmMain.PreviewGrh = frmGrafico.ShowPic
 End Sub

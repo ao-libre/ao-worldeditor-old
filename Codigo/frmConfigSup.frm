@@ -444,7 +444,7 @@ Private Sub mAncho_Change()
 If Val(mAncho) <= 0 Then
     mAncho.Text = 1
 Else
-    Call ActualizarMosaico
+    If Me.Visible Then Call ActualizarMosaico
 End If
 End Sub
 
@@ -461,7 +461,7 @@ Private Sub mLargo_Change()
 If Val(mLargo) <= 0 Then
     mLargo.Text = 1
 Else
-    Call ActualizarMosaico
+    If Me.Visible Then Call ActualizarMosaico
 End If
 End Sub
 
@@ -490,5 +490,6 @@ Private Sub MOSAICO_Click()
 If Val(mAncho.Text) <= 0 Then mAncho.Text = "1"
 If Val(mLargo.Text) <= 0 Then mLargo.Text = "1"
 
+MosaicoChecked = (MOSAICO.value = vbChecked)
 Call ActualizarMosaico
 End Sub

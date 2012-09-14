@@ -57,26 +57,26 @@ Public Sub Deshacer_Add(ByRef Desc As String)
 If Not frmMain.mnuUtilizarDeshacer.Checked Then Exit Sub
 
 Dim i As Integer
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 ' Desplazo todos los deshacer uno hacia atras
 For i = maxDeshacer To 2 Step -1
-    For x = XMinMapSize To XMaxMapSize
+    For X = XMinMapSize To XMaxMapSize
         For y = YMinMapSize To YMaxMapSize
-            MapData_Deshacer(i, x, y) = MapData_Deshacer(i - 1, x, y)
+            MapData_Deshacer(i, X, y) = MapData_Deshacer(i - 1, X, y)
         Next y
-    Next x
+    Next X
     
     MapData_Deshacer_Info(i) = MapData_Deshacer_Info(i - 1)
 Next i
 
 ' Guardo los valores
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        MapData_Deshacer(1, x, y) = MapData(x, y)
+        MapData_Deshacer(1, X, y) = MapData(X, y)
     Next y
-Next x
+Next X
 
 MapData_Deshacer_Info(1).Desc = Desc
 MapData_Deshacer_Info(1).Libre = False
@@ -174,20 +174,20 @@ Public Sub Bloquear_Bordes()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Bloquear los bordes" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        If x < MinXBorder Or x > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
-            MapData(x, y).Blocked = 1
+        If X < MinXBorder Or X > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
+            MapData(X, y).Blocked = 1
         End If
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -220,7 +220,7 @@ If Cuantos > 0 Then
         tx = RandomNumber(MinXBorder, MaxXBorder)
         tY = RandomNumber(MinYBorder, MaxYBorder)
         
-        Call InsertarGrh(tx, tY, frmConfigSup.MOSAICO.Value = vbChecked, bAutoCompletarSuperficies, frmMain.cInsertarBloqueo.Value, False)
+        Call InsertarGrh(tx, tY, MosaicoChecked, bAutoCompletarSuperficies, frmMain.cInsertarBloqueo.value, False)
     Next k
 End If
 
@@ -239,29 +239,29 @@ Public Sub Superficie_Bordes()
 'Last modified: 20/05/06
 '*************************************************
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Insertar Superficie en todos los bordes" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        If x < MinXBorder Or x > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
-            Call InsertarGrh(x, y, frmConfigSup.MOSAICO.Value = vbChecked, False, frmMain.cInsertarBloqueo.Value, False)
+        If X < MinXBorder Or X > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
+            Call InsertarGrh(X, y, MosaicoChecked, False, frmMain.cInsertarBloqueo.value, False)
             
              'Erase NPCs
-            Call QuitarNpc(x, y, False)
+            Call QuitarNpc(X, y, False)
 
             'Erase Objs
-            Call QuitarObjeto(x, y, False)
+            Call QuitarObjeto(X, y, False)
 
             'Clear exits
-            Call QuitarTileExit(x, y, False)
+            Call QuitarTileExit(X, y, False)
         End If
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -280,18 +280,18 @@ Public Sub Superficie_Todo()
 
 If EditWarning Then Exit Sub
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Insertar Superficie en todo el mapa" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        Call InsertarGrh(x, y, frmConfigSup.MOSAICO.Value = vbChecked, False, MapData(x, y).Blocked, False)
+        Call InsertarGrh(X, y, MosaicoChecked, False, MapData(X, y).Blocked, False)
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -312,18 +312,18 @@ Public Sub Bloqueo_Todo(ByVal Valor As Byte)
 
 If EditWarning Then Exit Sub
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Bloquear todo el mapa" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        MapData(x, y).Blocked = Valor
+        MapData(X, y).Blocked = Valor
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -342,36 +342,36 @@ Public Sub Borrar_Mapa()
 
 If EditWarning Then Exit Sub
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Borrar todo el mapa menos Triggers" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        MapData(x, y).Graphic(1).grhIndex = 1
+        MapData(X, y).Graphic(1).grhIndex = 1
         'Change blockes status
-        MapData(x, y).Blocked = 0
+        MapData(X, y).Blocked = 0
 
         'Erase layer 2 and 3
-        MapData(x, y).Graphic(2).grhIndex = 0
-        MapData(x, y).Graphic(3).grhIndex = 0
-        MapData(x, y).Graphic(4).grhIndex = 0
+        MapData(X, y).Graphic(2).grhIndex = 0
+        MapData(X, y).Graphic(3).grhIndex = 0
+        MapData(X, y).Graphic(4).grhIndex = 0
 
         'Erase NPCs
-        Call QuitarNpc(x, y, False)
+        Call QuitarNpc(X, y, False)
 
         'Erase Objs
-        Call QuitarObjeto(x, y, False)
+        Call QuitarObjeto(X, y, False)
 
         'Clear exits
-        Call QuitarTileExit(x, y, False)
+        Call QuitarTileExit(X, y, False)
         
-        InitGrh MapData(x, y).Graphic(1), 1
+        InitGrh MapData(X, y).Graphic(1), 1
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -392,19 +392,19 @@ If EditWarning Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar todos los NPCs" & IIf(Hostiles = True, " Hostiles", "No Hostiles") ' Hago deshacer
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        If MapData(x, y).NPCIndex > 0 Then
-            If (Hostiles And NpcData(MapData(x, y).NPCIndex).Hostile) Or ((Hostiles = False) And (NpcData(MapData(x, y).NPCIndex).Hostile = False)) Then
-                Call EraseChar(MapData(x, y).CharIndex)
-                MapData(x, y).NPCIndex = 0
+        If MapData(X, y).NPCIndex > 0 Then
+            If (Hostiles And NpcData(MapData(X, y).NPCIndex).Hostile) Or ((Hostiles = False) And (NpcData(MapData(X, y).NPCIndex).Hostile = False)) Then
+                Call EraseChar(MapData(X, y).CharIndex)
+                MapData(X, y).NPCIndex = 0
             End If
         End If
     Next y
-Next x
+Next X
 
 bRefreshRadar = True ' Radar
 
@@ -426,14 +426,14 @@ If EditWarning Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar todos los Objetos" ' Hago deshacer
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        Call QuitarObjeto(x, y, False)
+        Call QuitarObjeto(X, y, False)
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -453,16 +453,16 @@ If EditWarning Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar todos los Triggers" ' Hago deshacer
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        If MapData(x, y).Trigger > 0 Then
-            MapData(x, y).Trigger = 0
+        If MapData(X, y).Trigger > 0 Then
+            MapData(X, y).Trigger = 0
         End If
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -482,14 +482,14 @@ If EditWarning Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar todos los Translados" ' Hago deshacer
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        Call QuitarTileExit(x, y, False)
+        Call QuitarTileExit(X, y, False)
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -512,34 +512,34 @@ If EditWarning Then Exit Sub
 'Clears a border in a room with current GRH
 '*****************************************************************
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar todos los Bordes" ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
-        If x < MinXBorder Or x > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
-            MapData(x, y).Graphic(1).grhIndex = 1
-            InitGrh MapData(x, y).Graphic(1), 1
-            MapData(x, y).Blocked = 0
+        If X < MinXBorder Or X > MaxXBorder Or y < MinYBorder Or y > MaxYBorder Then
+            MapData(X, y).Graphic(1).grhIndex = 1
+            InitGrh MapData(X, y).Graphic(1), 1
+            MapData(X, y).Blocked = 0
             
              'Erase NPCs
-             Call QuitarNpc(x, y, False)
+             Call QuitarNpc(X, y, False)
 
             'Erase Objs
-            Call QuitarObjeto(x, y, False)
+            Call QuitarObjeto(X, y, False)
 
             'Clear exits
-            Call QuitarTileExit(x, y, False)
+            Call QuitarTileExit(X, y, False)
             
             ' Triggers
-            MapData(x, y).Trigger = 0
+            MapData(X, y).Trigger = 0
         End If
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -564,22 +564,22 @@ If EditWarning Then Exit Sub
 'Clears one layer
 '*****************************************************************
 
-Dim x As Integer
+Dim X As Integer
 Dim y As Integer
 
 If Not MapaCargado Then Exit Sub
 
 modEdicion.Deshacer_Add "Quitar Capa " & Capa ' Hago deshacer
 
-For x = XMinMapSize To XMaxMapSize
+For X = XMinMapSize To XMaxMapSize
     For y = YMinMapSize To YMaxMapSize
         If Capa = 1 Then
-            MapData(x, y).Graphic(Capa).grhIndex = 1
+            MapData(X, y).Graphic(Capa).grhIndex = 1
         Else
-            MapData(x, y).Graphic(Capa).grhIndex = 0
+            MapData(X, y).Graphic(Capa).grhIndex = 0
         End If
     Next y
-Next x
+Next X
 
 'Set changed flag
 MapInfo.Changed = 1
@@ -607,11 +607,11 @@ If tTrans.Map > 0 Then
             Call modMapIO.NuevoMapa
             frmMain.Dialog.FileName = PATH_Save & NameMap_Save & tTrans.Map & ".map"
             modMapIO.AbrirMapa frmMain.Dialog.FileName, MapData
-            UserPos.x = tTrans.x
+            UserPos.X = tTrans.X
             UserPos.y = tTrans.y
             
             If WalkMode Then
-                MoveCharbyPos UserCharIndex, UserPos.x, UserPos.y
+                MoveCharbyPos UserCharIndex, UserPos.X, UserPos.y
                 CharList(UserCharIndex).Heading = SOUTH
             End If
             
@@ -637,7 +637,7 @@ Sub ClickEdit(ByVal Button As Integer, ByVal tx As Integer, ByVal tY As Integer)
     Dim NPCIndex As Integer
     Dim objindex As Integer
     Dim Amount As Integer
-    Dim x As Integer
+    Dim X As Integer
     Dim y As Integer
     Dim Map As Integer
     
@@ -654,29 +654,29 @@ Sub ClickEdit(ByVal Button As Integer, ByVal tx As Integer, ByVal tY As Integer)
     'Left click
     ElseIf Button = vbLeftButton Then
         'Erase 2-3
-        If frmMain.cQuitarEnTodasLasCapas.Value Then
+        If frmMain.cQuitarEnTodasLasCapas.value Then
             Call QuitarCapasMedias(tx, tY)
         'Borrar "esta" Capa
-        ElseIf frmMain.cQuitarEnEstaCapa.Value Then
+        ElseIf frmMain.cQuitarEnEstaCapa.value Then
             Call QuitarEstaCapa(tx, tY)
         '************** Place grh
         ElseIf bSelectSup Then
-            Call InsertarGrh(tx, tY, frmConfigSup.MOSAICO.Value = vbChecked, bAutoCompletarSuperficies, MapData(tx, tY).Blocked)
+            Call InsertarGrh(tx, tY, MosaicoChecked, bAutoCompletarSuperficies, MapData(tx, tY).Blocked)
         '************** Place blocked tile
-        ElseIf frmMain.cInsertarBloqueo.Value Then
+        ElseIf frmMain.cInsertarBloqueo.value Then
             Call InsertarBloq(tx, tY)
-        ElseIf frmMain.cQuitarBloqueo.Value Then
+        ElseIf frmMain.cQuitarBloqueo.value Then
             Call QuitarBloq(tx, tY)
         '************** Place exit
-        ElseIf frmMain.cInsertarTrans.Value Then
+        ElseIf frmMain.cInsertarTrans.value Then
             Map = Val(frmMain.tTMapa.Text)
-            x = Val(frmMain.tTX.Text)
+            X = Val(frmMain.tTX.Text)
             y = Val(frmMain.tTY.Text)
             
             If (Map < 0) Or (Map > NumMaps) Then
                 MsgBox "Valor de Mapa invalido", vbCritical + vbOKOnly
                 Exit Sub
-            ElseIf (x < MinXBorder) Or (x > MaxXBorder) Then
+            ElseIf (X < MinXBorder) Or (X > MaxXBorder) Then
                 MsgBox "Valor de X invalido", vbCritical + vbOKOnly
                 Exit Sub
             ElseIf (y < MinYBorder) Or (y > MaxYBorder) Then
@@ -684,48 +684,48 @@ Sub ClickEdit(ByVal Button As Integer, ByVal tx As Integer, ByVal tY As Integer)
                 Exit Sub
             End If
             
-            If frmMain.cInsertarTransOBJ.Value Then _
+            If frmMain.cInsertarTransOBJ.value Then _
                 Call InsertarObjTranslado(tx, tY)
             
-            If frmMain.cUnionManual.Value Then
+            If frmMain.cUnionManual.value Then
                 Call InsertarUnionManual(tx, tY, Map)
             Else
-                Call InsertarTileExit(tx, tY, x, y, Map)
+                Call InsertarTileExit(tx, tY, X, y, Map)
             End If
-        ElseIf frmMain.cQuitarTrans.Value Then
+        ElseIf frmMain.cQuitarTrans.value Then
             Call QuitarTileExit(tx, tY)
         '************** Place NPC
-        ElseIf frmMain.cInsertarFunc(0).Value Then
+        ElseIf frmMain.cInsertarFunc(0).value Then
             NPCIndex = Val(frmMain.cNumFunc(0).Text)
             
             Call InsertarNpc(tx, tY, NPCIndex)
-        ElseIf frmMain.cInsertarFunc(1).Value Then
+        ElseIf frmMain.cInsertarFunc(1).value Then
             NPCIndex = Val(frmMain.cNumFunc(1).Text)
                 
             Call InsertarNpc(tx, tY, NPCIndex)
-        ElseIf frmMain.cQuitarFunc(0).Value Or frmMain.cQuitarFunc(1).Value Then
+        ElseIf frmMain.cQuitarFunc(0).value Or frmMain.cQuitarFunc(1).value Then
             Call QuitarNpc(tx, tY)
         ' ***************** Control de Funcion de Objetos *****************
-        ElseIf frmMain.cInsertarFunc(2).Value = True Then ' Insertar Objeto
+        ElseIf frmMain.cInsertarFunc(2).value = True Then ' Insertar Objeto
             objindex = frmMain.cNumFunc(2).Text
             Amount = Val(frmMain.cCantFunc(2).Text)
             
             Call InsertarObjeto(tx, tY, objindex, Amount)
-        ElseIf frmMain.cQuitarFunc(2).Value Then  ' Quitar Objeto
+        ElseIf frmMain.cQuitarFunc(2).value Then  ' Quitar Objeto
             Call QuitarObjeto(tx, tY)
         ' ***************** Control de Funcion de Triggers *****************
-        ElseIf frmMain.cInsertarTrigger.Value Then ' Insertar Trigger
+        ElseIf frmMain.cInsertarTrigger.value Then ' Insertar Trigger
             Call InsertarTrigger(tx, tY, frmMain.lListado(4).ListIndex)
-        ElseIf frmMain.cQuitarTrigger.Value Then  ' Quitar Trigger
+        ElseIf frmMain.cQuitarTrigger.value Then  ' Quitar Trigger
             Call InsertarTrigger(tx, tY, 0)
         End If
     End If
 End Sub
 
-Public Sub GetMapData(ByVal x As Byte, ByVal y As Byte)
-With MapData(x, y)
+Public Sub GetMapData(ByVal X As Byte, ByVal y As Byte)
+With MapData(X, y)
     ' Posicion
-    frmMain.StatTxt.Text = frmMain.StatTxt.Text & ENDL & ENDL & "Posición " & x & "," & y
+    frmMain.StatTxt.Text = frmMain.StatTxt.Text & ENDL & ENDL & "Posición " & X & "," & y
     
     ' Bloqueos
     If .Blocked = 1 Then frmMain.StatTxt.Text = frmMain.StatTxt.Text & " (BLOQ)"
@@ -734,11 +734,11 @@ With MapData(x, y)
     If .TileExit.Map > 0 Then
         If frmMain.mnuAutoCapturarTranslados.Checked Then
             frmMain.tTMapa.Text = .TileExit.Map
-            frmMain.tTX.Text = .TileExit.x
+            frmMain.tTX.Text = .TileExit.X
             frmMain.tTY = .TileExit.y
         End If
         
-        frmMain.StatTxt.Text = frmMain.StatTxt.Text & " (Trans.: " & .TileExit.Map & "," & .TileExit.x & "," & .TileExit.y & ")"
+        frmMain.StatTxt.Text = frmMain.StatTxt.Text & " (Trans.: " & .TileExit.Map & "," & .TileExit.X & "," & .TileExit.y & ")"
     End If
     
     ' NPCs
@@ -784,16 +784,16 @@ End With
 End Sub
 
 Public Sub SelectTiles(ByVal Up As Boolean, ByVal tx As Integer, ByVal tY As Integer)
-Dim x As Long
+Dim X As Long
 Dim y As Long
 
 If (tx < XMinMapSize) Or (tY < YMinMapSize) Or (tx > XMaxMapSize) Or (tY > YMaxMapSize) Then Exit Sub
 
 If MaxSelectX Then 'Si tenemos un max, tenemos el otro, y también tenemos los min
     For y = MinSelectY To MaxSelectY
-        For x = MinSelectX To MaxSelectX
-            MapData(x, y).Select = 0
-        Next x
+        For X = MinSelectX To MaxSelectX
+            MapData(X, y).Select = 0
+        Next X
     Next y
 End If
 
@@ -852,9 +852,9 @@ If GetAsyncKeyState(vbKeyShift) < 0 Then
     
     If MaxSelectX Then
         For y = MinSelectY To MaxSelectY
-            For x = MinSelectX To MaxSelectX
-                MapData(x, y).Select = 1
-            Next x
+            For X = MinSelectX To MaxSelectX
+                MapData(X, y).Select = 1
+            Next X
         Next y
     End If
 ElseIf Up Then
@@ -868,16 +868,16 @@ End If
 End Sub
 
 Public Sub AplicarBloqueos()
-Dim x As Long
+Dim X As Long
 Dim y As Long
 
 If MaxSelectX Then 'Si tenemos un max, tenemos el otro, y también tenemos los min
     Call modEdicion.Deshacer_Add("Bloquear selección")
     
     For y = MinSelectY To MaxSelectY
-        For x = MinSelectX To MaxSelectX
-            MapData(x, y).Blocked = 1
-        Next x
+        For X = MinSelectX To MaxSelectX
+            MapData(X, y).Blocked = 1
+        Next X
     Next y
     
     MapInfo.Changed = 1
@@ -885,7 +885,7 @@ End If
 End Sub
 
 Public Sub AplicarSeleccionado()
-Dim x As Long
+Dim X As Long
 Dim y As Long
 Dim NPCIndex As Integer
 Dim objindex As Integer
@@ -895,7 +895,7 @@ Dim tY As Integer
 Dim Map As Integer
 
 If MaxSelectX Then 'Si tenemos un max, tenemos el otro, y también tenemos los min
-    If frmMain.cInsertarTrans.Value Then
+    If frmMain.cInsertarTrans.value Then
         Map = Val(frmMain.tTMapa.Text)
         tx = Val(frmMain.tTX.Text)
         tY = Val(frmMain.tTY.Text)
@@ -913,79 +913,79 @@ If MaxSelectX Then 'Si tenemos un max, tenemos el otro, y también tenemos los mi
     End If
                 
     For y = MinSelectY To MaxSelectY
-        For x = MinSelectX To MaxSelectX
-            If frmMain.cQuitarEnTodasLasCapas.Value Then
-                Call QuitarCapasMedias(x, y, False)
-            ElseIf frmMain.cQuitarEnEstaCapa.Value Then
-                Call QuitarEstaCapa(x, y, False)
+        For X = MinSelectX To MaxSelectX
+            If frmMain.cQuitarEnTodasLasCapas.value Then
+                Call QuitarCapasMedias(X, y, False)
+            ElseIf frmMain.cQuitarEnEstaCapa.value Then
+                Call QuitarEstaCapa(X, y, False)
             ElseIf bSelectSup Then
-                Call InsertarGrh(x, y, frmConfigSup.MOSAICO.Value = vbChecked, bAutoCompletarSuperficies, MapData(x, y).Blocked, False)
-            ElseIf frmMain.cInsertarBloqueo.Value Then
-                Call InsertarBloq(x, y, False)
-            ElseIf frmMain.cQuitarBloqueo.Value Then
-                Call QuitarBloq(x, y, False)
-            ElseIf frmMain.cInsertarTrans.Value Then
-                If frmMain.cInsertarTransOBJ.Value Then _
-                    Call InsertarObjTranslado(x, y, False)
+                Call InsertarGrh(X, y, MosaicoChecked, bAutoCompletarSuperficies, MapData(X, y).Blocked, False)
+            ElseIf frmMain.cInsertarBloqueo.value Then
+                Call InsertarBloq(X, y, False)
+            ElseIf frmMain.cQuitarBloqueo.value Then
+                Call QuitarBloq(X, y, False)
+            ElseIf frmMain.cInsertarTrans.value Then
+                If frmMain.cInsertarTransOBJ.value Then _
+                    Call InsertarObjTranslado(X, y, False)
                 
-                If frmMain.cUnionManual.Value Then
-                    Call InsertarUnionManual(x, y, Map, False)
+                If frmMain.cUnionManual.value Then
+                    Call InsertarUnionManual(X, y, Map, False)
                 Else
-                    Call InsertarTileExit(x, y, tx, tY, Map, False)
+                    Call InsertarTileExit(X, y, tx, tY, Map, False)
                 End If
-            ElseIf frmMain.cQuitarTrans.Value Then
-                Call QuitarTileExit(x, y, False)
-            ElseIf frmMain.cInsertarFunc(0).Value Then
+            ElseIf frmMain.cQuitarTrans.value Then
+                Call QuitarTileExit(X, y, False)
+            ElseIf frmMain.cInsertarFunc(0).value Then
                 NPCIndex = Val(frmMain.cNumFunc(0).Text)
                 
-                Call InsertarNpc(x, y, NPCIndex, False)
-            ElseIf frmMain.cInsertarFunc(1).Value Then
+                Call InsertarNpc(X, y, NPCIndex, False)
+            ElseIf frmMain.cInsertarFunc(1).value Then
                 NPCIndex = Val(frmMain.cNumFunc(1).Text)
                     
-                Call InsertarNpc(x, y, NPCIndex, False)
-            ElseIf frmMain.cQuitarFunc(0).Value Or frmMain.cQuitarFunc(1).Value Then
-                Call QuitarNpc(x, y, False)
-            ElseIf frmMain.cInsertarFunc(2).Value = True Then
+                Call InsertarNpc(X, y, NPCIndex, False)
+            ElseIf frmMain.cQuitarFunc(0).value Or frmMain.cQuitarFunc(1).value Then
+                Call QuitarNpc(X, y, False)
+            ElseIf frmMain.cInsertarFunc(2).value = True Then
                 objindex = frmMain.cNumFunc(2).Text
                 Amount = Val(frmMain.cCantFunc(2).Text)
                 
-                Call InsertarObjeto(x, y, objindex, Amount, False)
-            ElseIf frmMain.cQuitarFunc(2).Value Then
-                Call QuitarObjeto(x, y, False)
-            ElseIf frmMain.cInsertarTrigger.Value Then
-                Call InsertarTrigger(x, y, frmMain.lListado(4).ListIndex, False)
-            ElseIf frmMain.cQuitarTrigger.Value Then
-                Call InsertarTrigger(x, y, 0, False)
+                Call InsertarObjeto(X, y, objindex, Amount, False)
+            ElseIf frmMain.cQuitarFunc(2).value Then
+                Call QuitarObjeto(X, y, False)
+            ElseIf frmMain.cInsertarTrigger.value Then
+                Call InsertarTrigger(X, y, frmMain.lListado(4).ListIndex, False)
+            ElseIf frmMain.cQuitarTrigger.value Then
+                Call InsertarTrigger(X, y, 0, False)
             End If
-        Next x
+        Next X
     Next y
 End If
 End Sub
 
-Public Sub QuitarCapasMedias(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
+Public Sub QuitarCapasMedias(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
 Dim i As Byte
     
 If ConDeshacer Then _
     Call modEdicion.Deshacer_Add("Quitar capas medias")
     
 For i = 2 To 3
-    MapData(x, y).Graphic(i).grhIndex = 0
+    MapData(X, y).Graphic(i).grhIndex = 0
 Next i
 
 MapInfo.Changed = 1
 End Sub
 
-Public Function QuitarEstaCapa(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True) As Boolean
-If MapData(x, y).Graphic(CurLayer).grhIndex <> 0 Then
+Public Function QuitarEstaCapa(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True) As Boolean
+If MapData(X, y).Graphic(CurLayer).grhIndex <> 0 Then
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Quitar capa " & CurLayer)
     
-    MapData(x, y).Graphic(CurLayer).grhIndex = 0
+    MapData(X, y).Graphic(CurLayer).grhIndex = 0
     MapInfo.Changed = 1
 End If
 End Function
 
-Public Sub InsertarGrh(ByVal x As Byte, ByVal y As Byte, ByVal MOSAICO As Boolean, ByVal AutoCompletar As Boolean, ByVal Bloq As Boolean, Optional ByVal ConDeshacer As Boolean = True)
+Public Sub InsertarGrh(ByVal X As Byte, ByVal y As Byte, ByVal MOSAICO As Boolean, ByVal AutoCompletar As Boolean, ByVal Bloq As Boolean, Optional ByVal ConDeshacer As Boolean = True)
 Dim grhIndex As Integer
 Dim OffsetX As Long
 Dim OffsetY As Long
@@ -996,27 +996,27 @@ If MOSAICO And AutoCompletar Then
         
     For OffsetX = 0 To mAncho - 1
         For OffsetY = 0 To MAlto - 1
-            grhIndex = CurrentGrh(((x + OffsetX + DespX) Mod mAncho) + 1, ((y + OffsetY + DespY) Mod MAlto) + 1).grhIndex
+            grhIndex = CurrentGrh(((X + OffsetX + DespX) Mod mAncho) + 1, ((y + OffsetY + DespY) Mod MAlto) + 1).grhIndex
                 
             If Bloq Then
-                MapData(x + OffsetX, y + OffsetY).Blocked = 1
+                MapData(X + OffsetX, y + OffsetY).Blocked = 1
             Else
-                MapData(x + OffsetX, y + OffsetY).Blocked = 0
+                MapData(X + OffsetX, y + OffsetY).Blocked = 0
             End If
             
-            InitGrh MapData(x + OffsetX, y + OffsetY).Graphic(CurLayer), grhIndex
+            InitGrh MapData(X + OffsetX, y + OffsetY).Graphic(CurLayer), grhIndex
         Next OffsetY
     Next OffsetX
     
     MapInfo.Changed = 1
 Else
     If MOSAICO Then
-        grhIndex = CurrentGrh(((x + DespX) Mod mAncho) + 1, ((y + DespY) Mod MAlto) + 1).grhIndex
+        grhIndex = CurrentGrh(((X + DespX) Mod mAncho) + 1, ((y + DespY) Mod MAlto) + 1).grhIndex
     Else
         grhIndex = CurrentGrh(0).grhIndex
     End If
     
-    With MapData(x, y)
+    With MapData(X, y)
         If .Graphic(CurLayer).grhIndex <> grhIndex Then
             If ConDeshacer Then _
                 Call modEdicion.Deshacer_Add("Insertar superficie. Capa " & CurLayer)
@@ -1035,28 +1035,28 @@ Else
 End If
 End Sub
 
-Public Sub InsertarBloq(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
-If MapData(x, y).Blocked <> 1 Then
+Public Sub InsertarBloq(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
+If MapData(X, y).Blocked <> 1 Then
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Insertar bloqueo")
         
-    MapData(x, y).Blocked = 1
+    MapData(X, y).Blocked = 1
     MapInfo.Changed = 1 'Set changed flag
 End If
 End Sub
 
-Public Sub QuitarBloq(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
-If MapData(x, y).Blocked <> 0 Then
+Public Sub QuitarBloq(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
+If MapData(X, y).Blocked <> 0 Then
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Quitar bloqueo")
         
-    MapData(x, y).Blocked = 0
+    MapData(X, y).Blocked = 0
     MapInfo.Changed = 1 'Set changed flag
 End If
 End Sub
 
-Public Sub InsertarObjTranslado(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
-With MapData(x, y)
+Public Sub InsertarObjTranslado(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
+With MapData(X, y)
     If (Cfg_TrOBJ > 0) And (Cfg_TrOBJ <= NumOBJs) Then
         If ObjData(Cfg_TrOBJ).ObjType = 19 Then
             If ConDeshacer Then _
@@ -1072,27 +1072,27 @@ With MapData(x, y)
 End With
 End Sub
 
-Public Sub InsertarUnionManual(ByVal x As Byte, ByVal y As Byte, ByVal TargetMap As Integer, Optional ByVal ConDeshacer As Boolean = True)
-With MapData(x, y).TileExit
+Public Sub InsertarUnionManual(ByVal X As Byte, ByVal y As Byte, ByVal TargetMap As Integer, Optional ByVal ConDeshacer As Boolean = True)
+With MapData(X, y).TileExit
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Insertar Translado de Union Manual")
     
-    If x >= MaxXBorder Then ' 21 ' derecha
-        .x = MinXBorder + 1
+    If X >= MaxXBorder Then ' 21 ' derecha
+        .X = MinXBorder + 1
         .y = y
         .Map = TargetMap
-    ElseIf x <= MinYBorder Then ' 9 ' izquierda
-        .x = MaxXBorder - 1
+    ElseIf X <= MinYBorder Then ' 9 ' izquierda
+        .X = MaxXBorder - 1
         .y = y
         .Map = TargetMap
     End If
     
     If y >= MaxYBorder Then ' 94 '''' hacia abajo
-        .x = x
+        .X = X
         .y = MinYBorder + 1
         .Map = TargetMap
     ElseIf y <= MinYBorder Then ''' hacia arriba
-        .x = x
+        .X = X
         .y = MaxYBorder - 1
         .Map = TargetMap
     End If
@@ -1101,12 +1101,12 @@ With MapData(x, y).TileExit
 End With
 End Sub
 
-Public Sub InsertarTileExit(ByVal x As Byte, ByVal y As Byte, ByVal TargetX As Byte, ByVal TargetY As Byte, ByVal TargetMap As Integer, Optional ByVal ConDeshacer As Boolean = True)
-With MapData(x, y).TileExit
+Public Sub InsertarTileExit(ByVal X As Byte, ByVal y As Byte, ByVal TargetX As Byte, ByVal TargetY As Byte, ByVal TargetMap As Integer, Optional ByVal ConDeshacer As Boolean = True)
+With MapData(X, y).TileExit
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Insertar Translado")
         
-    .x = TargetX
+    .X = TargetX
     .y = TargetY
     .Map = TargetMap
     
@@ -1114,25 +1114,25 @@ With MapData(x, y).TileExit
 End With
 End Sub
 
-Public Sub QuitarTileExit(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean)
-With MapData(x, y).TileExit
+Public Sub QuitarTileExit(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean)
+With MapData(X, y).TileExit
     If ConDeshacer Then _
         Call modEdicion.Deshacer_Add("Quitar Translado")
         
     .Map = 0
-    .x = 0
+    .X = 0
     .y = 0
     
     MapInfo.Changed = 1 'Set changed flag
 End With
 End Sub
 
-Public Sub InsertarNpc(ByVal x As Byte, ByVal y As Byte, ByVal NPCIndex As Integer, Optional ByVal ConDeshacer As Boolean = True)
+Public Sub InsertarNpc(ByVal X As Byte, ByVal y As Byte, ByVal NPCIndex As Integer, Optional ByVal ConDeshacer As Boolean = True)
 Dim Body As Integer
 Dim Head As Integer
 Dim Heading As Integer
 
-With MapData(x, y)
+With MapData(X, y)
     If NPCIndex <> .NPCIndex Then
         If .NPCIndex > 0 Then _
             Call EraseChar(.CharIndex)
@@ -1146,14 +1146,14 @@ With MapData(x, y)
         Head = NpcData(NPCIndex).Head
         Heading = NpcData(NPCIndex).Heading
         
-        Call MakeChar(NextOpenChar(), Body, Head, Heading, x, y)
+        Call MakeChar(NextOpenChar(), Body, Head, Heading, X, y)
         MapInfo.Changed = 1 'Set changed flag
     End If
 End With
 End Sub
 
-Public Sub QuitarNpc(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
-With MapData(x, y)
+Public Sub QuitarNpc(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean = True)
+With MapData(X, y)
     If .NPCIndex > 0 Then
         If ConDeshacer Then _
             Call modEdicion.Deshacer_Add("Quitar NPC")
@@ -1166,8 +1166,8 @@ With MapData(x, y)
 End With
 End Sub
 
-Public Sub InsertarObjeto(ByVal x As Byte, ByVal y As Byte, ByVal objindex As Integer, ByVal Amount As Integer, Optional ByVal ConDeshacer As Boolean = True)
-With MapData(x, y)
+Public Sub InsertarObjeto(ByVal X As Byte, ByVal y As Byte, ByVal objindex As Integer, ByVal Amount As Integer, Optional ByVal ConDeshacer As Boolean = True)
+With MapData(X, y)
     If objindex > 0 Then
         If .OBJInfo.objindex <> objindex Or .OBJInfo.Amount <> Amount Then
             If ConDeshacer Then _
@@ -1189,8 +1189,8 @@ With MapData(x, y)
 End With
 End Sub
 
-Public Sub QuitarObjeto(ByVal x As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean)
-With MapData(x, y)
+Public Sub QuitarObjeto(ByVal X As Byte, ByVal y As Byte, Optional ByVal ConDeshacer As Boolean)
+With MapData(X, y)
     If .OBJInfo.objindex <> 0 Then
         If ConDeshacer Then _
             Call modEdicion.Deshacer_Add("Quitar objeto")
@@ -1206,8 +1206,8 @@ With MapData(x, y)
 End With
 End Sub
 
-Public Sub InsertarTrigger(ByVal x As Byte, ByVal y As Byte, ByVal Trigger As Byte, Optional ByVal ConDeshacer As Boolean)
-With MapData(x, y)
+Public Sub InsertarTrigger(ByVal X As Byte, ByVal y As Byte, ByVal Trigger As Byte, Optional ByVal ConDeshacer As Boolean)
+With MapData(X, y)
     If .Trigger <> Trigger Then
         If ConDeshacer Then _
             Call modEdicion.Deshacer_Add("Insertar Trigger " & Trigger)

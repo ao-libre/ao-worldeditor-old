@@ -178,14 +178,14 @@ Public Const INFINITE_LOOPS As Integer = -1
 'Holds a local position
 Public Type Position
     X As Integer
-    Y As Integer
+    y As Integer
 End Type
 
 'Holds a world position
 Public Type WorldPos
     Map As Integer
     X As Integer
-    Y As Integer
+    y As Integer
 End Type
 
 'Points to a grhData and keeps animation info
@@ -423,6 +423,7 @@ Public bAutoCompletarSuperficies As Boolean
 Public bVerNpcs As Boolean
 Public bVerObjetos As Boolean
 Public bSelectSup As Boolean
+Public MosaicoChecked As Boolean
 
 '********** Direct X ***********
 Public MainViewRect As RECT
@@ -452,4 +453,4 @@ Public Declare Function GetAsyncKeyState Lib "user32" (ByVal nVirtKey As Long) A
 Public Declare Function GetTickCount Lib "kernel32" () As Long
 Public Declare Sub Sleep Lib "kernel32" (ByVal dwMilliseconds As Long)
 
-Public Declare Function GetPixel Lib "gdi32" (ByVal hdc As Long, ByVal X As Long, ByVal Y As Long) As Long
+Public Declare Function GetPixel Lib "gdi32" (ByVal hdc As Long, ByVal X As Long, ByVal y As Long) As Long
