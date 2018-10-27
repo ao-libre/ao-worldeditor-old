@@ -40,6 +40,27 @@ Begin VB.Form frmAbout
       Value           =   0   'False
       cBack           =   -2147483633
    End
+   Begin VB.Label lblCred 
+      Alignment       =   2  'Center
+      BackColor       =   &H00000000&
+      Caption         =   "Mejoras por:                       About, Loopzer, Salvito"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   9
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000000FF&
+      Height          =   600
+      Index           =   1
+      Left            =   720
+      TabIndex        =   7
+      Top             =   1320
+      Width           =   3075
+   End
    Begin VB.Label lblTitle 
       AutoSize        =   -1  'True
       BackStyle       =   0  'Transparent
@@ -98,7 +119,7 @@ Begin VB.Form frmAbout
       Index           =   0
       Left            =   960
       TabIndex        =   3
-      Top             =   1920
+      Top             =   2040
       Width           =   2565
    End
    Begin VB.Label lblCred 
@@ -140,7 +161,7 @@ Begin VB.Form frmAbout
       Index           =   3
       Left            =   960
       TabIndex        =   1
-      Top             =   2520
+      Top             =   2640
       Width           =   2565
    End
    Begin VB.Line Line1 
@@ -167,7 +188,7 @@ Begin VB.Form frmAbout
       Caption         =   "Programado por ^[GS]^"
       BeginProperty Font 
          Name            =   "Tahoma"
-         Size            =   9
+         Size            =   9.75
          Charset         =   0
          Weight          =   700
          Underline       =   0   'False
@@ -177,10 +198,10 @@ Begin VB.Form frmAbout
       ForeColor       =   &H0000FF00&
       Height          =   240
       Index           =   2
-      Left            =   960
+      Left            =   720
       TabIndex        =   0
-      Top             =   1560
-      Width           =   2595
+      Top             =   1080
+      Width           =   3075
    End
    Begin VB.Shape Shape1 
       BackColor       =   &H00FFFF00&
@@ -189,10 +210,10 @@ Begin VB.Form frmAbout
       DrawMode        =   9  'Not Mask Pen
       FillColor       =   &H00C0C0FF&
       FillStyle       =   0  'Solid
-      Height          =   2415
+      Height          =   2655
       Left            =   120
       Shape           =   4  'Rounded Rectangle
-      Top             =   1200
+      Top             =   960
       Width           =   4095
    End
 End

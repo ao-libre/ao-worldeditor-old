@@ -2,16 +2,32 @@ VERSION 5.00
 Begin VB.Form frmMapInfo 
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Información del Mapa"
-   ClientHeight    =   3660
+   ClientHeight    =   4080
    ClientLeft      =   45
    ClientTop       =   435
-   ClientWidth     =   4470
+   ClientWidth     =   4425
    Icon            =   "frmMapInfo.frx":0000
    LinkTopic       =   "Form1"
    MaxButton       =   0   'False
-   ScaleHeight     =   3660
-   ScaleWidth      =   4470
+   ScaleHeight     =   4080
+   ScaleWidth      =   4425
    StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkMapResuSinEfecto 
+      Caption         =   "ResuSinEfecto"
+      Height          =   255
+      Left            =   2400
+      TabIndex        =   19
+      Top             =   2520
+      Width           =   1815
+   End
+   Begin VB.CheckBox chkMapInviSinEfecto 
+      Caption         =   "InviSinEfecto"
+      Height          =   255
+      Left            =   120
+      TabIndex        =   18
+      Top             =   2520
+      Width           =   2055
+   End
    Begin VB.TextBox txtMapVersion 
       BeginProperty Font 
          Name            =   "Arial"
@@ -58,7 +74,7 @@ Begin VB.Form frmMapInfo
       Height          =   375
       Left            =   2640
       TabIndex        =   14
-      Top             =   3120
+      Top             =   3600
       Width           =   1695
       _ExtentX        =   2990
       _ExtentY        =   661
@@ -92,9 +108,9 @@ Begin VB.Form frmMapInfo
       Height          =   330
       ItemData        =   "frmMapInfo.frx":628A
       Left            =   1680
-      List            =   "frmMapInfo.frx":629D
+      List            =   "frmMapInfo.frx":6294
       TabIndex        =   12
-      Text            =   "NO"
+      Text            =   "No"
       Top             =   1920
       Width           =   2655
    End
@@ -121,7 +137,7 @@ Begin VB.Form frmMapInfo
       Height          =   255
       Left            =   120
       TabIndex        =   11
-      Top             =   2520
+      Top             =   3000
       Width           =   1575
    End
    Begin VB.ComboBox txtMapTerreno 
@@ -135,9 +151,9 @@ Begin VB.Form frmMapInfo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   330
-      ItemData        =   "frmMapInfo.frx":62C4
+      ItemData        =   "frmMapInfo.frx":62A0
       Left            =   1680
-      List            =   "frmMapInfo.frx":62D1
+      List            =   "frmMapInfo.frx":62AD
       TabIndex        =   10
       Top             =   1560
       Width           =   2655
@@ -153,9 +169,9 @@ Begin VB.Form frmMapInfo
          Strikethrough   =   0   'False
       EndProperty
       Height          =   330
-      ItemData        =   "frmMapInfo.frx":62EE
+      ItemData        =   "frmMapInfo.frx":62CA
       Left            =   1680
-      List            =   "frmMapInfo.frx":62FB
+      List            =   "frmMapInfo.frx":62D7
       TabIndex        =   9
       Top             =   1200
       Width           =   2655
@@ -208,7 +224,7 @@ Begin VB.Form frmMapInfo
       Height          =   255
       Left            =   2400
       TabIndex        =   4
-      Top             =   2280
+      Top             =   2760
       Width           =   1575
    End
    Begin VB.CheckBox chkMapNoEncriptarMP 
@@ -225,7 +241,7 @@ Begin VB.Form frmMapInfo
       Height          =   255
       Left            =   2400
       TabIndex        =   3
-      Top             =   2520
+      Top             =   3000
       Width           =   1575
    End
    Begin VB.CheckBox chkMapMagiaSinEfecto 
@@ -242,7 +258,7 @@ Begin VB.Form frmMapInfo
       Height          =   255
       Left            =   120
       TabIndex        =   2
-      Top             =   2280
+      Top             =   2760
       Width           =   1575
    End
    Begin VB.Label Label6 
@@ -268,8 +284,8 @@ Begin VB.Form frmMapInfo
       Index           =   1
       X1              =   135
       X2              =   4315
-      Y1              =   2880
-      Y2              =   2880
+      Y1              =   3360
+      Y2              =   3360
    End
    Begin VB.Label Label5 
       Caption         =   "Restringir:"
@@ -362,8 +378,8 @@ Begin VB.Form frmMapInfo
       Index           =   0
       X1              =   120
       X2              =   4315
-      Y1              =   2880
-      Y2              =   2880
+      Y1              =   3360
+      Y2              =   3360
    End
 End
 Attribute VB_Name = "frmMapInfo"
@@ -397,7 +413,7 @@ Private Sub chkMapBackup_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.BackUp = chkMapBackup.Value
+MapInfo.BackUp = chkMapBackup.value
 MapInfo.Changed = 1
 End Sub
 
@@ -406,8 +422,28 @@ Private Sub chkMapMagiaSinEfecto_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.MagiaSinEfecto = chkMapMagiaSinEfecto.Value
+MapInfo.MagiaSinEfecto = chkMapMagiaSinEfecto.value
 MapInfo.Changed = 1
+End Sub
+
+Private Sub chkMapInviSinEfecto_LostFocus()
+'*************************************************
+'Author:
+'Last modified:
+'*************************************************
+MapInfo.InviSinEfecto = chkMapInviSinEfecto.value
+MapInfo.Changed = 1
+
+End Sub
+
+Private Sub chkMapResuSinEfecto_LostFocus()
+'*************************************************
+'Author:
+'Last modified:
+'*************************************************
+MapInfo.ResuSinEfecto = chkMapResuSinEfecto.value
+MapInfo.Changed = 1
+
 End Sub
 
 Private Sub chkMapNoEncriptarMP_LostFocus()
@@ -415,7 +451,7 @@ Private Sub chkMapNoEncriptarMP_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.NoEncriptarMP = chkMapNoEncriptarMP.Value
+MapInfo.NoEncriptarMP = chkMapNoEncriptarMP.value
 MapInfo.Changed = 1
 End Sub
 
@@ -424,7 +460,7 @@ Private Sub chkMapPK_LostFocus()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-MapInfo.PK = chkMapPK.Value
+MapInfo.PK = chkMapPK.value
 MapInfo.Changed = 1
 End Sub
 
@@ -441,7 +477,7 @@ Private Sub cmdMusica_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-frmMusica.Show vbModeless
+frmMusica.Show
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)

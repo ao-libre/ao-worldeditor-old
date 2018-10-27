@@ -1,0 +1,84 @@
+[REFERENCIA466]
+Nombre=(Dungeon Barro 1)
+GrhIndice=18482
+Ancho=4
+Alto=4
+
+[REFERENCIA467]
+Nombre=(Dungeon Barro 2)
+GrhIndice=18497
+Ancho=4
+Alto=4
+
+[REFERENCIA468]
+Nombre=(Dungeon Barro 3)
+GrhIndice=18514
+Ancho=4
+Alto=4
+
+[REFERENCIA469]
+Nombre=(Dungeon Barro 4)
+GrhIndice=18530
+Ancho=4
+Alto=4
+
+[REFERENCIA470]
+Nombre=(Dungeon Barro 5)
+GrhIndice=18546
+Ancho=4
+Alto=4
+
+[REFERENCIA471]
+Nombre=(Dungeon Barro 6)
+GrhIndice=18562
+Ancho=4
+Alto=4
+
+[REFERENCIA472]
+Nombre=(Dungeon Barro 7) 
+GrhIndice=18578
+Ancho=4
+Alto=4
+
+[REFERENCIA473]
+Nombre=(Dungeon Barro 8)
+GrhIndice=18594
+Ancho=4
+Alto=4
+
+
+[REFERENCIA474]
+Nombre=(Dungeon Barro 9)
+GrhIndice=18610
+Ancho=4
+Alto=4
+
+[REFERENCIA475]
+Nombre=(Dungeon Barro 10)
+GrhIndice=18626
+Ancho=4
+Alto=4
+
+[REFERENCIA476]
+Nombre=(Dungeon Barro 11)
+GrhIndice=18642
+Ancho=4
+Alto=4
+
+[REFERENCIA477]
+Nombre=(Dungeon Barro 12)
+GrhIndice=18658
+Ancho=4
+Alto=4
+
+[REFERENCIA477]
+Nombre=(Dungeon Barro 13)
+GrhIndice=18690
+Ancho=4
+Alto=4
+
+[REFERENCIA478]
+Nombre=(Dungeon Barro Piso)
+GrhIndice=18674
+Ancho=4
+Alto=4

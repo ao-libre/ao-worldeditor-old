@@ -29,7 +29,7 @@ Attribute VB_Name = "modDirectMusic"
 
 Option Explicit
 
-Public Sub CargarMIDI(ByRef Archivo As String)
+Public Sub CargarMIDI(Archivo As String)
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
@@ -51,12 +51,12 @@ Public Sub Stop_Midi()
 'Last modified: 20/05/06
 '*************************************************
 If IsPlayingCheck Then
-    If Perf.IsPlaying(Seg, SegState) Then Call Perf.Stop(Seg, SegState, 0, 0)
-    
-    IsPlayingCheck = False
-    Seg.SetStartPoint (0)
-    
-    Call Perf.Reset(0)
+     If Perf.IsPlaying(Seg, SegState) = True Then
+            Call Perf.Stop(Seg, SegState, 0, 0)
+     End If
+     IsPlayingCheck = False
+     Seg.SetStartPoint (0)
+     Call Perf.Reset(0)
 End If
 End Sub
 
@@ -66,23 +66,27 @@ Public Sub Play_Midi()
 'Last modified: 20/05/06
 '*************************************************
 On Error GoTo fin
-    If IsPlayingCheck Then Stop_Midi
-    
-    If Perf.IsPlaying(Seg, SegState) Then Call Perf.Stop(Seg, SegState, 0, 0)
-    
-    Seg.SetStartPoint (0)
-    Set SegState = Perf.PlaySegment(Seg, 0, 0)
-    IsPlayingCheck = True
-    Exit Sub
+        If IsPlayingCheck Then Stop_Midi
+        If Perf.IsPlaying(Seg, SegState) = True Then
+            Call Perf.Stop(Seg, SegState, 0, 0)
+        End If
+        Seg.SetStartPoint (0)
+        Set SegState = Perf.PlaySegment(Seg, 0, 0)
+        IsPlayingCheck = True
+        Exit Sub
 fin:
     MsgBox "Error producido en Public Sub Play_Midi()"
 
 End Sub
 
-Public Function Sonando()
+Function Sonando()
 '*************************************************
 'Author: Unkwown
 'Last modified: 20/05/06
 '*************************************************
 Sonando = (Perf.IsPlaying(Seg, SegState) = True)
 End Function
+
+
+
+

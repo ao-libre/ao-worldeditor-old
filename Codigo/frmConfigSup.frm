@@ -19,24 +19,16 @@ Begin VB.Form frmConfigSup
       TabIndex        =   15
       Top             =   2280
       Width           =   1935
-      _ExtentX        =   3413
-      _ExtentY        =   661
-      Caption         =   "&Aceptar"
-      CapAlign        =   2
-      BackStyle       =   2
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      cGradient       =   0
-      Mode            =   0
-      Value           =   0   'False
-      cBack           =   -2147483633
+      _extentx        =   3413
+      _extenty        =   661
+      caption         =   "&Aceptar"
+      capalign        =   2
+      backstyle       =   2
+      cgradient       =   0
+      font            =   "frmConfigSup.frx":628A
+      mode            =   0
+      value           =   0
+      cback           =   -2147483633
    End
    Begin VB.CommandButton cmdDM 
       Caption         =   "+"
@@ -391,23 +383,15 @@ Private Sub cmdDM_Click(index As Integer)
 
 On Error Resume Next
 Select Case index
-    Case 0
-        DMAncho.Text = str(Val(DMAncho.Text) + 1)
-    Case 1
-        DMAncho.Text = str(Val(DMAncho.Text) - 1)
-    Case 2
-        DMLargo.Text = str(Val(DMLargo.Text) - 1)
-    Case 3
-        DMLargo.Text = str(Val(DMLargo.Text) + 1)
+        Case 0
+            DMAncho.Text = Str(Val(DMAncho.Text) + 1)
+        Case 1
+            DMAncho.Text = Str(Val(DMAncho.Text) - 1)
+        Case 2
+            DMLargo.Text = Str(Val(DMLargo.Text) - 1)
+        Case 3
+            DMLargo.Text = Str(Val(DMLargo.Text) + 1)
 End Select
-End Sub
-
-Private Sub DMAncho_Change()
-DespX = Val(DMAncho)
-End Sub
-
-Private Sub DMLargo_Change()
-DespY = Val(DMLargo)
 End Sub
 
 Private Sub Form_Deactivate()
@@ -440,13 +424,6 @@ If LenB(DMAncho.Text) = 0 Then DMAncho.Text = "0"
 If LenB(DMLargo.Text) = 0 Then DMLargo.Text = "0"
 End Sub
 
-Private Sub mAncho_Change()
-If Val(mAncho) <= 0 Then
-    mAncho.Text = 1
-Else
-    If Me.Visible Then Call ActualizarMosaico
-End If
-End Sub
 
 Private Sub mAncho_KeyPress(KeyAscii As Integer)
 '*************************************************
@@ -454,15 +431,7 @@ Private Sub mAncho_KeyPress(KeyAscii As Integer)
 'Last modified: 20/05/06
 '*************************************************
 ' Impedir que se ingrese un valor no numerico
-If (KeyAscii <> 8) And (IsNumeric(Chr$(KeyAscii)) = False) Then KeyAscii = 0
-End Sub
-
-Private Sub mLargo_Change()
-If Val(mLargo) <= 0 Then
-    mLargo.Text = 1
-Else
-    If Me.Visible Then Call ActualizarMosaico
-End If
+If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
 End Sub
 
 Private Sub mLargo_KeyPress(KeyAscii As Integer)
@@ -471,7 +440,7 @@ Private Sub mLargo_KeyPress(KeyAscii As Integer)
 'Last modified: 20/05/06
 '*************************************************
 ' Impedir que se ingrese un valor no numerico
-If (KeyAscii <> 8) And (IsNumeric(Chr$(KeyAscii)) = False) Then KeyAscii = 0
+If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
 End Sub
 
 Private Sub cmdAceptar_Click()
@@ -487,9 +456,6 @@ Private Sub MOSAICO_Click()
 'Author: ^[GS]^
 'Last modified: 26/05/06
 '*************************************************
-If Val(mAncho.Text) <= 0 Then mAncho.Text = "1"
-If Val(mLargo.Text) <= 0 Then mLargo.Text = "1"
-
-MosaicoChecked = (MOSAICO.value = vbChecked)
-Call ActualizarMosaico
+If LenB(mAncho.Text) = 0 Then mAncho.Text = "0"
+If LenB(mLargo.Text) = 0 Then mLargo.Text = "0"
 End Sub

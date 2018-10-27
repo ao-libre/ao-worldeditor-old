@@ -38,7 +38,7 @@ Begin VB.Form frmCargando
             Italic          =   0   'False
             Strikethrough   =   0   'False
          EndProperty
-         ForeColor       =   &H0000FF00&
+         ForeColor       =   &H00FFFFFF&
          Height          =   210
          Left            =   255
          TabIndex        =   2
@@ -48,7 +48,7 @@ Begin VB.Form frmCargando
       Begin VB.Shape Shape1 
          BackColor       =   &H00C0FFC0&
          BackStyle       =   1  'Opaque
-         BorderColor     =   &H0000FF00&
+         BorderColor     =   &H00FFFFFF&
          BorderStyle     =   0  'Transparent
          DrawMode        =   3  'Not Merge Pen
          FillColor       =   &H00FF80FF&
@@ -82,7 +82,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   5
       Left            =   5520
@@ -104,7 +104,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   4
       Left            =   4440
@@ -126,7 +126,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   3
       Left            =   3360
@@ -148,7 +148,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   2
       Left            =   2400
@@ -170,7 +170,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   1
       Left            =   1440
@@ -192,7 +192,7 @@ Begin VB.Form frmCargando
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   195
       Index           =   0
       Left            =   600
@@ -250,7 +250,7 @@ Begin VB.Form frmCargando
       Alignment       =   2  'Center
       BackStyle       =   0  'Transparent
       Caption         =   "..."
-      ForeColor       =   &H0000FF00&
+      ForeColor       =   &H00FFFFFF&
       Height          =   255
       Left            =   240
       TabIndex        =   1

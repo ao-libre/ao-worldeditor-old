@@ -27,8 +27,6 @@ Attribute VB_Name = "modDirectSound"
 ' @version 0.0.01
 ' @date 20060520
 
-Option Explicit
-
 Public Sub IniciarDirectSound()
 '*************************************************
 'Author: Unkwown
@@ -37,6 +35,13 @@ Public Sub IniciarDirectSound()
 Err.Clear
 On Error GoTo fin
     
+    '<----------------Direct Music--------------->
+    Set Perf = DirectX.DirectMusicPerformanceCreate()
+    Call Perf.Init(Nothing, 0)
+    Perf.SetPort -1, 80
+    Call Perf.SetMasterAutoDownload(True)
+    '<------------------------------------------->
+    
     Set DirectSound = DirectX.DirectSoundCreate("")
     If Err Then
         MsgBox "Error iniciando DirectSound"
@@ -44,6 +49,7 @@ On Error GoTo fin
     End If
     
     LastSoundBufferUsed = 1
+    
     
     Exit Sub
 fin:
@@ -56,10 +62,8 @@ Public Sub LiberarDirectSound()
 'Last modified: 20/05/06
 '*************************************************
 Dim cloop As Integer
-
 For cloop = 1 To NumSoundBuffers
     Set DSBuffers(cloop) = Nothing
 Next cloop
-
 Set DirectSound = Nothing
 End Sub

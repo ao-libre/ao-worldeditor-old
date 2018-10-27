@@ -13,7 +13,7 @@ Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '**************************************************************
 ' clsIniReader.cls - Loads INI files into memory and applies Binary Search to get values at high speed.
-' Use it instead of GetVar when reading several values form the same file at once, otherwise it's not usefull.
+' Use it instead of general_var_get when reading several values form the same file at once, otherwise it's not usefull.
 ' Based in the idea of AlejoLP and his clsIniReader.
 '
 ' Designed and implemented by Juan Martín Sotuyo Dodero (Maraxus)
@@ -150,7 +150,7 @@ Public Sub Initialize(ByVal file As String)
         'Is it null??
         If Len(Text) Then
             'If it starts with '[' it is a main node or nothing (GetPrivateProfileStringA works this way), otherwise it's a value
-            If Left$(Text, 1) = "[" Then
+            If left$(Text, 1) = "[" Then
                 'If it has an ending ']' it's a main node, otherwise it's nothing
                 Pos = InStr(2, Text, "]")
                 If Pos Then
@@ -172,7 +172,7 @@ Public Sub Initialize(ByVal file As String)
                             ReDim Preserve .values(.numValues) As ChildNode
                             
                             .values(.numValues).value = Right$(Text, Len(Text) - Pos)
-                            .values(.numValues).Key = UCase$(Left$(Text, Pos - 1))
+                            .values(.numValues).Key = UCase$(left$(Text, Pos - 1))
                             
                             .numValues = .numValues + 1
                         End With

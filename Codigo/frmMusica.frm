@@ -12,19 +12,10 @@ Begin VB.Form frmMusica
    ScaleHeight     =   1935
    ScaleWidth      =   5430
    StartUpPosition =   2  'CenterScreen
-   Begin VB.ListBox lstMusic 
-      Height          =   1620
-      ItemData        =   "frmMusica.frx":628A
-      Left            =   120
-      List            =   "frmMusica.frx":628C
-      TabIndex        =   4
-      Top             =   120
-      Width           =   2655
-   End
    Begin WorldEditor.lvButtons_H cmdCerrar 
       Height          =   495
       Left            =   2880
-      TabIndex        =   3
+      TabIndex        =   4
       Top             =   1320
       Width           =   2415
       _ExtentX        =   4260
@@ -49,7 +40,7 @@ Begin VB.Form frmMusica
    Begin WorldEditor.lvButtons_H cmdAplicarYCerrar 
       Height          =   495
       Left            =   2880
-      TabIndex        =   2
+      TabIndex        =   3
       Top             =   720
       Width           =   2415
       _ExtentX        =   4260
@@ -75,7 +66,7 @@ Begin VB.Form frmMusica
    Begin WorldEditor.lvButtons_H cmdDetener 
       Height          =   495
       Left            =   4080
-      TabIndex        =   1
+      TabIndex        =   2
       Top             =   120
       Width           =   1215
       _ExtentX        =   2143
@@ -101,7 +92,7 @@ Begin VB.Form frmMusica
    Begin WorldEditor.lvButtons_H cmdEscuchar 
       Height          =   495
       Left            =   2880
-      TabIndex        =   0
+      TabIndex        =   1
       Top             =   120
       Width           =   1215
       _ExtentX        =   2143
@@ -121,7 +112,25 @@ Begin VB.Form frmMusica
       cGradient       =   0
       Mode            =   0
       Value           =   0   'False
+      Enabled         =   0   'False
       cBack           =   12648384
+   End
+   Begin VB.FileListBox fleMusicas 
+      BeginProperty Font 
+         Name            =   "Arial"
+         Size            =   9
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   1665
+      Left            =   120
+      Pattern         =   "*.mid"
+      TabIndex        =   0
+      Top             =   120
+      Width           =   2655
    End
 End
 Attribute VB_Name = "frmMusica"
@@ -150,15 +159,7 @@ Attribute VB_Exposed = False
 '**************************************************************
 Option Explicit
 
-Private CurrentMusic As String
-
-Private Function isMidi(ByRef path As String) As Boolean
-isMidi = (Right$(UCase$(path), 4) = ".MID")
-End Function
-
-Private Function isMp3(ByRef path As String) As Boolean
-isMp3 = (Right$(UCase$(path), 4) = ".MP3")
-End Function
+Private MidiActual As String
 
 ''
 ' Aplica la Musica seleccionada y oculta la ventana
@@ -170,11 +171,12 @@ Private Sub cmdAplicarYCerrar_Click()
 'Last modified: 20/05/06
 '*************************************************
 On Error Resume Next
-
-MapInfo.Music = Val(CurrentMusic) 'El val saca la extension
-frmMapInfo.txtMapMusica.Text = MapInfo.Music
-frmMain.lblMapMusica = MapInfo.Music
-
+If Len(MidiActual) >= 5 Then
+    MapInfo.Music = left(MidiActual, Len(MidiActual) - 4)
+    frmMapInfo.txtMapMusica.Text = MapInfo.Music
+    frmMain.lblMapMusica = MapInfo.Music
+    MidiActual = Empty
+End If
 Me.Hide
 End Sub
 
@@ -200,8 +202,10 @@ Private Sub cmdDetener_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-Call StopMusic
+Audio.StopMidi
+cmdEscuchar.Enabled = True
 cmdDetener.Enabled = False
+Play = False
 End Sub
 
 ''
@@ -213,55 +217,23 @@ Private Sub cmdEscuchar_Click()
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-Dim path As String
-
-If isMp3(CurrentMusic) Then
-    path = DirMp3
-Else
-    path = DirMidi
-End If
-
-path = path & CurrentMusic
-
-Call PlayMusic(path)
-
+Audio.PlayMIDI fleMusicas.List(fleMusicas.ListIndex)
 cmdDetener.Enabled = True
+cmdEscuchar.Enabled = False
+Play = True
 End Sub
 
 ''
 ' Selecciona una nueva Musica del listado
 '
 
-Private Sub lstMusic_Click()
+Private Sub fleMusicas_Click()
 '*************************************************
 'Author: ^[GS]^
 'Last modified: 20/05/06
 '*************************************************
-CurrentMusic = lstMusic.Text
-
+MidiActual = fleMusicas.List(fleMusicas.ListIndex)
 cmdAplicarYCerrar.Enabled = True
+If Play = False Then cmdEscuchar.Enabled = True
 End Sub
 
-Private Sub lstMusic_DblClick()
-Call cmdEscuchar_Click
-End Sub
-
-Private Sub Form_Load()
-Dim path As String
-
-If FileExist(DirMp3, vbDirectory) Then
-    path = Dir$(DirMp3 & "*.MP3")
-    Do While LenB(path) > 0
-        lstMusic.AddItem path
-        path = Dir$
-    Loop
-End If
-
-If FileExist(DirMidi, vbDirectory) Then
-    path = Dir$(DirMidi & "*.MID")
-    Do While LenB(path) > 0
-        lstMusic.AddItem path
-        path = Dir$
-    Loop
-End If
-End Sub
