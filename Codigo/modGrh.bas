@@ -85,7 +85,7 @@ Private Sub Grh_Load_All()
     
     
     'Open files
-    Open DirIndex & "Graphics.ao" For Binary As #1
+    Open DirIndex & "Graficos.ind" For Binary As #1
     Seek #1, 1
     
     Get #1, , FileVersion
