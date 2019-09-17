@@ -12,6 +12,8 @@
 7 ====== TIMBEROS
 8 ====== GUARDIAS DEL CAOS
 9 ====== PUEDE RESUCITAR SOLAMENTE A LOS NEWBIES
+10 ====== Clan Praetoriano
+11 ====== Gobernador
 
 
 ##############################################
@@ -38,6 +40,7 @@ NPCS GUARDIAS LEGIÓN
 NPCS NO HOSTILES
 NPCS HOSTILES
 NPCS PRETORIANOS
+NPCS QUESTS
 
 
 ##############################################
@@ -72,7 +75,7 @@ Actual Npc con Nro más alto: 616
 [INIT]
 'aca va el número de NPC más alto, NO la cantidad de NPCs.
 'esto sirve para que los GMS puedan ver la lista completa de npcs a invocar en una ventanita.
-NumNPCs=923
+NumNPCs=929
 
 
 
@@ -97,10 +100,10 @@ Alineacion=0
 Comercia=1
 TipoItems=9
 NROITEMS=4
-Obj1=54-1
-Obj2=65-1
-Obj3=69-1
-Obj4=73-1
+Obj1=54-0
+Obj2=65-0
+Obj3=69-0
+Obj4=73-0
 InvReSpawn=1
 BackUp=1
 
@@ -122,16 +125,16 @@ Alineacion=0
 Comercia=1
 TipoItems=9
 NROITEMS=10
-Obj1=87-1
-Obj2=91-1
-Obj3=95-1
-Obj4=99-1
-Obj5=103-1 'Llave Nix Casa Nro 5
-Obj6=107-1 'Llave Nix Casa Nro 6
-Obj7=111-1
-Obj8=115-1
-Obj9=119-1
-obj10=140-1 
+Obj1=87-0
+Obj2=91-0
+Obj3=95-0
+Obj4=99-0
+Obj5=103-0
+Obj6=107-0
+Obj7=111-0
+Obj8=115-0
+Obj9=119-0
+obj10=140-0 
 InvReSpawn=1
 BackUp=1
 
@@ -153,24 +156,24 @@ Alineacion=0
 Comercia=1
 TipoItems=9
 NROITEMS=18
-Obj1=266-1
-Obj2=270-1
-Obj3=274-1
-Obj4=278-1
-Obj5=282-1
-Obj6=286-1
-Obj7=290-1
-Obj8=294-1
-Obj9=298-1
-Obj10=323-1 'Llave Banderbill Casa Nro 10
-Obj11=327-1 'Llave Banderbill Casa Nro 11
-Obj12=331-1 'Llave Banderbill Casa Nro 12
-Obj13=335-1
-Obj14=339-1
-Obj15=343-1
-Obj16=347-1
-Obj17=351-1
-Obj18=355-1
+Obj1=266-0
+Obj2=270-0
+Obj3=274-0
+Obj4=278-0
+Obj5=282-0
+Obj6=286-0
+Obj7=290-0
+Obj8=294-0
+Obj9=298-0
+Obj10=323-0
+Obj11=327-0
+Obj12=331-0
+Obj13=335-0
+Obj14=339-0
+Obj15=343-0
+Obj16=347-0
+Obj17=351-0
+Obj18=355-0
 InvReSpawn=1
 BackUp=1
 
@@ -191,12 +194,12 @@ Alineacion=0
 Comercia=1
 TipoItems=9
 NROITEMS=6
-Obj1=420-1
-Obj2=424-1
-Obj3=428-1
-Obj4=432-1
-Obj5=436-1
-Obj6=440-1
+Obj1=420-0
+Obj2=424-0
+Obj3=428-0
+Obj4=436-0
+Obj5=436-0
+Obj6=440-0
 InvReSpawn=1
 BackUp=1
 
@@ -217,14 +220,14 @@ Alineacion=0
 Comercia=1
 TipoItems=9
 NROITEMS=8
-Obj1=583-1
-Obj2=587-1
-Obj3=591-1
-Obj4=595-1
-Obj5=599-1
-Obj6=603-1
-Obj7=607-1
-Obj8=611-1
+Obj1=583-0
+Obj2=587-0
+Obj3=591-0
+Obj4=595-0
+Obj5=599-0
+Obj6=603-0
+Obj7=607-0
+Obj8=611-0
 InvReSpawn=1
 BackUp=1
 
@@ -440,7 +443,7 @@ BackUp=0
 ##############################################################
 
 [NPC14] 'Vende Pociones
-Name=Lilith
+Name=Lilith (Vende Pociones)
 NpcType=0
 Desc=Hola, tengo las mejores Pociones de la Alquimia.
 Head=77
@@ -500,12 +503,16 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=20
-NROITEMS=5
-Obj1=163-1000 'Cuchara
-Obj2=167-1000 'Mueble Rústico
-Obj3=168-1000 'Silla
-Obj4=198-1000 'Serrucho
-Obj5=480-10000 ' Flecha
+NROITEMS=9
+Obj1=163-1000 	'Cuchara
+Obj2=167-1000 	'Mueble Rústico
+Obj3=168-1000 	'Silla
+Obj4=198-1000 	'Serrucho
+Obj5=480-10000 	'Flecha
+Obj6=478-1000 	'Arco Simple
+Obj7=663-1000 	'Arco Simple Reforzado
+Obj8=479-1000 	'Arco Compuesto
+Obj9=664-1000 	'Arco Compuesto Reforzado
 BackUp=1
 
 #############################################
@@ -525,9 +532,10 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=1
-NROITEMS=2
-Obj1=138-1000 'Caña de Pescar
+NROITEMS=3
+Obj1=138-1000 'Cana de Pescar
 Obj2=139-1000 'Pescado
+Obj3=543-1000 'Red de Pesca
 BackUp=1
 
 #############################################
@@ -547,9 +555,10 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=1
-NROITEMS=2
-Obj1=138-1000 'Caña de Pescar
+NROITEMS=3
+Obj1=138-1000 'Cana de Pescar
 Obj2=139-1000 'Pescado
+Obj3=543-1000 'Red de Pesca
 BackUp=1
 
 #############################################
@@ -590,8 +599,10 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=1000
-NROITEMS=1
-Obj1=534-1000 'Odre Vacía
+NROITEMS=3
+Obj1=1127-1000 'Manual de Liderazgo
+Obj1=1128-1000 'Manual de Supervivencia
+Obj1=1129-1000 'Manual de Navegacion
 BackUp=1
 
 #############################################
@@ -1078,7 +1089,7 @@ BackUp=0
 #############################################
 
 [NPC13] 'npc gobernador de ulla
-Name=Gobernador
+Name=Gobernador de Ulla
 NpcType=11
 Desc=Hola, soy el gobernador de Ullathorpe ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -1507,16 +1518,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=9
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=9-1000 'Horquilla
-Obj5=2-1000 'Espada Larga
-Obj6=125-1000 'Sable
-Obj7=123-1000 'Vikinga
-Obj8=389-1000 'Martillo de Herrero
-Obj9=124-1000 'Katana
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -1536,13 +1556,30 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=6
+NROITEMS=23
 Obj1=363-1000 'Ataque de Hambre
-Obj2=199-1000 'Dardo Mágico
-Obj3=200-1000 'Antídoto Mágico
-Obj4=197-1000 'Flecha Mágica
-Obj5=658-1000 'Vara de Fresno
-Obj6=659-1000 'Bastón nudoso
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=532-1000 'Apocalipsis
+Obj20=658-1000 'Vara de Fresno
+Obj21=659-1000 'Bastón nudoso
+Obj22=696-1000 'Laúd Mágico
+Obj23=208-1000 'Flauta Mágica
 BackUp=1
 
 #############################################
@@ -1695,16 +1732,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=9
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=389-1000 'Martillo de Herrero
-Obj5=3-1000 'Hacha
-Obj6=2-1000 'Espada Larga
-Obj7=398-1000 'Garrote
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -1724,16 +1770,30 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=9
-Obj1=201-1000 'Aura Sanadora
-Obj2=204-1000 'Flecha Eléctrica
-Obj3=364-1000 'Terrible Hambre de Igôr
-Obj4=205-1000 'Proyectil Etéreo
-Obj5=380-1000 'Invocación de Ultratumba
-Obj6=661-1000 'Sombrero de Aprendiz
-Obj7=383-1000 'Sombrero de Aprendiz Avanzado
-Obj8=658-1000 'Vara de Fresno
-Obj9=659-1000 'Bastón nudoso
+NROITEMS=23
+Obj1=363-1000 'Ataque de Hambre
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=658-1000 'Vara de Fresno
+Obj20=659-1000 'Bastón nudoso
+Obj21=696-1000 'Laúd Mágico
+Obj22=208-1000 'Flauta Mágica
+Obj23=532-1000 'Apocalipsis
 BackUp=1
 
 #############################################
@@ -1896,16 +1956,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=2-1000 'Espada Larga
-Obj3=19-1000 'Espada Dos Manos
-Obj4=123-1000 'Espada Vikinga
-Obj5=389-1000 'Martillo de Herrero
-Obj6=401-1000 'Martillo de Guerra
-Obj7=478-1000 'Arco Simple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -1925,20 +1994,30 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=13
-Obj1=394-1000 'Llamado a la Naturaleza
-Obj2=203-1000 'Aura Sanadora Avanzada
-Obj3=207-1000 'Devolver Movilidad
-Obj4=657-1000 'Quitar la turbación
-Obj5=206-1000 'Paralizar
-Obj6=361-1000 'Tormenta de Fuego
-Obj7=319-1000 'Resucitar
-Obj8=531-1000 'Descarga Eléctrica
-Obj9=318-1000 'Invisibilidad
-Obj10=537-1000 'Invocar Elemental de Agua
-Obj11=662-1000 'Sombrero de Mago
-Obj12=658-1000 'Vara de Fresno
-Obj13=659-1000 'Bastón nudoso
+NROITEMS=23
+Obj1=363-1000 'Ataque de Hambre
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=658-1000 'Vara de Fresno
+Obj20=659-1000 'Bastón nudoso
+Obj21=696-1000 'Laúd Mágico
+Obj22=208-1000 'Flauta Mágica
+Obj23=532-1000 'Apocalipsis
 BackUp=1
 
 #############################################
@@ -2094,15 +2173,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=8
-Obj1=2-1000 'Espada Larga
-Obj2=19-1000 'Espada Dos Manos
-Obj3=123-1000 'Espada Vikinga
-Obj4=401-1000 'Martillo de Guerra
-Obj5=125-1000 'Sable
-Obj6=753-1000 'Mayal Triple
-Obj7=404-1000 'Escudo de Tortuga
-Obj8=990-1000 'Mazo del Juicio
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -2122,22 +2211,30 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=15
-Obj1=530-1000 'Inmovilizar
-Obj2=396-1000 'Celeridad
-Obj3=397-1000 'Torpeza
-Obj4=470-1000 'Fuerza
-Obj5=471-1000 'Debilidad
-Obj6=319-1000 'Resucitar	
-Obj7=673-1000 'Mimetismo
-Obj8=394-1000 'LLamado a la Naturaleza
-Obj9=395-1000 'Llamado Nigromante
-Obj10=538-1000 'Invocar Elemental de Tierra
-Obj11=536-1000 'Invocar Elemental de Fuego
-Obj12=532-1000 'Apocalipsis
-Obj13=542-1000 'Turbación
-Obj14=658-1000 'Vara de Fresno
-Obj15=659-1000 'Bastón nudoso
+NROITEMS=23
+Obj1=363-1000 'Ataque de Hambre
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=658-1000 'Vara de Fresno
+Obj20=659-1000 'Bastón nudoso
+Obj21=696-1000 'Laúd Mágico
+Obj22=208-1000 'Flauta Mágica
+Obj23=532-1000 'Apocalipsis
 BackUp=1
 
 #############################################
@@ -2325,15 +2422,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=8
-Obj1=15-1000 'Daga
-Obj2=619-1000 'Daga Envenenada
-Obj3=165-1000 'Daga +1
-Obj4=389-1000 'Martillo de Herrero
-Obj5=9-1000 'Horquilla
-Obj6=2-1000 'Espada Larga
-Obj7=125-1000 'Sable
-Obj8=123-1000 'Espada Vikinga
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -2352,14 +2459,30 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=7
-Obj1=199-1000 'Dardo Mágico
-Obj2=200-1000 'Antídoto Mágico
-Obj3=201-1000 'Aura Sanadora
-Obj4=202-1000 'Toxina
-Obj5=204-1000 'Flecha Eléctrica
-Obj6=658-1000 'Vara de Fresno
-Obj7=659-1000 'Bastón nudoso
+NROITEMS=23
+Obj1=363-1000 'Ataque de Hambre
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=658-1000 'Vara de Fresno
+Obj20=659-1000 'Bastón nudoso
+Obj21=696-1000 'Laúd Mágico
+Obj22=208-1000 'Flauta Mágica
+Obj23=532-1000 'Apocalipsis
 BackUp=1
 
 #############################################
@@ -2434,13 +2557,14 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=3
-NROITEMS=6
+NROITEMS=7
 Obj1=240-1000 'Ropa de Enano (E/G)
 Obj2=527-1000 'Ropa de Enana (E/G-M)
 Obj3=486-1000 'Ropa de Estilo (E/G)
 Obj4=507-1000 'Ropa Violeta (E/G)
 Obj5=502-1000 'Ropa de Campesino (E/G)
 Obj6=707-1000 'Vestimenta de Noble (E/G)
+Obj7=867-1000 'Túnica de Gnomo (E/G)
 BackUp=1
 
 [NPC73] 'Armaduras Arghal
@@ -2514,16 +2638,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=2-1000 'Espada Larga
-Obj3=19-1000 'Espada Dos Manos
-Obj4=123-1000 'Espada Vikinga
-Obj5=389-1000 'Martillo de Herrero
-Obj6=401-1000 'Martillo de Guerra
-Obj7=478-1000 'Arco Simple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -2542,7 +2675,7 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=14
+NROITEMS=16
 Obj1=395-1000 'Llamado Nigromante
 Obj2=203-1000 'Aura Sanadora Avanzada
 obj3=207-1000 'Devolver Movilidad
@@ -2557,6 +2690,8 @@ Obj11=537-1000 'Invocar Elemental de Agua
 Obj12=662-1000 'Sombrero de Mago
 Obj13=658-1000 'Vara de Fresno
 Obj14=659-1000 'Bastón nudoso
+Obj15=696-1000 'Laúd Mágico
+Obj16=208-1000 'Flauta Mágica
 BackUp=1
 
 #############################################
@@ -2723,16 +2858,25 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=2
-NROITEMS=9
-Obj1=164-1000 'Espada Corta
-Obj2=19-1000 'Espada Dos Manos
-Obj3=123-1000 'Espada Vikinga
-Obj4=124-1000 'Katana
-Obj5=401-1000 'Martillo de Guerra
-Obj6=125-1000 'Sable
-Obj7=753-1000 'Mayal Triple
-Obj8=990-1000 'Mazo del Juicio
-Obj9=1009-1000 'Cuchillas
+NROITEMS=18
+Obj1=389-1000 	'Martillo de Herrero
+Obj2=1009-10000 'Cuchillas
+Obj3=15-1000 	'Daga
+Obj4=619-1000 	'Daga Envenenada
+Obj5=165-1000 	'Daga +1
+Obj6=19-1000 	'Espada Dos Manos
+Obj7=9-1000 	'Horquilla
+Ob18=164-1000 	'Espada Corta
+Obj9=2-1000 	'Espada Larga
+Obj10=125-1000 	'Sable
+Obj11=123-1000 	'Vikinga
+Obj12=124-1000 	'Katana
+Obj13=126-1000 	'Hacha Larga de Guerra
+Obj14=129-1000 	'Hacha de Guerra Dos Filos
+Obj15=159-1000 	'Hacha de Bárbaro
+Obj16=399-1000 	'Cimitarra
+Obj17=990-1000 	'Mazo del Juicio
+Obj18=403-1000 	'Espada de Plata
 BackUp=1
 
 #############################################
@@ -2752,11 +2896,29 @@ Domable=0
 Alineacion=0
 Comercia=1
 TipoItems=24
-NROITEMS=4
-Obj1=542-1000 'Turbación
-Obj2=532-1000 'Apocalipsis
-Obj3=658-1000 'Vara de Fresno
-Obj4=659-1000 'Bastón nudoso
+NROITEMS=21
+Obj1=363-1000 'Ataque de Hambre
+Obj2=470-1000 'Fuerza
+Obj3=396-1000 'Celeridad
+Obj4=199-1000 'Dardo Mágico
+Obj5=200-1000 'Antídoto Mágico
+Obj6=197-1000 'Flecha Mágica
+Obj7=361-1000 'Tormenta de Fuego
+Obj8=201-1000 'Curar Heridas Leves
+Obj9=203-1000 'Curar Heridas Graves
+Obj10=204-1000 'Flecha Eléctrica
+Obj11=206-1000 'Paralizar
+Obj12=530-1000 'Inmovilizar
+Obj13=207-1000 'Devolver Movilidad
+Obj14=318-1000 'Invisibilidad
+Obj15=319-1000 'Resucitar
+Obj16=380-1000 'Invocación de Ultratumba
+Obj17=394-1000 'Llamado a la Naturaleza
+Obj18=395-1000 'Llamado Nigromante
+Obj19=658-1000 'Vara de Fresno
+Obj20=659-1000 'Bastón nudoso
+Obj21=696-1000 'Laúd Mágico
+Obj22=208-1000 'Flauta Mágica
 BackUp=1
 
 #############################################
@@ -3275,7 +3437,7 @@ BackUp=0
 #############################################
 
 [NPC150] 'npc gobernador de nix
-Name=Gobernador
+Name=Gobernador de Nix
 NpcType=11
 Desc=Hola, soy el gobernador de Nix ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -3294,7 +3456,7 @@ BackUp=0
 #############################################
 
 [NPC151] 'npc gobernador de Banderbill
-Name=Gobernador
+Name=Gobernador de Banderbill
 NpcType=11
 Desc=Hola, soy el gobernador de Banderbill ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -3313,7 +3475,7 @@ BackUp=0
 #############################################
 
 [NPC152] 'npc gobernador de Lindos
-Name=Gobernador
+Name=Gobernador de Lindos
 NpcType=11
 Desc=Hola, soy el gobernador de Lindos ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -3332,7 +3494,7 @@ BackUp=0
 #############################################
 
 [NPC153] 'npc gobernador de Arghal
-Name=Gobernador
+Name=Gobernador de Arghal
 NpcType=11
 Desc=Hola, soy el gobernador de Arghal ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -3351,7 +3513,7 @@ BackUp=0
 #############################################
 
 [NPC158] 'npc gobernador de Arkhein
-Name=Gobernador
+Name=Gobernador de Arkhein
 NpcType=11
 Desc=Hola, soy el gobernador de Arkhein ¡Bienvenido a nuestra pequeña aldea! Escribe /Hogar para obtener la ciudadanía.
 Head=0
@@ -3490,7 +3652,7 @@ BackUp=0
 #############################################
 
 [NPC154] 'Vende Pociones newbie
-Name=Lilith
+Name=Lilith (Vende Pociones newbie)
 NpcType=0
 Desc=Hola, tengo las mejores Pociones de la Alquimia para principiantes.
 Head=77
@@ -4283,7 +4445,6 @@ MaxHP=15
 MaxHIT=4
 MinHIT=1
 DEF=0
-DefM=3
 PoderAtaque=30
 PoderEvasion=10
 BackUp=0
@@ -5214,7 +5375,6 @@ MaxHP=32
 MaxHIT=3
 MinHIT=1
 DEF=0
-DefM=3
 PoderAtaque=30
 PoderEvasion=10
 Veneno=1
@@ -5980,7 +6140,7 @@ BackUp=0
 NROITEMS=5
 Drop1=12-2000 'Oro
 Drop2=12-2750 'Oro
-Drop3=21-10000 'Oro
+Drop3=12-10000 'Oro
 Drop4=403-2 'Espadas de Plata
 Drop5=485-1 'Armadura Legendaria
 
@@ -8754,6 +8914,667 @@ Alineacion=0
 Comercia=0
 BackUp=0 
 
+############################################
+
+[NPC658]
+Name=Ente Supremo
+NpcType=0
+Head=0
+Heading=3
+Body=535
+Movement=3
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=50000
+MinHP=50000
+MaxHP=50000
+MaxHIT=300
+MinHIT=250
+DEF=75
+DEFm=100
+PoderAtaque=300
+PoderEvasion=500
+LanzaSpells=2
+Sp1=31
+Sp2=25
+AtacaDoble=1
+AfectaParalisis=1
+BackUp=0
+NROITEMS=5
+Drop1=400-1 'Vara de mago
+Drop2=400-1 'Vara de mago
+Drop3=400-1 'Vara de mago
+Drop4=400-1 'Vara de mago
+Drop5=400-1 'Vara de mago
+
+############################################
+
+[NPC700]
+Name=NPC1
+NpcType=0
+Head=0
+Heading=3
+Body=549
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+############################################
+
+[NPC701]
+Name=NPC2
+NpcType=0
+Head=0
+Heading=3
+Body=550
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+############################################
+
+[NPC702]
+Name=NPC3
+NpcType=0
+Head=0
+Heading=3
+Body=551
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+
+############################################
+
+[NPC703]
+Name=NPC4
+NpcType=0
+Head=0
+Heading=3
+Body=552
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+############################################
+
+[NPC704]
+Name=NPC5
+NpcType=0
+Head=0
+Heading=3
+Body=553
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+############################################
+
+[NPC705]
+Name=NPC6
+NpcType=0
+Head=0
+Heading=3
+Body=554
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC706]
+Name=NPC7
+NpcType=0
+Head=0
+Heading=3
+Body=555
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+
+[NPC707]
+Name=NPC8
+NpcType=0
+Head=0
+Heading=3
+Body=556
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC708]
+Name=NPC9
+NpcType=0
+Head=0
+Heading=3
+Body=557
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC709]
+Name=NPC10
+NpcType=0
+Head=0
+Heading=3
+Body=558
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC710]
+Name=NPC11
+NpcType=0
+Head=0
+Heading=3
+Body=559
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC711]
+Name=NPC11
+NpcType=0
+Head=0
+Heading=3
+Body=571
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC712]
+Name=NPC12
+NpcType=0
+Head=0
+Heading=3
+Body=570
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC713]
+Name=NPC13
+NpcType=0
+Head=0
+Heading=3
+Body=569
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC714]
+Name=NPC14
+NpcType=0
+Head=0
+Heading=3
+Body=404
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=0
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=10000
+MinHP=15000
+MaxHP=15000
+MaxHIT=350
+MinHIT=75
+DEF=0
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=5
+Drop1=12-8000 'Oro
+Drop2=12-16000 'Oro
+Drop3=126-3 'Hacha Larga de Guerra
+Drop4=129-5 'Hachas Doble Filo
+Drop5=495-2 'Armaduras Escarlata
+
+[NPC715]
+Name=Etognil Bronce
+NpcType=0
+Head=0
+Heading=3
+Body=569
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=1
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=1000
+GiveGLD=0
+MinHP=49000
+MaxHP=49000
+MaxHIT=450
+MinHIT=300
+DEF=30
+AfectaParalisis=1
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=6
+Drop1=12-1200 'Oro
+Drop2=38-100 'Pociones Rojas
+Drop3=37-100 'Pociones Azules`
+Drop4=12-7500 'Oro
+Drop5=386-10 'Lingote de Hierro
+Drop6=192-900 'Minerales de Bronce
+
+[NPC716]
+Name=Etognil Plata
+NpcType=0
+Head=0
+Heading=3
+Body=571
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=1
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=2000
+GiveGLD=0
+MinHP=65000
+MaxHP=65000
+MaxHIT=450
+MinHIT=300
+DEF=30
+AfectaParalisis=1
+PoderAtaque=280
+PoderEvasion=250
+Snd3=100
+BackUp=0
+NROITEMS=6
+Drop1=12-1200 'Oro
+Drop2=38-100 'Pociones Rojas
+Drop3=37-100 'Pociones Azules
+Drop4=12-7500 'Oro
+Drop5=387-10 'Lingote de Plata
+Drop6=193-700 'Minerales de Plata
+
+[NPC717]
+Name=Etognil Oro
+NpcType=0
+Head=0
+Heading=3
+Body=570
+Movement=3
+AguaValida=0
+Attackable=1
+ReSpawn=1
+Hostile=1
+Domable=0
+Alineacion=2
+Comercia=0
+GiveEXP=2000
+GiveGLD=0
+MinHP=80000
+MaxHP=80000
+MaxHIT=450
+MinHIT=300
+DEF=30
+AfectaParalisis=1
+PoderAtaque=230
+PoderEvasion=220
+Snd3=100
+BackUp=0
+NROITEMS=6
+Drop1=12-1200 'Oro
+Drop2=38-100 'Pociones Rojas
+Drop3=37-100 'Pociones Azules
+Drop4=12-7500 'Oro
+Drop5=388-10 'Lingote de Oro
+Drop6=194-600 'Minerales de Oro
+############################################
+
+[NPC750] ' Hija de ZeuS
+Name=ReyarB Artemisa
+NpcType=3
+Desc=¡Hola amigo! Soy la hija de ZeuS, si deseas que traiga una criatura solo debes pedirmelo. (Escribe /ENTRENAR)
+Head=71
+Body=170
+Heading=3
+Movement=1
+NroCriaturas=15
+CI1=700
+CI2=701
+CI3=702
+CI4=703
+CI5=704
+CI6=705
+CI7=706
+CI8=707
+CI9=708
+CI10=709
+CI11=710
+CI12=711
+CI13=712
+CI14=713
+CI15=714
+CN1=700 BAUTIZAR
+CN2=701 BAUTIZAR
+CN3=702 BAUTIZAR
+CN4=703 BAUTIZAR
+CN5=704 BAUTIZAR
+CN6=705 BAUTIZAR
+CN7=706 BAUTIZAR
+CN8=707 BAUTIZAR
+CN9=708 BAUTIZAR
+CN10=709 BAUTIZAR
+CN11=710 BAUTIZAR
+CN12=711 BAUTIZAR
+CN13=712 BAUTIZAR
+CN14=713 BAUTIZAR
+CN15=714 BAUTIZAR
+Domable=0
+
+############################################
+
 ##############################################################
 ##############################################################
 #####################NPCS PRETORIANOS#########################
@@ -9624,4 +10445,109 @@ NROITEMS=3
 Obj1=12-10000 ' Oro
 Obj2=873-1    ' Guantes de hurto
 Obj3=132-1    ' Casco de Hierro
+BackUp=0
+
+##############################################################
+##############################################################
+#####################NPCS QUESTS##############################
+##############################################################
+###############no cambiar los índices asignados###############
+
+[NPC924]
+Name=Mark Quest
+NpcType=0
+Desc=¡Buen día amigo mío! Soy el que te va a dar tu la aventura de esta hermosa ciudad. Si deseas cooperar con la milicia de la ciudad y recibir una recompensa, escribe /QUEST.
+Head=101
+Heading=3
+Body=348
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+QuestNumber=1
+
+[NPC925]
+Name=Willdon
+NpcType=0
+Desc=Que onda? Necesito pieles de oso y lobo para hacer un par de cosas copadas, si queres ayudarme escribe /QUEST.
+Head=101
+Heading=3
+Body=348
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+QuestNumber=2
+
+[NPC926]
+Name=Selenna
+NpcType=0
+Desc=Esta ciudad es un peligro con estas criaturas alrededor, hay que traer paz a la metropolis, si eres capaz de ayudarnos escribe /QUEST.
+Head=71
+Heading=3
+Body=254
+Movement=1
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+QuestNumber=3
+
+[NPC927]
+Name=Novia cornuda
+NpcType=0
+Desc=¡ME CAMBIASTE POR UNA GNOMA! No vuelvas a hablarme nunca mas en tu puta vida.
+Head=77
+Heading=3
+Body=511
+Movement=2
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+
+[NPC928]
+Name=Novio cagador
+NpcType=0
+Desc=¡NO ES LO QUE PARECE!.
+Head=0
+Heading=3
+Body=4
+Movement=2
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
+BackUp=0
+
+[NPC929]
+Name=Tercera en discordia
+NpcType=0
+Desc=Enserio armaste un casamiento 2 x 1 para ahorrarte plata? Sos una rata inmunda, cagador, mal padre.
+Head=473
+Heading=3
+Body=288
+Movement=2
+Attackable=0
+ReSpawn=0
+Hostile=0
+Domable=0
+Alineacion=0
+Comercia=0
 BackUp=0
