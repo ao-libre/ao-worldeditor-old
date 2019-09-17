@@ -84,8 +84,10 @@ Sub CargarParticulas()
     Dim GrhListing As String
     Dim TempSet    As String
     Dim ColorSet   As Long
+    
     Dim Leer       As clsIniReader
-
+    Set Leer = New clsIniReader
+    
     Call Leer.Initialize(DirIndex & "Particulas.ini")
     
     'resize StreamData array
@@ -146,6 +148,8 @@ Sub CargarParticulas()
         End With
             
     Next loopc
+    
+    Set Leer = Nothing
  
 End Sub
  
