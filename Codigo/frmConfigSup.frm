@@ -19,16 +19,24 @@ Begin VB.Form frmConfigSup
       TabIndex        =   15
       Top             =   2280
       Width           =   1935
-      _extentx        =   3413
-      _extenty        =   661
-      caption         =   "&Aceptar"
-      capalign        =   2
-      backstyle       =   2
-      cgradient       =   0
-      font            =   "frmConfigSup.frx":628A
-      mode            =   0
-      value           =   0
-      cback           =   -2147483633
+      _ExtentX        =   3413
+      _ExtentY        =   661
+      Caption         =   "&Aceptar"
+      CapAlign        =   2
+      BackStyle       =   2
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      cGradient       =   0
+      Mode            =   0
+      Value           =   0   'False
+      cBack           =   -2147483633
    End
    Begin VB.CommandButton cmdDM 
       Caption         =   "+"
@@ -376,86 +384,104 @@ Attribute VB_Exposed = False
 Option Explicit
 
 Private Sub cmdDM_Click(index As Integer)
-'*************************************************
-'Author: Unkwown
-'Last modified: 20/05/06
-'*************************************************
+    '*************************************************
+    'Author: Unkwown
+    'Last modified: 20/05/06
+    '*************************************************
 
-On Error Resume Next
-Select Case index
+    On Error Resume Next
+
+    Select Case index
+
         Case 0
             DMAncho.Text = Str(Val(DMAncho.Text) + 1)
+
         Case 1
             DMAncho.Text = Str(Val(DMAncho.Text) - 1)
+
         Case 2
             DMLargo.Text = Str(Val(DMLargo.Text) - 1)
+
         Case 3
             DMLargo.Text = Str(Val(DMLargo.Text) + 1)
-End Select
+
+    End Select
+
 End Sub
 
 Private Sub Form_Deactivate()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
 
-Me.Hide
+    Me.Hide
+
 End Sub
 
 Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
 
-If UnloadMode <> 0 Then
-    Cancel = True
-    Me.Hide
-End If
+    If UnloadMode <> 0 Then
+        Cancel = True
+        Me.Hide
+
+    End If
+
 End Sub
 
 Private Sub DespMosaic_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 26/05/06
-'*************************************************
-If LenB(DMAncho.Text) = 0 Then DMAncho.Text = "0"
-If LenB(DMLargo.Text) = 0 Then DMLargo.Text = "0"
+
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 26/05/06
+    '*************************************************
+    If LenB(DMAncho.Text) = 0 Then DMAncho.Text = "0"
+    If LenB(DMLargo.Text) = 0 Then DMLargo.Text = "0"
+
 End Sub
 
-
 Private Sub mAncho_KeyPress(KeyAscii As Integer)
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-' Impedir que se ingrese un valor no numerico
-If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
+
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
+    ' Impedir que se ingrese un valor no numerico
+    If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
+
 End Sub
 
 Private Sub mLargo_KeyPress(KeyAscii As Integer)
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-' Impedir que se ingrese un valor no numerico
-If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
+
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
+    ' Impedir que se ingrese un valor no numerico
+    If KeyAscii <> 8 And IsNumeric(Chr(KeyAscii)) = False Then KeyAscii = 0
+
 End Sub
 
 Private Sub cmdAceptar_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
-Me.Hide
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
+    Me.Hide
+
 End Sub
 
 Private Sub MOSAICO_Click()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 26/05/06
-'*************************************************
-If LenB(mAncho.Text) = 0 Then mAncho.Text = "0"
-If LenB(mLargo.Text) = 0 Then mLargo.Text = "0"
+
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 26/05/06
+    '*************************************************
+    If LenB(mAncho.Text) = 0 Then mAncho.Text = "0"
+    If LenB(mLargo.Text) = 0 Then mLargo.Text = "0"
+
 End Sub
