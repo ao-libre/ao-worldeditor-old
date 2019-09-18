@@ -176,3 +176,514 @@ Public Function General_Particle_Create(ByVal ParticulaInd As Long, ByVal X As I
  
 End Function
 
+
+Private Function Particle_Group_Next_Open() As Long
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 10/07/2002
+    '
+    '*****************************************************************
+    On Error GoTo ErrorHandler:
+
+    Dim loopc As Long
+   
+    loopc = 1
+
+    Do Until particle_group_list(loopc).Active = False
+
+        If loopc = particle_group_last Then
+            Particle_Group_Next_Open = particle_group_last + 1
+            Exit Function
+
+        End If
+
+        loopc = loopc + 1
+    Loop
+   
+    Particle_Group_Next_Open = loopc
+    Exit Function
+ErrorHandler:
+    Particle_Group_Next_Open = 1
+
+End Function
+
+Public Function Particle_Group_Create(ByVal map_x As Integer, ByVal map_y As Integer, ByRef grh_index_list() As Long, ByRef Rgb_List() As Long, _
+   Optional ByVal particle_count As Long = 20, Optional ByVal stream_type As Long = 1, _
+   Optional ByVal alpha_blend As Boolean, Optional ByVal alive_counter As Long = -1, _
+   Optional ByVal frame_speed As Single = 0.5, Optional ByVal id As Long, _
+   Optional ByVal x1 As Integer, Optional ByVal Y1 As Integer, Optional ByVal angle As Integer, _
+   Optional ByVal vecx1 As Integer, Optional ByVal vecx2 As Integer, _
+   Optional ByVal vecy1 As Integer, Optional ByVal vecy2 As Integer, _
+   Optional ByVal life1 As Integer, Optional ByVal life2 As Integer, _
+   Optional ByVal fric As Integer, Optional ByVal spin_speedL As Single, _
+   Optional ByVal gravity As Boolean, Optional grav_strength As Long, _
+   Optional bounce_strength As Long, Optional ByVal x2 As Integer, Optional ByVal Y2 As Integer, _
+   Optional ByVal XMove As Boolean, Optional ByVal move_x1 As Integer, Optional ByVal move_x2 As Integer, _
+   Optional ByVal move_y1 As Integer, Optional ByVal move_y2 As Integer, Optional ByVal YMove As Boolean, _
+   Optional ByVal spin_speedH As Single, Optional ByVal spin As Boolean) As Long
+   
+    '**************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 12/15/2002
+    'Returns the particle_group_index if successful, else 0
+    '**************************************************************
+    If (map_x <> -1) And (map_y <> -1) Then
+        If Map_Particle_Group_Get(map_x, map_y) = 0 Then
+            Particle_Group_Create = Particle_Group_Next_Open
+            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, grh_index_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
+        Else
+            Particle_Group_Create = Particle_Group_Next_Open
+            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, grh_index_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
+
+        End If
+
+    End If
+
+End Function
+ 
+Public Function Particle_Group_Remove(ByVal particle_group_index As Long) As Boolean
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 1/04/2003
+    '
+    '*****************************************************************
+    'Make sure it's a legal index
+    If Particle_Group_Check(particle_group_index) Then
+        Particle_Group_Destroy particle_group_index
+        Particle_Group_Remove = True
+
+    End If
+
+End Function
+ 
+Public Function Particle_Group_Remove_All() As Boolean
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 1/04/2003
+    '
+    '*****************************************************************
+    Dim index As Long
+   
+    For index = 1 To particle_group_last
+
+        'Make sure it's a legal index
+        If Particle_Group_Check(index) Then
+            Particle_Group_Destroy index
+
+        End If
+
+    Next index
+   
+    Particle_Group_Remove_All = True
+
+End Function
+ 
+Public Function Particle_Group_Find(ByVal id As Long) As Long
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 1/04/2003
+    'Find the index related to the handle
+    '*****************************************************************
+    On Error GoTo ErrorHandler:
+
+    Dim loopc As Long
+   
+    loopc = 1
+
+    Do Until particle_group_list(loopc).id = id
+
+        If loopc = particle_group_last Then
+            Particle_Group_Find = 0
+            Exit Function
+
+        End If
+
+        loopc = loopc + 1
+    Loop
+   
+    Particle_Group_Find = loopc
+    Exit Function
+ErrorHandler:
+    Particle_Group_Find = 0
+
+End Function
+ 
+Private Sub Particle_Group_Make(ByVal particle_group_index As Long, ByVal map_x As Integer, ByVal map_y As Integer, _
+   ByVal particle_count As Long, ByVal stream_type As Long, ByRef grh_index_list() As Long, ByRef Rgb_List() As Long, _
+   Optional ByVal alpha_blend As Boolean, Optional ByVal alive_counter As Long = -1, _
+   Optional ByVal frame_speed As Single = 0.5, Optional ByVal id As Long, _
+   Optional ByVal x1 As Integer, Optional ByVal Y1 As Integer, Optional ByVal angle As Integer, _
+   Optional ByVal vecx1 As Integer, Optional ByVal vecx2 As Integer, _
+   Optional ByVal vecy1 As Integer, Optional ByVal vecy2 As Integer, _
+   Optional ByVal life1 As Integer, Optional ByVal life2 As Integer, _
+   Optional ByVal fric As Integer, Optional ByVal spin_speedL As Single, _
+   Optional ByVal gravity As Boolean, Optional grav_strength As Long, _
+   Optional bounce_strength As Long, Optional ByVal x2 As Integer, Optional ByVal Y2 As Integer, _
+   Optional ByVal XMove As Boolean, Optional ByVal move_x1 As Integer, Optional ByVal move_x2 As Integer, _
+   Optional ByVal move_y1 As Integer, Optional ByVal move_y2 As Integer, Optional ByVal YMove As Boolean, _
+   Optional ByVal spin_speedH As Single, Optional ByVal spin As Boolean)
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 10/07/2002
+    'Makes a new particle effect
+    '*****************************************************************
+    'Update array size
+    If particle_group_index > particle_group_last Then
+        particle_group_last = particle_group_index
+        ReDim Preserve particle_group_list(1 To particle_group_last)
+
+    End If
+
+    particle_group_count = particle_group_count + 1
+   
+    'Make active
+    particle_group_list(particle_group_index).Active = True
+   
+    'Map pos
+    If (map_x <> -1) And (map_y <> -1) Then
+        particle_group_list(particle_group_index).map_x = map_x
+        particle_group_list(particle_group_index).map_y = map_y
+
+    End If
+   
+    'Grh list
+    ReDim particle_group_list(particle_group_index).grh_index_list(1 To UBound(grh_index_list))
+    particle_group_list(particle_group_index).grh_index_list() = grh_index_list()
+    particle_group_list(particle_group_index).grh_index_count = UBound(grh_index_list)
+   
+    'Sets alive vars
+    If alive_counter = -1 Then
+        particle_group_list(particle_group_index).alive_counter = -1
+        particle_group_list(particle_group_index).never_die = True
+    Else
+        particle_group_list(particle_group_index).alive_counter = alive_counter
+        particle_group_list(particle_group_index).never_die = False
+
+    End If
+   
+    'alpha blending
+    particle_group_list(particle_group_index).alpha_blend = alpha_blend
+   
+    'stream type
+    particle_group_list(particle_group_index).stream_type = stream_type
+   
+    'speed
+    particle_group_list(particle_group_index).frame_speed = frame_speed
+   
+    particle_group_list(particle_group_index).x1 = x1
+    particle_group_list(particle_group_index).Y1 = Y1
+    particle_group_list(particle_group_index).x2 = x2
+    particle_group_list(particle_group_index).Y2 = Y2
+    particle_group_list(particle_group_index).angle = angle
+    particle_group_list(particle_group_index).vecx1 = vecx1
+    particle_group_list(particle_group_index).vecx2 = vecx2
+    particle_group_list(particle_group_index).vecy1 = vecy1
+    particle_group_list(particle_group_index).vecy2 = vecy2
+    particle_group_list(particle_group_index).life1 = life1
+    particle_group_list(particle_group_index).life2 = life2
+    particle_group_list(particle_group_index).fric = fric
+    particle_group_list(particle_group_index).spin = spin
+    particle_group_list(particle_group_index).spin_speedL = spin_speedL
+    particle_group_list(particle_group_index).spin_speedH = spin_speedH
+    particle_group_list(particle_group_index).gravity = gravity
+    particle_group_list(particle_group_index).grav_strength = grav_strength
+    particle_group_list(particle_group_index).bounce_strength = bounce_strength
+    particle_group_list(particle_group_index).XMove = XMove
+    particle_group_list(particle_group_index).YMove = YMove
+    particle_group_list(particle_group_index).move_x1 = move_x1
+    particle_group_list(particle_group_index).move_x2 = move_x2
+    particle_group_list(particle_group_index).move_y1 = move_y1
+    particle_group_list(particle_group_index).move_y2 = move_y2
+   
+    particle_group_list(particle_group_index).Rgb_List(0) = Rgb_List(0)
+    particle_group_list(particle_group_index).Rgb_List(1) = Rgb_List(1)
+    particle_group_list(particle_group_index).Rgb_List(2) = Rgb_List(2)
+    particle_group_list(particle_group_index).Rgb_List(3) = Rgb_List(3)
+   
+    'create particle stream
+    particle_group_list(particle_group_index).particle_count = particle_count
+    ReDim particle_group_list(particle_group_index).particle_stream(1 To particle_count)
+   
+    'plot particle group on map
+    MapData(map_x, map_y).particle_group_index = particle_group_index
+
+End Sub
+ 
+Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As Integer, ByVal screen_Y As Integer, _
+   ByVal grh_index As Long, ByRef Rgb_List() As Long, _
+   Optional ByVal alpha_blend As Boolean, Optional ByVal no_move As Boolean, _
+   Optional ByVal x1 As Integer, Optional ByVal Y1 As Integer, Optional ByVal angle As Integer, _
+   Optional ByVal vecx1 As Integer, Optional ByVal vecx2 As Integer, _
+   Optional ByVal vecy1 As Integer, Optional ByVal vecy2 As Integer, _
+   Optional ByVal life1 As Integer, Optional ByVal life2 As Integer, _
+   Optional ByVal fric As Integer, Optional ByVal spin_speedL As Single, _
+   Optional ByVal gravity As Boolean, Optional grav_strength As Long, _
+   Optional ByVal bounce_strength As Long, Optional ByVal x2 As Integer, Optional ByVal Y2 As Integer, _
+   Optional ByVal XMove As Boolean, Optional ByVal move_x1 As Integer, Optional ByVal move_x2 As Integer, _
+   Optional ByVal move_y1 As Integer, Optional ByVal move_y2 As Integer, Optional ByVal YMove As Boolean, _
+   Optional ByVal spin_speedH As Single, Optional ByVal spin As Boolean, Optional grh_resize As Boolean, _
+   Optional grh_resizex As Integer, Optional grh_resizey As Integer, _
+   Optional ByVal Radio As Integer, Optional ByVal Count As Integer, Optional ByVal index As Integer)
+    '**************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 4/24/2003
+    '
+    '**************************************************************
+
+    If no_move = False Then
+        If temp_particle.alive_counter = 0 Then
+            Grh_Initialize temp_particle.Grh, grh_index, alpha_blend
+
+            If Radio = 0 Then
+                temp_particle.X = General_Random_Number(x1, x2)
+                temp_particle.Y = General_Random_Number(Y1, Y2)
+            Else
+                temp_particle.X = (General_Random_Number(x1, x2) + Radio) + Radio * Cos(PI * 2 * index / Count)
+                temp_particle.Y = (General_Random_Number(Y1, Y2) + Radio) + Radio * Sin(PI * 2 * index / Count)
+
+            End If
+
+            temp_particle.vector_x = General_Random_Number(vecx1, vecx2)
+            temp_particle.vector_y = General_Random_Number(vecy1, vecy2)
+            temp_particle.angle = angle
+            temp_particle.alive_counter = General_Random_Number(life1, life2)
+            temp_particle.friction = fric
+        Else
+
+            'Continue old particle
+            'Do gravity
+            If gravity = True Then
+                temp_particle.vector_y = temp_particle.vector_y + grav_strength
+
+                If temp_particle.Y > 0 Then
+                    'bounce
+                    temp_particle.vector_y = bounce_strength
+
+                End If
+
+            End If
+
+            'Do rotation
+            If spin = True Then temp_particle.Grh.angle = temp_particle.Grh.angle + (General_Random_Number(spin_speedL, spin_speedH) / 100)
+            If temp_particle.angle >= 360 Then
+                temp_particle.angle = 0
+
+            End If
+                                
+            If XMove = True Then temp_particle.vector_x = General_Random_Number(move_x1, move_x2)
+            If YMove = True Then temp_particle.vector_y = General_Random_Number(move_y1, move_y2)
+
+        End If
+
+        'Add in vector
+        temp_particle.X = temp_particle.X + (temp_particle.vector_x \ temp_particle.friction)
+        temp_particle.Y = temp_particle.Y + (temp_particle.vector_y \ temp_particle.friction)
+    
+        'decrement counter
+        temp_particle.alive_counter = temp_particle.alive_counter - 1
+
+    End If
+ 
+    'Draw it
+    If temp_particle.Grh.grh_index Then
+        Grh_Render temp_particle.Grh, temp_particle.X + screen_x, temp_particle.Y + screen_Y, Rgb_List()
+
+    End If
+
+End Sub
+
+Public Sub Particle_Group_Render(ByVal particle_group_index As Long, ByVal screen_x As Integer, ByVal screen_Y As Integer)
+
+    '*****************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 12/15/2002
+    'Renders a particle stream at a paticular screen point
+    '*****************************************************************
+    On Error GoTo Err
+
+    Dim loopc       As Long
+
+    Dim temp_rgb(3) As Long
+
+    Dim no_move     As Boolean
+
+    'Set colors
+    temp_rgb(0) = particle_group_list(particle_group_index).Rgb_List(0)
+    temp_rgb(1) = particle_group_list(particle_group_index).Rgb_List(1)
+    temp_rgb(2) = particle_group_list(particle_group_index).Rgb_List(2)
+    temp_rgb(3) = particle_group_list(particle_group_index).Rgb_List(3)
+       
+    If particle_group_list(particle_group_index).alive_counter Then
+    
+        'See if it is time to move a particle
+        particle_group_list(particle_group_index).frame_counter = particle_group_list(particle_group_index).frame_counter + timer_ticks_per_frame
+
+        If particle_group_list(particle_group_index).frame_counter > particle_group_list(particle_group_index).frame_speed Then
+            particle_group_list(particle_group_index).frame_counter = 0
+            no_move = False
+        Else
+            no_move = True
+
+        End If
+    
+        'If it's still alive render all the particles inside
+        For loopc = 1 To particle_group_list(particle_group_index).particle_count
+        
+            'Render particle
+            Particle_Render particle_group_list(particle_group_index).particle_stream(loopc), _
+               screen_x, screen_Y, _
+               particle_group_list(particle_group_index).grh_index_list(Round(General_Random_Number(1, particle_group_list(particle_group_index).grh_index_count), 0)), _
+               temp_rgb(), _
+               particle_group_list(particle_group_index).alpha_blend, no_move, _
+               particle_group_list(particle_group_index).x1, particle_group_list(particle_group_index).Y1, particle_group_list(particle_group_index).angle, _
+               particle_group_list(particle_group_index).vecx1, particle_group_list(particle_group_index).vecx2, _
+               particle_group_list(particle_group_index).vecy1, particle_group_list(particle_group_index).vecy2, _
+               particle_group_list(particle_group_index).life1, particle_group_list(particle_group_index).life2, _
+               particle_group_list(particle_group_index).fric, particle_group_list(particle_group_index).spin_speedL, _
+               particle_group_list(particle_group_index).gravity, particle_group_list(particle_group_index).grav_strength, _
+               particle_group_list(particle_group_index).bounce_strength, particle_group_list(particle_group_index).x2, _
+               particle_group_list(particle_group_index).Y2, particle_group_list(particle_group_index).XMove, _
+               particle_group_list(particle_group_index).move_x1, particle_group_list(particle_group_index).move_x2, _
+               particle_group_list(particle_group_index).move_y1, particle_group_list(particle_group_index).move_y2, _
+               particle_group_list(particle_group_index).YMove, particle_group_list(particle_group_index).spin_speedH, _
+               particle_group_list(particle_group_index).spin, , , , _
+               , particle_group_list(particle_group_index).particle_count, loopc
+                            
+        Next loopc
+        
+        If no_move = False Then
+
+            'Update the group alive counter
+            If particle_group_list(particle_group_index).never_die = False Then
+                particle_group_list(particle_group_index).alive_counter = particle_group_list(particle_group_index).alive_counter - 1
+
+            End If
+
+        End If
+    
+    Else
+        'If it's dead destroy it
+        particle_group_list(particle_group_index).particle_count = particle_group_list(particle_group_index).particle_count - 1
+
+        If particle_group_list(particle_group_index).particle_count <= 0 Then Particle_Group_Destroy particle_group_index
+
+    End If
+    
+Err:
+    temp_rgb(0) = 0
+    temp_rgb(1) = 0
+    temp_rgb(2) = 0
+    temp_rgb(3) = 0
+
+End Sub
+ 
+Public Function Particle_Type_Get(ByVal particle_Index As Long) As Long
+
+    '*****************************************************************
+    'Author: Juan Martín Sotuyo Dodero (juansotuyo@hotmail.com)
+    'Last Modify Date: 8/27/2003
+    'Returns the stream type of a particle stream
+    '*****************************************************************
+    If Particle_Group_Check(particle_Index) Then
+        Particle_Type_Get = particle_group_list(particle_Index).stream_type
+
+    End If
+
+End Function
+ 
+Private Function Particle_Group_Check(ByVal particle_group_index As Long) As Boolean
+
+    '**************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 1/04/2003
+    '
+    '**************************************************************
+    'check index
+    If particle_group_index > 0 And particle_group_index <= particle_group_last Then
+        If particle_group_list(particle_group_index).Active Then
+            Particle_Group_Check = True
+
+        End If
+
+    End If
+
+End Function
+ 
+Public Function Particle_Group_Map_Pos_Set(ByVal particle_group_index As Long, ByVal map_x As Long, ByVal map_y As Long) As Boolean
+
+    '**************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 5/27/2003
+    'Returns true if successful, else false
+    '**************************************************************
+    'Make sure it's a legal index
+    If Particle_Group_Check(particle_group_index) Then
+
+        'Make sure it's a legal move
+        If InMapBounds(map_x, map_y) Then
+            'Move it
+            particle_group_list(particle_group_index).map_x = map_x
+            particle_group_list(particle_group_index).map_y = map_y
+   
+            Particle_Group_Map_Pos_Set = True
+
+        End If
+
+    End If
+
+End Function
+ 
+Private Sub Particle_Group_Destroy(ByVal particle_group_index As Long)
+
+    '**************************************************************
+    'Author: Aaron Perkins
+    'Last Modify Date: 10/07/2002
+    '
+    '**************************************************************
+    Dim temp As particle_group
+    
+    If particle_group_list(particle_group_index).map_x > 0 And particle_group_list(particle_group_index).map_y > 0 Then
+        MapData(particle_group_list(particle_group_index).map_x, particle_group_list(particle_group_index).map_y).particle_group_index = 0
+
+    End If
+    
+    particle_group_list(particle_group_index) = temp
+            
+    'Update array size
+    If particle_group_index = particle_group_last Then
+
+        Do Until particle_group_list(particle_group_last).Active
+            particle_group_last = particle_group_last - 1
+
+            If particle_group_last = 0 Then
+                particle_group_count = 0
+                Exit Sub
+
+            End If
+
+        Loop
+        ReDim Preserve particle_group_list(1 To particle_group_last)
+
+    End If
+
+    particle_group_count = particle_group_count - 1
+
+End Sub
+
+Public Function Map_Particle_Group_Get(ByVal map_x As Integer, ByVal map_y As Integer) As Long
+ 
+    If InMapBounds(map_x, map_y) Then
+        Map_Particle_Group_Get = MapData(map_x, map_y).particle_group_index
+    Else
+        Map_Particle_Group_Get = 0
+
+    End If
+
+End Function
+
+

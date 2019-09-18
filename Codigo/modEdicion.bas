@@ -1277,7 +1277,7 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
         ElseIf frmMain.cQuitarParticula Then
 
             If MapData(tX, tY).particle_group_index Then
-                Call modDXEngine.Particle_Group_Remove(MapData(tX, tY).particle_group_index)
+                Call modOreEngine.Particle_Group_Remove(MapData(tX, tY).particle_group_index)
                 MapData(tX, tY).particle_group_index = 0
                 MapData(tX, tY).parti_index = 0
 

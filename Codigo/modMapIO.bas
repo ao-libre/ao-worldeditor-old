@@ -159,36 +159,43 @@ Public Sub NuevoMapa()
     Dim loopc As Integer
 
     bAutoGuardarMapaCount = 0
+    
+    With frmMain
+    
+        '.mnuUtirialNuevoFormato.Checked = True
+        .mnuReAbrirMapa.Enabled = False
+        .TimAutoGuardarMapa.Enabled = False
+        .lblMapVersion.Caption = 0
 
-    'frmMain.mnuUtirialNuevoFormato.Checked = True
-    frmMain.mnuReAbrirMapa.Enabled = False
-    frmMain.TimAutoGuardarMapa.Enabled = False
-    frmMain.lblMapVersion.Caption = 0
+        MapaCargado = False
 
-    MapaCargado = False
+        For loopc = 0 To frmMain.MapPest.Count - 1
+            .MapPest(loopc).Enabled = False
+        Next
 
-    For loopc = 0 To frmMain.MapPest.Count - 1
-        frmMain.MapPest(loopc).Enabled = False
-    Next
-
-    frmMain.MousePointer = 11
-
+        .MousePointer = 11
+    
+    End With
+    
     ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize) As MapBlock
 
     For loopc = 1 To LastChar
-
         If CharList(loopc).Active = 1 Then Call EraseChar(loopc)
     Next loopc
-
-    MapInfo.MapVersion = 0
-    MapInfo.name = "Nuevo Mapa"
-    MapInfo.Music = 0
-    MapInfo.PK = True
-    MapInfo.MagiaSinEfecto = 0
-    MapInfo.Terreno = "BOSQUE"
-    MapInfo.Zona = "CAMPO"
-    MapInfo.Restringir = "NO"
-    MapInfo.NoEncriptarMP = 0
+    
+    With MapInfo
+    
+        .MapVersion = 0
+        .name = "Nuevo Mapa"
+        .Music = 0
+        .PK = True
+        .MagiaSinEfecto = 0
+        .Terreno = "BOSQUE"
+        .Zona = "CAMPO"
+        .Restringir = "NO"
+        .NoEncriptarMP = 0
+    
+    End With
 
     Call MapInfo_Actualizar
 
@@ -199,7 +206,7 @@ Public Sub NuevoMapa()
     frmMain.MousePointer = 0
 
     ' Vacio deshacer
-    modEdicion.Deshacer_Clear
+    Call modEdicion.Deshacer_Clear
 
     MapaCargado = True
 
@@ -216,23 +223,14 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     On Error GoTo ErrorSave
 
     Dim FreeFileMap As Long
-
     Dim FreeFileInf As Long
-
     Dim loopc       As Long
-
     Dim TempInt     As Integer
-
     Dim Y           As Long
-
     Dim X           As Long
-
     Dim ByFlags     As Byte
-
     Dim R           As Byte
-
     Dim G           As Byte
-
     Dim B           As Byte
 
     If General_File_Exist(SaveAs, vbNormal) = True Then
@@ -551,34 +549,22 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
     On Error Resume Next
 
     Dim TempInt     As Integer
-
     Dim Body        As Integer
-
     Dim Head        As Integer
-
     Dim Heading     As Byte
-
     Dim Y           As Integer
-
     Dim X           As Integer
-
     Dim ByFlags     As Byte
-
     Dim FreeFileMap As Long
-
     Dim FreeFileInf As Long
-
     Dim TempLng     As Long
-
     Dim TempByte1   As Byte
-
     Dim TempByte2   As Byte
-
     Dim TempByte3   As Byte
            
-    LightDestroyAll
-    Particle_Group_Remove_All
-    Map_ResetMontañita
+    Call LightDestroyAll
+    Call Particle_Group_Remove_All
+    Call Map_ResetMontañita
     
     'Change mouse icon
     frmMain.MousePointer = 11
@@ -749,14 +735,14 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
         
         Map = left$(Map, Len(Map) - 4) & ".dat"
         
-        MapInfo_Cargar Map
+        Call MapInfo_Cargar(Map)
         frmMain.lblMapVersion.Caption = MapInfo.MapVersion
         
         'Set changed flag
         MapInfo.Changed = 0
         
         ' Vacia el Deshacer
-        modEdicion.Deshacer_Clear
+        Call modEdicion.Deshacer_Clear
 
     End If
     
@@ -780,24 +766,17 @@ Public Sub MapaV1_Cargar(ByVal Map As String)
     On Error Resume Next
 
     Dim loopc       As Integer
-
     Dim TempInt     As Integer
-
     Dim Body        As Integer
-
     Dim Head        As Integer
-
     Dim Heading     As Byte
-
     Dim Y           As Integer
-
     Dim X           As Integer
-
     Dim FreeFileMap As Long
-
     Dim FreeFileInf As Long
 
     DoEvents
+    
     'Change mouse icon
     frmMain.MousePointer = 11
     
@@ -1041,13 +1020,12 @@ Public Sub MapInfo_Cargar(ByVal Archivo As String)
     On Error Resume Next
 
     Dim Leer  As New clsIniReader
-
     Dim loopc As Integer
-
     Dim Path  As String
 
     MapTitulo = Empty
-    Leer.Initialize Archivo
+    
+    Call Leer.Initialize(Archivo)
 
     For loopc = Len(Archivo) To 1 Step -1
 
@@ -1060,25 +1038,29 @@ Public Sub MapInfo_Cargar(ByVal Archivo As String)
     Next
     Archivo = Right(Archivo, Len(Archivo) - (Len(Path)))
     MapTitulo = UCase(left(Archivo, Len(Archivo) - 4))
-
-    MapInfo.name = Leer.GetValue(MapTitulo, "Name")
-    MapInfo.Music = Leer.GetValue(MapTitulo, "MusicNum")
-    MapInfo.MagiaSinEfecto = Val(Leer.GetValue(MapTitulo, "MagiaSinEfecto"))
-    MapInfo.InviSinEfecto = Val(Leer.GetValue(MapTitulo, "InviSinEfecto"))
-    MapInfo.ResuSinEfecto = Val(Leer.GetValue(MapTitulo, "ResuSinEfecto"))
-    MapInfo.NoEncriptarMP = Val(Leer.GetValue(MapTitulo, "NoEncriptarMP"))
     
-    If Val(Leer.GetValue(MapTitulo, "Pk")) = 0 Then
-        MapInfo.PK = True
-    Else
-        MapInfo.PK = False
-
-    End If
+    With MapInfo
     
-    MapInfo.Terreno = Leer.GetValue(MapTitulo, "Terreno")
-    MapInfo.Zona = Leer.GetValue(MapTitulo, "Zona")
-    MapInfo.Restringir = Leer.GetValue(MapTitulo, "Restringir")
-    MapInfo.BackUp = Val(Leer.GetValue(MapTitulo, "BACKUP"))
+        .name = Leer.GetValue(MapTitulo, "Name")
+        .Music = Leer.GetValue(MapTitulo, "MusicNum")
+        .MagiaSinEfecto = Val(Leer.GetValue(MapTitulo, "MagiaSinEfecto"))
+        .InviSinEfecto = Val(Leer.GetValue(MapTitulo, "InviSinEfecto"))
+        .ResuSinEfecto = Val(Leer.GetValue(MapTitulo, "ResuSinEfecto"))
+        .NoEncriptarMP = Val(Leer.GetValue(MapTitulo, "NoEncriptarMP"))
+    
+        If Val(Leer.GetValue(MapTitulo, "Pk")) = 0 Then
+            MapInfo.PK = True
+        Else
+            MapInfo.PK = False
+
+        End If
+    
+        .Terreno = Leer.GetValue(MapTitulo, "Terreno")
+        .Zona = Leer.GetValue(MapTitulo, "Zona")
+        .Restringir = Leer.GetValue(MapTitulo, "Restringir")
+        .BackUp = Val(Leer.GetValue(MapTitulo, "BACKUP"))
+    
+    End With
     
     Call MapInfo_Actualizar
     
@@ -1097,20 +1079,26 @@ Public Sub MapInfo_Actualizar()
     On Error Resume Next
 
     ' Mostrar en Formularios
-    frmMapInfo.txtMapNombre.Text = MapInfo.name
-    frmMapInfo.txtMapMusica.Text = MapInfo.Music
-    frmMapInfo.txtMapTerreno.Text = MapInfo.Terreno
-    frmMapInfo.txtMapZona.Text = MapInfo.Zona
-    frmMapInfo.txtMapRestringir.Text = MapInfo.Restringir
-    frmMapInfo.chkMapBackup.value = MapInfo.BackUp
-    frmMapInfo.chkMapMagiaSinEfecto.value = MapInfo.MagiaSinEfecto
-    frmMapInfo.chkMapInviSinEfecto.value = MapInfo.InviSinEfecto
-    frmMapInfo.chkMapResuSinEfecto.value = MapInfo.ResuSinEfecto
-    frmMapInfo.chkMapNoEncriptarMP.value = MapInfo.NoEncriptarMP
-    frmMapInfo.chkMapPK.value = IIf(MapInfo.PK = True, 1, 0)
-    frmMapInfo.txtMapVersion = MapInfo.MapVersion
-    frmMain.lblMapNombre = MapInfo.name
-    frmMain.lblMapMusica = MapInfo.Music
+    With frmMapInfo
+        .txtMapNombre.Text = MapInfo.name
+        .txtMapMusica.Text = MapInfo.Music
+        .txtMapTerreno.Text = MapInfo.Terreno
+        .txtMapZona.Text = MapInfo.Zona
+        .txtMapRestringir.Text = MapInfo.Restringir
+        .chkMapBackup.value = MapInfo.BackUp
+        .chkMapMagiaSinEfecto.value = MapInfo.MagiaSinEfecto
+        .chkMapInviSinEfecto.value = MapInfo.InviSinEfecto
+        .chkMapResuSinEfecto.value = MapInfo.ResuSinEfecto
+        .chkMapNoEncriptarMP.value = MapInfo.NoEncriptarMP
+        .chkMapPK.value = IIf(MapInfo.PK = True, 1, 0)
+        .txtMapVersion = MapInfo.MapVersion
+    End With
+    
+    With frmMain
+        .lblMapNombre = MapInfo.name
+        .lblMapMusica = MapInfo.Music
+    End With
+    
 
 End Sub
 
