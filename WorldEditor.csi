@@ -1,0 +1,11 @@
+[History]
+1=#P0#=mb	#P1#=General_Particle_Create	#P2#=WorldEditor/modOreEngine/General_Particle_Create	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917201232	#P7#=0	#P8#=9	.
+2=#P0#=mb	#P1#=CargarParticulas	#P2#=WorldEditor/modOreEngine/CargarParticulas	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917201434	#P7#=0	#P8#=52	.
+3=#P0#=mb	#P1#=Grh_Load_All	#P2#=WorldEditor/modGrh/Grh_Load_All	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917200831	#P7#=0	#P8#=10	.
+4=#P0#=mb	#P1#=CargarIndicesNPC	#P2#=WorldEditor/modIndices/CargarIndicesNPC	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917200813	#P7#=0	#P8#=39	.
+5=#P0#=mb	#P1#=CargarIndicesDeCabezas	#P2#=WorldEditor/modIndices/CargarIndicesDeCabezas	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917200643	#P7#=0	#P8#=24	.
+6=#P0#=mb	#P1#=CargarIndicesDeCuerpos	#P2#=WorldEditor/modIndices/CargarIndicesDeCuerpos	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917200629	#P7#=0	#P8#=45	.
+7=#P0#=mb	#P1#=CargarIndicesTriggers	#P2#=WorldEditor/modIndices/CargarIndicesTriggers	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917200531	#P7#=0	#P8#=18	.
+8=#P0#=mb	#P1#=CargarIndicesOBJ	#P2#=WorldEditor/modIndices/CargarIndicesOBJ	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917193545	#P7#=0	#P8#=18	.
+9=#P0#=mb	#P1#=Load_Texture	#P2#=WorldEditor/clsTextureManager/Load_Texture	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917193058	#P7#=0	#P8#=13	.
+10=#P0#=mb	#P1#=CargarIndicesSuperficie	#P2#=WorldEditor/modIndices/CargarIndicesSuperficie	#P3#=	#P4#=	#P5#=MembMethodPublic	#P6#=20190917193355	#P7#=0	#P8#=25	.

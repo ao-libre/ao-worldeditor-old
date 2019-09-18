@@ -121,10 +121,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
 Private Sub Command_Click()
-Map_CreateMontañita Text1.Text, Text2.Text, Text3.Text, Text4.Text
+    Map_CreateMontañita Text1.Text, Text2.Text, Text3.Text, Text4.Text
+
 End Sub
 
 Private Sub Command1_Click()
-Map_ResetMontañita
+    Map_ResetMontañita
+
 End Sub
