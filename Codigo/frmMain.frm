@@ -414,12 +414,12 @@ Begin VB.Form frmMain
          Visible         =   0   'False
          Width           =   1860
          Begin VB.TextBox txtParticula 
+            Alignment       =   2  'Center
             BackColor       =   &H80000006&
             ForeColor       =   &H80000005&
             Height          =   375
             Left            =   900
             TabIndex        =   111
-            Text            =   "Text1"
             Top             =   255
             Width           =   555
          End
