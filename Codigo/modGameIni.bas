@@ -30,15 +30,18 @@ Attribute VB_Name = "modGameIni"
 Option Explicit
 
 Public Type tCabecera 'Cabecera de los con
+
     Desc As String * 255
     CRC As Long
     MagicWord As Long
+
 End Type
 
 Public Type tGameIni
+
     Puerto As Long
     Musica As Byte
-    fx As Byte
+    fX As Byte
     tip As Byte
     Password As String
     name As String
@@ -48,49 +51,59 @@ Public Type tGameIni
     DirMapas As String
     NumeroDeBMPs As Long
     NumeroMapas As Integer
+
 End Type
 
-Public MiCabecera As tCabecera
+Public MiCabecera    As tCabecera
+
 Public Config_Inicio As tGameIni
 
 Public Sub IniciarCabecera(ByRef Cabecera As tCabecera)
-'*************************************************
-'Author: Unkwown
-'Last modified: 20/05/06
-'*************************************************
-Cabecera.Desc = "Argentum Online by Noland Studios. Copyright Noland-Studios 2001, pablomarquez@noland-studios.com.ar"
-Cabecera.CRC = Rnd * 100
-Cabecera.MagicWord = Rnd * 10
+    '*************************************************
+    'Author: Unkwown
+    'Last modified: 20/05/06
+    '*************************************************
+    Cabecera.Desc = "Argentum Online by Noland Studios. Copyright Noland-Studios 2001, pablomarquez@noland-studios.com.ar"
+    Cabecera.CRC = Rnd * 100
+    Cabecera.MagicWord = Rnd * 10
+
 End Sub
 
 Public Function LeerGameIni() As tGameIni
-'*************************************************
-'Author: Unkwown
-'Last modified: 20/05/06
-'*************************************************
-Dim n As Integer
-Dim GameIni As tGameIni
-n = FreeFile
-Open DirIndex & "Inicio.con" For Binary As #n
-Get #n, , MiCabecera
 
-Get #n, , GameIni
+    '*************************************************
+    'Author: Unkwown
+    'Last modified: 20/05/06
+    '*************************************************
+    Dim n       As Integer
 
-Close #n
-LeerGameIni = GameIni
+    Dim GameIni As tGameIni
+
+    n = FreeFile
+    Open DirIndex & "Inicio.con" For Binary As #n
+    Get #n, , MiCabecera
+
+    Get #n, , GameIni
+
+    Close #n
+    LeerGameIni = GameIni
+
 End Function
 
 Public Sub EscribirGameIni(ByRef GameIniConfiguration As tGameIni)
-'*************************************************
-'Author: Unkwown
-'Last modified: 20/05/06
-'*************************************************
-Dim n As Integer
-n = FreeFile
-Open DirIndex & "Inicio.con" For Binary As #n
-Put #n, , MiCabecera
-GameIniConfiguration.Password = "DAMMLAMERS!"
-Put #n, , GameIniConfiguration
-Close #n
+
+    '*************************************************
+    'Author: Unkwown
+    'Last modified: 20/05/06
+    '*************************************************
+    Dim n As Integer
+
+    n = FreeFile
+    Open DirIndex & "Inicio.con" For Binary As #n
+    Put #n, , MiCabecera
+    GameIniConfiguration.Password = "DAMMLAMERS!"
+    Put #n, , GameIniConfiguration
+    Close #n
+
 End Sub
 

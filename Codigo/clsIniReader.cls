@@ -58,8 +58,10 @@ Option Base 0
 '
 
 Private Type ChildNode
+
     Key As String
     value As String
+
 End Type
 
 ''
@@ -73,9 +75,11 @@ End Type
 '
 
 Private Type MainNode
+
     name As String
     values() As ChildNode
     numValues As Integer
+
 End Type
 
 ''
@@ -86,18 +90,19 @@ Private fileData() As MainNode
 ''
 'Stores the total number of main sections in the loaded INI file
 '
-Private MainNodes As Long
+Private MainNodes  As Long
 
 ''
 'Default constructor. Does nothing.
 '
 
 Private Sub Class_Initialize()
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    '
+    '**************************************************************
 End Sub
 
 ''
@@ -105,21 +110,25 @@ End Sub
 '
 
 Private Sub Class_Terminate()
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    '
+    '**************************************************************
     Dim i As Long
     
     'Clean up
     If MainNodes Then
+
         For i = 1 To MainNodes - 1
             Erase fileData(i).values
         Next i
         
         Erase fileData
+
     End If
+
 End Sub
 
 ''
@@ -130,14 +139,17 @@ End Sub
 '
 
 Public Sub Initialize(ByVal file As String)
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Opens the requested file and loads it's data into memory
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Opens the requested file and loads it's data into memory
+    '**************************************************************
     Dim handle As Integer
-    Dim Text As String
-    Dim Pos As Long
+
+    Dim Text   As String
+
+    Dim Pos    As Long
     
     'Get a free handle and start reading line by line until the end
     handle = FreeFile
@@ -149,10 +161,12 @@ Public Sub Initialize(ByVal file As String)
         
         'Is it null??
         If Len(Text) Then
+
             'If it starts with '[' it is a main node or nothing (GetPrivateProfileStringA works this way), otherwise it's a value
             If left$(Text, 1) = "[" Then
                 'If it has an ending ']' it's a main node, otherwise it's nothing
                 Pos = InStr(2, Text, "]")
+
                 If Pos Then
                     'Add a main node
                     ReDim Preserve fileData(MainNodes) As MainNode
@@ -160,13 +174,18 @@ Public Sub Initialize(ByVal file As String)
                     fileData(MainNodes).name = UCase$(Trim$(mid$(Text, 2, Pos - 2)))
                     
                     MainNodes = MainNodes + 1
+
                 End If
+
             Else
                 'So it's a value. Check if it has a '=', otherwise it's nothing
                 Pos = InStr(2, Text, "=")
+
                 If Pos Then
+
                     'Is it under any main node??
                     If MainNodes Then
+
                         With fileData(MainNodes - 1)
                             'Add it to the main node's value
                             ReDim Preserve .values(.numValues) As ChildNode
@@ -175,11 +194,17 @@ Public Sub Initialize(ByVal file As String)
                             .values(.numValues).Key = UCase$(left$(Text, Pos - 1))
                             
                             .numValues = .numValues + 1
+
                         End With
+
                     End If
+
                 End If
+
             End If
+
         End If
+
     Loop
     
     Close handle
@@ -192,10 +217,12 @@ Public Sub Initialize(ByVal file As String)
         
         'Sort values of each node to allow binary search
         For i = 0 To MainNodes - 1
-            If fileData(i).numValues Then _
-                Call SortChildNodes(fileData(i), 0, fileData(i).numValues - 1)
+
+            If fileData(i).numValues Then Call SortChildNodes(fileData(i), 0, fileData(i).numValues - 1)
         Next i
+
     End If
+
 End Sub
 
 ''
@@ -207,15 +234,19 @@ End Sub
 '
 
 Private Sub SortChildNodes(ByRef Node As MainNode, ByVal first As Integer, ByVal last As Integer)
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Sorts the list of values in a given MainNode using quicksort,
-'this allows the use of Binary Search for faster searches
-'**************************************************************
-    Dim min As Integer      'First item in the list
-    Dim max As Integer      'Last item in the list
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Sorts the list of values in a given MainNode using quicksort,
+    'this allows the use of Binary Search for faster searches
+    '**************************************************************
+    Dim min  As Integer      'First item in the list
+
+    Dim max  As Integer      'Last item in the list
+
     Dim comp As String      'Item used to compare
+
     Dim temp As ChildNode
     
     min = first
@@ -228,21 +259,27 @@ Private Sub SortChildNodes(ByRef Node As MainNode, ByVal first As Integer, ByVal
             Do While .values(min).Key < comp And min < last
                 min = min + 1
             Loop
+
             Do While .values(max).Key > comp And max > first
                 max = max - 1
             Loop
+
             If min <= max Then
                 temp = .values(min)
                 .values(min) = .values(max)
                 .values(max) = temp
                 min = min + 1
                 max = max - 1
+
             End If
+
         Loop
+
     End With
     
     If first < max Then SortChildNodes Node, first, max
     If min < last Then SortChildNodes Node, min, last
+
 End Sub
 
 ''
@@ -253,15 +290,19 @@ End Sub
 '
 
 Private Sub SortMainNodes(ByVal first As Integer, ByVal last As Integer)
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Sorts the MainNodes list using quicksort,
-'this allows the use of Binary Search for faster searches
-'**************************************************************
-    Dim min As Integer      'First item in the list
-    Dim max As Integer      'Last item in the list
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Sorts the MainNodes list using quicksort,
+    'this allows the use of Binary Search for faster searches
+    '**************************************************************
+    Dim min  As Integer      'First item in the list
+
+    Dim max  As Integer      'Last item in the list
+
     Dim comp As String      'Item used to compare
+
     Dim temp As MainNode
     
     min = first
@@ -273,20 +314,25 @@ Private Sub SortMainNodes(ByVal first As Integer, ByVal last As Integer)
         Do While fileData(min).name < comp And min < last
             min = min + 1
         Loop
+
         Do While fileData(max).name > comp And max > first
             max = max - 1
         Loop
+
         If min <= max Then
             temp = fileData(min)
             fileData(min) = fileData(max)
             fileData(max) = temp
             min = min + 1
             max = max - 1
+
         End If
+
     Loop
     
     If first < max Then SortMainNodes first, max
     If min < last Then SortMainNodes min, last
+
 End Sub
 
 ''
@@ -298,12 +344,14 @@ End Sub
 '
 
 Public Function GetValue(ByVal Main As String, ByVal Key As String) As String
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Returns a value if the key and main node exist, or a nullstring otherwise
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Returns a value if the key and main node exist, or a nullstring otherwise
+    '**************************************************************
     Dim i As Long
+
     Dim j As Long
     
     'Search for the main node
@@ -315,7 +363,9 @@ Public Function GetValue(ByVal Main As String, ByVal Key As String) As String
         
         'If we found it we return it
         If j >= 0 Then GetValue = fileData(i).values(j).value
+
     End If
+
 End Function
 
 ''
@@ -327,14 +377,17 @@ End Function
 '
 
 Private Function FindKey(ByRef Node As MainNode, ByVal Key As String) As Long
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Returns the index of the value which key matches the requested one,
-'or the negation of the position were it should be if not found
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Returns the index of the value which key matches the requested one,
+    'or the negation of the position were it should be if not found
+    '**************************************************************
     Dim min As Long
+
     Dim max As Long
+
     Dim mid As Long
     
     min = 0
@@ -351,12 +404,15 @@ Private Function FindKey(ByRef Node As MainNode, ByVal Key As String) As Long
             'We found it
             FindKey = mid
             Exit Function
+
         End If
+
     Loop
     
     'Not found, return the negation of the position where it should be
     '(all higher values are to the right of the list and lower values are to the left)
     FindKey = Not mid
+
 End Function
 
 ''
@@ -367,14 +423,17 @@ End Function
 '
 
 Private Function FindMain(ByVal name As String) As Long
-'**************************************************************
-'Author: Juan Martín Sotuyo Dodero
-'Last Modify Date: 5/01/2006
-'Returns the index of the MainNode which name matches the requested one,
-'or the negation of the position were it should be if not found
-'**************************************************************
+
+    '**************************************************************
+    'Author: Juan Martín Sotuyo Dodero
+    'Last Modify Date: 5/01/2006
+    'Returns the index of the MainNode which name matches the requested one,
+    'or the negation of the position were it should be if not found
+    '**************************************************************
     Dim min As Long
+
     Dim max As Long
+
     Dim mid As Long
     
     min = 0
@@ -391,10 +450,13 @@ Private Function FindMain(ByVal name As String) As Long
             'We found it
             FindMain = mid
             Exit Function
+
         End If
+
     Loop
     
     'Not found, return the negation of the position where it should be
     '(all higher values are to the right of the list and lower values are to the left)
     FindMain = Not mid
+
 End Function

@@ -33,35 +33,50 @@ Option Explicit
 '
 
 Public Sub CargarIndicesSuperficie()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 29/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 29/05/06
+    '*************************************************
 
-On Error GoTo Fallo
+    On Error GoTo Fallo
+
     If General_File_Exist(inipath & "GrhIndex\indices.ini", vbArchive) = False Then
-        MsgBox "Falta el archivo 'GrhIndex\indices.ini'", vbCritical
+        Call MsgBox("Falta el archivo 'GrhIndex\indices.ini'", vbCritical)
         End
     End If
+
     Dim Leer As New clsIniReader
-    Dim i As Integer
-    Leer.Initialize inipath & "GrhIndex\indices.ini"
+    Dim i    As Integer
+
+    Call Leer.Initialize(inipath & "GrhIndex\indices.ini")
+    
     MaxSup = Leer.GetValue("INIT", "Referencias")
     ReDim SupData(MaxSup) As SupData
-    frmMain.lListado(0).Clear
+    
+    Call frmMain.lListado(0).Clear
+
     For i = 0 To MaxSup
-        SupData(i).name = Leer.GetValue("REFERENCIA" & i, "Nombre")
-        SupData(i).Grh = Val(Leer.GetValue("REFERENCIA" & i, "GrhIndice"))
-        SupData(i).Width = Val(Leer.GetValue("REFERENCIA" & i, "Ancho"))
-        SupData(i).Height = Val(Leer.GetValue("REFERENCIA" & i, "Alto"))
-        SupData(i).Block = IIf(Val(Leer.GetValue("REFERENCIA" & i, "Bloquear")) = 1, True, False)
-        SupData(i).Capa = Val(Leer.GetValue("REFERENCIA" & i, "Capa"))
-        frmMain.lListado(0).AddItem SupData(i).name & " - #" & i
+
+        With SupData(i)
+        
+            .name = Leer.GetValue("REFERENCIA" & i, "Nombre")
+            .Grh = Val(Leer.GetValue("REFERENCIA" & i, "GrhIndice"))
+            .Width = Val(Leer.GetValue("REFERENCIA" & i, "Ancho"))
+            .Height = Val(Leer.GetValue("REFERENCIA" & i, "Alto"))
+            .Block = IIf(Val(Leer.GetValue("REFERENCIA" & i, "Bloquear")) = 1, True, False)
+            .Capa = Val(Leer.GetValue("REFERENCIA" & i, "Capa"))
+            Call frmMain.lListado(0).AddItem(.name & " - #" & i)
+        
+        End With
+        
     Next
+    
     DoEvents
+    
     Exit Sub
 Fallo:
-    MsgBox "Error al intentar cargar el indice " & i & " de GrhIndex\indices.ini" & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
+    Call MsgBox("Error al intentar cargar el indice " & i & " de GrhIndex\indices.ini" & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly)
+
 End Sub
 
 ''
@@ -69,38 +84,53 @@ End Sub
 '
 
 Public Sub CargarIndicesOBJ()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 20/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 20/05/06
+    '*************************************************
 
-On Error GoTo Fallo
+    On Error GoTo Fallo
+
     If General_File_Exist(DirDats & "\OBJ.dat", vbArchive) = False Then
-        MsgBox "Falta el archivo 'OBJ.dat' en " & DirDats, vbCritical
+        Call MsgBox("Falta el archivo 'OBJ.dat' en " & DirDats, vbCritical)
         End
+
     End If
-    Dim Obj As Integer
+
+    Dim Obj  As Integer
     Dim Leer As New clsIniReader
+
     Call Leer.Initialize(DirDats & "\OBJ.dat")
-    frmMain.lListado(3).Clear
+    
+    'Limpio la lista
+    Call frmMain.lListado(3).Clear
+    
     NumOBJs = Val(Leer.GetValue("INIT", "NumOBJs"))
     ReDim ObjData(1 To NumOBJs) As ObjData
+
     For Obj = 1 To NumOBJs
         frmCargando.X.Caption = "Cargando Datos de Objetos..." & Obj & "/" & NumOBJs
         DoEvents
-        ObjData(Obj).name = Leer.GetValue("OBJ" & Obj, "Name")
-        ObjData(Obj).Grh_Index = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
-        ObjData(Obj).ObjType = Val(Leer.GetValue("OBJ" & Obj, "ObjType"))
-        ObjData(Obj).Ropaje = Val(Leer.GetValue("OBJ" & Obj, "NumRopaje"))
-        ObjData(Obj).Info = Leer.GetValue("OBJ" & Obj, "Info")
-        ObjData(Obj).WeaponAnim = Val(Leer.GetValue("OBJ" & Obj, "Anim"))
-        ObjData(Obj).Texto = Leer.GetValue("OBJ" & Obj, "Texto")
-        ObjData(Obj).GrhSecundario = Val(Leer.GetValue("OBJ" & Obj, "GrhSec"))
-        frmMain.lListado(3).AddItem ObjData(Obj).name & " - #" & Obj
+        
+        With ObjData(Obj)
+        
+            .name = Leer.GetValue("OBJ" & Obj, "Name")
+            .grh_index = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
+            .ObjType = Val(Leer.GetValue("OBJ" & Obj, "ObjType"))
+            .Ropaje = Val(Leer.GetValue("OBJ" & Obj, "NumRopaje"))
+            .Info = Leer.GetValue("OBJ" & Obj, "Info")
+            .WeaponAnim = Val(Leer.GetValue("OBJ" & Obj, "Anim"))
+            .Texto = Leer.GetValue("OBJ" & Obj, "Texto")
+            .GrhSecundario = Val(Leer.GetValue("OBJ" & Obj, "GrhSec"))
+            Call frmMain.lListado(3).AddItem(.name & " - #" & Obj)
+        
+        End With
+
     Next Obj
+
     Exit Sub
 Fallo:
-MsgBox "Error al intentar cargar el Objteto " & Obj & " de OBJ.dat en " & DirDats & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
+    Call MsgBox("Error al intentar cargar el Objteto " & Obj & " de OBJ.dat en " & DirDats & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly)
 
 End Sub
 
@@ -109,27 +139,34 @@ End Sub
 '
 
 Public Sub CargarIndicesTriggers()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 28/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 28/05/06
+    '*************************************************
 
-On Error GoTo Fallo
+    On Error GoTo Fallo
+
     If General_File_Exist(DirIndex & "Triggers.ini", vbArchive) = False Then
         MsgBox "Falta el archivo 'Triggers.ini' en " & DirIndex, vbCritical
         End
+
     End If
+
     Dim NumT As Integer
-    Dim T As Integer
+    Dim T    As Integer
     Dim Leer As New clsIniReader
+
     Call Leer.Initialize(DirIndex & "Triggers.ini")
-    frmMain.lListado(4).Clear
+    
+    Call frmMain.lListado(4).Clear
+    
     NumT = Val(Leer.GetValue("INIT", "NumTriggers"))
+
     For T = 1 To NumT
-         frmMain.lListado(4).AddItem Leer.GetValue("Trig" & T, "Name") & " - #" & (T - 1)
+        Call frmMain.lListado(4).AddItem(Leer.GetValue("Trig" & T, "Name") & " - #" & (T - 1))
     Next T
 
-Exit Sub
+    Exit Sub
 Fallo:
     MsgBox "Error al intentar cargar el Trigger " & T & " de Triggers.ini en " & DirIndex & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
 
@@ -140,15 +177,17 @@ End Sub
 '
 
 Public Sub CargarIndicesDeCuerpos()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 29/05/06
-'*************************************************
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 29/05/06
+    '*************************************************
 
-On Error GoTo Fallo
+    On Error GoTo Fallo
+
     If Not General_File_Exist(DirIndex & "Personajes.ind", vbArchive) Then
-        MsgBox "Falta el archivo 'Personajes.ind' en " & DirIndex, vbCritical
+        Call MsgBox("Falta el archivo 'Personajes.ind' en " & DirIndex, vbCritical)
         End
+
     End If
     
     Dim n As Integer
@@ -156,30 +195,33 @@ On Error GoTo Fallo
     
     n = FreeFile
     Open DirIndex & "Personajes.ind" For Binary Access Read As #n
+        
         'cabecera
         Get #n, , MiCabecera
         'num de cabezas
         Get #n, , NumBodies
-        
+            
         'Resize array
         ReDim BodyData(1 To NumBodies) As tBodyData
         ReDim MisCuerpos(1 To NumBodies) As tIndiceCuerpo
-        
+            
         For i = 1 To NumBodies
             Get #n, , MisCuerpos(i)
-            
-            Grh_Initialize BodyData(i).Walk(1), MisCuerpos(i).Body(1), , , 0
-            Grh_Initialize BodyData(i).Walk(2), MisCuerpos(i).Body(2), , , 0
-            Grh_Initialize BodyData(i).Walk(3), MisCuerpos(i).Body(3), , , 0
-            Grh_Initialize BodyData(i).Walk(4), MisCuerpos(i).Body(4), , , 0
-            
+                
+            Call Grh_Initialize(BodyData(i).Walk(1), MisCuerpos(i).Body(1), , , 0)
+            Call Grh_Initialize(BodyData(i).Walk(2), MisCuerpos(i).Body(2), , , 0)
+            Call Grh_Initialize(BodyData(i).Walk(3), MisCuerpos(i).Body(3), , , 0)
+            Call Grh_Initialize(BodyData(i).Walk(4), MisCuerpos(i).Body(4), , , 0)
+                
             BodyData(i).HeadOffset.X = MisCuerpos(i).HeadOffsetX
-            BodyData(i).HeadOffset.y = MisCuerpos(i).HeadOffsetY
+            BodyData(i).HeadOffset.Y = MisCuerpos(i).HeadOffsetY
         Next i
+
     Close #n
-Exit Sub
+    
+    Exit Sub
 Fallo:
-    MsgBox "Error al intentar cargar el Cuerpo " & i & " de Personajes.ind en " & DirIndex & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
+    Call MsgBox("Error al intentar cargar el Cuerpo " & i & " de Personajes.ind en " & DirIndex & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly)
 
 End Sub
 
@@ -188,98 +230,107 @@ End Sub
 '
 
 Public Sub CargarIndicesDeCabezas()
-On Error GoTo Fallo
+
+    On Error GoTo Fallo
+
     If Not General_File_Exist(DirIndex & "Cabezas.ind", vbArchive) Then
         MsgBox "Falta el archivo 'Cabezas.ind' en " & DirIndex, vbCritical
         End
+
     End If
     
-    Dim n As Integer
-    Dim i As Long
+    Dim n            As Integer
+    Dim i            As Long
     Dim MisCabezas() As tIndiceCabeza
     
     n = FreeFile()
     
     Open DirIndex & "Cabezas.ind" For Binary Access Read As #n
+    
         'cabecera
         Get #n, , MiCabecera
+        
         'num de cabezas
         Get #n, , Numheads
+        
         'Resize array
         ReDim HeadData(0 To Numheads) As tHeadData
         ReDim MisCabezas(0 To Numheads) As tIndiceCabeza
-        
+            
         For i = 1 To Numheads
             Get #n, , MisCabezas(i)
-            
+                
             If MisCabezas(i).Head(1) Then
                 Call Grh_Initialize(HeadData(i).Head(1), MisCabezas(i).Head(1), , , 0)
                 Call Grh_Initialize(HeadData(i).Head(2), MisCabezas(i).Head(2), , , 0)
                 Call Grh_Initialize(HeadData(i).Head(3), MisCabezas(i).Head(3), , , 0)
                 Call Grh_Initialize(HeadData(i).Head(4), MisCabezas(i).Head(4), , , 0)
+    
             End If
+    
         Next i
+
     Close #n
-Exit Sub
+    Exit Sub
 Fallo:
     MsgBox "Error al intentar cargar la Cabeza " & i & " de Cabezas.ind en " & DirIndex & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
 
 End Sub
-
 
 ''
 ' Carga los indices de NPCs
 '
 
 Public Sub CargarIndicesNPC()
-'*************************************************
-'Author: ^[GS]^
-'Last modified: 26/05/06
-'*************************************************
-On Error Resume Next
-'On Error GoTo Fallo
+
+    '*************************************************
+    'Author: ^[GS]^
+    'Last modified: 26/05/06
+    '*************************************************
+    On Error Resume Next
+
+    'On Error GoTo Fallo
     If General_File_Exist(DirDats & "\NPCs.dat", vbArchive) = False Then
         MsgBox "Falta el archivo 'NPCs.dat' en " & DirDats, vbCritical
         End
+
     End If
-    'If general_file_exist(DirDats & "\NPCs-HOSTILES.dat", vbArchive) = False Then
-    '    MsgBox "Falta el archivo 'NPCs-HOSTILES.dat' en " & DirDats, vbCritical
-    '    End
-    'End If
+    
     Dim Trabajando As String
-    Dim NPC As Integer
-    Dim Leer As New clsIniReader
-    frmMain.lListado(1).Clear
-    frmMain.lListado(2).Clear
+    Dim NPC        As Integer
+    Dim Leer       As New clsIniReader
+
+    Call frmMain.lListado(1).Clear
+    Call frmMain.lListado(2).Clear
+    
     Call Leer.Initialize(DirDats & "\NPCs.dat")
+    
     NumNPCs = Val(Leer.GetValue("INIT", "NumNPCs"))
-    'Call Leer.Initialize(DirDats & "\NPCs-HOSTILES.dat")
-    'NumNPCsHOST = Val(Leer.GetValue("INIT", "NumNPCs"))
     ReDim NpcData(1000) As NpcData
+    
     Trabajando = "Dats\NPCs.dat"
-    'Call Leer.Initialize(DirDats & "\NPCs.dat")
-    'MsgBox "  "
+
     For NPC = 1 To NumNPCs
-        NpcData(NPC).name = Leer.GetValue("NPC" & NPC, "Name")
         
-        NpcData(NPC).Body = Val(Leer.GetValue("NPC" & NPC, "Body"))
-        NpcData(NPC).Head = Val(Leer.GetValue("NPC" & NPC, "Head"))
-        NpcData(NPC).Heading = Val(Leer.GetValue("NPC" & NPC, "Heading"))
-        If LenB(NpcData(NPC).name) <> 0 Then frmMain.lListado(1).AddItem NpcData(NPC).name & " - #" & NPC
+        With NpcData(NPC)
+        
+            .name = Leer.GetValue("NPC" & NPC, "Name")
+        
+            .Body = Val(Leer.GetValue("NPC" & NPC, "Body"))
+            .Head = Val(Leer.GetValue("NPC" & NPC, "Head"))
+            .Heading = Val(Leer.GetValue("NPC" & NPC, "Heading"))
+
+            If LenB(NpcData(NPC).name) <> 0 Then
+                Call frmMain.lListado(1).AddItem(.name & " - #" & NPC)
+            End If
+        
+        End With
+        
     Next
-    'MsgBox "  "
-    'Trabajando = "Dats\NPCs-HOSTILES.dat"
-    'Call Leer.Initialize(DirDats & "\NPCs-HOSTILES.dat")
-    'For NPC = 1 To NumNPCsHOST
-    '    NpcData(NPC + 499).name = Leer.GetValue("NPC" & (NPC + 499), "Name")
-    '    NpcData(NPC + 499).Body = Val(Leer.GetValue("NPC" & (NPC + 499), "Body"))
-    '    NpcData(NPC + 499).Head = Val(Leer.GetValue("NPC" & (NPC + 499), "Head"))
-    '    NpcData(NPC + 499).Heading = Val(Leer.GetValue("NPC" & (NPC + 499), "Heading"))
-    '    If LenB(NpcData(NPC + 499).name) <> 0 Then frmMain.lListado(2).AddItem NpcData(NPC + 499).name & " - #" & (NPC + 499)
-    'Next NPC
+
     Exit Sub
 Fallo:
-    MsgBox "Error al intentar cargar el NPC " & NPC & " de " & Trabajando & " en " & DirDats & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly
+    Call MsgBox("Error al intentar cargar el NPC " & NPC & " de " & Trabajando & " en " & DirDats & vbCrLf & "Err: " & Err.Number & " - " & Err.Description, vbCritical + vbOKOnly)
 
 End Sub
 
