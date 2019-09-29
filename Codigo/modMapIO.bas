@@ -1389,14 +1389,16 @@ Public Sub Convertir(ByVal PathMAP As String, ByVal PathCSM As String, ByVal Des
     
     For i = Desde To Hasta
         
-        'Si no existe Mapa i.map, lo omitimos.
-        If Not FileExist(PathMAP & "\Mapa" & i & ".map", vbNormal) Then i = i + 1
+        'Si existe Mapa i.map, lo convertimos.
+        If FileExist(PathMAP & "\Mapa" & i & ".map", vbNormal) Then
         
-        Debug.Print "Abriendo " & PathMAP & "\Mapa" & i & ".map"
-        Call AbrirMapa(PathMAP & "\Mapa" & i & ".map", MapData, False)
+            Debug.Print "Abriendo " & PathMAP & "\Mapa" & i & ".map"
+            Call AbrirMapa(PathMAP & "\Mapa" & i & ".map", MapData, False)
         
-        Debug.Print "Guardando " & CurMap & " .CSM: " & PathCSM & "\Mapa" & i & ".csm"
-        Call Save_CSM(PathCSM & "\Mapa" & i & ".csm")
+            Debug.Print "Guardando " & CurMap & " .CSM: " & PathCSM & "\Mapa" & i & ".csm"
+            Call Save_CSM(PathCSM & "\Mapa" & i & ".csm")
+        
+        End If
         
     Next
     
