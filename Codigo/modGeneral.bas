@@ -294,11 +294,11 @@ Private Sub CargarMapIni()
 
     Dim tStr As String
 
-    Dim Leer As New clsIniReader
+    Dim Leer As New clsIniManager
 
     inipath = App.Path & "\"
 
-    If General_File_Exist(inipath & "WorldEditor.ini", vbArchive) = False Then
+    If FileExist(inipath & "WorldEditor.ini", vbArchive) = False Then
         frmMain.mnuGuardarUltimaConfig.Checked = True
         DirGraficos = inipath & PATH_GRAPHICS & "\"
         DirIndex = inipath & PATH_INIT & "\"
@@ -341,7 +341,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirGraficos, vbDirectory) = False Then
+    If FileExist(DirGraficos, vbDirectory) = False Then
         MsgBox "El directorio de Graficos es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -354,7 +354,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirMidi, vbDirectory) = False Then
+    If FileExist(DirMidi, vbDirectory) = False Then
         MsgBox "El directorio de MIDI es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -368,7 +368,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirIndex, vbDirectory) = False Then
+    If FileExist(DirIndex, vbDirectory) = False Then
         MsgBox "El directorio de Index es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -381,7 +381,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirDats, vbDirectory) = False Then
+    If FileExist(DirDats, vbDirectory) = False Then
         MsgBox "El directorio de Dats es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -394,7 +394,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(dirwavs, vbDirectory) = False Then
+    If FileExist(dirwavs, vbDirectory) = False Then
         MsgBox "El directorio de WAV es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -426,8 +426,8 @@ Private Sub CargarMapIni()
     frmMain.mnuVerGrilla.Checked = Val(Leer.GetValue("MOSTRAR", "Grilla")) ' Grilla
     VerGrilla = frmMain.mnuVerGrilla.Checked
     frmMain.mnuVerBloqueos.Checked = Val(Leer.GetValue("MOSTRAR", "Bloqueos"))
-    frmMain.cVerTriggers.value = frmMain.mnuVerTriggers.Checked
-    frmMain.cVerBloqueos.value = frmMain.mnuVerBloqueos.Checked
+    frmMain.cVerTriggers.Value = frmMain.mnuVerTriggers.Checked
+    frmMain.cVerBloqueos.Value = frmMain.mnuVerBloqueos.Checked
 
     ' Tamaño de visualizacion
     PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
@@ -514,7 +514,7 @@ Public Sub Main()
     If App.PrevInstance = True Then End
     'CambioDeVideo
 
-    'If General_File_Exist(DirIndex & "AO.dat", vbArchive) Then
+    'If FileExist(DirIndex & "AO.dat", vbArchive) Then
     Call LoadClientSetup
     'End If
     Set DXPool = New clsTextureManager
@@ -523,7 +523,7 @@ Public Sub Main()
     Call IniciarCabecera(MiCabecera)
     DoEvents
     
-    If General_File_Exist(inipath & "WorldEditor.jpg", vbArchive) Then frmCargando.Picture1.Picture = LoadPicture(inipath & "WorldEditor.jpg")
+    If FileExist(inipath & "WorldEditor.jpg", vbArchive) Then frmCargando.Picture1.Picture = LoadPicture(inipath & "WorldEditor.jpg")
     
     frmCargando.verX = "v" & App.Major & "." & App.Minor & "." & App.Revision
     frmCargando.Show
@@ -682,14 +682,14 @@ Public Sub Main()
             
             DXEngine_EndRender
             
-            timer_elapsed_time = General_Get_Elapsed_Time()
+            timer_elapsed_time = GetElapsedTime()
             modGrh.AnimSpeedCalculate timer_elapsed_time
 
         End If
         
         Chkflag = Chkflag + 1
         
-        If CurrentGrh.grh_index = 0 Then
+        If CurrentGrh.GrhIndex = 0 Then
             Grh_Initialize CurrentGrh, 1
 
         End If
@@ -721,7 +721,7 @@ Public Sub Main()
 
 End Sub
 
-Public Function general_var_get(file As String, ByVal Main As String, Var As String) As String
+Public Function general_var_get(File As String, ByVal Main As String, Var As String) As String
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
@@ -733,18 +733,18 @@ Public Function general_var_get(file As String, ByVal Main As String, Var As Str
 
     szReturn = vbNullString
     sSpaces = Space(5000) ' This tells the computer how long the longest string can be. If you want, you can change the number 75 to any number you wish
-    GetPrivateProfileString Main, Var, szReturn, sSpaces, Len(sSpaces), file
+    GetPrivateProfileString Main, Var, szReturn, sSpaces, Len(sSpaces), File
     general_var_get = RTrim(sSpaces)
     general_var_get = left(general_var_get, Len(general_var_get) - 1)
 
 End Function
 
-Public Sub WriteVar(file As String, Main As String, Var As String, value As String)
+Public Sub WriteVar(File As String, Main As String, Var As String, Value As String)
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
     '*************************************************
-    writeprivateprofilestring Main, Var, value, file
+    writeprivateprofilestring Main, Var, Value, File
 
 End Sub
 
@@ -793,17 +793,17 @@ Public Sub FixCoasts(ByVal GrhIndex As Integer, ByVal X As Integer, ByVal Y As I
     'Last modified: 20/05/06
     '*************************************************
 
-    If GrhIndex = 7284 Or GrhIndex = 7290 Or GrhIndex = 7291 Or GrhIndex = 7297 Or GrhIndex = 7300 Or GrhIndex = 7301 Or GrhIndex = 7302 Or GrhIndex = 7303 Or GrhIndex = 7304 Or GrhIndex = 7306 Or GrhIndex = 7308 Or GrhIndex = 7310 Or GrhIndex = 7311 Or GrhIndex = 7313 Or GrhIndex = 7314 Or GrhIndex = 7315 Or GrhIndex = 7316 Or GrhIndex = 7317 Or GrhIndex = 7319 Or GrhIndex = 7321 Or GrhIndex = 7325 Or GrhIndex = 7326 Or GrhIndex = 7327 Or GrhIndex = 7328 Or GrhIndex = 7332 Or GrhIndex = 7338 Or GrhIndex = 7339 Or GrhIndex = 7345 Or GrhIndex = 7348 Or GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or GrhIndex = 7352 Or GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or GrhIndex = 7354 Or GrhIndex = 7357 Or GrhIndex = 7358 Or GrhIndex = 7360 Or GrhIndex = 7362 Or GrhIndex = 7363 Or GrhIndex = 7365 Or GrhIndex = 7366 Or GrhIndex = 7367 Or GrhIndex = 7368 Or GrhIndex = 7369 Or GrhIndex = 7371 Or GrhIndex = 7373 Or GrhIndex = 7375 Or GrhIndex = 7376 Then MapData(X, Y).Graphic(2).grh_index = 0
+    If GrhIndex = 7284 Or GrhIndex = 7290 Or GrhIndex = 7291 Or GrhIndex = 7297 Or GrhIndex = 7300 Or GrhIndex = 7301 Or GrhIndex = 7302 Or GrhIndex = 7303 Or GrhIndex = 7304 Or GrhIndex = 7306 Or GrhIndex = 7308 Or GrhIndex = 7310 Or GrhIndex = 7311 Or GrhIndex = 7313 Or GrhIndex = 7314 Or GrhIndex = 7315 Or GrhIndex = 7316 Or GrhIndex = 7317 Or GrhIndex = 7319 Or GrhIndex = 7321 Or GrhIndex = 7325 Or GrhIndex = 7326 Or GrhIndex = 7327 Or GrhIndex = 7328 Or GrhIndex = 7332 Or GrhIndex = 7338 Or GrhIndex = 7339 Or GrhIndex = 7345 Or GrhIndex = 7348 Or GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or GrhIndex = 7352 Or GrhIndex = 7349 Or GrhIndex = 7350 Or GrhIndex = 7351 Or GrhIndex = 7354 Or GrhIndex = 7357 Or GrhIndex = 7358 Or GrhIndex = 7360 Or GrhIndex = 7362 Or GrhIndex = 7363 Or GrhIndex = 7365 Or GrhIndex = 7366 Or GrhIndex = 7367 Or GrhIndex = 7368 Or GrhIndex = 7369 Or GrhIndex = 7371 Or GrhIndex = 7373 Or GrhIndex = 7375 Or GrhIndex = 7376 Then MapData(X, Y).Graphic(2).GrhIndex = 0
 
 End Sub
 
-Public Function General_Random_Number(ByVal LowerBound As Variant, ByVal UpperBound As Variant) As Single
+Public Function RandomNumber(ByVal LowerBound As Variant, ByVal UpperBound As Variant) As Single
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
     '*************************************************
     Randomize timer
-    General_Random_Number = (UpperBound - LowerBound) * Rnd + LowerBound
+    RandomNumber = (UpperBound - LowerBound) * Rnd + LowerBound
 
 End Function
 
@@ -879,7 +879,7 @@ Private Sub LoadClientSetup()
     '**************************************************************
     Dim fHandle As Integer
     
-    If General_File_Exist(DirIndex & "ao.dat", vbArchive) Then
+    If FileExist(DirIndex & "ao.dat", vbArchive) Then
         fHandle = FreeFile
         
         Open DirIndex & "ao.dat" For Binary Access Read Lock Write As fHandle
@@ -893,7 +893,7 @@ Private Sub LoadClientSetup()
 
 End Sub
 
-Public Function General_Get_Elapsed_Time() As Single
+Public Function GetElapsedTime() As Single
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -916,7 +916,7 @@ Public Function General_Get_Elapsed_Time() As Single
     QueryPerformanceCounter start_time
     
     'Calculate elapsed time
-    General_Get_Elapsed_Time = (start_time - end_time) / timer_freq * 1000
+    GetElapsedTime = (start_time - end_time) / timer_freq * 1000
     
     'Get next end time
     QueryPerformanceCounter end_time

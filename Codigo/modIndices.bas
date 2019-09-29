@@ -40,12 +40,12 @@ Public Sub CargarIndicesSuperficie()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(inipath & "GrhIndex\indices.ini", vbArchive) = False Then
+    If FileExist(inipath & "GrhIndex\indices.ini", vbArchive) = False Then
         Call MsgBox("Falta el archivo 'GrhIndex\indices.ini'", vbCritical)
         End
     End If
 
-    Dim Leer As New clsIniReader
+    Dim Leer As New clsIniManager
     Dim i    As Integer
 
     Call Leer.Initialize(inipath & "GrhIndex\indices.ini")
@@ -59,13 +59,13 @@ Public Sub CargarIndicesSuperficie()
 
         With SupData(i)
         
-            .name = Leer.GetValue("REFERENCIA" & i, "Nombre")
+            .Name = Leer.GetValue("REFERENCIA" & i, "Nombre")
             .Grh = Val(Leer.GetValue("REFERENCIA" & i, "GrhIndice"))
             .Width = Val(Leer.GetValue("REFERENCIA" & i, "Ancho"))
             .Height = Val(Leer.GetValue("REFERENCIA" & i, "Alto"))
             .Block = IIf(Val(Leer.GetValue("REFERENCIA" & i, "Bloquear")) = 1, True, False)
             .Capa = Val(Leer.GetValue("REFERENCIA" & i, "Capa"))
-            Call frmMain.lListado(0).AddItem(.name & " - #" & i)
+            Call frmMain.lListado(0).AddItem(.Name & " - #" & i)
         
         End With
         
@@ -91,14 +91,14 @@ Public Sub CargarIndicesOBJ()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(DirDats & "\OBJ.dat", vbArchive) = False Then
+    If FileExist(DirDats & "\OBJ.dat", vbArchive) = False Then
         Call MsgBox("Falta el archivo 'OBJ.dat' en " & DirDats, vbCritical)
         End
 
     End If
 
     Dim Obj  As Integer
-    Dim Leer As New clsIniReader
+    Dim Leer As New clsIniManager
 
     Call Leer.Initialize(DirDats & "\OBJ.dat")
     
@@ -114,15 +114,15 @@ Public Sub CargarIndicesOBJ()
         
         With ObjData(Obj)
         
-            .name = Leer.GetValue("OBJ" & Obj, "Name")
-            .grh_index = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
+            .Name = Leer.GetValue("OBJ" & Obj, "Name")
+            .GrhIndex = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
             .ObjType = Val(Leer.GetValue("OBJ" & Obj, "ObjType"))
             .Ropaje = Val(Leer.GetValue("OBJ" & Obj, "NumRopaje"))
             .Info = Leer.GetValue("OBJ" & Obj, "Info")
             .WeaponAnim = Val(Leer.GetValue("OBJ" & Obj, "Anim"))
             .Texto = Leer.GetValue("OBJ" & Obj, "Texto")
             .GrhSecundario = Val(Leer.GetValue("OBJ" & Obj, "GrhSec"))
-            Call frmMain.lListado(3).AddItem(.name & " - #" & Obj)
+            Call frmMain.lListado(3).AddItem(.Name & " - #" & Obj)
         
         End With
 
@@ -146,7 +146,7 @@ Public Sub CargarIndicesTriggers()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(DirIndex & "Triggers.ini", vbArchive) = False Then
+    If FileExist(DirIndex & "Triggers.ini", vbArchive) = False Then
         MsgBox "Falta el archivo 'Triggers.ini' en " & DirIndex, vbCritical
         End
 
@@ -154,7 +154,7 @@ Public Sub CargarIndicesTriggers()
 
     Dim NumT As Integer
     Dim T    As Integer
-    Dim Leer As New clsIniReader
+    Dim Leer As New clsIniManager
 
     Call Leer.Initialize(DirIndex & "Triggers.ini")
     
@@ -184,7 +184,7 @@ Public Sub CargarIndicesDeCuerpos()
 
     On Error GoTo Fallo
 
-    If Not General_File_Exist(DirIndex & "Personajes.ind", vbArchive) Then
+    If Not FileExist(DirIndex & "Personajes.ind", vbArchive) Then
         Call MsgBox("Falta el archivo 'Personajes.ind' en " & DirIndex, vbCritical)
         End
 
@@ -233,7 +233,7 @@ Public Sub CargarIndicesDeCabezas()
 
     On Error GoTo Fallo
 
-    If Not General_File_Exist(DirIndex & "Cabezas.ind", vbArchive) Then
+    If Not FileExist(DirIndex & "Cabezas.ind", vbArchive) Then
         MsgBox "Falta el archivo 'Cabezas.ind' en " & DirIndex, vbCritical
         End
 
@@ -290,7 +290,7 @@ Public Sub CargarIndicesNPC()
     On Error Resume Next
 
     'On Error GoTo Fallo
-    If General_File_Exist(DirDats & "\NPCs.dat", vbArchive) = False Then
+    If FileExist(DirDats & "\NPCs.dat", vbArchive) = False Then
         MsgBox "Falta el archivo 'NPCs.dat' en " & DirDats, vbCritical
         End
 
@@ -298,7 +298,7 @@ Public Sub CargarIndicesNPC()
     
     Dim Trabajando As String
     Dim NPC        As Integer
-    Dim Leer       As New clsIniReader
+    Dim Leer       As New clsIniManager
 
     Call frmMain.lListado(1).Clear
     Call frmMain.lListado(2).Clear
@@ -314,14 +314,14 @@ Public Sub CargarIndicesNPC()
         
         With NpcData(NPC)
         
-            .name = Leer.GetValue("NPC" & NPC, "Name")
+            .Name = Leer.GetValue("NPC" & NPC, "Name")
         
             .Body = Val(Leer.GetValue("NPC" & NPC, "Body"))
             .Head = Val(Leer.GetValue("NPC" & NPC, "Head"))
             .Heading = Val(Leer.GetValue("NPC" & NPC, "Heading"))
 
-            If LenB(NpcData(NPC).name) <> 0 Then
-                Call frmMain.lListado(1).AddItem(.name & " - #" & NPC)
+            If LenB(NpcData(NPC).Name) <> 0 Then
+                Call frmMain.lListado(1).AddItem(.Name & " - #" & NPC)
             End If
         
         End With

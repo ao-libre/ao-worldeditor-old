@@ -84,8 +84,8 @@ Public Type particle_group
     particle_stream() As Particle
     particle_count As Long
    
-    grh_index_list() As Long
-    grh_index_count As Long
+    GrhIndex_list() As Long
+    GrhIndex_count As Long
    
     alpha_blend As Boolean
    
@@ -697,7 +697,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                     Sobre = -1
 
                     If frmMain.cSeleccionarSuperficie.value = True Then
-                        Sobre = MapData(X, Y).Graphic(bCapa).grh_index
+                        Sobre = MapData(X, Y).Graphic(bCapa).GrhIndex
 
                         If frmConfigSup.MOSAICO.value = vbChecked Then
 
@@ -719,8 +719,8 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                             If frmMain.mnuAutoCompletarSuperficies.Checked = False Then
                                 aux = Val(frmMain.cGrh.Text) + (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dX) Mod frmConfigSup.mAncho.Text)
 
-                                If MapData(X, Y).Graphic(bCapa).grh_index <> aux Then
-                                    MapData(X, Y).Graphic(bCapa).grh_index = aux
+                                If MapData(X, Y).Graphic(bCapa).GrhIndex <> aux Then
+                                    MapData(X, Y).Graphic(bCapa).GrhIndex = aux
                                     Grh_Initialize MapData(X, Y).Graphic(bCapa), aux
 
                                 End If
@@ -728,8 +728,8 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                             Else
                                 aux = Val(frmMain.cGrh.Text) + (((Y + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((X + dX) Mod frmConfigSup.mAncho.Text)
 
-                                If MapData(X, Y).Graphic(bCapa).grh_index <> aux Then
-                                    MapData(X, Y).Graphic(bCapa).grh_index = aux
+                                If MapData(X, Y).Graphic(bCapa).GrhIndex <> aux Then
+                                    MapData(X, Y).Graphic(bCapa).GrhIndex = aux
                                     Grh_Initialize MapData(X, Y).Graphic(bCapa), aux
 
                                 End If
@@ -738,8 +738,8 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
 
                         Else
 
-                            If MapData(X, Y).Graphic(bCapa).grh_index <> Val(frmMain.cGrh.Text) Then
-                                MapData(X, Y).Graphic(bCapa).grh_index = Val(frmMain.cGrh.Text)
+                            If MapData(X, Y).Graphic(bCapa).GrhIndex <> Val(frmMain.cGrh.Text) Then
+                                MapData(X, Y).Graphic(bCapa).GrhIndex = Val(frmMain.cGrh.Text)
                                 Grh_Initialize MapData(X, Y).Graphic(bCapa), Val(frmMain.cGrh.Text)
 
                             End If
@@ -782,25 +782,25 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
     
                         'Ready the texture
                         'If grhindex = 0 Then Exit Sub
-                        If MapData(X, Y).Graphic(1).grh_index Then
+                        If MapData(X, Y).Graphic(1).GrhIndex Then
                             xb = (ScreenX - 1) * 32 + PixelOffsetX
                             yb = (ScreenY - 1) * 32 + PixelOffsetY
    
                             If MapData(X, Y).Graphic(1).Started = 1 Then
        
-                                MapData(X, Y).Graphic(1).frame_counter = MapData(X, Y).Graphic(1).frame_counter + ((timer_elapsed_time * 0.1) * Grh_list(MapData(X, Y).Graphic(1).grh_index).frame_count / MapData(X, Y).Graphic(1).frame_speed)
+                                MapData(X, Y).Graphic(1).frame_counter = MapData(X, Y).Graphic(1).frame_counter + ((timer_elapsed_time * 0.1) * Grh_list(MapData(X, Y).Graphic(1).GrhIndex).frame_count / MapData(X, Y).Graphic(1).frame_speed)
 
-                                If MapData(X, Y).Graphic(1).frame_counter > Grh_list(MapData(X, Y).Graphic(1).grh_index).frame_count Then
-                                    MapData(X, Y).Graphic(1).frame_counter = (MapData(X, Y).Graphic(1).frame_counter Mod Grh_list(MapData(X, Y).Graphic(1).grh_index).frame_count) + 1
+                                If MapData(X, Y).Graphic(1).frame_counter > Grh_list(MapData(X, Y).Graphic(1).GrhIndex).frame_count Then
+                                    MapData(X, Y).Graphic(1).frame_counter = (MapData(X, Y).Graphic(1).frame_counter Mod Grh_list(MapData(X, Y).Graphic(1).GrhIndex).frame_count) + 1
 
                                 End If
            
                             End If
 
                             If MapData(X, Y).Graphic(1).frame_counter = 0 Then MapData(X, Y).Graphic(1).frame_counter = 1
-                            If MapData(X, Y).Graphic(1).grh_index <= 0 Then Exit Sub
+                            If MapData(X, Y).Graphic(1).GrhIndex <= 0 Then Exit Sub
  
-                            iGrhIndex = Grh_list(MapData(X, Y).Graphic(1).grh_index).frame_list(MapData(X, Y).Graphic(1).frame_counter)
+                            iGrhIndex = Grh_list(MapData(X, Y).Graphic(1).GrhIndex).frame_list(MapData(X, Y).Graphic(1).frame_counter)
 
                             With Grh_list(iGrhIndex)
     
@@ -953,14 +953,14 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                 End If
 
                 'Layer 2 **********************************
-                If MapData(X, Y).Graphic(2).grh_index <> 0 And VerCapa2 Then
+                If MapData(X, Y).Graphic(2).GrhIndex <> 0 And VerCapa2 Then
                     modGrh.Grh_Render MapData(X, Y).Graphic(2), ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, MapData(X, Y).light_value, True
 
                 End If
             
                 If Sobre >= 0 Then
-                    If MapData(X, Y).Graphic(bCapa).grh_index <> Sobre Then
-                        MapData(X, Y).Graphic(bCapa).grh_index = Sobre
+                    If MapData(X, Y).Graphic(bCapa).GrhIndex <> Sobre Then
+                        MapData(X, Y).Graphic(bCapa).GrhIndex = Sobre
                         Grh_Initialize MapData(X, Y).Graphic(bCapa), Sobre
 
                     End If
@@ -1005,7 +1005,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                     PixelOffsetYTemp = PixelOffsetY
                     
                     'Dibuja solamente players
-                    If TempChar.Head.Head(TempChar.Heading).grh_index <> 0 Then
+                    If TempChar.Head.Head(TempChar.Heading).GrhIndex <> 0 Then
                         'Draw Body
                         modGrh.Grh_Render TempChar.Body.Walk(TempChar.Heading), iPPx, iPPy, MapData(X, Y).light_value, True
                         'Draw Head
@@ -1017,7 +1017,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                 End If
 
                 'Layer 3 *****************************************
-                If MapData(X, Y).Graphic(3).grh_index <> 0 And VerCapa3 Then
+                If MapData(X, Y).Graphic(3).GrhIndex <> 0 And VerCapa3 Then
                     'Draw
                     modGrh.Grh_Render MapData(X, Y).Graphic(3), ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, MapData(X, Y).light_value, True
 
@@ -1049,14 +1049,14 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                 iPPx = ((32 * ScreenX) - 32) + PixelOffsetX
                 iPPy = ((32 * ScreenY) - 32) + PixelOffsetY
 
-                If MapData(X, Y).Graphic(4).grh_index <> 0 And (frmMain.mnuVerCapa4.Checked = True) Then
+                If MapData(X, Y).Graphic(4).GrhIndex <> 0 And (frmMain.mnuVerCapa4.Checked = True) Then
                     'Draw
                     modGrh.Grh_Render MapData(X, Y).Graphic(4), iPPx, iPPy, MapData(X, Y).light_value, True
 
                 End If
 
                 If MapData(X, Y).TileExit.Map <> 0 And VerTranslados Then
-                    Grh.grh_index = 3
+                    Grh.GrhIndex = 3
                     Grh.frame_counter = 1
                     Grh.Started = 0
                     modGrh.Grh_Render Grh, iPPx, iPPy, MapData(X, Y).light_value, True
@@ -1064,7 +1064,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                 End If
             
                 If MapData(X, Y).light_index Then
-                    Grh.grh_index = 4
+                    Grh.GrhIndex = 4
                     Grh.frame_counter = 1
                     Grh.Started = 0
                     modGrh.Grh_Render Grh, iPPx, iPPy, colorlist, True
@@ -1073,7 +1073,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
             
                 'Show blocked tiles
                 If VerBlockeados And MapData(X, Y).Blocked = 1 Then
-                    Grh.grh_index = 4
+                    Grh.GrhIndex = 4
                     Grh.frame_counter = 1
                     Grh.Started = 0
                     modGrh.Grh_Render Grh, iPPx, iPPy, MapData(X, Y).light_value, True
@@ -1566,7 +1566,7 @@ Function CalcularAlturaPoligono(mx As Integer, my As Integer, Xn As Integer, Yn 
 End Function
 
 Function HayAgua(ByVal X As Integer, ByVal Y As Integer) As Boolean
-    HayAgua = ((MapData(X, Y).Graphic(1).grh_index >= 1505 And MapData(X, Y).Graphic(1).grh_index <= 1520) Or (MapData(X, Y).Graphic(1).grh_index >= 5665 And MapData(X, Y).Graphic(1).grh_index <= 5680) Or (MapData(X, Y).Graphic(1).grh_index >= 13547 And MapData(X, Y).Graphic(1).grh_index <= 13562)) And MapData(X, Y).Graphic(2).grh_index = 0
+    HayAgua = ((MapData(X, Y).Graphic(1).GrhIndex >= 1505 And MapData(X, Y).Graphic(1).GrhIndex <= 1520) Or (MapData(X, Y).Graphic(1).GrhIndex >= 5665 And MapData(X, Y).Graphic(1).GrhIndex <= 5680) Or (MapData(X, Y).Graphic(1).GrhIndex >= 13547 And MapData(X, Y).Graphic(1).GrhIndex <= 13562)) And MapData(X, Y).Graphic(2).GrhIndex = 0
                 
 End Function
 

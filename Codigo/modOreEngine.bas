@@ -16,7 +16,7 @@ End Type
  
 Public Type Stream
 
-    name As String
+    Name As String
     NumOfParticles As Long
     NumGrhs As Long
     id As Long
@@ -85,8 +85,8 @@ Sub CargarParticulas()
     Dim TempSet    As String
     Dim ColorSet   As Long
     
-    Dim Leer       As clsIniReader
-    Set Leer = New clsIniReader
+    Dim Leer       As clsIniManager
+    Set Leer = New clsIniManager
     
     Call Leer.Initialize(DirIndex & "Particulas.ini")
     
@@ -98,7 +98,7 @@ Sub CargarParticulas()
     For loopc = 1 To TotalStreams
 
         With StreamData(loopc)
-            .name = Leer.GetValue(Val(loopc), "Name")
+            .Name = Leer.GetValue(Val(loopc), "Name")
             .NumOfParticles = Leer.GetValue(Val(loopc), "NumOfParticles")
             .x1 = Leer.GetValue(Val(loopc), "X1")
             .Y1 = Leer.GetValue(Val(loopc), "Y1")
@@ -208,7 +208,7 @@ ErrorHandler:
 
 End Function
 
-Public Function Particle_Group_Create(ByVal map_x As Integer, ByVal map_y As Integer, ByRef grh_index_list() As Long, ByRef Rgb_List() As Long, _
+Public Function Particle_Group_Create(ByVal map_x As Integer, ByVal map_y As Integer, ByRef GrhIndex_list() As Long, ByRef Rgb_List() As Long, _
    Optional ByVal particle_count As Long = 20, Optional ByVal stream_type As Long = 1, _
    Optional ByVal alpha_blend As Boolean, Optional ByVal alive_counter As Long = -1, _
    Optional ByVal frame_speed As Single = 0.5, Optional ByVal id As Long, _
@@ -231,10 +231,10 @@ Public Function Particle_Group_Create(ByVal map_x As Integer, ByVal map_y As Int
     If (map_x <> -1) And (map_y <> -1) Then
         If Map_Particle_Group_Get(map_x, map_y) = 0 Then
             Particle_Group_Create = Particle_Group_Next_Open
-            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, grh_index_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
+            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, GrhIndex_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
         Else
             Particle_Group_Create = Particle_Group_Next_Open
-            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, grh_index_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
+            Particle_Group_Make Particle_Group_Create, map_x, map_y, particle_count, stream_type, GrhIndex_list(), Rgb_List(), alpha_blend, alive_counter, frame_speed, id, x1, Y1, angle, vecx1, vecx2, vecy1, vecy2, life1, life2, fric, spin_speedL, gravity, grav_strength, bounce_strength, x2, Y2, XMove, move_x1, move_x2, move_y1, move_y2, YMove, spin_speedH, spin
 
         End If
 
@@ -313,7 +313,7 @@ ErrorHandler:
 End Function
  
 Private Sub Particle_Group_Make(ByVal particle_group_index As Long, ByVal map_x As Integer, ByVal map_y As Integer, _
-   ByVal particle_count As Long, ByVal stream_type As Long, ByRef grh_index_list() As Long, ByRef Rgb_List() As Long, _
+   ByVal particle_count As Long, ByVal stream_type As Long, ByRef GrhIndex_list() As Long, ByRef Rgb_List() As Long, _
    Optional ByVal alpha_blend As Boolean, Optional ByVal alive_counter As Long = -1, _
    Optional ByVal frame_speed As Single = 0.5, Optional ByVal id As Long, _
    Optional ByVal x1 As Integer, Optional ByVal Y1 As Integer, Optional ByVal angle As Integer, _
@@ -352,9 +352,9 @@ Private Sub Particle_Group_Make(ByVal particle_group_index As Long, ByVal map_x 
     End If
    
     'Grh list
-    ReDim particle_group_list(particle_group_index).grh_index_list(1 To UBound(grh_index_list))
-    particle_group_list(particle_group_index).grh_index_list() = grh_index_list()
-    particle_group_list(particle_group_index).grh_index_count = UBound(grh_index_list)
+    ReDim particle_group_list(particle_group_index).GrhIndex_list(1 To UBound(GrhIndex_list))
+    particle_group_list(particle_group_index).GrhIndex_list() = GrhIndex_list()
+    particle_group_list(particle_group_index).GrhIndex_count = UBound(GrhIndex_list)
    
     'Sets alive vars
     If alive_counter = -1 Then
@@ -415,7 +415,7 @@ Private Sub Particle_Group_Make(ByVal particle_group_index As Long, ByVal map_x 
 End Sub
  
 Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As Integer, ByVal screen_Y As Integer, _
-   ByVal grh_index As Long, ByRef Rgb_List() As Long, _
+   ByVal GrhIndex As Long, ByRef Rgb_List() As Long, _
    Optional ByVal alpha_blend As Boolean, Optional ByVal no_move As Boolean, _
    Optional ByVal x1 As Integer, Optional ByVal Y1 As Integer, Optional ByVal angle As Integer, _
    Optional ByVal vecx1 As Integer, Optional ByVal vecx2 As Integer, _
@@ -437,21 +437,21 @@ Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As I
 
     If no_move = False Then
         If temp_particle.alive_counter = 0 Then
-            Grh_Initialize temp_particle.Grh, grh_index, alpha_blend
+            Grh_Initialize temp_particle.Grh, GrhIndex, alpha_blend
 
             If Radio = 0 Then
-                temp_particle.X = General_Random_Number(x1, x2)
-                temp_particle.Y = General_Random_Number(Y1, Y2)
+                temp_particle.X = RandomNumber(x1, x2)
+                temp_particle.Y = RandomNumber(Y1, Y2)
             Else
-                temp_particle.X = (General_Random_Number(x1, x2) + Radio) + Radio * Cos(PI * 2 * index / Count)
-                temp_particle.Y = (General_Random_Number(Y1, Y2) + Radio) + Radio * Sin(PI * 2 * index / Count)
+                temp_particle.X = (RandomNumber(x1, x2) + Radio) + Radio * Cos(PI * 2 * index / Count)
+                temp_particle.Y = (RandomNumber(Y1, Y2) + Radio) + Radio * Sin(PI * 2 * index / Count)
 
             End If
 
-            temp_particle.vector_x = General_Random_Number(vecx1, vecx2)
-            temp_particle.vector_y = General_Random_Number(vecy1, vecy2)
+            temp_particle.vector_x = RandomNumber(vecx1, vecx2)
+            temp_particle.vector_y = RandomNumber(vecy1, vecy2)
             temp_particle.angle = angle
-            temp_particle.alive_counter = General_Random_Number(life1, life2)
+            temp_particle.alive_counter = RandomNumber(life1, life2)
             temp_particle.friction = fric
         Else
 
@@ -469,14 +469,14 @@ Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As I
             End If
 
             'Do rotation
-            If spin = True Then temp_particle.Grh.angle = temp_particle.Grh.angle + (General_Random_Number(spin_speedL, spin_speedH) / 100)
+            If spin = True Then temp_particle.Grh.angle = temp_particle.Grh.angle + (RandomNumber(spin_speedL, spin_speedH) / 100)
             If temp_particle.angle >= 360 Then
                 temp_particle.angle = 0
 
             End If
                                 
-            If XMove = True Then temp_particle.vector_x = General_Random_Number(move_x1, move_x2)
-            If YMove = True Then temp_particle.vector_y = General_Random_Number(move_y1, move_y2)
+            If XMove = True Then temp_particle.vector_x = RandomNumber(move_x1, move_x2)
+            If YMove = True Then temp_particle.vector_y = RandomNumber(move_y1, move_y2)
 
         End If
 
@@ -490,7 +490,7 @@ Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As I
     End If
  
     'Draw it
-    If temp_particle.Grh.grh_index Then
+    If temp_particle.Grh.GrhIndex Then
         Grh_Render temp_particle.Grh, temp_particle.X + screen_x, temp_particle.Y + screen_Y, Rgb_List()
 
     End If
@@ -537,7 +537,7 @@ Public Sub Particle_Group_Render(ByVal particle_group_index As Long, ByVal scree
             'Render particle
             Particle_Render particle_group_list(particle_group_index).particle_stream(loopc), _
                screen_x, screen_Y, _
-               particle_group_list(particle_group_index).grh_index_list(Round(General_Random_Number(1, particle_group_list(particle_group_index).grh_index_count), 0)), _
+               particle_group_list(particle_group_index).GrhIndex_list(Round(RandomNumber(1, particle_group_list(particle_group_index).GrhIndex_count), 0)), _
                temp_rgb(), _
                particle_group_list(particle_group_index).alpha_blend, no_move, _
                particle_group_list(particle_group_index).x1, particle_group_list(particle_group_index).Y1, particle_group_list(particle_group_index).angle, _
