@@ -294,7 +294,7 @@ Private Sub CargarMapIni()
 
     Dim tStr As String
 
-    Dim Leer As New clsIniReader
+    Dim Leer As New clsIniManager
 
     inipath = App.Path & "\"
 
@@ -426,8 +426,8 @@ Private Sub CargarMapIni()
     frmMain.mnuVerGrilla.Checked = Val(Leer.GetValue("MOSTRAR", "Grilla")) ' Grilla
     VerGrilla = frmMain.mnuVerGrilla.Checked
     frmMain.mnuVerBloqueos.Checked = Val(Leer.GetValue("MOSTRAR", "Bloqueos"))
-    frmMain.cVerTriggers.value = frmMain.mnuVerTriggers.Checked
-    frmMain.cVerBloqueos.value = frmMain.mnuVerBloqueos.Checked
+    frmMain.cVerTriggers.Value = frmMain.mnuVerTriggers.Checked
+    frmMain.cVerBloqueos.Value = frmMain.mnuVerBloqueos.Checked
 
     ' Tamaño de visualizacion
     PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
@@ -721,7 +721,7 @@ Public Sub Main()
 
 End Sub
 
-Public Function general_var_get(file As String, ByVal Main As String, Var As String) As String
+Public Function general_var_get(File As String, ByVal Main As String, Var As String) As String
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
@@ -733,18 +733,18 @@ Public Function general_var_get(file As String, ByVal Main As String, Var As Str
 
     szReturn = vbNullString
     sSpaces = Space(5000) ' This tells the computer how long the longest string can be. If you want, you can change the number 75 to any number you wish
-    GetPrivateProfileString Main, Var, szReturn, sSpaces, Len(sSpaces), file
+    GetPrivateProfileString Main, Var, szReturn, sSpaces, Len(sSpaces), File
     general_var_get = RTrim(sSpaces)
     general_var_get = left(general_var_get, Len(general_var_get) - 1)
 
 End Function
 
-Public Sub WriteVar(file As String, Main As String, Var As String, value As String)
+Public Sub WriteVar(File As String, Main As String, Var As String, Value As String)
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
     '*************************************************
-    writeprivateprofilestring Main, Var, value, file
+    writeprivateprofilestring Main, Var, Value, File
 
 End Sub
 

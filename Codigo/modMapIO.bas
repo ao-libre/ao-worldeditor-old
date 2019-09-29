@@ -94,13 +94,6 @@ Private Type tDatosTE
     DestY As Integer
 End Type
 
-Private Type tMapSize
-    XMax As Integer
-    XMin As Integer
-    YMax As Integer
-    YMin As Integer
-End Type
-
 Private Type tMapDat
     map_name As String
     battle_mode As Boolean
@@ -119,7 +112,6 @@ Private Type tMapDat
     version As Long
 End Type
 
-Public MapSize As tMapSize
 Private MapDat As tMapDat
 '***************************
 'Map format .CSM
@@ -164,13 +156,13 @@ End Function
 ' @param FileType Especifica el tipo de archivo/directorio
 ' @return   Nos devuelve verdadero o falso
 
-Public Function FileExist(ByVal file As String, ByVal FileType As VbFileAttribute) As Boolean
+Public Function FileExist(ByVal File As String, ByVal FileType As VbFileAttribute) As Boolean
 
     '*************************************************
     'Author: Unkwown
     'Last modified: 26/05/06
     '*************************************************
-    If LenB(Dir(file, FileType)) = 0 Then
+    If LenB(Dir(File, FileType)) = 0 Then
         FileExist = False
     Else
         FileExist = True
@@ -282,7 +274,7 @@ Public Sub NuevoMapa()
     With MapInfo
     
         .MapVersion = 0
-        .name = "Nuevo Mapa"
+        .Name = "Nuevo Mapa"
         .Music = 0
         .PK = True
         .MagiaSinEfecto = 0
@@ -724,7 +716,7 @@ Public Sub MapInfo_Guardar(ByVal Archivo As String)
 
     End If
 
-    Call WriteVar(Archivo, MapTitulo, "Name", MapInfo.name)
+    Call WriteVar(Archivo, MapTitulo, "Name", MapInfo.Name)
     Call WriteVar(Archivo, MapTitulo, "MusicNum", MapInfo.Music)
     Call WriteVar(Archivo, MapTitulo, "MagiaSinefecto", Val(MapInfo.MagiaSinEfecto))
     Call WriteVar(Archivo, MapTitulo, "InviSinEfecto", Val(MapInfo.InviSinEfecto))
@@ -758,7 +750,7 @@ Public Sub MapInfo_Cargar(ByVal Archivo As String)
 
     On Error Resume Next
 
-    Dim Leer  As New clsIniReader
+    Dim Leer  As New clsIniManager
     Dim loopc As Integer
     Dim Path  As String
 
@@ -780,7 +772,7 @@ Public Sub MapInfo_Cargar(ByVal Archivo As String)
     
     With MapInfo
     
-        .name = Leer.GetValue(MapTitulo, "Name")
+        .Name = Leer.GetValue(MapTitulo, "Name")
         .Music = Leer.GetValue(MapTitulo, "MusicNum")
         .MagiaSinEfecto = Val(Leer.GetValue(MapTitulo, "MagiaSinEfecto"))
         .InviSinEfecto = Val(Leer.GetValue(MapTitulo, "InviSinEfecto"))
@@ -819,22 +811,22 @@ Public Sub MapInfo_Actualizar()
 
     ' Mostrar en Formularios
     With frmMapInfo
-        .txtMapNombre.Text = MapInfo.name
+        .txtMapNombre.Text = MapInfo.Name
         .txtMapMusica.Text = MapInfo.Music
         .txtMapTerreno.Text = MapInfo.Terreno
         .txtMapZona.Text = MapInfo.Zona
         .txtMapRestringir.Text = MapInfo.Restringir
-        .chkMapBackup.value = MapInfo.BackUp
-        .chkMapMagiaSinEfecto.value = MapInfo.MagiaSinEfecto
-        .chkMapInviSinEfecto.value = MapInfo.InviSinEfecto
-        .chkMapResuSinEfecto.value = MapInfo.ResuSinEfecto
-        .chkMapNoEncriptarMP.value = MapInfo.NoEncriptarMP
-        .chkMapPK.value = IIf(MapInfo.PK = True, 1, 0)
+        .chkMapBackup.Value = MapInfo.BackUp
+        .chkMapMagiaSinEfecto.Value = MapInfo.MagiaSinEfecto
+        .chkMapInviSinEfecto.Value = MapInfo.InviSinEfecto
+        .chkMapResuSinEfecto.Value = MapInfo.ResuSinEfecto
+        .chkMapNoEncriptarMP.Value = MapInfo.NoEncriptarMP
+        .chkMapPK.Value = IIf(MapInfo.PK = True, 1, 0)
         .txtMapVersion = MapInfo.MapVersion
     End With
     
     With frmMain
-        .lblMapNombre = MapInfo.name
+        .lblMapNombre = MapInfo.Name
         .lblMapMusica = MapInfo.Music
     End With
     
@@ -897,7 +889,7 @@ Public Sub CSMInfoSave()
     
     With MapDat
     
-        .map_name = MapInfo.name
+        .map_name = MapInfo.Name
         .music_number = MapInfo.Music
         .MagiaSinEfecto = MapInfo.MagiaSinEfecto
         .InviSinEfecto = MapInfo.InviSinEfecto
@@ -924,7 +916,7 @@ End Sub
 Public Sub CSMInfoCargar()
 
     With MapInfo
-        .name = MapDat.map_name
+        .Name = MapDat.map_name
         .Music = MapDat.music_number
         .MagiaSinEfecto = MapDat.MagiaSinEfecto
         .InviSinEfecto = MapDat.InviSinEfecto
@@ -958,7 +950,7 @@ Sub Cargar_CSM(ByVal Map As String)
     On Error GoTo ErrorHandler
 
     Dim fh           As Integer
-    Dim file         As Integer
+    Dim File         As Integer
 
     Dim MH           As tMapHeader
     
@@ -1167,10 +1159,10 @@ ErrorHandler:
 
     If fh <> 0 Then Close fh
     
-    file = FreeFile
-    Open App.Path & "\Logs.txt" For Output As #file
-        Print #file, Err.Description
-    Close #file
+    File = FreeFile
+    Open App.Path & "\Logs.txt" For Output As #File
+        Print #File, Err.Description
+    Close #File
 
 End Sub
 

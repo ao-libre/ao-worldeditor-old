@@ -16,7 +16,7 @@ End Type
  
 Public Type Stream
 
-    name As String
+    Name As String
     NumOfParticles As Long
     NumGrhs As Long
     id As Long
@@ -85,8 +85,8 @@ Sub CargarParticulas()
     Dim TempSet    As String
     Dim ColorSet   As Long
     
-    Dim Leer       As clsIniReader
-    Set Leer = New clsIniReader
+    Dim Leer       As clsIniManager
+    Set Leer = New clsIniManager
     
     Call Leer.Initialize(DirIndex & "Particulas.ini")
     
@@ -98,7 +98,7 @@ Sub CargarParticulas()
     For loopc = 1 To TotalStreams
 
         With StreamData(loopc)
-            .name = Leer.GetValue(Val(loopc), "Name")
+            .Name = Leer.GetValue(Val(loopc), "Name")
             .NumOfParticles = Leer.GetValue(Val(loopc), "NumOfParticles")
             .x1 = Leer.GetValue(Val(loopc), "X1")
             .Y1 = Leer.GetValue(Val(loopc), "Y1")
