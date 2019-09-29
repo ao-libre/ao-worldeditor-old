@@ -2109,6 +2109,14 @@ Begin VB.Form frmMain
       TabStop         =   0   'False
       Top             =   6270
       Width           =   4455
+      Begin VB.CommandButton cmdConversor 
+         Caption         =   "Convertir a .CSM"
+         Height          =   420
+         Left            =   1680
+         TabIndex        =   120
+         Top             =   3960
+         Width           =   1620
+      End
       Begin VB.PictureBox PreviewGrh 
          BackColor       =   &H00004000&
          FillColor       =   &H00C0C0C0&
@@ -3353,6 +3361,32 @@ Private Sub cInsertarTrigger_Click()
 
     End If
 
+End Sub
+
+Private Sub cmdConversor_Click()
+    
+    Dim PathMAP As String
+        PathMAP = InputBox("Donde estan los archivos .MAP (Path absoluto, por favor) ?")
+    
+    If Len(PathMAP) = 0 Then Exit Sub
+    
+    Dim PathCSM As String
+        PathCSM = InputBox("Donde queres que se guarden los archivos .CSM (Path absoluto, por favor) ?")
+    
+    If Len(PathCSM) = 0 Then Exit Sub
+    
+    Dim Desde As String
+        Desde = InputBox("Desde que mapa queres convertir a .CSM ?")
+    
+    If Len(Desde) = 0 Then Exit Sub
+    
+    Dim Hasta As String
+        Hasta = InputBox("Hasta que mapa queres convertir a .CSM ?")
+    
+    If Len(Hasta) = 0 Then Exit Sub
+    
+    Call Convertir(PathMAP, PathCSM, CInt(Desde), CInt(Hasta))
+    
 End Sub
 
 Private Sub cmdInformacionDelMapa_Click()

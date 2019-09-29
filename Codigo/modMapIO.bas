@@ -1382,3 +1382,19 @@ ErrorHandler:
     If fh <> 0 Then Close fh
 
 End Function
+
+Public Sub Convertir(ByVal PathMAP As String, ByVal PathCSM As String, ByVal Desde As Integer, ByVal Hasta As Integer)
+
+    Dim i As Long
+    
+    For i = Desde To Hasta
+        
+        Debug.Print "Abriendo " & PathMAP & "\Mapa" & i & ".map"
+        Call AbrirMapa(PathMAP & "\Mapa" & i & ".map", MapData, False)
+        
+        Debug.Print "Guardando " & CurMap & " .CSM: " & PathCSM & "\Mapa" & i & ".csm"
+        Call Save_CSM(PathCSM & "\Mapa" & i & ".csm")
+        
+    Next
+    
+End Sub
