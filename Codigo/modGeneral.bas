@@ -298,7 +298,7 @@ Private Sub CargarMapIni()
 
     inipath = App.Path & "\"
 
-    If General_File_Exist(inipath & "WorldEditor.ini", vbArchive) = False Then
+    If FileExist(inipath & "WorldEditor.ini", vbArchive) = False Then
         frmMain.mnuGuardarUltimaConfig.Checked = True
         DirGraficos = inipath & PATH_GRAPHICS & "\"
         DirIndex = inipath & PATH_INIT & "\"
@@ -341,7 +341,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirGraficos, vbDirectory) = False Then
+    If FileExist(DirGraficos, vbDirectory) = False Then
         MsgBox "El directorio de Graficos es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -354,7 +354,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirMidi, vbDirectory) = False Then
+    If FileExist(DirMidi, vbDirectory) = False Then
         MsgBox "El directorio de MIDI es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -368,7 +368,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirIndex, vbDirectory) = False Then
+    If FileExist(DirIndex, vbDirectory) = False Then
         MsgBox "El directorio de Index es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -381,7 +381,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(DirDats, vbDirectory) = False Then
+    If FileExist(DirDats, vbDirectory) = False Then
         MsgBox "El directorio de Dats es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -394,7 +394,7 @@ Private Sub CargarMapIni()
 
     End If
 
-    If General_File_Exist(dirwavs, vbDirectory) = False Then
+    If FileExist(dirwavs, vbDirectory) = False Then
         MsgBox "El directorio de WAV es incorrecto", vbCritical + vbOKOnly
         End
 
@@ -514,7 +514,7 @@ Public Sub Main()
     If App.PrevInstance = True Then End
     'CambioDeVideo
 
-    'If General_File_Exist(DirIndex & "AO.dat", vbArchive) Then
+    'If FileExist(DirIndex & "AO.dat", vbArchive) Then
     Call LoadClientSetup
     'End If
     Set DXPool = New clsTextureManager
@@ -523,7 +523,7 @@ Public Sub Main()
     Call IniciarCabecera(MiCabecera)
     DoEvents
     
-    If General_File_Exist(inipath & "WorldEditor.jpg", vbArchive) Then frmCargando.Picture1.Picture = LoadPicture(inipath & "WorldEditor.jpg")
+    If FileExist(inipath & "WorldEditor.jpg", vbArchive) Then frmCargando.Picture1.Picture = LoadPicture(inipath & "WorldEditor.jpg")
     
     frmCargando.verX = "v" & App.Major & "." & App.Minor & "." & App.Revision
     frmCargando.Show
@@ -682,7 +682,7 @@ Public Sub Main()
             
             DXEngine_EndRender
             
-            timer_elapsed_time = General_Get_Elapsed_Time()
+            timer_elapsed_time = GetElapsedTime()
             modGrh.AnimSpeedCalculate timer_elapsed_time
 
         End If
@@ -797,13 +797,13 @@ Public Sub FixCoasts(ByVal GrhIndex As Integer, ByVal X As Integer, ByVal Y As I
 
 End Sub
 
-Public Function General_Random_Number(ByVal LowerBound As Variant, ByVal UpperBound As Variant) As Single
+Public Function RandomNumber(ByVal LowerBound As Variant, ByVal UpperBound As Variant) As Single
     '*************************************************
     'Author: Unkwown
     'Last modified: 20/05/06
     '*************************************************
     Randomize timer
-    General_Random_Number = (UpperBound - LowerBound) * Rnd + LowerBound
+    RandomNumber = (UpperBound - LowerBound) * Rnd + LowerBound
 
 End Function
 
@@ -879,7 +879,7 @@ Private Sub LoadClientSetup()
     '**************************************************************
     Dim fHandle As Integer
     
-    If General_File_Exist(DirIndex & "ao.dat", vbArchive) Then
+    If FileExist(DirIndex & "ao.dat", vbArchive) Then
         fHandle = FreeFile
         
         Open DirIndex & "ao.dat" For Binary Access Read Lock Write As fHandle
@@ -893,7 +893,7 @@ Private Sub LoadClientSetup()
 
 End Sub
 
-Public Function General_Get_Elapsed_Time() As Single
+Public Function GetElapsedTime() As Single
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -916,7 +916,7 @@ Public Function General_Get_Elapsed_Time() As Single
     QueryPerformanceCounter start_time
     
     'Calculate elapsed time
-    General_Get_Elapsed_Time = (start_time - end_time) / timer_freq * 1000
+    GetElapsedTime = (start_time - end_time) / timer_freq * 1000
     
     'Get next end time
     QueryPerformanceCounter end_time

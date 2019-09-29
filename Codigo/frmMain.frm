@@ -3090,8 +3090,8 @@ Private Sub PonerAlAzar(ByVal n As Integer, T As Byte)
     modEdicion.Deshacer_Add "Aplicar " & IIf(T = 0, "Objetos", "NPCs") & " al Azar" ' Hago deshacer
 
     Do While i > 0
-        X = CInt(General_Random_Number(XMinMapSize, XMaxMapSize - 1))
-        Y = CInt(General_Random_Number(YMinMapSize, YMaxMapSize - 1))
+        X = CInt(RandomNumber(XMinMapSize, XMaxMapSize - 1))
+        Y = CInt(RandomNumber(YMinMapSize, YMaxMapSize - 1))
     
         Select Case T
 
@@ -4664,7 +4664,7 @@ Private Sub mnuReAbrirMapa_Click()
     '*************************************************
     On Error GoTo ErrHandler
 
-    If General_File_Exist(Dialog.FileName, vbArchive) = False Then Exit Sub
+    If FileExist(Dialog.FileName, vbArchive) = False Then Exit Sub
     If MapInfo.Changed = 1 Then
         If MsgBox(MSGMod, vbExclamation + vbYesNo) = vbYes Then
             modMapIO.GuardarMapa Dialog.FileName

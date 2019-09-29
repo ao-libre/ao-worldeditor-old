@@ -256,8 +256,8 @@ Public Sub Superficie_Azar()
         modEdicion.Deshacer_Add "Insertar Superficie al Azar" ' Hago deshacer
 
         For k = 1 To Cuantos
-            X = General_Random_Number(10, 90)
-            Y = General_Random_Number(10, 90)
+            X = RandomNumber(10, 90)
+            Y = RandomNumber(10, 90)
 
             If frmConfigSup.MOSAICO.value = vbChecked Then
 
@@ -848,7 +848,7 @@ Sub DobleClick(tX As Integer, tY As Integer)
 
     If tTrans.Map > 0 Then
         If LenB(frmMain.Dialog.FileName) <> 0 Then
-            If General_File_Exist(PATH_Save & NameMap_Save & tTrans.Map & ".map", vbArchive) = True Then
+            If FileExist(PATH_Save & NameMap_Save & tTrans.Map & ".map", vbArchive) = True Then
                 Call modMapIO.NuevoMapa
                 frmMain.Dialog.FileName = PATH_Save & NameMap_Save & tTrans.Map & ".map"
                 modMapIO.AbrirMapa frmMain.Dialog.FileName, MapData

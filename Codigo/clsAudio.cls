@@ -444,7 +444,7 @@ Private Function LoadWave(ByVal FileName As String, ByVal looping As LoopStyle) 
    
     FileName = UCase$(FileName)
    
-    If Not General_File_Exist(SoundPath & FileName, vbArchive) Then Exit Function
+    If Not FileExist(SoundPath & FileName, vbArchive) Then Exit Function
    
     'Check if the buffer is in memory and not playing
     For i = 1 To NumSoundBuffers
@@ -665,7 +665,7 @@ Private Function LoadMidi(ByVal file As String) As Boolean
 
     On Error GoTo ErrHandler
 
-    If Not General_File_Exist(MusicPath & file, vbArchive) Then Exit Function
+    If Not FileExist(MusicPath & file, vbArchive) Then Exit Function
    
     Call StopMidi
    

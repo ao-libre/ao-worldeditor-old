@@ -440,18 +440,18 @@ Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As I
             Grh_Initialize temp_particle.Grh, GrhIndex, alpha_blend
 
             If Radio = 0 Then
-                temp_particle.X = General_Random_Number(x1, x2)
-                temp_particle.Y = General_Random_Number(Y1, Y2)
+                temp_particle.X = RandomNumber(x1, x2)
+                temp_particle.Y = RandomNumber(Y1, Y2)
             Else
-                temp_particle.X = (General_Random_Number(x1, x2) + Radio) + Radio * Cos(PI * 2 * index / Count)
-                temp_particle.Y = (General_Random_Number(Y1, Y2) + Radio) + Radio * Sin(PI * 2 * index / Count)
+                temp_particle.X = (RandomNumber(x1, x2) + Radio) + Radio * Cos(PI * 2 * index / Count)
+                temp_particle.Y = (RandomNumber(Y1, Y2) + Radio) + Radio * Sin(PI * 2 * index / Count)
 
             End If
 
-            temp_particle.vector_x = General_Random_Number(vecx1, vecx2)
-            temp_particle.vector_y = General_Random_Number(vecy1, vecy2)
+            temp_particle.vector_x = RandomNumber(vecx1, vecx2)
+            temp_particle.vector_y = RandomNumber(vecy1, vecy2)
             temp_particle.angle = angle
-            temp_particle.alive_counter = General_Random_Number(life1, life2)
+            temp_particle.alive_counter = RandomNumber(life1, life2)
             temp_particle.friction = fric
         Else
 
@@ -469,14 +469,14 @@ Private Sub Particle_Render(ByRef temp_particle As Particle, ByVal screen_x As I
             End If
 
             'Do rotation
-            If spin = True Then temp_particle.Grh.angle = temp_particle.Grh.angle + (General_Random_Number(spin_speedL, spin_speedH) / 100)
+            If spin = True Then temp_particle.Grh.angle = temp_particle.Grh.angle + (RandomNumber(spin_speedL, spin_speedH) / 100)
             If temp_particle.angle >= 360 Then
                 temp_particle.angle = 0
 
             End If
                                 
-            If XMove = True Then temp_particle.vector_x = General_Random_Number(move_x1, move_x2)
-            If YMove = True Then temp_particle.vector_y = General_Random_Number(move_y1, move_y2)
+            If XMove = True Then temp_particle.vector_x = RandomNumber(move_x1, move_x2)
+            If YMove = True Then temp_particle.vector_y = RandomNumber(move_y1, move_y2)
 
         End If
 
@@ -537,7 +537,7 @@ Public Sub Particle_Group_Render(ByVal particle_group_index As Long, ByVal scree
             'Render particle
             Particle_Render particle_group_list(particle_group_index).particle_stream(loopc), _
                screen_x, screen_Y, _
-               particle_group_list(particle_group_index).GrhIndex_list(Round(General_Random_Number(1, particle_group_list(particle_group_index).GrhIndex_count), 0)), _
+               particle_group_list(particle_group_index).GrhIndex_list(Round(RandomNumber(1, particle_group_list(particle_group_index).GrhIndex_count), 0)), _
                temp_rgb(), _
                particle_group_list(particle_group_index).alpha_blend, no_move, _
                particle_group_list(particle_group_index).x1, particle_group_list(particle_group_index).Y1, particle_group_list(particle_group_index).angle, _

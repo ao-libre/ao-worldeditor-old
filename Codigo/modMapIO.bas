@@ -164,16 +164,16 @@ End Function
 ' @param FileType Especifica el tipo de archivo/directorio
 ' @return   Nos devuelve verdadero o falso
 
-Public Function General_File_Exist(ByVal file As String, ByVal FileType As VbFileAttribute) As Boolean
+Public Function FileExist(ByVal file As String, ByVal FileType As VbFileAttribute) As Boolean
 
     '*************************************************
     'Author: Unkwown
     'Last modified: 26/05/06
     '*************************************************
     If LenB(Dir(file, FileType)) = 0 Then
-        General_File_Exist = False
+        FileExist = False
     Else
-        General_File_Exist = True
+        FileExist = True
 
     End If
 
@@ -329,7 +329,7 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     Dim G           As Byte
     Dim B           As Byte
 
-    If General_File_Exist(SaveAs, vbNormal) = True Then
+    If FileExist(SaveAs, vbNormal) = True Then
         If MsgBox("¿Desea sobrescribir " & SaveAs & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Sub
         Else
@@ -342,7 +342,7 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     frmMain.MousePointer = 11
 
     ' y borramos el .inf tambien
-    If General_File_Exist(left$(SaveAs, Len(SaveAs) - 4) & ".inf", vbNormal) = True Then
+    If FileExist(left$(SaveAs, Len(SaveAs) - 4) & ".inf", vbNormal) = True Then
         Kill left$(SaveAs, Len(SaveAs) - 4) & ".inf"
 
     End If
@@ -880,7 +880,7 @@ Public Sub Pestañas(ByVal Map As String)
 
     For loopc = (NumMap_Save - 4) To (NumMap_Save + 8)
 
-        If General_File_Exist(PATH_Save & NameMap_Save & loopc & ".map", vbArchive) = True Then
+        If FileExist(PATH_Save & NameMap_Save & loopc & ".map", vbArchive) = True Then
             frmMain.MapPest(loopc - NumMap_Save + 4).Visible = True
             frmMain.MapPest(loopc - NumMap_Save + 4).Enabled = True
             frmMain.MapPest(loopc - NumMap_Save + 4).Caption = NameMap_Save & loopc
@@ -1198,7 +1198,7 @@ Public Function Save_CSM(ByVal MapRoute As String) As Boolean
     Dim i            As Integer
     Dim j            As Integer
 
-    If General_File_Exist(MapRoute, vbNormal) = True Then
+    If FileExist(MapRoute, vbNormal) = True Then
         If MsgBox("¿Desea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Function
         Else

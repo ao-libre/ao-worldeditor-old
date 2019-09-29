@@ -663,7 +663,7 @@ Public Sub LoadGraphicFonts()
 
     file_path = DirIndex & "GUIFonts.ini"
 
-    If General_File_Exist(file_path, vbArchive) Then
+    If FileExist(file_path, vbArchive) Then
         gfont_count = general_var_get(file_path, "INIT", "FontCount")
 
         If gfont_count > 0 Then
@@ -760,7 +760,7 @@ Private Sub LoadFonts()
     
     file_path = DirIndex & "fonts.ini"
     
-    If Not General_File_Exist(file_path, vbArchive) Then Exit Sub
+    If Not FileExist(file_path, vbArchive) Then Exit Sub
     
     num_fonts = general_var_get(file_path, "INIT", "FontCount")
     

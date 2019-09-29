@@ -40,7 +40,7 @@ Public Sub CargarIndicesSuperficie()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(inipath & "GrhIndex\indices.ini", vbArchive) = False Then
+    If FileExist(inipath & "GrhIndex\indices.ini", vbArchive) = False Then
         Call MsgBox("Falta el archivo 'GrhIndex\indices.ini'", vbCritical)
         End
     End If
@@ -91,7 +91,7 @@ Public Sub CargarIndicesOBJ()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(DirDats & "\OBJ.dat", vbArchive) = False Then
+    If FileExist(DirDats & "\OBJ.dat", vbArchive) = False Then
         Call MsgBox("Falta el archivo 'OBJ.dat' en " & DirDats, vbCritical)
         End
 
@@ -146,7 +146,7 @@ Public Sub CargarIndicesTriggers()
 
     On Error GoTo Fallo
 
-    If General_File_Exist(DirIndex & "Triggers.ini", vbArchive) = False Then
+    If FileExist(DirIndex & "Triggers.ini", vbArchive) = False Then
         MsgBox "Falta el archivo 'Triggers.ini' en " & DirIndex, vbCritical
         End
 
@@ -184,7 +184,7 @@ Public Sub CargarIndicesDeCuerpos()
 
     On Error GoTo Fallo
 
-    If Not General_File_Exist(DirIndex & "Personajes.ind", vbArchive) Then
+    If Not FileExist(DirIndex & "Personajes.ind", vbArchive) Then
         Call MsgBox("Falta el archivo 'Personajes.ind' en " & DirIndex, vbCritical)
         End
 
@@ -233,7 +233,7 @@ Public Sub CargarIndicesDeCabezas()
 
     On Error GoTo Fallo
 
-    If Not General_File_Exist(DirIndex & "Cabezas.ind", vbArchive) Then
+    If Not FileExist(DirIndex & "Cabezas.ind", vbArchive) Then
         MsgBox "Falta el archivo 'Cabezas.ind' en " & DirIndex, vbCritical
         End
 
@@ -290,7 +290,7 @@ Public Sub CargarIndicesNPC()
     On Error Resume Next
 
     'On Error GoTo Fallo
-    If General_File_Exist(DirDats & "\NPCs.dat", vbArchive) = False Then
+    If FileExist(DirDats & "\NPCs.dat", vbArchive) = False Then
         MsgBox "Falta el archivo 'NPCs.dat' en " & DirDats, vbCritical
         End
 
