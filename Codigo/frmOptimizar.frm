@@ -159,7 +159,7 @@ Private Sub Optimizar()
                 ' Quitar Objetos
                 MapData(X, Y).OBJInfo.objindex = 0
                 MapData(X, Y).OBJInfo.Amount = 0
-                MapData(X, Y).ObjGrh.grh_index = 0
+                MapData(X, Y).ObjGrh.GrhIndex = 0
                 ' Quitar Translados
                 MapData(X, Y).TileExit.Map = 0
                 MapData(X, Y).TileExit.X = 0
@@ -198,7 +198,7 @@ Private Sub Optimizar()
 
                     Case 4, 8, 10, 22 ' Arboles, Carteles, Foros, Yacimientos
 
-                        If MapData(X, Y).Graphic(3).grh_index <> MapData(X, Y).ObjGrh.grh_index And chkMapearArbolesEtc.value = 1 Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
+                        If MapData(X, Y).Graphic(3).GrhIndex <> MapData(X, Y).ObjGrh.GrhIndex And chkMapearArbolesEtc.value = 1 Then MapData(X, Y).Graphic(3) = MapData(X, Y).ObjGrh
                         If chkBloquearArbolesEtc.value = 1 And MapData(X, Y).Blocked = 0 Then MapData(X, Y).Blocked = 1
 
                 End Select

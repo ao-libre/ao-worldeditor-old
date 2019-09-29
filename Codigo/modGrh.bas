@@ -23,7 +23,7 @@ End Type
 'Points to a Grh_Data and keeps animation info
 Public Type Grh
 
-    grh_index As Integer
+    GrhIndex As Integer
     alpha_blend As Boolean
     angle As Single
     frame_speed As Single
@@ -44,24 +44,24 @@ Public timer_ticks_per_frame As Single
 
 Public base_tile_size        As Integer
 
-Public Sub Grh_Initialize(ByRef Grh As Grh, ByVal grh_index As Long, Optional ByVal alpha_blend As Boolean, Optional ByVal angle As Single, Optional ByVal Started As Byte = 2, Optional ByVal LoopTimes As Integer = LoopAdEternum)
+Public Sub Grh_Initialize(ByRef Grh As Grh, ByVal GrhIndex As Long, Optional ByVal alpha_blend As Boolean, Optional ByVal angle As Single, Optional ByVal Started As Byte = 2, Optional ByVal LoopTimes As Integer = LoopAdEternum)
 
     '*****************************************************************
     'Author: Aaron Perkins
     'Last Modify Date: 10/07/2002
     'Sets up a grh. MUST be done before rendering
     '*****************************************************************
-    If grh_index <= 0 Then Exit Sub
+    If GrhIndex <= 0 Then Exit Sub
 
     'Copy of parameters
-    Grh.grh_index = grh_index
+    Grh.GrhIndex = GrhIndex
     Grh.alpha_blend = alpha_blend
     Grh.angle = angle
     Grh.LoopTimes = LoopTimes
     
     'Start it if it's a animated grh
     If Started = 2 Then
-        If Grh_list(Grh.grh_index).frame_count > 1 Then
+        If Grh_list(Grh.GrhIndex).frame_count > 1 Then
             Grh.Started = True
         Else
             Grh.Started = False
@@ -76,7 +76,7 @@ Public Sub Grh_Initialize(ByRef Grh As Grh, ByVal grh_index As Long, Optional By
     'Set frame counters
     Grh.frame_counter = 1
     
-    Grh.frame_speed = Grh_list(Grh.grh_index).frame_speed
+    Grh.frame_speed = Grh_list(Grh.GrhIndex).frame_speed
 
 End Sub
 
@@ -212,15 +212,15 @@ Public Sub Grh_Render(ByRef Grh As Grh, ByVal screen_x As Long, ByVal screen_Y A
 
     Dim tile_height As Single
 
-    Dim grh_index   As Long
+    Dim GrhIndex   As Long
     
-    If Grh.grh_index = 0 Then Exit Sub
+    If Grh.GrhIndex = 0 Then Exit Sub
     
     'Animation
     If Grh.Started Then
         Grh.frame_counter = Grh.frame_counter + (timer_ticks_per_frame * Grh.frame_speed / 1000)
 
-        If Grh.frame_counter > Grh_list(Grh.grh_index).frame_count Then
+        If Grh.frame_counter > Grh_list(Grh.GrhIndex).frame_count Then
             If Grh.LoopTimes < 2 Then
                 Grh.frame_counter = 1
                 Grh.Started = False
@@ -240,14 +240,14 @@ Public Sub Grh_Render(ByRef Grh As Grh, ByVal screen_x As Long, ByVal screen_Y A
     
     'Figure out what frame to draw (always 1 if not animated)
     If Grh.frame_counter <= 0 Then Grh.frame_counter = 1
-    grh_index = Grh_list(Grh.grh_index).frame_list(Grh.frame_counter)
+    GrhIndex = Grh_list(Grh.GrhIndex).frame_list(Grh.frame_counter)
     
-    If grh_index = 0 Then Exit Sub 'This is an error condition
+    If GrhIndex = 0 Then Exit Sub 'This is an error condition
     
     'Center Grh over X,Y pos
     If center Then
-        tile_width = Grh_list(grh_index).src_width / base_tile_size
-        tile_height = Grh_list(grh_index).src_height / base_tile_size
+        tile_width = Grh_list(GrhIndex).src_width / base_tile_size
+        tile_height = Grh_list(GrhIndex).src_height / base_tile_size
 
         If tile_width <> 1 Then
             screen_x = screen_x - Int(tile_width * base_tile_size / 2) + base_tile_size / 2
@@ -262,11 +262,11 @@ Public Sub Grh_Render(ByRef Grh As Grh, ByVal screen_x As Long, ByVal screen_Y A
     End If
     
     'Draw it to device
-    DXEngine_TextureRender Grh_list(grh_index).texture_index, screen_x, screen_Y, Grh_list(grh_index).src_width, Grh_list(grh_index).src_height, Rgb_List, Grh_list(grh_index).Src_X, Grh_list(grh_index).Src_Y, Grh_list(grh_index).src_width, Grh_list(grh_index).src_height, Grh.alpha_blend, Grh.angle
+    DXEngine_TextureRender Grh_list(GrhIndex).texture_index, screen_x, screen_Y, Grh_list(GrhIndex).src_width, Grh_list(GrhIndex).src_height, Rgb_List, Grh_list(GrhIndex).Src_X, Grh_list(GrhIndex).Src_Y, Grh_list(GrhIndex).src_width, Grh_list(GrhIndex).src_height, Grh.alpha_blend, Grh.angle
 
 End Sub
 
-Public Sub Grh_Render_To_Hdc(ByVal grh_index As Long, desthdc As Long, ByVal screen_x As Long, ByVal screen_Y As Long, Optional transparent As Boolean = False)
+Public Sub Grh_Render_To_Hdc(ByVal GrhIndex As Long, desthdc As Long, ByVal screen_x As Long, ByVal screen_Y As Long, Optional transparent As Boolean = False)
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -274,7 +274,7 @@ Public Sub Grh_Render_To_Hdc(ByVal grh_index As Long, desthdc As Long, ByVal scr
     'This method is SLOW... Don't use in a loop if you care about
     'speed!
     '*************************************************************
-    If Grh_Check(grh_index) = False Then
+    If Grh_Check(GrhIndex) = False Then
         Exit Sub
 
     End If
@@ -289,23 +289,23 @@ Public Sub Grh_Render_To_Hdc(ByVal grh_index As Long, desthdc As Long, ByVal scr
 
     Dim file_index As Long
 
-    'If it's animated switch grh_index to first frame
-    If Grh_list(grh_index).frame_count <> 1 Then
-        grh_index = Grh_list(grh_index).frame_list(1)
+    'If it's animated switch GrhIndex to first frame
+    If Grh_list(GrhIndex).frame_count <> 1 Then
+        GrhIndex = Grh_list(GrhIndex).frame_list(1)
 
     End If
 
-    file_index = Grh_list(grh_index).texture_index
-    Src_X = Grh_list(grh_index).Src_X
-    Src_Y = Grh_list(grh_index).Src_Y
-    src_width = Grh_list(grh_index).src_width
-    src_height = Grh_list(grh_index).src_height
+    file_index = Grh_list(GrhIndex).texture_index
+    Src_X = Grh_list(GrhIndex).Src_X
+    Src_Y = Grh_list(GrhIndex).Src_Y
+    src_width = Grh_list(GrhIndex).src_width
+    src_height = Grh_list(GrhIndex).src_height
 
     Call DXEngine_TextureToHdcRender(file_index, desthdc, screen_x, screen_Y, Src_X, Src_Y, src_width, src_height, transparent)
 
 End Sub
 
-Public Function GUI_Grh_Render(ByVal grh_index As Long, X As Long, Y As Long, Optional ByVal angle As Single, Optional ByVal alpha_blend As Boolean, Optional ByVal Color As Long) As Boolean
+Public Function GUI_Grh_Render(ByVal GrhIndex As Long, X As Long, Y As Long, Optional ByVal angle As Single, Optional ByVal alpha_blend As Boolean, Optional ByVal Color As Long) As Boolean
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -316,7 +316,7 @@ Public Function GUI_Grh_Render(ByVal grh_index As Long, X As Long, Y As Long, Op
 
     Dim rpg_list(3) As Long
 
-    If Grh_Check(grh_index) = False Then
+    If Grh_Check(GrhIndex) = False Then
         Exit Function
 
     End If
@@ -326,7 +326,7 @@ Public Function GUI_Grh_Render(ByVal grh_index As Long, X As Long, Y As Long, Op
     rpg_list(2) = Color
     rpg_list(3) = Color
 
-    Grh_Initialize temp_grh, grh_index, alpha_blend, angle
+    Grh_Initialize temp_grh, GrhIndex, alpha_blend, angle
     
     Grh_Render temp_grh, X, Y, rpg_list
     
@@ -346,16 +346,16 @@ Public Sub AnimSpeedCalculate(ByVal timer_elapsed_time As Single)
 
 End Sub
 
-Public Function Grh_Check(ByVal grh_index As Long) As Boolean
+Public Function Grh_Check(ByVal GrhIndex As Long) As Boolean
 
     '**************************************************************
     'Author: Aaron Perkins
     'Last Modify Date: 1/04/2003
     '
     '**************************************************************
-    'check grh_index
-    If grh_index > 0 And grh_index <= grh_count Then
-        If Grh_list(grh_index).Active Then
+    'check GrhIndex
+    If GrhIndex > 0 And GrhIndex <= grh_count Then
+        If Grh_list(GrhIndex).Active Then
             Grh_Check = True
 
         End If

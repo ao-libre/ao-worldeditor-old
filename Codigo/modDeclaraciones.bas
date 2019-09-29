@@ -148,7 +148,7 @@ Public Type ObjData
 
     name As String 'Nombre del obj
     ObjType As Integer 'Tipo enum que determina cuales son las caract del obj
-    grh_index As Integer ' Indice del grafico que representa el obj
+    GrhIndex As Integer ' Indice del grafico que representa el obj
     GrhSecundario As Integer
     Info As String
     Ropaje As Integer 'Indice del grafico del ropaje

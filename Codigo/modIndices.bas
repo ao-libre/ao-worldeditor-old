@@ -115,7 +115,7 @@ Public Sub CargarIndicesOBJ()
         With ObjData(Obj)
         
             .name = Leer.GetValue("OBJ" & Obj, "Name")
-            .grh_index = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
+            .GrhIndex = Val(Leer.GetValue("OBJ" & Obj, "GrhIndex"))
             .ObjType = Val(Leer.GetValue("OBJ" & Obj, "ObjType"))
             .Ropaje = Val(Leer.GetValue("OBJ" & Obj, "NumRopaje"))
             .Info = Leer.GetValue("OBJ" & Obj, "Info")

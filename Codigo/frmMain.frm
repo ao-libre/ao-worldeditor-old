@@ -8,23 +8,39 @@ Begin VB.Form frmMain
    ClientHeight    =   10740
    ClientLeft      =   390
    ClientTop       =   840
-   ClientWidth     =   15270
+   ClientWidth     =   16830
    Icon            =   "frmMain.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    ScaleHeight     =   716
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   1018
+   ScaleWidth      =   1122
    StartUpPosition =   1  'CenterOwner
    Visible         =   0   'False
    WindowState     =   2  'Maximized
+   Begin VB.CommandButton cmdCargarCSM 
+      Caption         =   "Cagar CSM"
+      Height          =   510
+      Left            =   15120
+      TabIndex        =   121
+      Top             =   1560
+      Width           =   1455
+   End
+   Begin VB.CommandButton cmdSaveCSM 
+      Caption         =   "Guardar en CSM"
+      Height          =   510
+      Left            =   15120
+      TabIndex        =   120
+      Top             =   720
+      Width           =   1335
+   End
    Begin VB.CommandButton Command1 
       Caption         =   "Montaña"
-      Height          =   1215
-      Left            =   15000
+      Height          =   495
+      Left            =   15120
       TabIndex        =   118
-      Top             =   0
-      Width           =   255
+      Top             =   120
+      Width           =   1215
    End
    Begin VB.PictureBox picRadar 
       BackColor       =   &H00400040&
@@ -3093,7 +3109,7 @@ Private Sub PonerAlAzar(ByVal n As Integer, T As Byte)
 
                     If cNumFunc(2).Text > 0 Then
                         objindex = cNumFunc(2).Text
-                        Grh_Initialize MapData(X, Y).ObjGrh, ObjData(objindex).grh_index
+                        Grh_Initialize MapData(X, Y).ObjGrh, ObjData(objindex).GrhIndex
                         MapData(X, Y).OBJInfo.objindex = objindex
                         MapData(X, Y).OBJInfo.Amount = Val(cCantFunc(2).Text)
 
@@ -3355,6 +3371,10 @@ Private Sub cInsertarTrigger_Click()
 
 End Sub
 
+Private Sub cmdCargarCSM_Click()
+    Call Cargar_CSM(App.Path & "\Mapas_CSM\Mapa1.csm")
+End Sub
+
 Private Sub cmdInformacionDelMapa_Click()
     '*************************************************
     'Author: ^[GS]^
@@ -3372,6 +3392,10 @@ Private Sub cmdQuitarFunciones_Click()
     '*************************************************
     Call mnuQuitarFunciones_Click
 
+End Sub
+
+Private Sub cmdSaveCSM_Click()
+    Call Save_CSM(App.Path & "\Mapas_CSM\Mapa" & CurMap & ".csm")
 End Sub
 
 Private Sub Combo1_Click()

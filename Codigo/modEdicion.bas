@@ -286,7 +286,7 @@ Public Sub Superficie_Azar()
 
                     End If
 
-                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                     Grh_Initialize MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
                 Else
 
@@ -307,7 +307,7 @@ Public Sub Superficie_Azar()
 
                             End If
 
-                            MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                            MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                          
                             Grh_Initialize MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)), aux
                             tXX = tXX + 1
@@ -370,7 +370,7 @@ Public Sub Superficie_Bordes()
 
                     End If
 
-                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                     'Setup GRH
                     Grh_Initialize MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
                 Else
@@ -383,7 +383,7 @@ Public Sub Superficie_Bordes()
 
                     End If
             
-                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).grh_index = Val(frmMain.cGrh.Text)
+                    MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Val(frmMain.cGrh.Text)
             
                     'Setup GRH
     
@@ -401,7 +401,7 @@ Public Sub Superficie_Bordes()
                 'Erase Objs
                 MapData(X, Y).OBJInfo.objindex = 0
                 MapData(X, Y).OBJInfo.Amount = 0
-                MapData(X, Y).ObjGrh.grh_index = 0
+                MapData(X, Y).ObjGrh.GrhIndex = 0
 
                 'Clear exits
                 MapData(X, Y).TileExit.Map = 0
@@ -449,12 +449,12 @@ Public Sub Superficie_Todo()
                 Dim aux As Integer
 
                 aux = Val(frmMain.cGrh.Text) + ((Y Mod frmConfigSup.mLargo) * frmConfigSup.mAncho) + (X Mod frmConfigSup.mAncho)
-                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                 'Setup GRH
                 Grh_Initialize MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), aux
             Else
                 'Else Place graphic
-                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).grh_index = Val(frmMain.cGrh.Text)
+                MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Val(frmMain.cGrh.Text)
                 'Setup GRH
                 Grh_Initialize MapData(X, Y).Graphic(Val(frmMain.cCapas.Text)), Val(frmMain.cGrh.Text)
 
@@ -528,14 +528,14 @@ Public Sub Borrar_Mapa()
 
     For Y = YMinMapSize To YMaxMapSize
         For X = XMinMapSize To XMaxMapSize
-            MapData(X, Y).Graphic(1).grh_index = 1
+            MapData(X, Y).Graphic(1).GrhIndex = 1
             'Change blockes status
             MapData(X, Y).Blocked = 0
 
             'Erase layer 2 and 3
-            MapData(X, Y).Graphic(2).grh_index = 0
-            MapData(X, Y).Graphic(3).grh_index = 0
-            MapData(X, Y).Graphic(4).grh_index = 0
+            MapData(X, Y).Graphic(2).GrhIndex = 0
+            MapData(X, Y).Graphic(3).GrhIndex = 0
+            MapData(X, Y).Graphic(4).GrhIndex = 0
 
             'Erase NPCs
             If MapData(X, Y).NPCIndex > 0 Then
@@ -547,7 +547,7 @@ Public Sub Borrar_Mapa()
             'Erase Objs
             MapData(X, Y).OBJInfo.objindex = 0
             MapData(X, Y).OBJInfo.Amount = 0
-            MapData(X, Y).ObjGrh.grh_index = 0
+            MapData(X, Y).ObjGrh.GrhIndex = 0
 
             'Clear exits
             MapData(X, Y).TileExit.Map = 0
@@ -627,7 +627,7 @@ Public Sub Quitar_Objetos()
         For X = XMinMapSize To XMaxMapSize
 
             If MapData(X, Y).OBJInfo.objindex > 0 Then
-                If MapData(X, Y).Graphic(3).grh_index = MapData(X, Y).ObjGrh.grh_index Then MapData(X, Y).Graphic(3).grh_index = 0
+                If MapData(X, Y).Graphic(3).GrhIndex = MapData(X, Y).ObjGrh.GrhIndex Then MapData(X, Y).Graphic(3).GrhIndex = 0
                 MapData(X, Y).OBJInfo.objindex = 0
                 MapData(X, Y).OBJInfo.Amount = 0
 
@@ -743,7 +743,7 @@ Public Sub Quitar_Bordes()
 
             If X < MinXBorder Or X > MaxXBorder Or Y < MinYBorder Or Y > MaxYBorder Then
         
-                MapData(X, Y).Graphic(1).grh_index = 1
+                MapData(X, Y).Graphic(1).GrhIndex = 1
                 Grh_Initialize MapData(X, Y).Graphic(1), 1
                 MapData(X, Y).Blocked = 0
             
@@ -757,7 +757,7 @@ Public Sub Quitar_Bordes()
                 'Erase Objs
                 MapData(X, Y).OBJInfo.objindex = 0
                 MapData(X, Y).OBJInfo.Amount = 0
-                MapData(X, Y).ObjGrh.grh_index = 0
+                MapData(X, Y).ObjGrh.GrhIndex = 0
 
                 'Clear exits
                 MapData(X, Y).TileExit.Map = 0
@@ -809,9 +809,9 @@ Public Sub Quitar_Capa(ByVal Capa As Byte)
         For X = XMinMapSize To XMaxMapSize
 
             If Capa = 1 Then
-                MapData(X, Y).Graphic(Capa).grh_index = 1
+                MapData(X, Y).Graphic(Capa).GrhIndex = 1
             Else
-                MapData(X, Y).Graphic(Capa).grh_index = 0
+                MapData(X, Y).Graphic(Capa).GrhIndex = 0
 
             End If
 
@@ -946,21 +946,21 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
         End If
         
         ' Capas
-        frmMain.StatTxt.Text = frmMain.StatTxt.Text & ENDL & "Capa1: " & MapData(tX, tY).Graphic(1).grh_index & " - Capa2: " & MapData(tX, tY).Graphic(2).grh_index & " - Capa3: " & MapData(tX, tY).Graphic(3).grh_index & " - Capa4: " & MapData(tX, tY).Graphic(4).grh_index
+        frmMain.StatTxt.Text = frmMain.StatTxt.Text & ENDL & "Capa1: " & MapData(tX, tY).Graphic(1).GrhIndex & " - Capa2: " & MapData(tX, tY).Graphic(2).GrhIndex & " - Capa3: " & MapData(tX, tY).Graphic(3).GrhIndex & " - Capa4: " & MapData(tX, tY).Graphic(4).GrhIndex
 
         If frmMain.mnuAutoCapturarSuperficie.Checked = True And frmMain.cSeleccionarSuperficie.value = False Then
-            If MapData(tX, tY).Graphic(4).grh_index <> 0 Then
+            If MapData(tX, tY).Graphic(4).GrhIndex <> 0 Then
                 frmMain.cCapas.Text = 4
-                frmMain.cGrh.Text = MapData(tX, tY).Graphic(4).grh_index
-            ElseIf MapData(tX, tY).Graphic(3).grh_index <> 0 Then
+                frmMain.cGrh.Text = MapData(tX, tY).Graphic(4).GrhIndex
+            ElseIf MapData(tX, tY).Graphic(3).GrhIndex <> 0 Then
                 frmMain.cCapas.Text = 3
-                frmMain.cGrh.Text = MapData(tX, tY).Graphic(3).grh_index
-            ElseIf MapData(tX, tY).Graphic(2).grh_index <> 0 Then
+                frmMain.cGrh.Text = MapData(tX, tY).Graphic(3).GrhIndex
+            ElseIf MapData(tX, tY).Graphic(2).GrhIndex <> 0 Then
                 frmMain.cCapas.Text = 2
-                frmMain.cGrh.Text = MapData(tX, tY).Graphic(2).grh_index
-            ElseIf MapData(tX, tY).Graphic(1).grh_index <> 0 Then
+                frmMain.cGrh.Text = MapData(tX, tY).Graphic(2).GrhIndex
+            ElseIf MapData(tX, tY).Graphic(1).GrhIndex <> 0 Then
                 frmMain.cCapas.Text = 1
-                frmMain.cGrh.Text = MapData(tX, tY).Graphic(1).grh_index
+                frmMain.cGrh.Text = MapData(tX, tY).Graphic(1).GrhIndex
 
             End If
 
@@ -987,7 +987,7 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
             MapInfo.Changed = 1 'Set changed flag
 
             For loopc = 2 To 3
-                MapData(tX, tY).Graphic(loopc).grh_index = 0
+                MapData(tX, tY).Graphic(loopc).GrhIndex = 0
             Next loopc
                 
             Exit Sub
@@ -997,18 +997,18 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
         'Borrar "esta" Capa
         If frmMain.cQuitarEnEstaCapa.value = True Then
             If Val(frmMain.cCapas.Text) = 1 Then
-                If MapData(tX, tY).Graphic(1).grh_index <> 1 Then
+                If MapData(tX, tY).Graphic(1).GrhIndex <> 1 Then
                     modEdicion.Deshacer_Add "Quitar Capa 1" ' Hago deshacer
                     MapInfo.Changed = 1 'Set changed flag
-                    MapData(tX, tY).Graphic(1).grh_index = 1
+                    MapData(tX, tY).Graphic(1).GrhIndex = 1
                     Exit Sub
 
                 End If
 
-            ElseIf MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index <> 0 Then
+            ElseIf MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> 0 Then
                 modEdicion.Deshacer_Add "Quitar Capa " & frmMain.cCapas.Text  ' Hago deshacer
                 MapInfo.Changed = 1 'Set changed flag
-                MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index = 0
+                MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = 0
                 Exit Sub
 
             End If
@@ -1040,8 +1040,8 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
                     MapInfo.Changed = 1 'Set changed flag
                     aux = Val(frmMain.cGrh.Text) + (((tY + dy) Mod frmConfigSup.mLargo.Text) * frmConfigSup.mAncho.Text) + ((tX + dX) Mod frmConfigSup.mAncho.Text)
 
-                    If MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index <> aux Or MapData(tX, tY).Blocked <> frmMain.SelectPanel(2).value Then
-                        MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                    If MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> aux Or MapData(tX, tY).Blocked <> frmMain.SelectPanel(2).value Then
+                        MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                         Grh_Initialize MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)), aux
 
                     End If
@@ -1059,7 +1059,7 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
                     For i = 1 To frmConfigSup.mLargo.Text
                         For j = 1 To frmConfigSup.mAncho.Text
                             aux = Val(frmMain.cGrh.Text) + desptile
-                            MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)).grh_index = aux
+                            MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = aux
                             Grh_Initialize MapData(tXX, tYY).Graphic(Val(frmMain.cCapas.Text)), aux
                             tXX = tXX + 1
                             desptile = desptile + 1
@@ -1074,10 +1074,10 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
             Else
 
                 'Else Place graphic
-                If MapData(tX, tY).Blocked <> frmMain.SelectPanel(2).value Or MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index <> Val(frmMain.cGrh.Text) Then
+                If MapData(tX, tY).Blocked <> frmMain.SelectPanel(2).value Or MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex <> Val(frmMain.cGrh.Text) Then
                     modEdicion.Deshacer_Add "Quitar Superficie en Capa " & frmMain.cCapas.Text ' Hago deshacer
                     MapInfo.Changed = 1 'Set changed flag
-                    MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).grh_index = Val(frmMain.cGrh.Text)
+                    MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)).GrhIndex = Val(frmMain.cGrh.Text)
                     'Setup GRH
                     Grh_Initialize MapData(tX, tY).Graphic(Val(frmMain.cCapas.Text)), Val(frmMain.cGrh.Text)
 
@@ -1113,7 +1113,7 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
                 If ObjData(Cfg_TrOBJ).ObjType = 19 Then
                     modEdicion.Deshacer_Add "Insertar Objeto de Translado" ' Hago deshacer
                     MapInfo.Changed = 1 'Set changed flag
-                    Grh_Initialize MapData(tX, tY).ObjGrh, ObjData(Cfg_TrOBJ).grh_index
+                    Grh_Initialize MapData(tX, tY).ObjGrh, ObjData(Cfg_TrOBJ).GrhIndex
                     MapData(tX, tY).OBJInfo.objindex = Cfg_TrOBJ
                     MapData(tX, tY).OBJInfo.Amount = 1
 
@@ -1230,7 +1230,7 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
                 If MapData(tX, tY).OBJInfo.objindex <> objindex Or MapData(tX, tY).OBJInfo.Amount <> Val(frmMain.cCantFunc(2).Text) Then
                     modEdicion.Deshacer_Add "Insertar Objeto" ' Hago deshacer
                     MapInfo.Changed = 1 'Set changed flag
-                    Grh_Initialize MapData(tX, tY).ObjGrh, ObjData(objindex).grh_index
+                    Grh_Initialize MapData(tX, tY).ObjGrh, ObjData(objindex).GrhIndex
                     MapData(tX, tY).OBJInfo.objindex = objindex
                     MapData(tX, tY).OBJInfo.Amount = Val(frmMain.cCantFunc(2).Text)
 
@@ -1251,8 +1251,8 @@ Sub ClickEdit(Button As Integer, tX As Integer, tY As Integer)
                 modEdicion.Deshacer_Add "Quitar Objeto" ' Hago deshacer
                 MapInfo.Changed = 1 'Set changed flag
 
-                If MapData(tX, tY).Graphic(3).grh_index = MapData(tX, tY).ObjGrh.grh_index Then MapData(tX, tY).Graphic(3).grh_index = 0
-                MapData(tX, tY).ObjGrh.grh_index = 0
+                If MapData(tX, tY).Graphic(3).GrhIndex = MapData(tX, tY).ObjGrh.GrhIndex Then MapData(tX, tY).Graphic(3).GrhIndex = 0
+                MapData(tX, tY).ObjGrh.GrhIndex = 0
                 MapData(tX, tY).OBJInfo.objindex = 0
                 MapData(tX, tY).OBJInfo.Amount = 0
 

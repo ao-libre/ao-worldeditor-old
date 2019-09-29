@@ -369,10 +369,10 @@ Public Sub fPreviewGrh(ByVal GrhIn As Integer)
     End If
 
     'Change CurrentGrh
-    CurrentGrh.grh_index = GrhIn
+    CurrentGrh.GrhIndex = GrhIn
     CurrentGrh.Started = 1
     CurrentGrh.frame_counter = 1
-    CurrentGrh.frame_speed = Grh_list(CurrentGrh.grh_index).frame_speed
+    CurrentGrh.frame_speed = Grh_list(CurrentGrh.GrhIndex).frame_speed
 
 End Sub
 
@@ -388,19 +388,19 @@ Public Sub VistaPreviaDeSup()
     '*************************************************
     Dim SR As RECT, DR As RECT
 
-    If CurrentGrh.grh_index = 0 Then Exit Sub
+    If CurrentGrh.GrhIndex = 0 Then Exit Sub
     frmGrafico.ShowPic = frmGrafico.Picture1
 
     If frmConfigSup.MOSAICO = vbUnchecked Then
         DR.left = 0
         DR.top = 0
-        DR.Bottom = (Grh_list(CurrentGrh.grh_index).src_height)
-        DR.Right = (Grh_list(CurrentGrh.grh_index).src_width)
-        SR.left = Grh_list(CurrentGrh.grh_index).Src_X
-        SR.top = Grh_list(CurrentGrh.grh_index).Src_Y
-        SR.Bottom = (Grh_list(CurrentGrh.grh_index).src_height)
-        SR.Right = (Grh_list(CurrentGrh.grh_index).src_width)
-        Call modDXEngine.DXEngine_TextureToHdcRender(Grh_list(CurrentGrh.grh_index).texture_index, frmGrafico.ShowPic.hdc, DR.left, DR.top, SR.left, SR.top, SR.Right, SR.Bottom)
+        DR.Bottom = (Grh_list(CurrentGrh.GrhIndex).src_height)
+        DR.Right = (Grh_list(CurrentGrh.GrhIndex).src_width)
+        SR.left = Grh_list(CurrentGrh.GrhIndex).Src_X
+        SR.top = Grh_list(CurrentGrh.GrhIndex).Src_Y
+        SR.Bottom = (Grh_list(CurrentGrh.GrhIndex).src_height)
+        SR.Right = (Grh_list(CurrentGrh.GrhIndex).src_width)
+        Call modDXEngine.DXEngine_TextureToHdcRender(Grh_list(CurrentGrh.GrhIndex).texture_index, frmGrafico.ShowPic.hdc, DR.left, DR.top, SR.left, SR.top, SR.Right, SR.Bottom)
     Else
 
         Dim j    As Integer, i As Integer
@@ -411,22 +411,22 @@ Public Sub VistaPreviaDeSup()
             For j = 1 To CInt(Val(frmConfigSup.mAncho))
                 DR.left = (j - 1) * 32
                 DR.top = (i - 1) * 32
-                SR.left = Grh_list(CurrentGrh.grh_index).Src_X
-                SR.top = Grh_list(CurrentGrh.grh_index).Src_Y
-                SR.Right = Grh_list(CurrentGrh.grh_index).src_width
-                SR.Bottom = Grh_list(CurrentGrh.grh_index).src_height
+                SR.left = Grh_list(CurrentGrh.GrhIndex).Src_X
+                SR.top = Grh_list(CurrentGrh.GrhIndex).Src_Y
+                SR.Right = Grh_list(CurrentGrh.GrhIndex).src_width
+                SR.Bottom = Grh_list(CurrentGrh.GrhIndex).src_height
                 'If Cont = 15 Then Stop
-                Call modDXEngine.DXEngine_TextureToHdcRender(Grh_list(CurrentGrh.grh_index).texture_index, frmGrafico.ShowPic.hdc, DR.left, DR.top, SR.left, SR.top, SR.Right, SR.Bottom)
+                Call modDXEngine.DXEngine_TextureToHdcRender(Grh_list(CurrentGrh.GrhIndex).texture_index, frmGrafico.ShowPic.hdc, DR.left, DR.top, SR.left, SR.top, SR.Right, SR.Bottom)
 
                 If Cont < CInt(Val(frmConfigSup.mAncho)) Then
-                    Cont = Cont + 1: CurrentGrh.grh_index = CurrentGrh.grh_index + 1
+                    Cont = Cont + 1: CurrentGrh.GrhIndex = CurrentGrh.GrhIndex + 1
                     Cont = 0
 
                 End If
 
             Next
         Next
-        CurrentGrh.grh_index = CurrentGrh.grh_index - Cont
+        CurrentGrh.GrhIndex = CurrentGrh.GrhIndex - Cont
 
     End If
 
