@@ -8,39 +8,23 @@ Begin VB.Form frmMain
    ClientHeight    =   10740
    ClientLeft      =   390
    ClientTop       =   840
-   ClientWidth     =   16830
+   ClientWidth     =   15705
    Icon            =   "frmMain.frx":0000
    KeyPreview      =   -1  'True
    LinkTopic       =   "Form1"
    ScaleHeight     =   716
    ScaleMode       =   3  'Pixel
-   ScaleWidth      =   1122
+   ScaleWidth      =   1047
    StartUpPosition =   1  'CenterOwner
    Visible         =   0   'False
    WindowState     =   2  'Maximized
-   Begin VB.CommandButton cmdCargarCSM 
-      Caption         =   "Cagar CSM"
-      Height          =   510
-      Left            =   15120
-      TabIndex        =   121
-      Top             =   1560
-      Width           =   1455
-   End
-   Begin VB.CommandButton cmdSaveCSM 
-      Caption         =   "Guardar en CSM"
-      Height          =   510
-      Left            =   15120
-      TabIndex        =   120
-      Top             =   720
-      Width           =   1335
-   End
    Begin VB.CommandButton Command1 
       Caption         =   "Montaña"
       Height          =   495
-      Left            =   15120
+      Left            =   120
       TabIndex        =   118
-      Top             =   120
-      Width           =   1215
+      Top             =   10200
+      Width           =   1455
    End
    Begin VB.PictureBox picRadar 
       BackColor       =   &H00400040&
@@ -395,7 +379,7 @@ Begin VB.Form frmMain
          Strikethrough   =   0   'False
       EndProperty
       ForeColor       =   &H00FFFFFF&
-      Height          =   4275
+      Height          =   3675
       Left            =   120
       Locked          =   -1  'True
       MultiLine       =   -1  'True
@@ -3371,10 +3355,6 @@ Private Sub cInsertarTrigger_Click()
 
 End Sub
 
-Private Sub cmdCargarCSM_Click()
-    Call Cargar_CSM(App.Path & "\Mapas_CSM\Mapa1.csm")
-End Sub
-
 Private Sub cmdInformacionDelMapa_Click()
     '*************************************************
     'Author: ^[GS]^
@@ -3392,10 +3372,6 @@ Private Sub cmdQuitarFunciones_Click()
     '*************************************************
     Call mnuQuitarFunciones_Click
 
-End Sub
-
-Private Sub cmdSaveCSM_Click()
-    Call Save_CSM(App.Path & "\Mapas_CSM\Mapa" & CurMap & ".csm")
 End Sub
 
 Private Sub Combo1_Click()
@@ -3948,6 +3924,51 @@ ErrHandler:
 
 End Sub
 
+Private Sub mnuAbrirMapa_Click()
+    '*************************************************
+    'Author: Lorwik
+    'Last modified: 04/11/2015
+    '*************************************************
+    
+    Dialog.CancelError = True
+
+    On Error GoTo ErrHandler
+
+    Call DeseaGuardarMapa(Dialog.FileName)
+
+    Call ObtenerNombreArchivo(False)
+
+    If Len(Dialog.FileName) < 3 Then Exit Sub
+
+    If WalkMode = True Then
+        Call modGeneral.ToggleWalkMode
+
+    End If
+    
+    Call modMapIO.NuevoMapa
+    
+    Select Case frmMain.Dialog.FilterIndex
+    
+        Case 1
+            Call modMapIO.AbrirMapa(Dialog.FileName, MapData)
+            
+        Case 2
+            Call modMapIO.Cargar_CSM(Dialog.FileName)
+            
+    End Select
+
+    DoEvents
+    
+    mnuReAbrirMapa.Enabled = True
+    
+    EngineRun = True
+    
+    Exit Sub
+    
+ErrHandler:
+
+End Sub
+
 Private Sub mnuActualizarCabezas_Click()
     '*************************************************
     'Author: ^[GS]^
@@ -3981,37 +4002,6 @@ Private Sub mnuActualizarSuperficies_Click()
     'Last modified: 20/05/06
     '*************************************************
     Call modIndices.CargarIndicesSuperficie
-
-End Sub
-
-Private Sub mnuAbrirMapa_Click()
-    '*************************************************
-    'Author: ^[GS]^
-    'Last modified: 20/05/06
-    '*************************************************
-    Dialog.CancelError = True
-
-    On Error GoTo ErrHandler
-
-    DeseaGuardarMapa Dialog.FileName
-
-    ObtenerNombreArchivo False
-
-    If Len(Dialog.FileName) < 3 Then Exit Sub
-
-    If WalkMode = True Then
-        Call modGeneral.ToggleWalkMode
-
-    End If
-    
-    Call modMapIO.NuevoMapa
-    modMapIO.AbrirMapa Dialog.FileName, MapData
-    DoEvents
-    mnuReAbrirMapa.Enabled = True
-    EngineRun = True
-    
-    Exit Sub
-ErrHandler:
 
 End Sub
 
@@ -5053,7 +5043,7 @@ Public Sub ObtenerNombreArchivo(ByVal Guardar As Boolean)
     '*************************************************
 
     With Dialog
-        .Filter = "Mapas de Argentum Online (*.map)|*.map"
+        .Filter = "Mapas de Argentum Online (*.map)|*.map|Mapas de IAOClon (*.csm)|*.csm"
 
         If Guardar Then
             .DialogTitle = "Guardar"

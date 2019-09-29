@@ -94,6 +94,13 @@ Private Type tDatosTE
     DestY As Integer
 End Type
 
+Private Type tMapSize
+    XMax As Integer
+    XMin As Integer
+    YMax As Integer
+    YMin As Integer
+End Type
+
 Private Type tMapDat
     map_name As String
     battle_mode As Boolean
@@ -112,6 +119,7 @@ Private Type tMapDat
     version As Long
 End Type
 
+Public MapSize As tMapSize
 Private MapDat As tMapDat
 '***************************
 'Map format .CSM
@@ -193,7 +201,7 @@ End Sub
 
 Public Sub GuardarMapa(Optional Path As String)
     '*************************************************
-    'Author: ^[GS]^
+    'Author: Lorwik
     'Last modified: 01/11/08
     '*************************************************
 
@@ -202,14 +210,18 @@ Public Sub GuardarMapa(Optional Path As String)
     On Error GoTo ErrHandler
 
     If LenB(Path) = 0 Then
-        frmMain.ObtenerNombreArchivo True
+        Call frmMain.ObtenerNombreArchivo(True)
         Path = frmMain.Dialog.FileName
 
         If LenB(Path) = 0 Then Exit Sub
 
     End If
 
-    Call MapaV2_Guardar(Path)
+    If frmMain.Dialog.FilterIndex = 1 Then
+        Call MapaV2_Guardar(Path)
+    ElseIf frmMain.Dialog.FilterIndex = 2 Then
+        Call Save_CSM(Path)
+    End If
 
 ErrHandler:
 
@@ -228,7 +240,7 @@ Public Sub DeseaGuardarMapa(Optional Path As String)
 
     If MapInfo.Changed = 1 Then
         If MsgBox(MSGMod, vbExclamation + vbYesNo) = vbYes Then
-            GuardarMapa Path
+            Call GuardarMapa(Path)
 
         End If
 
@@ -715,26 +727,34 @@ Public Sub MapInfo_Guardar(ByVal Archivo As String)
         MapTitulo = NameMap_Save
 
     End If
+    
+    Set FileManager = New clsIniManager
+    
+    With FileManager
+        Call .Initialize(Archivo)
 
-    Call WriteVar(Archivo, MapTitulo, "Name", MapInfo.Name)
-    Call WriteVar(Archivo, MapTitulo, "MusicNum", MapInfo.Music)
-    Call WriteVar(Archivo, MapTitulo, "MagiaSinefecto", Val(MapInfo.MagiaSinEfecto))
-    Call WriteVar(Archivo, MapTitulo, "InviSinEfecto", Val(MapInfo.InviSinEfecto))
-    Call WriteVar(Archivo, MapTitulo, "ResuSinEfecto", Val(MapInfo.ResuSinEfecto))
-    Call WriteVar(Archivo, MapTitulo, "NoEncriptarMP", Val(MapInfo.NoEncriptarMP))
+        Call .ChangeValue(MapTitulo, "Name", MapInfo.Name)
+        Call .ChangeValue(MapTitulo, "MusicNum", MapInfo.Music)
+        Call .ChangeValue(MapTitulo, "MagiaSinefecto", Val(MapInfo.MagiaSinEfecto))
+        Call .ChangeValue(MapTitulo, "InviSinEfecto", Val(MapInfo.InviSinEfecto))
+        Call .ChangeValue(MapTitulo, "ResuSinEfecto", Val(MapInfo.ResuSinEfecto))
+        Call .ChangeValue(MapTitulo, "NoEncriptarMP", Val(MapInfo.NoEncriptarMP))
 
-    Call WriteVar(Archivo, MapTitulo, "Terreno", MapInfo.Terreno)
-    Call WriteVar(Archivo, MapTitulo, "Zona", MapInfo.Zona)
-    Call WriteVar(Archivo, MapTitulo, "Restringir", MapInfo.Restringir)
-    Call WriteVar(Archivo, MapTitulo, "BackUp", Str(MapInfo.BackUp))
+        Call .ChangeValue(MapTitulo, "Terreno", MapInfo.Terreno)
+        Call .ChangeValue(MapTitulo, "Zona", MapInfo.Zona)
+        Call .ChangeValue(MapTitulo, "Restringir", MapInfo.Restringir)
+        Call .ChangeValue(MapTitulo, "BackUp", Str(MapInfo.BackUp))
 
-    If MapInfo.PK Then
-        Call WriteVar(Archivo, MapTitulo, "Pk", "0")
-    Else
-        Call WriteVar(Archivo, MapTitulo, "Pk", "1")
-
-    End If
-
+        If MapInfo.PK Then
+            Call .ChangeValue(MapTitulo, "Pk", "0")
+        Else
+            Call .ChangeValue(MapTitulo, "Pk", "1")
+        End If
+    
+    End With
+    
+    Set FileManager = Nothing
+    
 End Sub
 
 ''
@@ -916,6 +936,7 @@ End Sub
 Public Sub CSMInfoCargar()
 
     With MapInfo
+    
         .Name = MapDat.map_name
         .Music = MapDat.music_number
         .MagiaSinEfecto = MapDat.MagiaSinEfecto
@@ -943,9 +964,6 @@ Public Sub CSMInfoCargar()
 End Sub
 
 Sub Cargar_CSM(ByVal Map As String)
-
-    'Particle_Group_Remove_All
-    'Light_Remove_All
 
     On Error GoTo ErrorHandler
 
@@ -1007,7 +1025,7 @@ Sub Cargar_CSM(ByVal Map As String)
                 Get #fh, , L2
     
                 For i = 1 To .NumeroLayers(2)
-                    Grh_Initialize MapData(L2(i).X, L2(i).Y).Graphic(2), L2(i).GrhIndex
+                    Call Grh_Initialize(MapData(L2(i).X, L2(i).Y).Graphic(2), L2(i).GrhIndex)
                 Next i
     
             End If
@@ -1017,7 +1035,7 @@ Sub Cargar_CSM(ByVal Map As String)
                 Get #fh, , L3
     
                 For i = 1 To .NumeroLayers(3)
-                    Grh_Initialize MapData(L3(i).X, L3(i).Y).Graphic(3), L3(i).GrhIndex
+                    Call Grh_Initialize(MapData(L3(i).X, L3(i).Y).Graphic(3), L3(i).GrhIndex)
                 Next i
     
             End If
@@ -1027,7 +1045,7 @@ Sub Cargar_CSM(ByVal Map As String)
                 Get #fh, , L4
     
                 For i = 1 To .NumeroLayers(4)
-                    Grh_Initialize MapData(L4(i).X, L4(i).Y).Graphic(4), L4(i).GrhIndex
+                    Call Grh_Initialize(MapData(L4(i).X, L4(i).Y).Graphic(4), L4(i).GrhIndex)
                 Next i
     
             End If
@@ -1077,9 +1095,9 @@ Sub Cargar_CSM(ByVal Map As String)
                     MapData(Objetos(i).X, Objetos(i).Y).OBJInfo.Amount = Objetos(i).ObjAmmount
     
                     If MapData(Objetos(i).X, Objetos(i).Y).OBJInfo.objindex > NumOBJs Then
-                        Grh_Initialize MapData(Objetos(i).X, Objetos(i).Y).ObjGrh, 20299
+                        Call Grh_Initialize(MapData(Objetos(i).X, Objetos(i).Y).ObjGrh, 20299)
                     Else
-                        Grh_Initialize MapData(Objetos(i).X, Objetos(i).Y).ObjGrh, ObjData(MapData(Objetos(i).X, Objetos(i).Y).OBJInfo.objindex).GrhIndex
+                        Call Grh_Initialize(MapData(Objetos(i).X, Objetos(i).Y).ObjGrh, ObjData(MapData(Objetos(i).X, Objetos(i).Y).OBJInfo.objindex).GrhIndex)
     
                     End If
     
@@ -1143,7 +1161,7 @@ Sub Cargar_CSM(ByVal Map As String)
     Call Pestañas(Map)
     
     ' Vacia el Deshacer
-    modEdicion.Deshacer_Clear
+    Call modEdicion.Deshacer_Clear
     
     'Change mouse icon
     frmMain.MousePointer = 0

@@ -29,6 +29,8 @@ Attribute VB_Name = "modDeclaraciones"
 
 Option Explicit
 
+Public FileManager           As clsIniManager
+
 Public Meteo                 As New clsMeteo
 Public Audio                 As New clsAudio
 
@@ -117,7 +119,7 @@ Public bRefreshRadar As Boolean
 
 Type SupData
 
-    name As String
+    Name As String
     Grh As Integer
     Width As Byte
     Height As Byte
@@ -132,7 +134,7 @@ Public SupData() As SupData
 
 Public Type NpcData
 
-    name As String
+    Name As String
     Body As Integer
     Head As Integer
     Heading As Byte
@@ -146,7 +148,7 @@ Public NpcData() As NpcData
 
 Public Type ObjData
 
-    name As String 'Nombre del obj
+    Name As String 'Nombre del obj
     ObjType As Integer 'Tipo enum que determina cuales son las caract del obj
     GrhIndex As Integer ' Indice del grafico que representa el obj
     GrhSecundario As Integer
@@ -173,7 +175,7 @@ Public dLastWalk   As Double
 Public Type MapInfo
 
     Music As String
-    name As String
+    Name As String
     MapVersion As Integer
     PK As Boolean
     MagiaSinEfecto As Byte
