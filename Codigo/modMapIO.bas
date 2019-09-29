@@ -1389,6 +1389,9 @@ Public Sub Convertir(ByVal PathMAP As String, ByVal PathCSM As String, ByVal Des
     
     For i = Desde To Hasta
         
+        'Si no existe Mapa i.map, lo omitimos.
+        If Not FileExist(PathMAP & "\Mapa" & i & ".map", vbNormal) Then i = i + 1
+        
         Debug.Print "Abriendo " & PathMAP & "\Mapa" & i & ".map"
         Call AbrirMapa(PathMAP & "\Mapa" & i & ".map", MapData, False)
         
