@@ -54,7 +54,6 @@ Private Const COLOR_KEY As Long = &HFF000000
 Private Function BorraMenosUsado() As Integer
 
     Dim Valor As Long
-
     Dim i     As Long
     
     'Inicializamos todo
@@ -67,7 +66,6 @@ Private Function BorraMenosUsado() As Integer
         If texture_list(i).UltimoAcceso < Valor And texture_list(i).borrable Then
             Valor = texture_list(i).UltimoAcceso
             BorraMenosUsado = i
-
         End If
 
     Next i
@@ -87,8 +85,10 @@ Public Function GetTexture(ByVal file_name As Integer) As Direct3DTexture8
     If lKeys(file_name) <> 0 Then
 
         With texture_list(lKeys(file_name))
+            
             'Ultimo acceso
             .UltimoAcceso = GetTickCount
+            
             'Devuelvo una texture con el grafico cargado
             Set GetTexture = .d3dtexture
 
@@ -98,11 +98,16 @@ Public Function GetTexture(ByVal file_name As Integer) As Direct3DTexture8
 
         'Vemos si puedo agregar uno a la lista
         If MaxEntries = texture_count Then
+            
             'Sacamos el que hace más que no usamos, y utilizamos el slot
             lKeys(file_name) = Load_Texture(file_name, BorraMenosUsado())
+            
             Set GetTexture = texture_list(index).d3dtexture
+            
         Else
+        
             lKeys(file_name) = Load_Texture(file_name)
+            
             Set GetTexture = texture_list(lKeys(file_name)).d3dtexture
 
         End If
@@ -110,6 +115,7 @@ Public Function GetTexture(ByVal file_name As Integer) As Direct3DTexture8
     End If
 
     Exit Function
+    
 ErrorHandler:
     Debug.Print "GetTexture Error & err.description "
 
@@ -126,21 +132,24 @@ Public Function Load_Texture(ByVal file_name As Integer, Optional ByVal texture_
     Dim texture_info As D3DXIMAGE_INFO_A
       
     If texture_index = -1 Then
+        
         'Agregamos al final de la lista
         texture_index = texture_count + 1
         ReDim Preserve texture_list(1 To texture_index)
 
     End If
     
-    'Call GetTextureHeader(GrhPath & Archivo & ".bmp", BMPInfo)  'para alto y ancho de la texture
-    
     With texture_list(texture_index)
+        
         'Nombre
         .file_name = file_name
+        
         'Ultimo acceso
         .UltimoAcceso = GetTickCount
+        
         'Cargamos el gráfico y seteamos la Color Key
-        Texture_Load_From_File .d3dtexture, file_name & ".bmp", texture_info
+        Call Texture_Load_From_File(.d3dtexture, file_name, texture_info)
+        
         .Width = texture_info.Width
         .Height = texture_info.Height
         .borrable = borrable
@@ -160,19 +169,26 @@ End Function
 
 Public Function Texture_Remove_All()
 
-    Dim i As Long
-    
     If texture_count <= 0 Then Exit Function
     
+    Dim i As Long
+    
     For i = 1 To UBound(texture_list)
-        Set texture_list(i).d3dtexture = Nothing
-        texture_list(i).borrable = 1
-        texture_list(i).Width = 0
-        texture_list(i).Height = 0
-        texture_list(i).file_name = 0
-        texture_list(i).borrable = 1
-        texture_list(i).UltimoAcceso = 0
-        texture_list(i).Size = 0
+        
+        With texture_list(i)
+        
+            Set .d3dtexture = Nothing
+            
+            .borrable = 1
+            .Width = 0
+            .Height = 0
+            .file_name = 0
+            .borrable = 1
+            .UltimoAcceso = 0
+            .Size = 0
+        
+        End With
+        
     Next i
     
     For i = 1 To UBound(lKeys)
@@ -202,13 +218,12 @@ Public Function Texture_Dimension_Get(ByVal file_name As Integer, texture_width 
     If file_name > 0 Then
         texture_width = texture_list(lKeys(file_name)).Width
         texture_height = texture_list(lKeys(file_name)).Height
-
     End If
 
 End Function
 
 'TODO: No estoy muy seguro de que esto deba quedar aca (Blizzard)
-Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal file As String, ByRef texture_info As D3DXIMAGE_INFO_A)
+Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal File As String, ByRef texture_info As D3DXIMAGE_INFO_A)
 
     '**************************************************************
     'Author: Aaron Perkins
@@ -217,10 +232,18 @@ Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal file As St
     '*************************************************************+
     On Error GoTo ErrHandler
 
-    file = DirGraficos & file
+    File = DirGraficos & File
     
-    Set Texture = d3dx.CreateTextureFromFileEx(ddevice, file, D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, D3DX_FILTER_POINT, COLOR_KEY, texture_info, ByVal 0)
+    If FileExist(File & ".png", vbNormal) Then
+        File = File & ".png"
+    Else
+        File = File & ".png"
+    End If
+    
+    Set Texture = d3dx.CreateTextureFromFileEx(ddevice, File, D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, D3DX_FILTER_POINT, COLOR_KEY, texture_info, ByVal 0)
+    
     Exit Sub
+    
 ErrHandler:
     'Ak solamente si no esta el archivo.
    
