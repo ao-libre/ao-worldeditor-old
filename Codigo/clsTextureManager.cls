@@ -161,6 +161,7 @@ Public Function Load_Texture(ByVal file_name As Integer, Optional ByVal texture_
     
     'Devolvemos el ìndice en que lo cargamos
     Load_Texture = texture_index
+    
     Exit Function
 
 ErrHandler:
@@ -202,6 +203,7 @@ End Function
 Public Function Texture_Initialize(ByVal max_entries As Long)
     
     ReDim lKeys(1 To 32000) As Long
+    
     MaxEntries = max_entries
 
 End Function
@@ -249,16 +251,23 @@ ErrHandler:
 End Sub
 
 Private Sub Texture_Remove(ByVal texture_index As Integer)
+    
     'Quitamos la clave
     lKeys(texture_list(texture_index).file_name) = 0
+    
     'Borramos la textura
-    Set texture_list(i).d3dtexture = Nothing
-    texture_list(i).borrable = 1
-    texture_list(i).Width = 0
-    texture_list(i).Height = 0
-    texture_list(i).file_name = 0
-    texture_list(i).borrable = 0
-    texture_list(i).UltimoAcceso = 0
+    With texture_list(i)
+    
+        Set .d3dtexture = Nothing
+        
+        .borrable = 1
+        .Width = 0
+        .Height = 0
+        .file_name = 0
+        .borrable = 0
+        .UltimoAcceso = 0
+    
+    End With
 
 End Sub
 
