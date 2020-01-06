@@ -222,7 +222,6 @@ Public Function Texture_Dimension_Get(ByVal file_name As Integer, texture_width 
 
 End Function
 
-'TODO: No estoy muy seguro de que esto deba quedar aca (Blizzard)
 Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal File As String, ByRef texture_info As D3DXIMAGE_INFO_A)
 
     '**************************************************************
@@ -237,7 +236,7 @@ Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal File As St
     If FileExist(File & ".png", vbNormal) Then
         File = File & ".png"
     Else
-        File = File & ".png"
+        File = File & ".bmp"
     End If
     
     Set Texture = d3dx.CreateTextureFromFileEx(ddevice, File, D3DX_DEFAULT, D3DX_DEFAULT, D3DX_DEFAULT, 0, D3DFMT_UNKNOWN, D3DPOOL_MANAGED, D3DX_FILTER_POINT, D3DX_FILTER_POINT, COLOR_KEY, texture_info, ByVal 0)
@@ -245,7 +244,7 @@ Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal File As St
     Exit Sub
     
 ErrHandler:
-    'Ak solamente si no esta el archivo.
+    Call MsgBox("No se pudo encontrar el grafico: " & FileCopy, vbCritical)
    
 End Sub
 
