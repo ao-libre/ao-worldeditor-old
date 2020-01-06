@@ -244,7 +244,7 @@ Private Sub Texture_Load_From_File(Texture As Direct3DTexture8, ByVal File As St
     Exit Sub
     
 ErrHandler:
-    Call MsgBox("No se pudo encontrar el grafico: " & FileCopy, vbCritical)
+    Call MsgBox("No se pudo encontrar el grafico: " & File, vbCritical)
    
 End Sub
 
