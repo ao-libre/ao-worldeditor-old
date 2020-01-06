@@ -14,7 +14,7 @@ Public Type Grh_Data
     src_height As Integer
     
     frame_count As Integer
-    frame_list(1 To 25) As Long
+    frame_list() As Long
     frame_speed As Single
     MiniMap_color As Long
 
@@ -106,98 +106,98 @@ Private Sub Grh_Load_All()
 
     'Resize arrays
     ReDim Grh_list(1 To grh_count) As Grh_Data
-    'Fill Grh List
     
     'Get first Grh Number
     Get #1, , Grh
     
     Do Until Grh <= 0
         
-        Grh_list(Grh).Active = True
+        With Grh_list(Grh)
         
-        'Get number of frames
-        Get #1, , Grh_list(Grh).frame_count
-
-        If Grh_list(Grh).frame_count <= 0 Then GoTo ErrorHandler
+            .Active = True
         
-        If Grh_list(Grh).frame_count > 1 Then
+            'Get number of frames
+            Get #1, , .frame_count
+            If .frame_count <= 0 Then GoTo ErrorHandler
+            
+            'Redimension the array with all the frames.
+            ReDim .frame_list(1 To .frame_count)
         
-            'Read a animation GRH set
-            For Frame = 1 To Grh_list(Grh).frame_count
-            
-                Get #1, , Grh_list(Grh).frame_list(Frame)
-
-                If Grh_list(Grh).frame_list(Frame) <= 0 Or Grh_list(Grh).frame_list(Frame) > grh_count Then GoTo ErrorHandler
-            
-            Next Frame
+            If .frame_count > 1 Then
         
-            Get #1, , Grh_list(Grh).frame_speed
-
-            If Grh_list(Grh).frame_speed = 0 Then GoTo ErrorHandler
+                'Read a animation GRH set
+                For Frame = 1 To .frame_count
             
-            'Compute width and height
-            Grh_list(Grh).src_height = Grh_list(Grh_list(Grh).frame_list(1)).src_height
-
-            If Grh_list(Grh).src_height <= 0 Then GoTo ErrorHandler
+                    Get #1, , .frame_list(Frame)
+                    If .frame_list(Frame) <= 0 Or .frame_list(Frame) > grh_count Then GoTo ErrorHandler
             
-            Grh_list(Grh).src_width = Grh_list(Grh_list(Grh).frame_list(1)).src_width
-
-            If Grh_list(Grh).src_width <= 0 Then GoTo ErrorHandler
+                Next Frame
         
-        Else
+                Get #1, , .frame_speed
+                If .frame_speed = 0 Then GoTo ErrorHandler
+            
+                'Compute width and height
+                .src_height = Grh_list(.frame_list(1)).src_height
+                If .src_height <= 0 Then GoTo ErrorHandler
+            
+                .src_width = Grh_list(.frame_list(1)).src_width
+                If .src_width <= 0 Then GoTo ErrorHandler
         
-            'Read in normal GRH data
-            Get #1, , Grh_list(Grh).texture_index
-
-            If Grh_list(Grh).texture_index <= 0 Then GoTo ErrorHandler
+            Else
+        
+                'Read in normal GRH data
+                Get #1, , .texture_index
+                If .texture_index <= 0 Then GoTo ErrorHandler
             
-            Get #1, , Grh_list(Grh).Src_X
-
-            If Grh_list(Grh).Src_X < 0 Then GoTo ErrorHandler
+                Get #1, , .Src_X
+                If .Src_X < 0 Then GoTo ErrorHandler
             
-            Get #1, , Grh_list(Grh).Src_Y
-
-            If Grh_list(Grh).Src_Y < 0 Then GoTo ErrorHandler
+                Get #1, , .Src_Y
+                If .Src_Y < 0 Then GoTo ErrorHandler
                 
-            Get #1, , Grh_list(Grh).src_width
-
-            If Grh_list(Grh).src_width <= 0 Then GoTo ErrorHandler
+                Get #1, , .src_width
+                If .src_width <= 0 Then GoTo ErrorHandler
             
-            Get #1, , Grh_list(Grh).src_height
-
-            If Grh_list(Grh).src_height <= 0 Then GoTo ErrorHandler
+                Get #1, , .src_height
+                If .src_height <= 0 Then GoTo ErrorHandler
             
-            Grh_list(Grh).frame_list(1) = Grh
+                .frame_list(1) = Grh
                 
-        End If
+            End If
     
-        'Get Next Grh Number
-        Get #1, , Grh
+            'Get Next Grh Number
+            Get #1, , Grh
+        
+        End With
     
     Loop
-    '************************************************
     
     Close #1
-
+    
+    '*******************************************************************************************
+    
     Dim Count As Long
  
     Open DirIndex & "\minimap.dat" For Binary As #1
+        
     Seek #1, 1
-
+    
     For Count = 1 To 20459
-
+    
         If Grh_list(Count).Active Then
             Get #1, , Grh_list(Count).MiniMap_color
-
+    
         End If
-
+    
     Next Count
 
     Close #1
+    
     Exit Sub
+    
 ErrorHandler:
     Close #1
-    MsgBox "Error while loading the grh.dat! Stopped at GRH number: " & Grh
+    Call MsgBox("Error while loading the grh.dat! Stopped at GRH number: " & Grh)
 
 End Sub
 
