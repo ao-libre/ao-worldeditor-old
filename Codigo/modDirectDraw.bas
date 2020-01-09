@@ -118,7 +118,7 @@ Public Type particle_group
     move_y2 As Integer
     Rgb_List(0 To 3) As Long
    
-    'Added by Juan Martín Sotuyo Dodero
+    'Added by Juan Martï¿½n Sotuyo Dodero
     Speed As Single
     life_counter As Long
 
@@ -601,8 +601,8 @@ Public Sub GenerarVista()
     ' hacer una llamada a un seter o geter , es mas lento q una variable
     ' con esto hacemos q no este preguntando a el objeto cadavez
     ' q dibuja , Render mas rapido ;)
-    VerBlockeados = frmMain.cVerBloqueos.value
-    VerTriggers = frmMain.cVerTriggers.value
+    VerBlockeados = frmMain.cVerBloqueos.Value
+    VerTriggers = frmMain.cVerTriggers.Value
     VerCapa1 = frmMain.mnuVerCapa1.Checked
     VerCapa2 = frmMain.mnuVerCapa2.Checked
     VerCapa3 = frmMain.mnuVerCapa3.Checked
@@ -696,10 +696,10 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                     ' Pone Grh !
                     Sobre = -1
 
-                    If frmMain.cSeleccionarSuperficie.value = True Then
+                    If frmMain.cSeleccionarSuperficie.Value = True Then
                         Sobre = MapData(X, Y).Graphic(bCapa).GrhIndex
 
-                        If frmConfigSup.MOSAICO.value = vbChecked Then
+                        If frmConfigSup.MOSAICO.Value = vbChecked Then
 
                             Dim aux As Integer
 
@@ -707,7 +707,7 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
 
                             Dim dX  As Integer
 
-                            If frmConfigSup.DespMosaic.value = vbChecked Then
+                            If frmConfigSup.DespMosaic.Value = vbChecked Then
                                 dy = Val(frmConfigSup.DMLargo.Text)
                                 dX = Val(frmConfigSup.DMAncho.Text)
                             Else
@@ -1088,8 +1088,32 @@ Public Sub RenderScreen(TileX As Integer, TileY As Integer, PixelOffsetX As Inte
                 End If
 
                 If VerTriggers Then
-                    Call DrawText(PixelPos(ScreenX), PixelPos(ScreenY), Str(MapData(X, Y).Trigger), vbRed)
-
+                    If MapData(X, Y).Trigger <> 0 Then
+                        Dim lColor As Long
+                        Select Case MapData(X, Y).Trigger
+                            Case 1
+                                lColor = D3DColorXRGB(255, 0, 0)
+                            Case 2
+                                lColor = D3DColorXRGB(0, 255, 0)
+                            Case 3
+                                lColor = D3DColorXRGB(0, 0, 255)
+                            Case 4
+                                lColor = D3DColorXRGB(0, 255, 255)
+                            Case 5
+                                lColor = D3DColorXRGB(255, 64, 0)
+                            Case 6
+                                lColor = D3DColorXRGB(255, 128, 255)
+                            Case Else
+                                lColor = D3DColorXRGB(255, 255, 0)
+                        End Select
+                        
+                        modDXEngine.DXEngine_DrawBox ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, 1, 1, lColor
+                        modDXEngine.DXEngine_DrawBox ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, 1, 32, lColor
+                        modDXEngine.DXEngine_DrawBox ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, 32, 1, lColor
+                        modDXEngine.DXEngine_DrawBox ((32 * ScreenX) - 32) + PixelOffsetX, ((32 * ScreenY) - 32) + PixelOffsetY, 32, 32, lColor
+                    End If
+                    ' No se dibuja sin fuente...
+                    'Call DrawText(PixelPos(ScreenX + 32), PixelPos(ScreenY + 32), str(MapData(X, Y).Trigger), D3DColorXRGB(0, 255, 0))
                 End If
 
                 If Seleccionando Then
@@ -1512,7 +1536,7 @@ Public Sub LightDestroyAll()
 
 End Sub
 
-Sub Map_ResetMontañita()
+Sub Map_ResetMontanita()
 
     Dim xb As Integer, yb As Integer, i As Byte
 
@@ -1526,7 +1550,7 @@ Sub Map_ResetMontañita()
 
 End Sub
 
-Sub Map_CreateMontañita(X As Integer, Y As Integer, Radio As Byte, alturamaxima As Integer)
+Sub Map_CreateMontanita(X As Integer, Y As Integer, Radio As Byte, alturamaxima As Integer)
  
     Dim xb As Integer, yb As Integer
 

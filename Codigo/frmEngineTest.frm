@@ -14,7 +14,7 @@ Begin VB.Form frmEngineTest
    ShowInTaskbar   =   0   'False
    StartUpPosition =   3  'Windows Default
    Begin VB.Frame Frame 
-      Caption         =   "Montañas"
+      Caption         =   "Montanas"
       Height          =   2295
       Index           =   1
       Left            =   0
@@ -123,11 +123,11 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Private Sub Command_Click()
-    Map_CreateMontañita Text1.Text, Text2.Text, Text3.Text, Text4.Text
+    Map_CreateMontanita Text1.Text, Text2.Text, Text3.Text, Text4.Text
 
 End Sub
 
 Private Sub Command1_Click()
-    Map_ResetMontañita
+    Map_ResetMontanita
 
 End Sub

@@ -19,7 +19,7 @@ Begin VB.Form frmMain
    Visible         =   0   'False
    WindowState     =   2  'Maximized
    Begin VB.CommandButton Command1 
-      Caption         =   "Montaña"
+      Caption         =   "Montana"
       Height          =   495
       Left            =   120
       TabIndex        =   118
@@ -500,7 +500,7 @@ Begin VB.Form frmMain
             Left            =   2400
             List            =   "frmMain.frx":20CA6
             TabIndex        =   119
-            Text            =   "Mañana"
+            Text            =   "Maï¿½ana"
             Top             =   600
             Width           =   1335
          End
@@ -2154,7 +2154,7 @@ Begin VB.Form frmMain
          Width           =   3015
          _ExtentX        =   5318
          _ExtentY        =   661
-         Caption         =   "&Información del Mapa"
+         Caption         =   "&Informaciï¿½n del Mapa"
          CapAlign        =   2
          BackStyle       =   2
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
@@ -2257,7 +2257,7 @@ Begin VB.Form frmMain
       Begin VB.Label lblFVersion 
          BackStyle       =   0  'Transparent
          BorderStyle     =   1  'Fixed Single
-         Caption         =   "Versión:"
+         Caption         =   "Versiï¿½n:"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   8.25
@@ -2716,33 +2716,33 @@ Begin VB.Form frmMain
       End
    End
    Begin VB.Menu mnuEdicion 
-      Caption         =   "&Edición"
+      Caption         =   "&Ediciï¿½n"
       Begin VB.Menu mnuComo 
-         Caption         =   "¿ Como seleccionar ? ---- Mantener SHIFT y arrastrar el cursor."
+         Caption         =   "ï¿½ Como seleccionar ? ---- Mantener SHIFT y arrastrar el cursor."
          Enabled         =   0   'False
       End
       Begin VB.Menu mnuCortar 
-         Caption         =   "C&ortar Selección"
+         Caption         =   "C&ortar Selecciï¿½n"
          Shortcut        =   ^X
       End
       Begin VB.Menu mnuCopiar 
-         Caption         =   "&Copiar Selección"
+         Caption         =   "&Copiar Selecciï¿½n"
          Shortcut        =   ^C
       End
       Begin VB.Menu mnuPegar 
-         Caption         =   "&Pegar Selección"
+         Caption         =   "&Pegar Selecciï¿½n"
          Shortcut        =   ^V
       End
       Begin VB.Menu mnuBloquearS 
-         Caption         =   "&Bloquear Selección"
+         Caption         =   "&Bloquear Selecciï¿½n"
          Shortcut        =   ^B
       End
       Begin VB.Menu mnuRealizarOperacion 
-         Caption         =   "&Realizar Operación en Selección"
+         Caption         =   "&Realizar Operaciï¿½n en Selecciï¿½n"
          Shortcut        =   ^D
       End
       Begin VB.Menu mnuDeshacerPegado 
-         Caption         =   "Deshacer P&egado de Selección"
+         Caption         =   "Deshacer P&egado de Selecciï¿½n"
          Shortcut        =   ^S
       End
       Begin VB.Menu mnuLineEdicion0 
@@ -2757,7 +2757,7 @@ Begin VB.Form frmMain
          Checked         =   -1  'True
       End
       Begin VB.Menu mnuInfoMap 
-         Caption         =   "&Información del Mapa"
+         Caption         =   "&Informacion del Mapa"
       End
       Begin VB.Menu mnuLineEdicion1 
          Caption         =   "-"
@@ -2840,14 +2840,14 @@ Begin VB.Form frmMain
          Caption         =   "Auto-Completar &Superficies"
       End
       Begin VB.Menu mnuAutoCapturarSuperficie 
-         Caption         =   "Auto-C&apturar información de la Superficie"
+         Caption         =   "Auto-C&apturar informaciï¿½n de la Superficie"
       End
       Begin VB.Menu mnuAutoCapturarTranslados 
-         Caption         =   "Auto-&Capturar información de los Translados"
+         Caption         =   "Auto-&Capturar informaciï¿½n de los Translados"
          Checked         =   -1  'True
       End
       Begin VB.Menu mnuAutoGuardarMapas 
-         Caption         =   "Configuración de Auto-&Guardar Mapas"
+         Caption         =   "Configuraciï¿½n de Auto-&Guardar Mapas"
       End
    End
    Begin VB.Menu mnuVer 
@@ -3009,7 +3009,7 @@ Begin VB.Form frmMain
          Caption         =   "-"
       End
       Begin VB.Menu mnuGuardarUltimaConfig 
-         Caption         =   "&Guardar Ultima Configuración"
+         Caption         =   "&Guardar Ultima Configuraciï¿½n"
       End
    End
    Begin VB.Menu mnuAyuda 
@@ -3412,7 +3412,7 @@ Private Sub Combo1_Click()
 
     Select Case Combo1.List(Combo1.ListIndex)
 
-        Case "Mañana"
+        Case "Maï¿½ana"
             Call Meteo.Set_Time(7, 0)
 
         Case "Dia"
@@ -4165,7 +4165,7 @@ Private Sub mnuBloquearS_Click()
     'Author: ^[GS]^
     'Last modified: 01/11/08
     '*************************************************
-    Call modEdicion.Deshacer_Add("Bloquear Selección")
+    Call modEdicion.Deshacer_Add("Bloquear Selecciï¿½n")
     Call BlockearSeleccion
 
 End Sub
@@ -4202,7 +4202,7 @@ Private Sub mnuCortar_Click()
     'Author: ^[GS]^
     'Last modified: 01/11/08
     '*************************************************
-    Call modEdicion.Deshacer_Add("Cortar Selección")
+    Call modEdicion.Deshacer_Add("Cortar Selecciï¿½n")
     Call CortarSeleccion
 
 End Sub
@@ -4221,7 +4221,7 @@ Private Sub mnuDeshacerPegado_Click()
     'Author: ^[GS]^
     'Last modified: 01/11/08
     '*************************************************
-    Call modEdicion.Deshacer_Add("Deshacer Pegado de Selección")
+    Call modEdicion.Deshacer_Add("Deshacer Pegado de Selecciï¿½n")
     Call DePegar
 
 End Sub
@@ -4476,7 +4476,7 @@ Private Sub mnuPegar_Click()
     'Author: ^[GS]^
     'Last modified: 01/11/08
     '*************************************************
-    Call modEdicion.Deshacer_Add("Pegar Selección")
+    Call modEdicion.Deshacer_Add("Pegar Selecciï¿½n")
     Call PegarSeleccion
 
 End Sub
@@ -4712,7 +4712,7 @@ Private Sub mnuRealizarOperacion_Click()
     'Author: ^[GS]^
     'Last modified: 01/11/08
     '*************************************************
-    Call modEdicion.Deshacer_Add("Realizar Operación en Selección")
+    Call modEdicion.Deshacer_Add("Realizar Operaciï¿½n en Selecciï¿½n")
     Call AccionSeleccion
 
 End Sub
@@ -4992,7 +4992,7 @@ Private Sub Form_QueryUnload(Cancel As Integer, UnloadMode As Integer)
     'Last modified: 24/11/08
     '*************************************************
 
-    ' Guardar configuración
+    ' Guardar configuraciï¿½n
     WriteVar inipath & "WorldEditor.ini", "CONFIGURACION", "GuardarConfig", IIf(frmMain.mnuGuardarUltimaConfig.Checked = True, "1", "0")
 
     If frmMain.mnuGuardarUltimaConfig.Checked = True Then

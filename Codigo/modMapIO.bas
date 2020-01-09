@@ -128,10 +128,10 @@ Private MapDat As tMapDat
 Private MapTitulo As String     ' GS > Almacena el titulo del mapa para el .dat
 
 ''
-' Obtener el tamaño de un archivo
+' Obtener el tamaï¿½o de un archivo
 '
 ' @param FileName Especifica el path del archivo
-' @return   Nos devuelve el tamaño
+' @return   Nos devuelve el tamaï¿½o
 
 Public Function FileSize(ByVal FileName As String) As Long
     '*************************************************
@@ -334,7 +334,7 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     Dim B           As Byte
 
     If FileExist(SaveAs, vbNormal) = True Then
-        If MsgBox("¿Desea sobrescribir " & SaveAs & "?", vbCritical + vbYesNo) = vbNo Then
+        If MsgBox("ï¿½Desea sobrescribir " & SaveAs & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Sub
         Else
             Kill SaveAs
@@ -479,7 +479,7 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     'Close .inf file
     Close FreeFileInf
 
-    Call Pestañas(SaveAs)
+    Call Pestaï¿½as(SaveAs)
 
     'write .dat file
     SaveAs = left$(SaveAs, Len(SaveAs) - 4) & ".dat"
@@ -520,7 +520,7 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
            
     Call LightDestroyAll
     Call Particle_Group_Remove_All
-    Call Map_ResetMontañita
+    Call Map_ResetMontanita
     
     'Change mouse icon
     frmMain.MousePointer = 11
@@ -685,7 +685,7 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
     If Not SoloMap Then
         Close FreeFileInf
         
-        Call Pestañas(Map)
+        Call Pestaï¿½as(Map)
         
         bRefreshRadar = True ' Radar
         
@@ -854,11 +854,11 @@ Public Sub MapInfo_Actualizar()
 End Sub
 
 ''
-' Calcula la orden de Pestañas
+' Calcula la orden de Pestaï¿½as
 '
 ' @param Map Especifica path del mapa
 
-Public Sub Pestañas(ByVal Map As String)
+Public Sub Pestaï¿½as(ByVal Map As String)
 
     '*************************************************
     'Author: ^[GS]^
@@ -1000,7 +1000,7 @@ Sub Cargar_CSM(ByVal Map As String)
         Get #fh, , MH
         Get #fh, , MapSize
         
-        '¿Queremos cargar un mapa de IAO 1.4?
+        'ï¿½Queremos cargar un mapa de IAO 1.4?
         Get #fh, , MapDat
         
         ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize)
@@ -1158,7 +1158,7 @@ Sub Cargar_CSM(ByVal Map As String)
     'MapInfo_Cargar Map
     frmMain.lblMapVersion.Caption = MapInfo.MapVersion
     
-    Call Pestañas(Map)
+    Call Pestaï¿½as(Map)
     
     ' Vacia el Deshacer
     Call modEdicion.Deshacer_Clear
@@ -1209,7 +1209,7 @@ Public Function Save_CSM(ByVal MapRoute As String) As Boolean
     Dim j            As Integer
 
     If FileExist(MapRoute, vbNormal) = True Then
-        If MsgBox("¿Desea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
+        If MsgBox("ï¿½Desea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Function
         Else
             Kill MapRoute
@@ -1367,7 +1367,7 @@ Public Function Save_CSM(ByVal MapRoute As String) As Boolean
 
     Close fh
 
-    Call Pestañas(MapRoute)
+    Call Pestaï¿½as(MapRoute)
 
     'Change mouse icon
     frmMain.MousePointer = 0
