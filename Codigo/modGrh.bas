@@ -87,7 +87,7 @@ Private Sub Grh_Load_All()
     'Last Modify Date: 1/04/2003
     'Loads Grh.dat
     '**************************************************************
-    'On Error GoTo ErrorHandler
+    On Error GoTo ErrorHandler
     Dim Grh         As Long
     Dim Frame       As Long
     Dim FileVersion As Long

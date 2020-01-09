@@ -101,7 +101,7 @@ Private Declare Function GetActiveWindow Lib "user32" () As Long
 
 Public Function IsAppActive() As Boolean
     '***************************************************
-    'Author: Juan Martín Sotuyo Dodero (maraxus)
+    'Author: Juan Martï¿½n Sotuyo Dodero (maraxus)
     'Last Modify Date: 03/03/2007
     'Checks if this is the active application or not
     '***************************************************
@@ -303,15 +303,17 @@ Private Sub CargarMapIni()
         DirGraficos = inipath & PATH_GRAPHICS & "\"
         DirIndex = inipath & PATH_INIT & "\"
         DirMidi = inipath & "MIDI\"
-        frmMusica.fleMusicas.Path = DirMidi
         DirDats = inipath & "DATS\"
         dirwavs = inipath & "WAV\"
+        DirMp3 = inipath & "MP3\"
+        DirMinimapa = inipath & "Minimapa\"
+        frmMusica.fleMusicas.Path = DirMp3 'Antes era midi ahora MP3 (Recox)
         MaxGrhs = 15000
         UserPos.X = 50
         UserPos.Y = 50
         PantallaX = 19
         PantallaY = 22
-        MsgBox "Falta el archivo 'WorldEditor.ini' de configuración.", vbInformation
+        MsgBox "Falta el archivo 'WorldEditor.ini' de configuraciï¿½n.", vbInformation
         Exit Sub
 
     End If
@@ -360,7 +362,6 @@ Private Sub CargarMapIni()
 
     End If
 
-    frmMusica.fleMusicas.Path = DirMidi
     DirIndex = autoCompletaPath(Leer.GetValue("PATH", "DirIndex"))
 
     If DirIndex = "\" Then
@@ -400,6 +401,35 @@ Private Sub CargarMapIni()
 
     End If
 
+    DirMp3 = autoCompletaPath(Leer.GetValue("PATH", "DirMp3"))
+
+    If DirMp3 = "\" Then
+        DirMp3 = inipath & "MP3\"
+
+    End If
+
+    If FileExist(dirwavs, vbDirectory) = False Then
+        MsgBox "El directorio de MP3 es incorrecto", vbCritical + vbOKOnly
+        End
+
+    End If
+    frmMusica.fleMusicas.Path = DirMp3
+
+
+    DirMinimapa = autoCompletaPath(Leer.GetValue("PATH", "DirMinimapa"))
+
+    If DirMp3 = "\" Then
+        DirMp3 = inipath & "Minimapa\"
+
+    End If
+
+    If FileExist(dirwavs, vbDirectory) = False Then
+        MsgBox "El directorio de MiniMapa es incorrecto", vbCritical + vbOKOnly
+        End
+
+    End If
+
+
     tStr = Leer.GetValue("MOSTRAR", "LastPos") ' x-y
     UserPos.X = Val(general_field_read(1, tStr, Asc("-")))
     UserPos.Y = Val(general_field_read(2, tStr, Asc("-")))
@@ -429,7 +459,7 @@ Private Sub CargarMapIni()
     frmMain.cVerTriggers.Value = frmMain.mnuVerTriggers.Checked
     frmMain.cVerBloqueos.Value = frmMain.mnuVerBloqueos.Checked
 
-    ' Tamaño de visualizacion
+    ' Tamaï¿½o de visualizacion
     PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
     PantallaY = Val(Leer.GetValue("MOSTRAR", "PantallaY"))
 
@@ -437,7 +467,7 @@ Private Sub CargarMapIni()
     If PantallaY > 32 Or PantallaY <= 2 Then PantallaY = 32
 
     ' [GS] 02/10/06
-    ' Tamaño de visualizacion en el cliente
+    ' Tamaï¿½o de visualizacion en el cliente
     ClienteHeight = Val(Leer.GetValue("MOSTRAR", "ClienteHeight"))
     ClienteWidth = Val(Leer.GetValue("MOSTRAR", "ClienteWidth"))
 
@@ -475,7 +505,7 @@ Public Sub CambioDeVideo()
 
     If ModoDeVideo.dmPelsWidth < 1024 Or ModoDeVideo.dmPelsHeight < 768 Then
 
-        Select Case MsgBox("La aplicacion necesita una resolucion minima de 1024 X 768 ,¿Acepta el Cambio de resolucion?", vbInformation + vbOKCancel, "World Editor")
+        Select Case MsgBox("La aplicacion necesita una resolucion minima de 1024 X 768 ,ï¿½Acepta el Cambio de resolucion?", vbInformation + vbOKCancel, "World Editor")
 
             Case vbOK
                 ModoDeVideo.dmPelsWidth = 1024
@@ -531,7 +561,7 @@ Public Sub Main()
     frmCargando.X.Caption = "Iniciando DirectSound..."
     DoEvents
 
-    Call Audio.Initialize(frmMain.hWnd, dirwavs, DirMidi)
+    Call Audio.Initialize(frmMain.hWnd, dirwavs, DirMp3)
     
     Audio.MusicActivated = True
     Audio.SoundActivated = True
@@ -588,7 +618,7 @@ Public Sub Main()
     End If
     
     frmCargando.SetFocus
-    frmCargando.X.Caption = "Iniciando Ventana de Edición..."
+    frmCargando.X.Caption = "Iniciando Ventana de Ediciï¿½n..."
     
     frmCargando.Hide
     frmMain.Show
@@ -873,7 +903,7 @@ End Sub
 Private Sub LoadClientSetup()
 
     '**************************************************************
-    'Author: Juan Martín Sotuyo Dodero (Maraxus)
+    'Author: Juan Martï¿½n Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/19/09
     '11/19/09: Pato - Is optional show the frmGuildNews form
     '**************************************************************
