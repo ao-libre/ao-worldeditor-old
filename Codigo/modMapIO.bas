@@ -520,7 +520,7 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
            
     Call LightDestroyAll
     Call Particle_Group_Remove_All
-    Call Map_ResetMontañita
+    Call Map_ResetMontanita
     
     'Change mouse icon
     frmMain.MousePointer = 11
