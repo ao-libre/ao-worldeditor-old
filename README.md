@@ -8,5 +8,3 @@ Se recomienda tambien ver/usar este:
 https://github.com/RecoX/ao-worldeditor-gsao/
 
 Funciona bastante bien y tiene muchas funciones que este repositorio no contiene. No obstante hay cosas que no estan 100% compatibles ya que lee por ejemplo los archivos de cabezas.ind o cuerpos.ind desde binarios cuando con este proyecto no es asi.
-
-Pero los triggers en esa funcion funcionan bien, en esta no se ven en el render.
