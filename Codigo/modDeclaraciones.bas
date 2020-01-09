@@ -34,8 +34,8 @@ Public FileManager           As clsIniManager
 Public Meteo                 As New clsMeteo
 Public Audio                 As New clsAudio
 
-Public Const MSGMod          As String = "Este mapa há sido modificado." & vbCrLf & "Si no lo guardas perderas todos los cambios ¿Deseas guardarlo?"
-Public Const MSGDang         As String = "CUIDADO! Este comando puede arruinar el mapa." & vbCrLf & "¿Estas seguro que desea continuar?"
+Public Const MSGMod          As String = "Este mapa hï¿½ sido modificado." & vbCrLf & "Si no lo guardas perderas todos los cambios ï¿½Deseas guardarlo?"
+Public Const MSGDang         As String = "CUIDADO! Este comando puede arruinar el mapa." & vbCrLf & "ï¿½Estas seguro que desea continuar?"
 Public Const ENDL            As String * 2 = vbCrLf
 
 '[Loopzer]
@@ -79,6 +79,8 @@ Public DirMidi               As String
 Public DirIndex              As String
 Public DirDats               As String
 Public dirwavs               As String
+Public DirMp3               As String
+Public DirMinimapa               As String
 Public bAutoGuardarMapa      As Byte
 Public bAutoGuardarMapaCount As Byte
 Public HotKeysAllow          As Boolean  ' Control Automatico de HotKeys
