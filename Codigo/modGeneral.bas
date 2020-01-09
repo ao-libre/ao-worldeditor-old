@@ -303,11 +303,12 @@ Private Sub CargarMapIni()
         DirGraficos = inipath & PATH_GRAPHICS & "\"
         DirIndex = inipath & PATH_INIT & "\"
         DirMidi = inipath & "MIDI\"
+        frmMusica.fleMusicas.Path = DirMidi
         DirDats = inipath & "DATS\"
         dirwavs = inipath & "WAV\"
         DirMp3 = inipath & "MP3\"
         DirMinimapa = inipath & "Minimapa\"
-        frmMusica.fleMusicas.Path = DirMp3 'Antes era midi ahora MP3 (Recox)
+        'frmMusica.fleMusicas.Path = DirMp3 HACER QUE FUNCIONEN LOS MP3S
         MaxGrhs = 15000
         UserPos.X = 50
         UserPos.Y = 50
@@ -361,6 +362,7 @@ Private Sub CargarMapIni()
         End
 
     End If
+    frmMusica.fleMusicas.Path = DirMidi
 
     DirIndex = autoCompletaPath(Leer.GetValue("PATH", "DirIndex"))
 
@@ -408,22 +410,23 @@ Private Sub CargarMapIni()
 
     End If
 
-    If FileExist(dirwavs, vbDirectory) = False Then
+    If FileExist(DirMp3, vbDirectory) = False Then
         MsgBox "El directorio de MP3 es incorrecto", vbCritical + vbOKOnly
         End
 
     End If
-    frmMusica.fleMusicas.Path = DirMp3
+    'TODO HACER QUE SE PUEDAN PONER MP3S
+    'frmMusica.fleMusicas.Path = DirMp3
 
 
     DirMinimapa = autoCompletaPath(Leer.GetValue("PATH", "DirMinimapa"))
 
-    If DirMp3 = "\" Then
-        DirMp3 = inipath & "Minimapa\"
+    If DirMinimapa = "\" Then
+        DirMinimapa = inipath & "Minimapa\"
 
     End If
 
-    If FileExist(dirwavs, vbDirectory) = False Then
+    If FileExist(DirMinimapa, vbDirectory) = False Then
         MsgBox "El directorio de MiniMapa es incorrecto", vbCritical + vbOKOnly
         End
 
