@@ -128,10 +128,10 @@ Private MapDat As tMapDat
 Private MapTitulo As String     ' GS > Almacena el titulo del mapa para el .dat
 
 ''
-' Obtener el tamaùo de un archivo
+' Obtener el tamaÔøΩo de un archivo
 '
 ' @param FileName Especifica el path del archivo
-' @return   Nos devuelve el tamaùo
+' @return   Nos devuelve el tamaÔøΩo
 
 Public Function FileSize(ByVal FileName As String) As Long
     '*************************************************
@@ -334,7 +334,7 @@ Public Sub MapaV2_Guardar(ByVal SaveAs As String)
     Dim B           As Byte
 
     If FileExist(SaveAs, vbNormal) = True Then
-        If MsgBox("ùDesea sobrescribir " & SaveAs & "?", vbCritical + vbYesNo) = vbNo Then
+        If MsgBox("ÔøΩDesea sobrescribir " & SaveAs & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Sub
         Else
             Kill SaveAs
@@ -706,10 +706,19 @@ Public Sub MapaV2_Cargar(ByVal Map As String, ByRef Buffer() As MapBlock, ByVal 
     frmMain.MousePointer = 0
     MapaCargado = True
 
-    'TODO: Arreglar por que no funciona bien esto, carga cualquier mapa..
-    frmMain.picRadar.Picture = LoadPicture(DirMinimapa & (Len(Map) - 4) & ".bmp")
+    frmMain.picRadar.Picture = LoadPicture(DirMinimapa & ReturnNumberFromString(Map) & ".bmp")
 
 End Sub
+
+'Solo se usa para el minimapa
+Private Function ReturnNumberFromString(ByVal sString As String) As String  
+   Dim i As Integer  
+   For i = 1 To Len(sString)  
+       If Mid(sString, i, 1) Like "[0-9]" Then  
+           ReturnNumberFromString = ReturnNumberFromString + Mid(sString, i, 1)  
+       End If  
+   Next i  
+End Function 
 
 ' *****************************************************************************
 ' MAPINFO *********************************************************************
@@ -1003,7 +1012,7 @@ Sub Cargar_CSM(ByVal Map As String)
         Get #fh, , MH
         Get #fh, , MapSize
         
-        'ùQueremos cargar un mapa de IAO 1.4?
+        'ÔøΩQueremos cargar un mapa de IAO 1.4?
         Get #fh, , MapDat
         
         ReDim MapData(XMinMapSize To XMaxMapSize, YMinMapSize To YMaxMapSize)
@@ -1212,7 +1221,7 @@ Public Function Save_CSM(ByVal MapRoute As String) As Boolean
     Dim j            As Integer
 
     If FileExist(MapRoute, vbNormal) = True Then
-        If MsgBox("ùDesea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
+        If MsgBox("ÔøΩDesea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Function
         Else
             Kill MapRoute
