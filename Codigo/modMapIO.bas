@@ -1221,7 +1221,7 @@ Public Function Save_CSM(ByVal MapRoute As String) As Boolean
     Dim j            As Integer
 
     If FileExist(MapRoute, vbNormal) = True Then
-        If MsgBox("�Desea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
+        If MsgBox("Desea sobrescribir " & MapRoute & "?", vbCritical + vbYesNo) = vbNo Then
             Exit Function
         Else
             Kill MapRoute
