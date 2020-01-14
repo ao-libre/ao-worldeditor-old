@@ -128,10 +128,10 @@ Private MapDat As tMapDat
 Private MapTitulo As String     ' GS > Almacena el titulo del mapa para el .dat
 
 ''
-' Obtener el tama�o de un archivo
+' Obtener el tamano de un archivo
 '
 ' @param FileName Especifica el path del archivo
-' @return   Nos devuelve el tama�o
+' @return   Nos devuelve el tamano
 
 Public Function FileSize(ByVal FileName As String) As Long
     '*************************************************

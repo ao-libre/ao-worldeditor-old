@@ -34,8 +34,8 @@ Public FileManager           As clsIniManager
 Public Meteo                 As New clsMeteo
 Public Audio                 As New clsAudio
 
-Public Const MSGMod          As String = "Este mapa h� sido modificado." & vbCrLf & "Si no lo guardas perderas todos los cambios �Deseas guardarlo?"
-Public Const MSGDang         As String = "CUIDADO! Este comando puede arruinar el mapa." & vbCrLf & "�Estas seguro que desea continuar?"
+Public Const MSGMod          As String = "Este mapa ha sido modificado." & vbCrLf & "Si no lo guardas perderas todos los cambios Deseas guardarlo?"
+Public Const MSGDang         As String = "CUIDADO! Este comando puede arruinar el mapa." & vbCrLf & "Estas seguro que desea continuar?"
 Public Const ENDL            As String * 2 = vbCrLf
 
 '[Loopzer]
