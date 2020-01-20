@@ -101,7 +101,7 @@ Private Declare Function GetActiveWindow Lib "user32" () As Long
 
 Public Function IsAppActive() As Boolean
     '***************************************************
-    'Author: Juan Mart�n Sotuyo Dodero (maraxus)
+    'Author: Juan Martin Sotuyo Dodero (maraxus)
     'Last Modify Date: 03/03/2007
     'Checks if this is the active application or not
     '***************************************************
@@ -314,7 +314,7 @@ Private Sub CargarMapIni()
         UserPos.Y = 50
         PantallaX = 19
         PantallaY = 22
-        MsgBox "Falta el archivo 'WorldEditor.ini' de configuraci�n.", vbInformation
+        MsgBox "Falta el archivo 'WorldEditor.ini' de configuracion.", vbInformation
         Exit Sub
 
     End If
@@ -462,7 +462,7 @@ Private Sub CargarMapIni()
     frmMain.cVerTriggers.Value = frmMain.mnuVerTriggers.Checked
     frmMain.cVerBloqueos.Value = frmMain.mnuVerBloqueos.Checked
 
-    ' Tama�o de visualizacion
+    ' Tamano de visualizacion
     PantallaX = Val(Leer.GetValue("MOSTRAR", "PantallaX"))
     PantallaY = Val(Leer.GetValue("MOSTRAR", "PantallaY"))
 
@@ -470,7 +470,7 @@ Private Sub CargarMapIni()
     If PantallaY > 32 Or PantallaY <= 2 Then PantallaY = 32
 
     ' [GS] 02/10/06
-    ' Tama�o de visualizacion en el cliente
+    ' Tamano de visualizacion en el cliente
     ClienteHeight = Val(Leer.GetValue("MOSTRAR", "ClienteHeight"))
     ClienteWidth = Val(Leer.GetValue("MOSTRAR", "ClienteWidth"))
 
@@ -508,7 +508,7 @@ Public Sub CambioDeVideo()
 
     If ModoDeVideo.dmPelsWidth < 1024 Or ModoDeVideo.dmPelsHeight < 768 Then
 
-        Select Case MsgBox("La aplicacion necesita una resolucion minima de 1024 X 768 ,�Acepta el Cambio de resolucion?", vbInformation + vbOKCancel, "World Editor")
+        Select Case MsgBox("La aplicacion necesita una resolucion minima de 1024 X 768 ,Acepta el Cambio de resolucion?", vbInformation + vbOKCancel, "World Editor")
 
             Case vbOK
                 ModoDeVideo.dmPelsWidth = 1024
@@ -621,7 +621,7 @@ Public Sub Main()
     End If
     
     frmCargando.SetFocus
-    frmCargando.X.Caption = "Iniciando Ventana de Edici�n..."
+    frmCargando.X.Caption = "Iniciando Ventana de Edicion..."
     
     frmCargando.Hide
     frmMain.Show
@@ -906,7 +906,7 @@ End Sub
 Private Sub LoadClientSetup()
 
     '**************************************************************
-    'Author: Juan Mart�n Sotuyo Dodero (Maraxus)
+    'Author: Juan Martin Sotuyo Dodero (Maraxus)
     'Last Modify Date: 11/19/09
     '11/19/09: Pato - Is optional show the frmGuildNews form
     '**************************************************************

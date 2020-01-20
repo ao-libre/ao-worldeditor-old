@@ -118,7 +118,7 @@ Public Type particle_group
     move_y2 As Integer
     Rgb_List(0 To 3) As Long
    
-    'Added by Juan Mart�n Sotuyo Dodero
+    'Added by Juan Martin Sotuyo Dodero
     Speed As Single
     life_counter As Long
 
