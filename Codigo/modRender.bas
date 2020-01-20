@@ -61,7 +61,7 @@ Dim destRect As RECT
         Else
             .ddsCaps.lCaps = DDSCAPS_OFFSCREENPLAIN Or DDSCAPS_SYSTEMMEMORY
         End If
-        .lHeight = 3200 '32(Tamaño del pixel)*100(Ancho en pixeles)*100(Alto en pixeles)
+        .lHeight = 3200 '32(Tamano del pixel)*100(Ancho en pixeles)*100(Alto en pixeles)
         .lWidth = 3200
         
         Set renderSurface = DirectDraw.CreateSurface(surfaceDesc)

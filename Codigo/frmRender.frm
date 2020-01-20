@@ -71,7 +71,7 @@ Begin VB.Form frmRender
    End
    Begin VB.Label Label1 
       AutoSize        =   -1  'True
-      Caption         =   "Tamaño:"
+      Caption         =   "Tamano:"
       Height          =   195
       Left            =   120
       TabIndex        =   2
@@ -101,7 +101,7 @@ Private Sub cmdAceptar_Click()
 Dim Size As Long
 
 txtSize.Text = Replace(txtSize.Text, ",", ".")
-If Not IsNumeric(txtSize.Text) Then MsgBox "El tamaño es inválido."
+If Not IsNumeric(txtSize.Text) Then MsgBox "El tamano es invalido."
 
 Size = Val(txtSize.Text) * 3200 / 100
 Call MapCapture(formatPic, Size)
